@@ -1,0 +1,38 @@
+{
+  "id": "1d63ec18-078e-468c-8c1c-9829b4aa0c25",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "ストレージコスト最適化",
+  "title": "AWS Storage Gateway Tape Gatewayを活用したオンプレミス物理テープの移行と保管コスト削減",
+  "services": [
+    "AWS Storage Gateway",
+    "Amazon S3 Glacier"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、オンプレミスのデータセンターで物理的な磁気テープライブラリ機器と既存のバックアップソフトウェアを使用して、毎月のシステムバックアップを作成・管理しています。物理テープメディアの購入費用、オフサイトの保管倉庫への定期輸送・保管委託費用、および老朽化したテープドライブの保守契約費用が高騰しており、コスト削減が急務となっています。既存のオンプレミスバックアップソフトウェアや運用ワークフローを変更することなく、物理テープ運用を廃止して AWS の超低コストなクラウドストレージへ移行する最も適切なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "オンプレミス環境に AWS Storage Gateway の Tape Gateway（仮想テープライブラリ: VTL）をデプロイし、既存バックアップソフトウェアの出力先を仮想テープに向けて Amazon S3 Glacier および S3 Glacier Deep Archive に自動保管する。",
+      "explanation": "AWS Storage Gateway の Tape Gateway は、既存のバックアップソフトウェアに対して標準の iSCSI ベースの仮想テープライブラリ（VTL）インターフェイスを提供します。バックアップソフトウェア側の設定やワークフローをほぼ変更することなく、仮想テープとしてデータを書き込むだけで Amazon S3、S3 Glacier、S3 Glacier Deep Archive へシームレスに保管でき、物理テープや輸送・保管管理コストを全廃できます。"
+    },
+    {
+      "id": "B",
+      "text": "AWS DataSync エージェントをインストールし、既存のすべての磁気テープの内容を毎日 Amazon EFS スタンダードストレージに直接ファイルコピーする。",
+      "explanation": "DataSync は物理テープドライブから直接テープデータを読み取るインターフェイスを備えておらず、また Amazon EFS はファイルシステムでありテープアーカイブの代替としては GB 単価が非常に高額になります。"
+    },
+    {
+      "id": "C",
+      "text": "オンプレミスサーバーに AWS Transfer Family を導入し、SFTP 経由でバックアップファイルを Amazon S3 Standard にアップロードするスクリプトを自作する。",
+      "explanation": "既存のバックアップソフトウェアのテープバックアップ処理を置き換えるために自作スクリプトを開発・維持する必要があり、開発工数と運用リスクが増大します。また S3 Standard は長期保管用としては保管単価が高くなります。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Snowball Edge Storage Optimized デバイスを毎月注文してオンプレミスに配送させ、テープデータを手動コピーして返送する運用を行う。",
+      "explanation": "Snowball デバイスを毎月定期的に注文・受取・接続・コピー・返送する運用は、物理配送の手間やデバイスレンタル料が継続的に発生し、自動化やコスト削減の観点から非効率です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Storage Gateway の Tape Gateway を使用すると、オンプレミスの仮想化基盤（VMware, Hyper-V 等）上に仮想テープライブラリ（VTL）を構築できます。主要なバックアップソフトウェア（Veritas, Veeam, Commvault 等）は既存のテープ書き込み先として認識するため、業務手順を変えずに物理テープの調達・配送・保管コストを削減し、S3 Glacier や S3 Glacier Deep Archive による安全かつ安価なクラウド長期保持を実現できます。"
+}

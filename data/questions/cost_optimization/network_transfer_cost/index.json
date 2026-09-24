@@ -1,0 +1,147 @@
+{
+  "major": "コスト最適化アーキテクチャの設計",
+  "minor": "データ転送・ネットワークコスト最適化",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "162e3d0f-68f7-4fbe-a6db-966a081ce795",
+      "title": "同一リージョン内VPC間の大量データ転送におけるVPCピアリングによるコスト最適化",
+      "services": [
+        "Amazon VPC",
+        "AWS Transit Gateway",
+        "AWS PrivateLink"
+      ],
+      "question_type": "single",
+      "file_name": "162e3d0f-68f7-4fbe-a6db-966a081ce795.json"
+    },
+    {
+      "id": "397d291e-640a-4b18-a5a7-9c3a6964b522",
+      "title": "Transit Gateway環境における特定VPC間大量データ転送のVPCピアリング併用によるコスト最適化",
+      "services": [
+        "AWS Transit Gateway",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "397d291e-640a-4b18-a5a7-9c3a6964b522.json"
+    },
+    {
+      "id": "42c705de-b570-47d3-ab15-5bb50db4fef0",
+      "title": "EC2ノード間通信におけるプライベートIP利用と同一AZ配置による通信料金の削減",
+      "services": [
+        "Amazon EC2",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "42c705de-b570-47d3-ab15-5bb50db4fef0.json"
+    },
+    {
+      "id": "436d7d51-c53d-4a98-aa3d-cd5e01824cc2",
+      "title": "プライベートコンテナ環境からのS3アクセスにおけるGateway型エンドポイントとNAT Gateway費用の最適化",
+      "services": [
+        "Amazon VPC",
+        "Amazon S3",
+        "NAT Gateway",
+        "Amazon ECS"
+      ],
+      "question_type": "single",
+      "file_name": "436d7d51-c53d-4a98-aa3d-cd5e01824cc2.json"
+    },
+    {
+      "id": "6072e87d-17c7-4962-ade5-251ea369f918",
+      "title": "S3クロスリージョンレプリケーション（CRR）におけるフィルタリングによる不要なリージョン間データ転送費用の削減",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "6072e87d-17c7-4962-ade5-251ea369f918.json"
+    },
+    {
+      "id": "729d9e52-e698-4b2a-9a37-5c8a817b3322",
+      "title": "DynamoDBへの大量クエリにおけるGateway型VPCエンドポイントによるNAT Gateway通信費用の削減",
+      "services": [
+        "Amazon DynamoDB",
+        "Amazon VPC",
+        "NAT Gateway"
+      ],
+      "question_type": "single",
+      "file_name": "729d9e52-e698-4b2a-9a37-5c8a817b3322.json"
+    },
+    {
+      "id": "75db20d9-91b7-4ab8-af93-801edf5fc504",
+      "title": "同一AZ内EC2ノード間通信におけるパブリックIP利用に起因するデータ転送料金の是正",
+      "services": [
+        "Amazon EC2",
+        "Amazon VPC",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "75db20d9-91b7-4ab8-af93-801edf5fc504.json"
+    },
+    {
+      "id": "7cb8916e-5807-4394-b380-db77396f5d4a",
+      "title": "オンプレミスからS3への大容量プライベートデータ転送におけるS3 Interface型エンドポイントの活用",
+      "services": [
+        "AWS PrivateLink",
+        "Amazon S3",
+        "AWS Direct Connect",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "7cb8916e-5807-4394-b380-db77396f5d4a.json"
+    },
+    {
+      "id": "8923ba7d-0279-436a-8833-903cec3780da",
+      "title": "Amazon CloudFront導入によるEC2からのインターネット向けデータ転送アウト料金の削減",
+      "services": [
+        "Amazon CloudFront",
+        "Amazon EC2",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "8923ba7d-0279-436a-8833-903cec3780da.json"
+    },
+    {
+      "id": "99a0e0f4-f1a8-401f-9658-870f9be5d644",
+      "title": "複数リージョンVPCとオンプレミス間のDirect Connect Gatewayを活用した回線集約とコスト最適化",
+      "services": [
+        "AWS Direct Connect",
+        "Direct Connect Gateway",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "99a0e0f4-f1a8-401f-9658-870f9be5d644.json"
+    },
+    {
+      "id": "a1259a18-8c6c-4308-8c55-39e145b3d129",
+      "title": "S3静的WebサイトホスティングにおけるCloudFront導入によるデータ転送アウト料金の削減",
+      "services": [
+        "Amazon S3",
+        "Amazon CloudFront"
+      ],
+      "question_type": "single",
+      "file_name": "a1259a18-8c6c-4308-8c55-39e145b3d129.json"
+    },
+    {
+      "id": "bdaaeabb-ec74-4d76-ab4a-f8cbdfcde09c",
+      "title": "CloudFront価格クラス（Price Class）の適切な選定によるコンテンツ配信データ転送費用の削減",
+      "services": [
+        "Amazon CloudFront",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "bdaaeabb-ec74-4d76-ab4a-f8cbdfcde09c.json"
+    },
+    {
+      "id": "c0846c00-eb20-4431-9ec3-9a3ca250485c",
+      "title": "Systems Manager接続におけるInterface型VPCエンドポイント導入によるNAT Gateway費用の削減",
+      "services": [
+        "AWS Systems Manager",
+        "AWS PrivateLink",
+        "Amazon VPC",
+        "NAT Gateway"
+      ],
+      "question_type": "multiple",
+      "file_name": "c0846c00-eb20-4431-9ec3-9a3ca250485c.json"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "major": "レジリエント・アーキテクチャの設計",
+  "minor": "スケーラビリティと疎結合",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "1445ff36-8874-4722-8e7d-ec33fdd33399",
+      "title": "Amazon MQ によるレガシーメッセージブローカー（ActiveMQ/RabbitMQ）の最小改修クラウド移行",
+      "services": [
+        "Amazon MQ",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "1445ff36-8874-4722-8e7d-ec33fdd33399.json"
+    },
+    {
+      "id": "3aaaade2-1ed2-4d66-bba0-407cfa5e9a84",
+      "title": "AWS Step Functions による分散トランザクション（サーガパターン）と障害時の補償処理のオーケストレーション",
+      "services": [
+        "AWS Step Functions",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "3aaaade2-1ed2-4d66-bba0-407cfa5e9a84.json"
+    },
+    {
+      "id": "3bf7ed09-8ab5-4c2c-ab91-aa5b819bcdd8",
+      "title": "Amazon SNS と Amazon SQS によるファンアウト（Pub/Sub）アーキテクチャの構築",
+      "services": [
+        "Amazon SNS",
+        "Amazon SQS",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "3bf7ed09-8ab5-4c2c-ab91-aa5b819bcdd8.json"
+    },
+    {
+      "id": "3e738539-7e5f-429c-8afd-f3c056d7bc38",
+      "title": "Amazon EventBridge によるイベント駆動アーキテクチャと複数ターゲットへのコンテンツベースルーティング",
+      "services": [
+        "Amazon EventBridge",
+        "AWS Lambda",
+        "Amazon SQS",
+        "Amazon SNS"
+      ],
+      "question_type": "single",
+      "file_name": "3e738539-7e5f-429c-8afd-f3c056d7bc38.json"
+    },
+    {
+      "id": "81200453-34fb-4367-8035-939c9b492c40",
+      "title": "Amazon Kinesis Data Streams によるリアルタイムデータ収集と複数コンシューマーの独立並列処理",
+      "services": [
+        "Amazon Kinesis Data Streams",
+        "AWS Lambda",
+        "Amazon S3"
+      ],
+      "question_type": "multiple",
+      "file_name": "81200453-34fb-4367-8035-939c9b492c40.json"
+    },
+    {
+      "id": "854f1a98-42b6-48b0-a11e-57eba9ebed9e",
+      "title": "Amazon SQS FIFOキューによる厳格な順序保証とメッセージ重複排除の実現",
+      "services": [
+        "Amazon SQS"
+      ],
+      "question_type": "single",
+      "file_name": "854f1a98-42b6-48b0-a11e-57eba9ebed9e.json"
+    },
+    {
+      "id": "8d1458f1-d582-4312-84c4-6b9feed7ecd6",
+      "title": "Amazon SQS とキューメトリクスに基づくAuto Scalingによる非同期処理層の疎結合化",
+      "services": [
+        "Amazon SQS",
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "8d1458f1-d582-4312-84c4-6b9feed7ecd6.json"
+    },
+    {
+      "id": "bba0301f-a534-4dae-bf66-b00a60b28609",
+      "title": "Amazon SQS 可視性タイムアウトとデッドレターキュー（DLQ）による処理失敗メッセージの適切な隔離",
+      "services": [
+        "Amazon SQS"
+      ],
+      "question_type": "single",
+      "file_name": "bba0301f-a534-4dae-bf66-b00a60b28609.json"
+    },
+    {
+      "id": "c1627c12-0f42-4025-b5d8-27b09277bee8",
+      "title": "Amazon SNS サブスクリプションフィルターポリシーによるコンシューマーの負荷軽減と選択的受信",
+      "services": [
+        "Amazon SNS",
+        "Amazon SQS"
+      ],
+      "question_type": "single",
+      "file_name": "c1627c12-0f42-4025-b5d8-27b09277bee8.json"
+    },
+    {
+      "id": "fb5a9f4a-9f4f-4a9a-bb1e-8ffb3117f283",
+      "title": "Amazon SQS ロングポーリングの有効化による空受信の削減とコスト最適化",
+      "services": [
+        "Amazon SQS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "fb5a9f4a-9f4f-4a9a-bb1e-8ffb3117f283.json"
+    }
+  ]
+}

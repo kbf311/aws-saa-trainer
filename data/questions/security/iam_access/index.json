@@ -1,0 +1,82 @@
+{
+  "major": "セキュアアーキテクチャの設計",
+  "minor": "IAMとアクセス制御",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "1bcd6bf2-6ac0-4494-b4ee-7f00912c2b81",
+      "title": "EC2インスタンスプロファイルとIAMロールによるセキュアなAWSリソースアクセス",
+      "services": [
+        "AWS IAM",
+        "Amazon EC2",
+        "Amazon S3",
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "1bcd6bf2-6ac0-4494-b4ee-7f00912c2b81.json"
+    },
+    {
+      "id": "31ff74ff-853b-4abd-bb69-bf5342e59667",
+      "title": "アクセス許可境界 (Permissions Boundary) を活用した安全なIAM権限委譲と特権昇格防止",
+      "services": [
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "31ff74ff-853b-4abd-bb69-bf5342e59667.json"
+    },
+    {
+      "id": "7873833f-aae8-4218-91df-18d5b5997575",
+      "title": "AWS IAM Access Analyzerによる外部公開リソースの検出と最小権限の継続的監査",
+      "services": [
+        "AWS IAM",
+        "AWS Organizations",
+        "Amazon S3",
+        "AWS KMS"
+      ],
+      "question_type": "single",
+      "file_name": "7873833f-aae8-4218-91df-18d5b5997575.json"
+    },
+    {
+      "id": "7953c710-dee0-4714-8591-77c2ce47be40",
+      "title": "STS AssumeRoleと外部ID (External ID) によるサードパーティのクロスアカウントアクセス保護",
+      "services": [
+        "AWS IAM",
+        "AWS STS"
+      ],
+      "question_type": "single",
+      "file_name": "7953c710-dee0-4714-8591-77c2ce47be40.json"
+    },
+    {
+      "id": "9011349c-e52c-4c5c-8882-da5a6981b697",
+      "title": "Amazon Cognito IDプールによるモバイルアプリユーザーのセキュアなS3個別フォルダアクセス",
+      "services": [
+        "AWS IAM",
+        "Amazon Cognito",
+        "Amazon S3",
+        "AWS STS"
+      ],
+      "question_type": "single",
+      "file_name": "9011349c-e52c-4c5c-8882-da5a6981b697.json"
+    },
+    {
+      "id": "da903c41-8d64-4fbb-b4fa-23d8204a97b3",
+      "title": "AWS Organizations サービスコントロールポリシー (SCP) による承認リージョン外のリソース作成禁止",
+      "services": [
+        "AWS Organizations",
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "da903c41-8d64-4fbb-b4fa-23d8204a97b3.json"
+    },
+    {
+      "id": "e64f3313-0ba1-453d-baa7-4c96ad4c2f3e",
+      "title": "S3バケットポリシーにおける明示的拒否 (Explicit Deny) と企業IPレンジによるアクセス制限",
+      "services": [
+        "AWS IAM",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "e64f3313-0ba1-453d-baa7-4c96ad4c2f3e.json"
+    }
+  ]
+}

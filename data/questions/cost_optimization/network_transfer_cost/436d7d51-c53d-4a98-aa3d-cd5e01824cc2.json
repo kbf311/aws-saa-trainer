@@ -1,0 +1,40 @@
+{
+  "id": "436d7d51-c53d-4a98-aa3d-cd5e01824cc2",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "プライベートコンテナ環境からのS3アクセスにおけるGateway型エンドポイントとNAT Gateway費用の最適化",
+  "services": [
+    "Amazon VPC",
+    "Amazon S3",
+    "NAT Gateway",
+    "Amazon ECS"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、VPCのプライベートサブネット内で稼働するAmazon ECS（AWS Fargate）タスクを使用して、毎月100TB以上の画像ファイルをAmazon S3バケットと同期しています。現在、プライベートサブネットのデフォルトルート（0.0.0.0/0）はパブリックサブネット内のNAT Gatewayに向けられており、ECSタスクはNAT Gateway経由でS3にアクセスしています。月次のコスト分析により、NAT Gatewayのデータ処理料金（1GBあたり0.045ドル）によって月額約4,500ドルの追加費用が発生していることが判明しました。\n\nこのデータ処理費用を完全に削減し、最も費用対効果を高めるソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各プライベートサブネットにS3用のGateway型VPCエンドポイントを設定し、プライベートサブネットのルートテーブルでS3プレフィックスリスト宛てのトラフィックのターゲットとして関連付ける。",
+      "explanation": "S3用のGateway型VPCエンドポイントは完全無料（追加料金・データ処理料金なし）です。ルートテーブルに設定することで、S3宛てのトラフィックのみがAWS内部ネットワークを通じて直接S3へルーティングされ、NAT Gatewayを経由しなくなります。これにより100TB分のNAT Gatewayデータ処理料金（約4,500ドル）を全額削減できます。"
+    },
+    {
+      "id": "B",
+      "text": "NAT Gatewayを削除し、パブリックサブネット内に独自に構築した単一のNATインスタンス（t4g.nano等）へ置き換える。",
+      "explanation": "NATインスタンスに置き換えることでNAT GatewayのGBあたりデータ処理料金は回避できる可能性がありますが、月100TBの転送を単一の極小EC2で処理すると深刻なネットワークボトルネックが生じ、可用性の管理やパッチ適用の運用オーバーヘッドが発生します。また、Gateway型VPCエンドポイントなら完全無料でマネージドに解決できます。"
+    },
+    {
+      "id": "C",
+      "text": "S3用のInterface型VPCエンドポイント (AWS PrivateLink) を各サブネットにプロビジョニングし、ECSタスクからのアクセス先をエンドポイントのDNS名に変更する。",
+      "explanation": "Interface型VPCエンドポイントはS3にも対応していますが、時間単位のENI稼働料金に加え、1GBあたり0.01ドルのデータ処理料金が発生します。100TBのデータ転送では月額1,000ドル以上のデータ処理費用がかかるため、完全無料のGateway型エンドポイントに比べてコスト面で劣ります。"
+    },
+    {
+      "id": "D",
+      "text": "S3 Transfer Accelerationを有効化し、ECSタスクからのリクエストをCloudFrontエッジロケーション経由で送信する。",
+      "explanation": "S3 Transfer Accelerationは長距離インターネット経由のデータ転送を高速化するための機能であり、転送ギガバイトごとに追加のデータ転送料金が発生するため、コストを削減するどころか大幅に増加させます。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon S3およびAmazon DynamoDB宛ての通信をプライベートサブネットから行う場合、Gateway型VPCエンドポイント (Gateway VPC Endpoint) を導入するのがAWSの標準的なベストプラクティスです。Gateway型エンドポイントは無料で提供されており、ルートテーブルを設定するだけでNAT Gatewayを経由するデータ処理料金（$0.045/GB）を完全にゼロにできます。Interface型エンドポイント (AWS PrivateLink) はデータ処理料金（約$0.01/GB）が発生するため、無料のGateway型が利用可能な同一VPC内の通信ではGateway型が最も費用対効果に優れます。"
+}

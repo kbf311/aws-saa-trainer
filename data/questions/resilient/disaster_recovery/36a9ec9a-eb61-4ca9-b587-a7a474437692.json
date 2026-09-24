@@ -1,0 +1,39 @@
+{
+  "id": "36a9ec9a-eb61-4ca9-b587-a7a474437692",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "ディザスタリカバリ",
+  "title": "AWS Elastic Disaster Recovery (AWS DRS) によるオンプレミスサーバーの低コストかつ継続的なDR保護",
+  "services": [
+    "AWS Elastic Disaster Recovery",
+    "Amazon EC2",
+    "Amazon EBS"
+  ],
+  "question_type": "single",
+  "question_text": "ある製造企業は、自社のオンプレミスデータセンターで稼働している数百台のWindowsおよびLinux仮想サーバー（VMware環境）に対して、AWSクラウドを活用したディザスタリカバリ（DR）ソリューションの導入を検討しています。ビジネス要件として、オンプレミス障害時のRPO（データ損失）を数秒、RTO（復旧時間）を数分〜数十分以内に抑える必要があります。また、通常時は高価な本番同等スペックのEC2インスタンスを常時稼働させることなく、AWS側のインフラコストを最小限に抑えつつ、DR訓練（テストフェイルオーバー）を無瞬断で実施できることが求められています。最も適切なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Elastic Disaster Recovery (AWS DRS) エージェントを各オンプレミスサーバーにインストールし、AWS上の低コストなステージングエリアへ継続的にブロックレベルレプリケーションを行う。",
+      "explanation": "AWS Elastic Disaster Recovery（AWS DRS）は、物理サーバーや仮想サーバーのストレージボリュームをブロックレベルでAWS上の低コストなステージングエリア（安価なEBSボリュームと小型EC2レプリケーションサーバー）へ継続的に非同期レプリケーションします。通常時は高価な本番用EC2インスタンスを稼働させる必要がないためコストを最小化でき、RPOは通常数秒です。災害時やドリル（訓練）時には数分以内に完全な本番インスタンスを自動プロビジョニングして復旧できます。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Application Discovery Service を使用してオンプレミスのサーバーを検出し、AWS Application Migration Service (AWS MGN) で即座に本番移行を完了させる。",
+      "explanation": "AWS Application Migration Service (AWS MGN) は一回限りのリフト＆シフト「クラウド移行」のためのサービスであり、オンプレミスとAWS間での継続的なDR保護や定期的なDRドリル運用を目的としたものではありません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS DataSync を設定し、オンプレミスのすべてのサーバーのファイルシステム全体を毎晩Amazon S3 Glacier Flexible Recoveryに同期転送する。",
+      "explanation": "DataSyncによる夜間ファイル同期はファイルレベルのバックアップであり、ブロックレベルのOS状態の保持が難しく、RPOが最大24時間、リストア時間（RTO）も数時間以上かかるため要件を満たせません。"
+    },
+    {
+      "id": "D",
+      "text": "AWS上にすべてのオンプレミスサーバーと全く同一スペックのEC2インスタンスをフル稼働させ、OS標準のrsyncコマンドで継続同期を行う。",
+      "explanation": "本番同等の数百台のEC2インスタンスを常時稼働させるのは莫大なコストが発生し、コスト最小化の要件を満たせません。またrsyncによる自前管理は運用の信頼性が低くなります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Elastic Disaster Recovery（AWS DRS）は、オンプレミス、クラウド、または異なるAWSリージョン間でのディザスタリカバリを実現する推奨サービスです。エージェントベースでストレージのブロックレベルの変更を継続的にAWS上の「ステージングエリア」へ非同期複製するため、通常時は安価な小型リソースのみで稼働しコストを最大80%以上削減できます。災害発生時には、事前設定された起動テンプレートに基づき、数分以内に最新状態の本番インスタンスを自動起動できます。"
+}

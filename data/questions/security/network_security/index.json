@@ -1,0 +1,85 @@
+{
+  "major": "セキュアアーキテクチャの設計",
+  "minor": "ネットワークセキュリティ",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "372aecdc-0a73-4f90-97e2-39842931cc7c",
+      "title": "3層Webアーキテクチャにおけるセキュリティグループの連鎖参照による最小権限設計",
+      "services": [
+        "Amazon VPC",
+        "Application Load Balancer",
+        "Amazon EC2",
+        "Amazon RDS"
+      ],
+      "question_type": "multiple",
+      "file_name": "372aecdc-0a73-4f90-97e2-39842931cc7c.json"
+    },
+    {
+      "id": "6a390fb7-2f56-453b-9dfd-c33c51b9b6aa",
+      "title": "AWS PrivateLink (インターフェイス型VPCエンドポイント) による完全閉域でのAWSサービスアクセス",
+      "services": [
+        "Amazon VPC",
+        "AWS Secrets Manager",
+        "AWS Systems Manager"
+      ],
+      "question_type": "single",
+      "file_name": "6a390fb7-2f56-453b-9dfd-c33c51b9b6aa.json"
+    },
+    {
+      "id": "9c340c26-f51d-46cb-9bf9-fe585e24621a",
+      "title": "Amazon GuardDutyとEventBridgeによる侵害されたEC2インスタンスの自動検出と隔離",
+      "services": [
+        "Amazon GuardDuty",
+        "Amazon EventBridge",
+        "AWS Lambda",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "9c340c26-f51d-46cb-9bf9-fe585e24621a.json"
+    },
+    {
+      "id": "dd7b6ca0-7482-4392-b970-3692840b9063",
+      "title": "AWS WAFによるレイヤー7攻撃防御とレートベースのIP自動ブロック",
+      "services": [
+        "AWS WAF",
+        "Application Load Balancer",
+        "Amazon CloudFront"
+      ],
+      "question_type": "single",
+      "file_name": "dd7b6ca0-7482-4392-b970-3692840b9063.json"
+    },
+    {
+      "id": "e79be1b3-1278-4794-a048-8a9553660443",
+      "title": "大規模DDoS攻撃に対するAWS Shield Advancedの導入とコスト保護",
+      "services": [
+        "AWS Shield",
+        "AWS WAF",
+        "Amazon CloudFront",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "e79be1b3-1278-4794-a048-8a9553660443.json"
+    },
+    {
+      "id": "ec05a97a-b698-44d2-aa2b-5a2d0cf98ad4",
+      "title": "AWS Network Firewallによるアウトバウンド通信のドメイン名 (FQDN) フィルタリングとトラフィック検査",
+      "services": [
+        "AWS Network Firewall",
+        "Amazon VPC",
+        "NAT Gateway"
+      ],
+      "question_type": "single",
+      "file_name": "ec05a97a-b698-44d2-aa2b-5a2d0cf98ad4.json"
+    },
+    {
+      "id": "fcbd2d83-71d4-4a5f-adc1-d2c12f075618",
+      "title": "ネットワークACL (NACL) による特定悪意IPアドレスの拒否とステートレス特性",
+      "services": [
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "fcbd2d83-71d4-4a5f-adc1-d2c12f075618.json"
+    }
+  ]
+}

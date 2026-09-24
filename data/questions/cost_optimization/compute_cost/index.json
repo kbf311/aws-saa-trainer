@@ -1,0 +1,81 @@
+{
+  "major": "コスト最適化アーキテクチャの設計",
+  "minor": "コンピュートコスト最適化",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "1f3c18d0-9a6e-43a8-bd1b-42e37a8187ab",
+      "title": "AWS Graviton プロセッサ搭載インスタンスへの移行によるコストパフォーマンス向上",
+      "services": [
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "1f3c18d0-9a6e-43a8-bd1b-42e37a8187ab.json"
+    },
+    {
+      "id": "2ccebcbf-a0ab-45c4-9058-6654cbabfa3f",
+      "title": "AWS Compute Optimizerを活用したインスタンス適正サイズ化 (Rightsizing)",
+      "services": [
+        "AWS Compute Optimizer",
+        "Amazon EC2",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "2ccebcbf-a0ab-45c4-9058-6654cbabfa3f.json"
+    },
+    {
+      "id": "3159c0e8-f66f-404f-84e7-b4241c695498",
+      "title": "EC2 Auto Scaling 混在インスタンスポリシーによる可用性維持とスポットコスト最適化",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "3159c0e8-f66f-404f-84e7-b4241c695498.json"
+    },
+    {
+      "id": "5b737255-d7c0-4d2d-bff5-3461f93fb586",
+      "title": "スケジュールされたスケーリングによる非本番環境の夜間・休日インスタンス停止とコスト削減",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "5b737255-d7c0-4d2d-bff5-3461f93fb586.json"
+    },
+    {
+      "id": "6fda4da5-351c-4cb2-877c-5a6bf5261de0",
+      "title": "アイドル時間が多い不定期バッチ処理のAWS Lambdaによるサーバーレス化とコスト最適化",
+      "services": [
+        "AWS Lambda",
+        "Amazon EC2",
+        "Amazon S3",
+        "Amazon EventBridge"
+      ],
+      "question_type": "single",
+      "file_name": "6fda4da5-351c-4cb2-877c-5a6bf5261de0.json"
+    },
+    {
+      "id": "d21905f6-e2e3-476b-907c-1107ee2ae7f6",
+      "title": "Compute Savings Plansによる将来のアーキテクチャ変更に柔軟な割引コミットメント",
+      "services": [
+        "Amazon EC2",
+        "AWS Fargate",
+        "AWS Lambda",
+        "AWS Cost Explorer"
+      ],
+      "question_type": "single",
+      "file_name": "d21905f6-e2e3-476b-907c-1107ee2ae7f6.json"
+    },
+    {
+      "id": "ef7c9d22-b5f1-47d5-a220-c43e84ef0d99",
+      "title": "EC2購買オプションの最適な組み合わせによるワークロード全体のコスト最小化",
+      "services": [
+        "Amazon EC2",
+        "AWS Compute Optimizer"
+      ],
+      "question_type": "single",
+      "file_name": "ef7c9d22-b5f1-47d5-a220-c43e84ef0d99.json"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("/static/fonts/NotoSansJP-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@source "../templates";
+@source "../static/js";
+
+@theme {
+  --color-aws-squid: #161e2e;
+  --color-aws-squidDark: #0f172a;
+  --color-aws-squid-dark: #0f172a;
+  --color-aws-squidLight: #232f3e;
+  --color-aws-squid-light: #232f3e;
+  --color-aws-orange: #FF9900;
+  --color-aws-orangeHover: #EC7211;
+  --color-aws-orange-hover: #EC7211;
+  --color-aws-blue: #0073bb;
+  --color-aws-card: #1e293b;
+  --color-aws-border: #334155;
+
+  --font-sans: "Inter", "Noto Sans JP", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #0b1120;
+    color: #f1f5f9;
+    font-family: var(--font-sans);
+  }
+}
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #1e293b;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 3px;
+  }
+}

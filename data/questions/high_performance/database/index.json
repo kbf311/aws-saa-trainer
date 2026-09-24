@@ -1,0 +1,76 @@
+{
+  "major": "高パフォーマンスアーキテクチャの設計",
+  "minor": "データベースとキャッシング",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "2a90e67f-ff0c-49a7-99f2-dce761bd2bd0",
+      "title": "Amazon ElastiCacheを活用した遅延読み込み（Cache-Aside）とTTLによるDB負荷軽減",
+      "services": [
+        "Amazon ElastiCache",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "2a90e67f-ff0c-49a7-99f2-dce761bd2bd0.json"
+    },
+    {
+      "id": "38624700-f3f5-46bd-9645-49b7e124685f",
+      "title": "DynamoDBにおけるパーティションキー設計と書き込みシャーディング（ソルト付与）",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "38624700-f3f5-46bd-9645-49b7e124685f.json"
+    },
+    {
+      "id": "3c6af892-984f-4655-850d-80bb76032bdf",
+      "title": "Amazon Auroraリーダーエンドポイントと自動スケーリングリードレプリカによる読み取り負荷分散",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "3c6af892-984f-4655-850d-80bb76032bdf.json"
+    },
+    {
+      "id": "81a715ab-7929-41bf-a661-5a8c61b13391",
+      "title": "Amazon Redshift Spectrumを活用したS3データレイクへの高速アドホッククエリ",
+      "services": [
+        "Amazon Redshift",
+        "Amazon Redshift Spectrum",
+        "Amazon S3",
+        "AWS Glue"
+      ],
+      "question_type": "single",
+      "file_name": "81a715ab-7929-41bf-a661-5a8c61b13391.json"
+    },
+    {
+      "id": "8709abcd-eda3-4025-8f61-e7e4d16d5ff1",
+      "title": "DynamoDB Accelerator (DAX) によるマイクロ秒単位のインメモリ読み取りキャッシュ",
+      "services": [
+        "Amazon DynamoDB",
+        "Amazon DynamoDB Accelerator (DAX)"
+      ],
+      "question_type": "single",
+      "file_name": "8709abcd-eda3-4025-8f61-e7e4d16d5ff1.json"
+    },
+    {
+      "id": "aaaf8eea-52b7-470a-b39a-2d67b2040d64",
+      "title": "予測不能な突発的トラフィックに対するAmazon Aurora Serverless v2の自動キャパシティ調整",
+      "services": [
+        "Amazon Aurora"
+      ],
+      "question_type": "single",
+      "file_name": "aaaf8eea-52b7-470a-b39a-2d67b2040d64.json"
+    },
+    {
+      "id": "f5abb4d3-9360-4e15-b121-94c7a0afc78a",
+      "title": "Amazon Redshiftにおける分散スタイル（KEY vs ALL）とソートキーの最適化",
+      "services": [
+        "Amazon Redshift"
+      ],
+      "question_type": "single",
+      "file_name": "f5abb4d3-9360-4e15-b121-94c7a0afc78a.json"
+    }
+  ]
+}

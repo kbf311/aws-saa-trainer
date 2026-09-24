@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}AWS SAA-C03 Trainer{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/tailwind.css">
+  <link rel="stylesheet" href="/static/vendor/fontawesome/css/all.min.css">
+  <script src="/static/js/chart.min.js"></script>
+  <script src="/static/js/explanation.js"></script>
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- Top Global Header -->
+  <header class="bg-aws-squid border-b border-aws-border sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo & Title -->
+        <a href="/" class="flex items-center space-x-3 group">
+          <div
+            class="w-10 h-10 rounded-lg bg-gradient-to-br from-aws-orange to-amber-600 flex items-center justify-center group-hover:opacity-90 transition">
+            <i class="fa-brands fa-aws text-2xl text-slate-950"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-lg text-white tracking-wide">AWS SAA-C03</span>
+              <span
+                class="text-xs font-semibold px-2 py-0.5 rounded bg-aws-orange/20 text-aws-orange border border-aws-orange/30">TRAINER</span>
+            </div>
+            <p class="text-xs text-slate-400">Solutions Architect Associate 認定対策</p>
+          </div>
+        </a>
+
+        <!-- Navigation Tabs -->
+        <nav class="hidden md:flex space-x-1 bg-slate-900/80 p-1.5 rounded-xl border border-slate-700/60">
+          <a href="/"
+            class="flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition {% if active_page == 'dashboard' %}bg-aws-orange text-slate-950 font-semibold shadow-sm{% else %}text-slate-300 hover:text-white hover:bg-slate-800{% endif %}">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>ダッシュボード</span>
+          </a>
+          <a href="/setup"
+            class="flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-medium transition {% if active_page == 'setup' %}bg-aws-orange text-slate-950 font-semibold shadow-sm{% else %}text-slate-300 hover:text-white hover:bg-slate-800{% endif %}">
+            <i class="fa-solid fa-sliders"></i>
+            <span>試験設定</span>
+          </a>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="md:hidden bg-slate-900 border-b border-slate-800 px-4 py-2 flex justify-around text-xs">
+    <a href="/"
+      class="{% if active_page == 'dashboard' %}text-aws-orange font-bold{% else %}text-slate-400{% endif %}">ダッシュボード</a>
+    <a href="/setup"
+      class="{% if active_page == 'setup' %}text-aws-orange font-bold{% else %}text-slate-400{% endif %}">試験設定</a>
+  </div>
+
+  <!-- Page Main Content -->
+  {% block content %}{% endblock %}
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-slate-950/80 mt-auto py-6">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+      <p>AWS Certified Solutions Architect - Associate (SAA-C03) Training App</p>
+      <p class="mt-1">Designed for Scalable Continuous Learning & AI Integration</p>
+    </div>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>

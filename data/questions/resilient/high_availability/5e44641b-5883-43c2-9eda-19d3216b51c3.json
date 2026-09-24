@@ -1,0 +1,39 @@
+{
+  "id": "5e44641b-5883-43c2-9eda-19d3216b51c3",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "高可用性と耐障害性",
+  "title": "AWS Global Acceleratorを活用したクライアントDNSキャッシュに依存しない即時フェイルオーバー",
+  "services": [
+    "AWS Global Accelerator",
+    "Application Load Balancer",
+    "Amazon Route 53"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバル企業が、東京リージョン（ap-northeast-1）とシンガポールリージョン（ap-southeast-1）の2つのリージョンで、それぞれApplication Load Balancer (ALB) とEC2インスタンス群によるアクティブ/パッシブ構成のWebシステムを運用しています。現在、Amazon Route 53のフェイルオーバールーティングポリシーを使用して健全性を監視しています。\n\nしかし、東京リージョンで大規模な障害が発生した際、Route 53のレコードTTLを低く設定していたにもかかわらず、一部のクライアント端末やISPのDNSリゾルバーが古いIPアドレスをキャッシュし続けたため、フェイルオーバーが完了して全ユーザーのアクセスが回復するまでに数十〜数十分の遅延が発生しました。同社は、DNSキャッシュの伝播遅延の影響を受けることなく、単一の静的IPアドレスを提供しながら、数秒以内で健全なリージョンへトラフィックを自動的に切り替えるソリューションを求めています。\n\nこの要件を満たす最も適切なサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Global Accelerator を導入し、提供される2つの静的Anycast IPアドレスをクライアントのエントリーポイントとして設定する。東京リージョンとシンガポールリージョンの両方のALBをエンドポイントとして登録し、ヘルスチェックを設定する。",
+      "explanation": "**AWS Global Accelerator**: AWS Global Acceleratorは、2つのグローバル静的Anycast IPアドレスを提供します。クライアントはこの固定IPアドレスに直接接続するため、クライアント側やISP側のDNSキャッシュに依存しません。AWS Global Acceleratorのエッジロケーションがバックエンドエンドポイント（ALB、NLB、EC2など）のヘルスチェックを常時継続して行い、東京リージョンのALBが異常と判定された場合、数秒以内（通常10秒〜20秒以内）にトラフィックを健全なシンガポールリージョンへ即座にリルートします。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon CloudFront ディストリビューションを作成し、東京とシンガポールのALBをオリジンとして設定する。オリジンリクエストポリシーでTTLを0秒に固定する。",
+      "explanation": "**CloudFront のTTL 0設定**: CloudFrontもオリジングループによるフェイルオーバーをサポートしていますが、静的Anycast IPを提供するわけではなく、DNSベースのドメイン名接続となります。また、TTL 0に設定するとエッジキャッシュが無効化されてオリジン負荷が増大します。"
+    },
+    {
+      "id": "C",
+      "text": "Route 53のルーティングポリシーをレイテンシールーティングに変更し、ヘルスチェックの間隔を高速（Fast: 10秒間隔）に設定する。",
+      "explanation": "**Route 53 レイテンシールーティングと高速ヘルスチェック**: Route 53側のヘルスチェック検知を高速化しても、クライアントOSや中間DNSプロキシ・リゾルバーがTTLを無視してキャッシュを保持し続ける問題（DNSキャッシュ毒化・固定化）を根本的に解決することはできません。"
+    },
+    {
+      "id": "D",
+      "text": "各リージョンのALBにElastic IPアドレスを直接関連付け、スクリプトを使用して障害検知時に東京のElastic IPをシンガポールのALBへ即時再マッピングする。",
+      "explanation": "**ALBへのElastic IP割り当てと再マッピング**: ALB（Application Load Balancer）は複数のAZに配置されたノード群によって動的に管理されるため、個別のElastic IPを直接割り当てたり、別リージョン間でElastic IPを動的に再マッピングすることはできません（Elastic IPはリージョンスコープのリソースです）。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Global Acceleratorを活用したクライアントDNSキャッシュに依存しない即時フェイルオーバーに関する設問です。本問では「AWS Global Accelerator」が要件を満たす最適なアプローチとなります。"
+}

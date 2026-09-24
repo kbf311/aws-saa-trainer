@@ -1,0 +1,39 @@
+{
+  "id": "000",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "ネットワークセキュリティ",
+  "title": "AWS WAFとApplication Load BalancerによるWeb層の多層防御とSQLインジェクション対策",
+  "services": [
+    "AWS WAF",
+    "Application Load Balancer",
+    "Security Groups"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業が、パブリック向けWebアプリケーションをプライベートサブネット内のAmazon EC2インスタンス群で運用し、インターネット向けApplication Load Balancer (ALB) を介してトラフィックを受信しています。最近のセキュリティペネトレーションテストにより、SQLインジェクションやクロスサイトスクリプティング (XSS) などの一般的なWeb脆弱性を狙った攻撃、および特定の悪意あるIPアドレス群からの大量リクエスト攻撃（レイヤー7のDDoS）に対する防御が不十分であると指摘されました。\n\n既存のアプリケーションコードに手を加えることなく、Webトラフィックを保護するための最も適切なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "ALBが配置されているパブリックサブネットのネットワークACL (NACL) を設定し、SQLインジェクションのシグネチャを含むHTTPリクエストを拒否するルールを追加する。",
+      "explanation": "**ネットワークACL (NACL) によるL7シグネチャ検査**: ネットワークACL (NACL) はステートレスなレイヤー4（IPアドレス・ポート番号）のパケットフィルタであり、HTTPペイロード内のSQLインジェクション文字列などのL7コンテンツを検査することはできません。"
+    },
+    {
+      "id": "B",
+      "text": "AWS WAFのWeb ACLを作成し、AWSマネージドルール（Core rule setおよびSQL database rule set）とレート制限ルールを設定して、これをALBに関連付ける。さらにEC2のセキュリティグループでALBからのトラフィックのみを許可する。",
+      "explanation": "**AWS WAF**: Application Load Balancer、Amazon CloudFront、Amazon API Gateway等と統合され、レイヤー7（アプリケーション層）の脅威を検査・遮断します。AWSマネージドルールセット（CommonRuleSet、SQLiRuleSetなど）を有効化することで、アプリケーションコードを変更することなく、最新の脅威シグネチャ（SQLインジェクション、XSS、OSコマンドインジェクションなど）から自動的に保護されます。また、レートベースのルールを設定することで、特定IPからの短時間の大量アクセス（L7 DDoS攻撃）を検知・遮断できます。\n\n**多層防御 (Defense in Depth)**: ALBにWAFを適用しつつ、バックエンドのEC2インスタンスにはALBのセキュリティグループからのHTTP/HTTPS通信のみを許可するセキュリティグループを設定することで、境界防御と内部保護の両立が図れます。"
+    },
+    {
+      "id": "C",
+      "text": "EC2インスタンスのOS内部にホスト型ファイアウォール（iptables等）を導入し、定期的にオープンソースのシグネチャファイルを更新するスクリプトを実行する。",
+      "explanation": "**OS内ホスト型ファイアウォールの運用**: OS内ホスト型ファイアウォールは運用負荷が高く、Auto Scaling環境での一元管理やパフォーマンス維持が困難です。"
+    },
+    {
+      "id": "D",
+      "text": "ALBをNetwork Load Balancer (NLB) に変更し、セキュリティグループのインバウンドルールで特定の悪意あるIPアドレスを明示的に拒否 (DENY) する。",
+      "explanation": "**NLBとセキュリティグループの拒否ルール**: セキュリティグループには「拒否 (DENY)」ルールを記述することはできず（許可ルールのみ）、またNLBはL4でのロードバランシングを行うため、L7のWAF検査を直接適用できません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "AWS WAFとApplication Load BalancerによるWeb層の多層防御とSQLインジェクション対策に関する設問です。AWS WAFを活用することで、要件を満たしつつ最適なアーキテクチャを実現できます。"
+}

@@ -1,0 +1,133 @@
+{
+  "major": "コスト最適化アーキテクチャの設計",
+  "minor": "ストレージコスト最適化",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "073b221b-d515-44fd-aadc-ef7c4709f927",
+      "title": "Amazon S3ストレージレンズを活用した組織全体のコスト最適化と無駄なストレージの可視化",
+      "services": [
+        "Amazon S3",
+        "AWS Organizations"
+      ],
+      "question_type": "multiple",
+      "file_name": "073b221b-d515-44fd-aadc-ef7c4709f927.json"
+    },
+    {
+      "id": "146a07cc-afb1-434d-b25e-1d654eac70c0",
+      "title": "AWS ConfigとSystems Managerを活用した未アタッチEBSボリュームの検出と自動クリーンアップ",
+      "services": [
+        "Amazon EBS",
+        "AWS Config",
+        "AWS Systems Manager"
+      ],
+      "question_type": "single",
+      "file_name": "146a07cc-afb1-434d-b25e-1d654eac70c0.json"
+    },
+    {
+      "id": "1d63ec18-078e-468c-8c1c-9829b4aa0c25",
+      "title": "AWS Storage Gateway Tape Gatewayを活用したオンプレミス物理テープの移行と保管コスト削減",
+      "services": [
+        "AWS Storage Gateway",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "single",
+      "file_name": "1d63ec18-078e-468c-8c1c-9829b4aa0c25.json"
+    },
+    {
+      "id": "7d336f6a-78e1-4f9d-aaf3-053830395276",
+      "title": "Elastic Volumesを活用したEBSボリュームタイプ（gp2からgp3）の移行によるコスト最適化",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "7d336f6a-78e1-4f9d-aaf3-053830395276.json"
+    },
+    {
+      "id": "9e12b2a6-5eb8-4a57-9ef4-3b9a04b33902",
+      "title": "S3ライフサイクルルールを活用した長期ログデータの段階的移行と削除",
+      "services": [
+        "Amazon S3",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "single",
+      "file_name": "9e12b2a6-5eb8-4a57-9ef4-3b9a04b33902.json"
+    },
+    {
+      "id": "c000aa28-7b7a-4f8c-8b74-5a762860fba1",
+      "title": "AWS Backupを活用した組織全体のバックアップ統合とコールドストレージ自動移行",
+      "services": [
+        "AWS Backup",
+        "AWS Organizations"
+      ],
+      "question_type": "multiple",
+      "file_name": "c000aa28-7b7a-4f8c-8b74-5a762860fba1.json"
+    },
+    {
+      "id": "ca3b7b16-62e4-4329-90d8-6074c199044a",
+      "title": "再作成可能な二次バックアップデータに対するS3 One Zone-IAの選定によるコスト最適化",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "ca3b7b16-62e4-4329-90d8-6074c199044a.json"
+    },
+    {
+      "id": "cfc5066d-fc59-4eec-a2d1-11fe8a2c1ce0",
+      "title": "S3ライフサイクルルールによる不完全なマルチパートアップロードの自動クリーンアップ",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "cfc5066d-fc59-4eec-a2d1-11fe8a2c1ce0.json"
+    },
+    {
+      "id": "d14c3156-d9bf-4095-a43c-5438dea7e3d4",
+      "title": "S3バージョニング有効バケットにおける非最新バージョンのライフサイクル管理によるコスト最適化",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "d14c3156-d9bf-4095-a43c-5438dea7e3d4.json"
+    },
+    {
+      "id": "dd88fcff-4900-498e-9ede-186e916663c4",
+      "title": "Amazon EFSライフサイクル管理によるアクセス頻度の低い共有データの階層化とコスト削減",
+      "services": [
+        "Amazon EFS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "dd88fcff-4900-498e-9ede-186e916663c4.json"
+    },
+    {
+      "id": "dee413b1-f6b3-47c2-b703-bf86e9902ad5",
+      "title": "規制監査ログの長期保管におけるS3 Glacier Deep Archiveの選定",
+      "services": [
+        "Amazon S3",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "single",
+      "file_name": "dee413b1-f6b3-47c2-b703-bf86e9902ad5.json"
+    },
+    {
+      "id": "e8a54e03-916f-4846-a5ea-58b9660a2778",
+      "title": "アクセスパターンが変動する非構造化データに対するS3 Intelligent-Tieringの適用",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "e8a54e03-916f-4846-a5ea-58b9660a2778.json"
+    },
+    {
+      "id": "f269991e-fe19-4228-94e9-79e352fb8e4c",
+      "title": "長期コンプライアンス保持要件におけるEBSスナップショットアーカイブの活用",
+      "services": [
+        "Amazon EBS"
+      ],
+      "question_type": "single",
+      "file_name": "f269991e-fe19-4228-94e9-79e352fb8e4c.json"
+    }
+  ]
+}

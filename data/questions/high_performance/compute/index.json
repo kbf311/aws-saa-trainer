@@ -1,0 +1,184 @@
+{
+  "major": "高パフォーマンスアーキテクチャの設計",
+  "minor": "コンピューティングとスケーリング",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "0b3138b0-af9f-46d9-b627-d34e5d1cb575",
+      "title": "EC2 Auto Scalingライフサイクルフックを活用した事前データ初期化とトラフィック受信の同期制御",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Application Load Balancer",
+        "Amazon EventBridge"
+      ],
+      "question_type": "single",
+      "file_name": "0b3138b0-af9f-46d9-b627-d34e5d1cb575.json"
+    },
+    {
+      "id": "0dbdd6f9-0f17-4988-802d-ca221ccc9806",
+      "title": "クラスタープレースメントグループとEFAを用いた密結合HPCワークロードの通信レイテンシー最小化",
+      "services": [
+        "Amazon EC2",
+        "AWS Placement Groups",
+        "Elastic Fabric Adapter (EFA)"
+      ],
+      "question_type": "single",
+      "file_name": "0dbdd6f9-0f17-4988-802d-ca221ccc9806.json"
+    },
+    {
+      "id": "189e1417-3fdb-4775-b5dc-115e1922f9fb",
+      "title": "パーティションプレイスメントグループによる分散NoSQLクラスタの障害分離とスループット維持",
+      "services": [
+        "Amazon EC2",
+        "Placement Groups"
+      ],
+      "question_type": "single",
+      "file_name": "189e1417-3fdb-4775-b5dc-115e1922f9fb.json"
+    },
+    {
+      "id": "1ee04ba1-0960-4e3c-86b9-744de12dcff8",
+      "title": "AWS Batchを活用した大規模並列シミュレーションジョブの実行と自動スケーリング",
+      "services": [
+        "AWS Batch",
+        "Amazon EC2",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "1ee04ba1-0960-4e3c-86b9-744de12dcff8.json"
+    },
+    {
+      "id": "362b4f24-811c-4f08-825e-cc40e472b285",
+      "title": "突発的かつ大規模なトラフィック急増に対応するステップスケーリングポリシーとウォームアップ設計",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon CloudWatch",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "362b4f24-811c-4f08-825e-cc40e472b285.json"
+    },
+    {
+      "id": "37b6c878-2954-4b39-8552-062a6bcf64b9",
+      "title": "グラフィックスレンダリングと機械学習推論ワークロードにおけるアクセラレーテッドコンピューティングインスタンスの選定（複数選択）",
+      "services": [
+        "Amazon EC2"
+      ],
+      "question_type": "multiple",
+      "file_name": "37b6c878-2954-4b39-8552-062a6bcf64b9.json"
+    },
+    {
+      "id": "3ea9af9c-391d-4053-bccc-eaac3a5b4df6",
+      "title": "スプレッドプレイスメントグループによる基盤ハードウェア障害からの重要インスタンス分離",
+      "services": [
+        "Amazon EC2",
+        "AWS Placement Groups"
+      ],
+      "question_type": "single",
+      "file_name": "3ea9af9c-391d-4053-bccc-eaac3a5b4df6.json"
+    },
+    {
+      "id": "3ead516d-431f-496d-88f3-8778ed486f77",
+      "title": "大規模インメモリデータ分析ワークロードにおけるEC2インスタンスファミリー選定（複数選択）",
+      "services": [
+        "Amazon EC2"
+      ],
+      "question_type": "multiple",
+      "file_name": "3ead516d-431f-496d-88f3-8778ed486f77.json"
+    },
+    {
+      "id": "556b77b8-a4cb-4b82-8296-ab9ec2f40936",
+      "title": "AWS Lambdaにおけるメモリ割り当ての最適化によるCPU処理性能と実行速度の向上",
+      "services": [
+        "AWS Lambda",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "556b77b8-a4cb-4b82-8296-ab9ec2f40936.json"
+    },
+    {
+      "id": "5e947985-e193-4592-9703-17f89e88e78c",
+      "title": "急激にスケールするAWS LambdaとリレーショナルDB間のAmazon RDS Proxyによる接続プーリング最適化",
+      "services": [
+        "AWS Lambda",
+        "Amazon RDS Proxy",
+        "Amazon Aurora"
+      ],
+      "question_type": "single",
+      "file_name": "5e947985-e193-4592-9703-17f89e88e78c.json"
+    },
+    {
+      "id": "66c33b24-936c-4df7-a406-7949b7272df6",
+      "title": "AWS Gravitonプロセッサ搭載インスタンスによる分散計算処理のコストパフォーマンス最大化",
+      "services": [
+        "Amazon EC2",
+        "AWS Auto Scaling"
+      ],
+      "question_type": "single",
+      "file_name": "66c33b24-936c-4df7-a406-7949b7272df6.json"
+    },
+    {
+      "id": "795ebd21-9e46-4eff-a4df-331c526af32f",
+      "title": "超高頻度I/Oが要求される分散NoSQLクラスタに向けたストレージ最適化インスタンスファミリーの選定",
+      "services": [
+        "Amazon EC2",
+        "Amazon EBS"
+      ],
+      "question_type": "single",
+      "file_name": "795ebd21-9e46-4eff-a4df-331c526af32f.json"
+    },
+    {
+      "id": "b7114822-a80a-4b8c-8f4f-fd9c601b5f5b",
+      "title": "Amazon EKSにおけるPodとワーカーノードの多層高速自動スケーリング設計",
+      "services": [
+        "Amazon EKS",
+        "Amazon EC2",
+        "AWS Auto Scaling"
+      ],
+      "question_type": "single",
+      "file_name": "b7114822-a80a-4b8c-8f4f-fd9c601b5f5b.json"
+    },
+    {
+      "id": "bcc89765-3ed8-452c-86be-27e4419fd826",
+      "title": "AWS Batchアレイジョブを活用した数万件の並列バッチ処理の効率的送信と実行最適化",
+      "services": [
+        "AWS Batch",
+        "Amazon S3",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "bcc89765-3ed8-452c-86be-27e4419fd826.json"
+    },
+    {
+      "id": "c74a048f-c7ce-4984-b2e9-71a03de7bd2e",
+      "title": "ターゲット追跡スケーリングポリシーと予測スケーリングによる周期的なトラフィック急増への対応",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Application Load Balancer",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "c74a048f-c7ce-4984-b2e9-71a03de7bd2e.json"
+    },
+    {
+      "id": "d47ca7db-c364-46f3-bab2-cf10278991a1",
+      "title": "AWS FargateとStep Functionsを活用した長時間実行コンテナタスクのスケーリング",
+      "services": [
+        "Amazon ECS",
+        "AWS Fargate",
+        "AWS Step Functions"
+      ],
+      "question_type": "single",
+      "file_name": "d47ca7db-c364-46f3-bab2-cf10278991a1.json"
+    },
+    {
+      "id": "dbc62bb1-e345-4fb7-b9ee-2b1bcc7028e8",
+      "title": "Provisioned ConcurrencyによるサーバーレスAPIのコールドスタート遅延解消",
+      "services": [
+        "AWS Lambda",
+        "Amazon API Gateway"
+      ],
+      "question_type": "single",
+      "file_name": "dbc62bb1-e345-4fb7-b9ee-2b1bcc7028e8.json"
+    }
+  ]
+}

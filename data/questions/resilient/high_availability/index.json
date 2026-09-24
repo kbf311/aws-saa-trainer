@@ -1,0 +1,217 @@
+{
+  "major": "レジリエント・アーキテクチャの設計",
+  "minor": "高可用性と耐障害性",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "0c514b21-6de0-4071-b95e-58baf14716e9",
+      "title": "Auto Scaling ライフサイクルフックとALB登録解除遅延による安全なインスタンス終了",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "0c514b21-6de0-4071-b95e-58baf14716e9.json"
+    },
+    {
+      "id": "1abf833a-052e-4555-807f-ea8e18603e95",
+      "title": "Amazon Aurora Serverless v2 マルチAZ展開による予測不能な負荷への耐障害性確保",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "1abf833a-052e-4555-807f-ea8e18603e95.json"
+    },
+    {
+      "id": "1e9e5517-5204-4fc3-942a-bea8965d5b98",
+      "title": "AWS Global Acceleratorのトラフィックダイヤルを活用したマルチリージョン高可用性制御",
+      "services": [
+        "AWS Global Accelerator",
+        "Application Load Balancer",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "1e9e5517-5204-4fc3-942a-bea8965d5b98.json"
+    },
+    {
+      "id": "3c30af7a-48ea-4ea0-bd05-6a9fdaf7d578",
+      "title": "Amazon RDS Proxy による接続急増時の高可用性とフェイルオーバー高速化",
+      "services": [
+        "Amazon RDS",
+        "AWS Lambda",
+        "Amazon RDS Proxy"
+      ],
+      "question_type": "single",
+      "file_name": "3c30af7a-48ea-4ea0-bd05-6a9fdaf7d578.json"
+    },
+    {
+      "id": "3c89ba5d-e850-4446-939f-f72c56a6c4c4",
+      "title": "Application Load BalancerのスティッキーセッションとEC2障害時の耐障害性設計",
+      "services": [
+        "Application Load Balancer",
+        "Amazon EC2",
+        "Amazon EC2 Auto Scaling"
+      ],
+      "question_type": "single",
+      "file_name": "3c89ba5d-e850-4446-939f-f72c56a6c4c4.json"
+    },
+    {
+      "id": "4043324d-351d-456b-8ca8-4d850e4130d7",
+      "title": "Amazon Route 53 複数値回答ルーティングによるDNSベースの耐障害性とロードバランシング",
+      "services": [
+        "Amazon Route 53",
+        "Amazon EC2"
+      ],
+      "question_type": "multiple",
+      "file_name": "4043324d-351d-456b-8ca8-4d850e4130d7.json"
+    },
+    {
+      "id": "5230acf3-676d-4b82-8060-a49a4346062e",
+      "title": "マルチAZプライベートサブネットにおけるNAT Gatewayの耐障害性アーキテクチャ",
+      "services": [
+        "Amazon VPC",
+        "NAT Gateway"
+      ],
+      "question_type": "single",
+      "file_name": "5230acf3-676d-4b82-8060-a49a4346062e.json"
+    },
+    {
+      "id": "526bd42f-9ba7-425a-a4fb-638cf16b77bc",
+      "title": "Network Load Balancer と Application Load Balancer の連携による固定IPと高度な耐障害性の両立",
+      "services": [
+        "Network Load Balancer",
+        "Application Load Balancer",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "526bd42f-9ba7-425a-a4fb-638cf16b77bc.json"
+    },
+    {
+      "id": "5508597b-af64-4a50-a637-e1f1b6bb1fa4",
+      "title": "EC2 Auto Scaling 混在インスタンスポリシーによるキャパシティ枯渇時の可用性維持",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "5508597b-af64-4a50-a637-e1f1b6bb1fa4.json"
+    },
+    {
+      "id": "5e44641b-5883-43c2-9eda-19d3216b51c3",
+      "title": "AWS Global Acceleratorを活用したクライアントDNSキャッシュに依存しない即時フェイルオーバー",
+      "services": [
+        "AWS Global Accelerator",
+        "Application Load Balancer",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "5e44641b-5883-43c2-9eda-19d3216b51c3.json"
+    },
+    {
+      "id": "5f7b47e1-f21e-486a-b664-23e830a894b3",
+      "title": "Amazon EFSを活用したマルチAZ環境における共有コンテンツの高可用性と耐障害性確保",
+      "services": [
+        "Amazon EFS",
+        "Amazon EC2",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "5f7b47e1-f21e-486a-b664-23e830a894b3.json"
+    },
+    {
+      "id": "7b7be414-c9e1-408b-b9fe-ccc277e0ef5e",
+      "title": "Amazon Route 53 レイテンシールーティングとヘルスチェックによるマルチリージョン高可用性",
+      "services": [
+        "Amazon Route 53",
+        "Application Load Balancer",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "7b7be414-c9e1-408b-b9fe-ccc277e0ef5e.json"
+    },
+    {
+      "id": "8e68e823-29c7-48ec-9fca-d4f17c6dbb61",
+      "title": "Network Load Balancerにおけるクロスゾーン負荷分散の有効化による負荷不均衡と耐障害性の改善",
+      "services": [
+        "Network Load Balancer",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "8e68e823-29c7-48ec-9fca-d4f17c6dbb61.json"
+    },
+    {
+      "id": "9619a0ae-f714-46b7-a847-55d24a81ed3c",
+      "title": "EC2 Auto Scaling 予測スケーリングと動的スケーリングの組み合わせによるスパイク耐性の向上",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "9619a0ae-f714-46b7-a847-55d24a81ed3c.json"
+    },
+    {
+      "id": "aed3016a-9162-40bb-a7ab-e81df1b77a43",
+      "title": "単一アベイラビリティーゾーン完全障害時におけるAuto Scalingキャパシティ設計",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "aed3016a-9162-40bb-a7ab-e81df1b77a43.json"
+    },
+    {
+      "id": "b4656e9f-58a5-4f41-9c01-ee751182c4b6",
+      "title": "ALBヘルスチェックとAuto Scaling連携による異常インスタンスの自動置換",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "b4656e9f-58a5-4f41-9c01-ee751182c4b6.json"
+    },
+    {
+      "id": "b92372c5-263e-490f-a808-691135225682",
+      "title": "Amazon ElastiCache for RedisマルチAZによるWebセッションの外部化と耐障害性確保",
+      "services": [
+        "Amazon ElastiCache",
+        "Application Load Balancer",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "b92372c5-263e-490f-a808-691135225682.json"
+    },
+    {
+      "id": "c2046d33-6659-43d0-84ee-cdf26b24cb30",
+      "title": "Amazon Route 53 ヘルスチェックとDNSフェイルオーバールーティングの構築要件",
+      "services": [
+        "Amazon Route 53",
+        "Application Load Balancer",
+        "Amazon S3"
+      ],
+      "question_type": "multiple",
+      "file_name": "c2046d33-6659-43d0-84ee-cdf26b24cb30.json"
+    },
+    {
+      "id": "fc3ed036-1f72-4f37-84d7-986ae291bd08",
+      "title": "RDSマルチAZ配置によるリレーショナルデータベースの高可用性と自動フェイルオーバー",
+      "services": [
+        "Amazon RDS",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "fc3ed036-1f72-4f37-84d7-986ae291bd08.json"
+    },
+    {
+      "id": "fc4aa1bf-9b87-45ef-afca-5f5f43cabd88",
+      "title": "Amazon AuroraマルチAZリードレプリカのフェイルオーバー優先度（ティア）制御",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "fc4aa1bf-9b87-45ef-afca-5f5f43cabd88.json"
+    }
+  ]
+}

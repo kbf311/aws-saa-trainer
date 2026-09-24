@@ -1,0 +1,38 @@
+{
+  "id": "dee413b1-f6b3-47c2-b703-bf86e9902ad5",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "ストレージコスト最適化",
+  "title": "規制監査ログの長期保管におけるS3 Glacier Deep Archiveの選定",
+  "services": [
+    "Amazon S3",
+    "Amazon S3 Glacier"
+  ],
+  "question_type": "single",
+  "question_text": "ある医療機関は、患者の電子カルテや検査画像データに関連する監査ログを、法規制に基づき最低 10 年間保持する必要があります。過去の運用実績から、これらの保管データに対するアクセス要求は年に 1 回発生するかどうかであり、万が一監査人からデータ提出を求められた場合でも、復元までに 12 時間程度の猶予が認められています。データ量は毎年数十テラバイト単位で増加しており、最優先事項としてストレージ保管コストを極限まで低く抑える必要があります。最も費用対効果の高い Amazon S3 ストレージクラスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "S3 Glacier Instant Retrieval",
+      "explanation": "S3 Glacier Instant Retrieval は、アクセス頻度は極めて低いもののミリ秒単位の即時取得が必要なデータに適したストレージクラスです。復元に最大12時間の猶予が認められているシナリオでは、保管単価がより安価な Deep Archive と比較して割高になります。"
+    },
+    {
+      "id": "B",
+      "text": "S3 Standard-Infrequent Access (S3 Standard-IA)",
+      "explanation": "S3 Standard-IA は月に数回程度アクセスされるデータ向けであり、年1回未満しかアクセスされない長期ログ保管用としてはGBあたりの月額保管料金が高すぎます。"
+    },
+    {
+      "id": "C",
+      "text": "S3 Glacier Deep Archive",
+      "explanation": "S3 Glacier Deep Archive は Amazon S3 で最も保管単価が低いストレージクラスであり、標準的な取り出し時間は 12 時間以内（大容量取り出しは 48 時間以内）です。年に 1 回アクセスするかどうかの長期保持データで、12 時間の復元遅延が許容されるユースケースにおいて、最大のコスト削減効果を発揮します。"
+    },
+    {
+      "id": "D",
+      "text": "S3 Glacier Flexible Recovery",
+      "explanation": "S3 Glacier Flexible Recovery は数分〜数時間（迅速取り出しで1〜5分、標準で3〜5時間）でデータを復元できますが、保管単価は S3 Glacier Deep Archive の約 3 倍から 4 倍程度高いため、12 時間の遅延が許容される本要件では最適ではありません。"
+    }
+  ],
+  "correct_answers": [
+    "C"
+  ],
+  "explanation": "Amazon S3 Glacier Deep Archive は、クラウド上で最も低コストなストレージクラスであり、テープライブラリの代替として設計されています。年に 1〜2 回程度しかアクセスされず、9〜12 時間程度の取り出し時間が許容される規制データ、医療記録、金融監査ログなどの超長期保管（7〜10年以上）に最適な選択肢です。"
+}

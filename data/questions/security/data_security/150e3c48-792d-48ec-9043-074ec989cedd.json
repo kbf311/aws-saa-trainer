@@ -1,0 +1,40 @@
+{
+  "id": "150e3c48-792d-48ec-9043-074ec989cedd",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "AWS Secrets ManagerによるRDSデータベース認証情報の安全な保管とダウンタイムなしの自動ローテーション",
+  "services": [
+    "AWS Secrets Manager",
+    "Amazon RDS",
+    "AWS Key Management Service",
+    "AWS IAM"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融系Webアプリケーションが、Amazon EC2インスタンス上で稼働し、Amazon RDS for PostgreSQLデータベースにアクセスしています。企業のセキュリティコンプライアンス要件により、以下の条件を満たすアーキテクチャの再設計が求められています：\n\n1. データベースの接続パスワードなどの認証情報をソースコードや設定ファイル、環境変数に直接保存しないこと\n2. データベースパスワードを30日ごとに自動的に変更（ローテーション）し、ローテーション処理中もアプリケーションの中断（ダウンタイム）を発生させないこと\n3. 認証情報の取得および管理に関する運用オーバーヘッドを最小限に抑えること\n\nこれらの要件を満たす最も適切なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "データベース認証情報をAWS Secrets Managerに保存し、30日ごとの自動ローテーションを設定する。EC2インスタンスにはSecrets Managerへの読み取り権限を持つIAMロールを割り当て、アプリケーションコード内でSDKを使用して実行時に認証情報を取得する。",
+      "explanation": "AWS Secrets Managerはデータベース認証情報などの機密情報を安全に一元管理できるサービスです。Amazon RDS向けに組み込みのローテーション用AWS Lambdaテンプレートが提供されており、ダウンタイムなしで定期的なパスワード変更（新しいパスワードの設定と旧パスワードの無効化）を完全自動化できます。EC2インスタンスプロファイル（IAMロール）を利用して実行時に認証情報をオンデマンドで取得することで、ハードコードを排除し、最小限の運用オーバーヘッドでセキュリティ要件を満たすことができます。"
+    },
+    {
+      "id": "B",
+      "text": "データベース認証情報をAWS Systems Manager Parameter StoreのSecureStringパラメータとして保存し、Amazon EventBridgeルールで30日ごとにAWS Lambda関数をトリガーして手動スクリプトでRDSパスワードを変更する。",
+      "explanation": "Systems Manager Parameter Store（SecureString）はKMSで暗号化したパラメータの保存が可能ですが、RDSパスワードの組み込み自動ローテーション機能はネイティブで提供されていません。EventBridgeと独自のLambdaスクリプトを構築・保守する必要があり、Secrets Managerを利用する場合と比較して運用のオーバーヘッドが大きくなります。"
+    },
+    {
+      "id": "C",
+      "text": "認証情報を暗号化したJSONファイルとしてAmazon S3バケットに保存し、S3イベント通知で毎月実行されるLambda関数を作成してRDSとJSONファイルのパスワードを更新する。",
+      "explanation": "Amazon S3と独自のLambda関数を組み合わせた認証情報の管理・更新は、ローテーション処理中の二重化やロールバック、排他制御などを自前で実装する必要があり、開発・運用コストが非常に高くなります。機密管理に特化したマネージドサービス（Secrets Manager）を採用するのがAWSのベストプラクティスです。"
+    },
+    {
+      "id": "D",
+      "text": "EC2インスタンスのユーザーデータスクリプト内に暗号化したパスワードを埋め込み、インスタンス起動時にAWS KMS APIを呼び出して復号し、ローカル環境変数に設定する。",
+      "explanation": "ユーザーデータやローカル環境変数にパスワードを展開する構成は、セキュリティリスクが高く推奨されません。また、パスワードが変更された場合にインスタンスの再起動や再プロビジョニングが必要となり、30日ごとのローテーションをダウンタイムなしでシームレスに実現することができません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "データベース認証情報の安全な管理と自動ローテーションに関する設計問題です。AWS Secrets Managerは、Amazon RDS、Amazon DocumentDB、Amazon Redshiftなどのデータベース認証情報に対して、あらかじめ用意されたLambda関数によるダウンタイムなしの自動ローテーションを標準でサポートしています。Systems Manager Parameter Storeとの使い分けとして、「認証情報の自動ローテーションが必要な場合はSecrets Manager」、「単純な構成値や静的パラメータの管理はParameter Store」という基準がAWS SAA試験における重要ポイントです。"
+}

@@ -1,0 +1,40 @@
+{
+  "id": "81a715ab-7929-41bf-a661-5a8c61b13391",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "データベースとキャッシング",
+  "title": "Amazon Redshift Spectrumを活用したS3データレイクへの高速アドホッククエリ",
+  "services": [
+    "Amazon Redshift",
+    "Amazon Redshift Spectrum",
+    "Amazon S3",
+    "AWS Glue"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融サービス企業が、過去10年間にわたるペタバイト規模の取引ログデータをAmazon S3にParquet形式で蓄積しています。データアナリストは、Redshiftクラスター内の直近の売上データと、S3内に存在するペタバイト規模の過去履歴データを単一のSQLクエリで直接結合（JOIN）して分析する必要があります。Redshiftクラスターにペタバイトもの過去データを事前にロードすることなく、ストレージコストを抑えながら高パフォーマンスに分析を実行する最適な方法はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS GlueデータカタログでS3データの外部スキーマを定義し、Amazon Redshift Spectrum を使用してRedshiftからS3内の外部テーブルを直接クエリする。",
+      "explanation": "Amazon Redshift Spectrumを使用すると、S3に格納されたデータをRedshiftクラスターにロードすることなく、標準のSQLで直接クエリできます。Redshift Spectrumの専用マネージドフリートがS3からのデータスキャンと集計を数千ノードで超並列処理するため、ローカルテーブルと透過的に結合しながら高パフォーマンスにクエリを実行できます。"
+    },
+    {
+      "id": "B",
+      "text": "S3上のすべての過去データをRedshiftのプロビジョンドローカルストレージに毎晩COPYコマンドで一括ロードする。",
+      "explanation": "ペタバイト規模のデータを毎日Redshiftローカルストレージへロードすることは、ストレージ容量の莫大な追加コストとロード処理に伴う膨大な時間・リソースの浪費を引き起こします。"
+    },
+    {
+      "id": "C",
+      "text": "S3データをAmazon DynamoDBテーブルに移行し、DynamoDB StreamsからRedshiftへデータを継続的にストリーミングする。",
+      "explanation": "DynamoDBはNoSQLトランザクションデータベースであり、ペタバイト規模の過去ログに対する複雑なアドホック集計やSQL分析の基盤としては適していません。"
+    },
+    {
+      "id": "D",
+      "text": "EC2インスタンス上でカスタムPythonスクリプトを実行し、S3オブジェクトを1つずつダウンロードしてメモリ内で結合処理する。",
+      "explanation": "単一のEC2上でペタバイト規模のデータをダウンロード・結合することはメモリや帯域の上限から現実的ではなく、可用性やパフォーマンスの観点からも極めて非効率です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon Redshift Spectrumは、Amazon Redshiftの強力な機能であり、データをRedshiftにロードすることなく、Amazon S3内のオープンフォーマット（Parquet, ORC, JSON, CSVなど）のデータに対して直接SQLクエリを実行できます。AWS Glueデータカタログまたは外部メタストアと統合され、S3データレイク上のペタバイト級データとRedshiftローカルストレージ内の頻繁にアクセスされるデータを単一のクエリで自在にJOIN・集計できます。"
+}

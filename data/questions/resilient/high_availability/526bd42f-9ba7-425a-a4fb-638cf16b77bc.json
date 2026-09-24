@@ -1,0 +1,39 @@
+{
+  "id": "526bd42f-9ba7-425a-a4fb-638cf16b77bc",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "高可用性と耐障害性",
+  "title": "Network Load Balancer と Application Load Balancer の連携による固定IPと高度な耐障害性の両立",
+  "services": [
+    "Network Load Balancer",
+    "Application Load Balancer",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融系サービス企業は、外部の顧客企業とHTTPS経由でAPI通信を行っています。顧客企業のセキュリティポリシーにより、通信先エンドポイントのIPアドレスをファイアウォールでホワイトリスト登録する必要があるため、常に静的（固定）なパブリックIPアドレスを提供することが義務付けられています。同時に、自社のWebアプリケーション層ではパスベースのURLルーティングと複数AZにまたがるEC2インスタンス群への自動ヘルスチェック・高可用性ロードバランシングが必要です。インフラの管理負担を最小限に抑えつつ、これらの要件をすべて満たす構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各アベイラビリティーゾーンにElastic IPアドレスを割り当てたApplication Load Balancer（ALB）を直接パブリックサブネットに配置する。",
+      "explanation": "Application Load Balancer（ALB）は動的にIPアドレスが変化する設計となっており、Elastic IPアドレス（静的IPアドレス）を直接割り当てることはサポートされていません。"
+    },
+    {
+      "id": "B",
+      "text": "各アベイラビリティーゾーンのパブリックサブネットにElastic IPアドレスを割り当てたNetwork Load Balancer（NLB）を作成し、その背後にプライベートサブネットのApplication Load Balancer（ALB）をターゲットとして登録する。",
+      "explanation": "Network Load Balancer（NLB）は各AZごとに静的なElastic IPアドレスを保持できます。NLBのターゲットグループにはApplication Load Balancer（ALB）を直接登録できるため、クライアントに対して固定IPアドレスを提供しつつ、ALBによるパスベースルーティングや高度なL7負荷分散・高可用性を実現できます。"
+    },
+    {
+      "id": "C",
+      "text": "パブリックサブネットに複数のEC2インスタンスを立ててNGINXリバースプロキシを構成し、各EC2インスタンスにElastic IPを割り当ててDNSラウンドロビンで負荷分散する。",
+      "explanation": "自前のEC2インスタンスでプロキシサーバー群を運用・管理する構成は、OSパッチや高可用性の維持、スケーリングなどの運用オーバーヘッドが非常に大きく、フルマネージドロードバランサーを活用するベストプラクティスに反します。"
+    },
+    {
+      "id": "D",
+      "text": "ALBの前にNAT Gatewayを配置し、NAT GatewayのElastic IPアドレスを顧客企業に提示してAPIトラフィックを受信させる。",
+      "explanation": "NAT Gatewayはプライベートサブネットからのアウトバウンド通信専用のリソースであり、インターネットからのインバウンド接続を受け付けることはできません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Network Load Balancer（NLB）はレイヤー4で動作し、各アベイラビリティーゾーンに対して固定のElastic IPアドレスを割り当てることが可能です。さらに、NLBのターゲットグループのターゲットタイプとして「Application Load Balancer」を直接指定できるため、静的IPアドレスの要件を満たしながら、ALBが持つレイヤー7の高度なリクエストルーティング機能やマルチAZ耐障害性をシームレスに組み合わせることができます。"
+}

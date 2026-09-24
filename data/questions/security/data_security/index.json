@@ -1,0 +1,150 @@
+{
+  "major": "セキュアアーキテクチャの設計",
+  "minor": "データ保護と暗号化",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "10cb6824-eea8-4fa5-95db-1da70feb2a98",
+      "title": "Amazon EBSボリュームの暗号化移行とリージョン単位のデフォルト暗号化によるガバナンス確保",
+      "services": [
+        "Amazon Elastic Block Store",
+        "Amazon EC2",
+        "AWS Key Management Service"
+      ],
+      "question_type": "single",
+      "file_name": "10cb6824-eea8-4fa5-95db-1da70feb2a98.json"
+    },
+    {
+      "id": "150e3c48-792d-48ec-9043-074ec989cedd",
+      "title": "AWS Secrets ManagerによるRDSデータベース認証情報の安全な保管とダウンタイムなしの自動ローテーション",
+      "services": [
+        "AWS Secrets Manager",
+        "Amazon RDS",
+        "AWS Key Management Service",
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "150e3c48-792d-48ec-9043-074ec989cedd.json"
+    },
+    {
+      "id": "3dad9a72-9262-4f87-ad36-73044c4c8ed1",
+      "title": "FIPS 140-2 レベル3準拠と専用ハードウェア要件を満たすAWS CloudHSMの選定",
+      "services": [
+        "AWS CloudHSM",
+        "AWS Key Management Service"
+      ],
+      "question_type": "single",
+      "file_name": "3dad9a72-9262-4f87-ad36-73044c4c8ed1.json"
+    },
+    {
+      "id": "6217b677-7ec0-41f5-a4a4-0c0447b36346",
+      "title": "Amazon Macieによる機密データ（PII）の検出監査とS3バケットでの転送時・保管時暗号化の強制",
+      "services": [
+        "Amazon Macie",
+        "Amazon S3",
+        "Amazon EventBridge",
+        "Amazon Simple Notification Service"
+      ],
+      "question_type": "single",
+      "file_name": "6217b677-7ec0-41f5-a4a4-0c0447b36346.json"
+    },
+    {
+      "id": "799ba9cc-f3c9-4346-866e-f1daee176b08",
+      "title": "Amazon S3バケットポリシーによるSSE-KMS暗号化および特定KMSキー使用の強制",
+      "services": [
+        "Amazon S3",
+        "AWS Key Management Service",
+        "AWS Identity and Access Management"
+      ],
+      "question_type": "single",
+      "file_name": "799ba9cc-f3c9-4346-866e-f1daee176b08.json"
+    },
+    {
+      "id": "88b17cd7-bd44-40ea-8056-901807fc0f77",
+      "title": "Amazon S3 Object Lockのコンプライアンスモードによるデータ改ざん・削除防止（WORM要件対応）",
+      "services": [
+        "Amazon S3",
+        "AWS Identity and Access Management"
+      ],
+      "question_type": "single",
+      "file_name": "88b17cd7-bd44-40ea-8056-901807fc0f77.json"
+    },
+    {
+      "id": "8ebfbd82-a99c-4369-a289-9d98c5830f2f",
+      "title": "AWS Systems Manager Parameter Storeを用いた設定値と機密情報の階層的・低コストな安全管理",
+      "services": [
+        "AWS Systems Manager Parameter Store",
+        "AWS Key Management Service",
+        "AWS Identity and Access Management"
+      ],
+      "question_type": "single",
+      "file_name": "8ebfbd82-a99c-4369-a289-9d98c5830f2f.json"
+    },
+    {
+      "id": "93d634be-3a0c-4a63-bf1e-376ba42d141b",
+      "title": "AWS KMSとエンベロープ暗号化（GenerateDataKey API）による大容量データの高効率クライアントサイド暗号化",
+      "services": [
+        "AWS Key Management Service",
+        "Amazon Elastic Compute Cloud",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "93d634be-3a0c-4a63-bf1e-376ba42d141b.json"
+    },
+    {
+      "id": "c1db56fe-21b0-4daa-bf22-fba5d7a845e4",
+      "title": "AWS Certificate Manager (ACM) と CloudFront によるSSL/TLS証明書の管理と完全自動更新の設計",
+      "services": [
+        "AWS Certificate Manager",
+        "Amazon CloudFront",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "c1db56fe-21b0-4daa-bf22-fba5d7a845e4.json"
+    },
+    {
+      "id": "c521a3c6-f0d7-4194-9a29-204d1310b330",
+      "title": "Amazon S3におけるサーバーサイド暗号化方式の選定とAWS KMSカスタマーマネージドキーによる監査要件の充足",
+      "services": [
+        "Amazon S3",
+        "AWS Key Management Service",
+        "AWS CloudTrail"
+      ],
+      "question_type": "single",
+      "file_name": "c521a3c6-f0d7-4194-9a29-204d1310b330.json"
+    },
+    {
+      "id": "d4fbb1c6-d122-41ca-9f0f-20b9953e69cd",
+      "title": "AWS KMSカスタマーマネージドキーで暗号化されたAmazon S3バケットへのクロスアカウントアクセスの設計",
+      "services": [
+        "AWS Key Management Service",
+        "Amazon S3",
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "d4fbb1c6-d122-41ca-9f0f-20b9953e69cd.json"
+    },
+    {
+      "id": "de9a86af-0d26-4434-9f36-6b7b604e3e75",
+      "title": "Amazon AuroraおよびAmazon S3における保管時暗号化と職務分掌を考慮したKMSキー設計（2つ選択）",
+      "services": [
+        "Amazon Aurora",
+        "Amazon S3",
+        "AWS Key Management Service",
+        "AWS Identity and Access Management"
+      ],
+      "question_type": "multiple",
+      "file_name": "de9a86af-0d26-4434-9f36-6b7b604e3e75.json"
+    },
+    {
+      "id": "e56aeebd-017b-44c8-b556-7c26745eadd1",
+      "title": "Amazon S3バケットポリシーによる転送中データのTLS暗号化強制と非暗号化通信の拒否",
+      "services": [
+        "Amazon S3",
+        "AWS Identity and Access Management"
+      ],
+      "question_type": "single",
+      "file_name": "e56aeebd-017b-44c8-b556-7c26745eadd1.json"
+    }
+  ]
+}

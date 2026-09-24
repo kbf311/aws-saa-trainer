@@ -1,0 +1,39 @@
+{
+  "id": "c1db56fe-21b0-4daa-bf22-fba5d7a845e4",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "AWS Certificate Manager (ACM) と CloudFront によるSSL/TLS証明書の管理と完全自動更新の設計",
+  "services": [
+    "AWS Certificate Manager",
+    "Amazon CloudFront",
+    "Amazon Route 53"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバル企業は、自社のWebサイト（例: `www.example.com`）の配信基盤としてAmazon CloudFrontディストリビューションを利用しています。ドメインのDNSレコードはAmazon Route 53パブリックホストゾーンでホストされています。現在、外部の商用認証局（CA）から購入したSSL/TLS証明書を手動でインポートして使用していますが、証明書の有効期限切れによるサイト停止リスクを排除するため、証明書のプロビジョニングと年次更新プロセスを完全に自動化したいと考えています。運用のオーバーヘッドを最小限に抑え、CloudFrontディストリビューションにカスタムSSL/TLS証明書を適用するための最も適切な手順はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "us-east-1（バージニア北部）リージョンのAWS Certificate Manager（ACM）でパブリックSSL/TLS証明書をリクエストし、検証方法として「DNS検証」を選択する。ACMコンソールからRoute 53にCNAMEレコードを自動作成し、証明書が発行された後、CloudFrontディストリビューションのカスタムSSL証明書として関連付ける。",
+      "explanation": "CloudFrontで使用するACM証明書は、必ずus-east-1（バージニア北部）リージョンでリクエストする必要があります。また、DNS検証を選択してRoute 53に検証用CNAMEレコードを登録することで、証明書の発行およびその後の毎年の更新が完全自動で行われ、人手による更新作業やサイト停止リスクがなくなります。"
+    },
+    {
+      "id": "B",
+      "text": "CloudFrontディストリビューションのオリジンが存在するリージョン（例: ap-northeast-1）のACMで証明書をリクエストし、検証方法として「Eメール検証」を選択する。ドメイン所有者宛ての承認メール内のリンクをクリックして証明書を発行し、ディストリビューションに関連付ける。",
+      "explanation": "CloudFrontに関連付けるACMパブリック証明書はus-east-1リージョンに存在しなければなりません。また、Eメール検証は更新時にも毎回管理者が承認メールをクリックする必要があり、DNS検証のような完全自動更新にはなりません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS IAMの証明書ストアに既存のSSL/TLS証明書をアップロードし、AWS Lambda関数をEventBridgeで毎月スケジュール実行して有効期限をチェックし、有効期限が近づいたら自動更新スクリプトを呼び出す。",
+      "explanation": "IAMへのSSL/TLS証明書アップロードは非推奨の古い方法であり、更新自動化のためにLambdaや外部スクリプトを自前開発・運用することは不要な工数と管理オーバーヘッドを発生させます。"
+    },
+    {
+      "id": "D",
+      "text": "ACM Private CA（プライベート認証局）をプロビジョニングし、ルート認証局から `www.example.com` 用のプライベート証明書を発行してCloudFrontディストリビューションに関連付ける。",
+      "explanation": "ACM Private CAは社内プライベートネットワーク用の証明書発行サービスであり、インターネット上の一般ユーザーのWebブラウザでは信頼されないため、パブリックWebサイトには使用できません。また、高額な月額料金が発生します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Certificate Manager (ACM) を使用してCloudFrontディストリビューションでカスタムSSL/TLS証明書を運用する際の主要なポイントは以下の通りです：\n1. **リージョンの制約**:\n   CloudFrontはエッジロケーションからコンテンツを配信するため、CloudFrontディストリビューションに関連付けるACM証明書は、必ず **米国東部（バージニア北部: `us-east-1`）リージョン** で要求・作成する必要があります（Application Load BalancerやAPI Gateway等のリージョンサービスの場合は、そのリソースと同じリージョンでリクエストします）。\n2. **DNS検証（DNS Validation）**:\n   ドメイン所有権の検証方法には「DNS検証」と「Eメール検証」があります。DNS検証を選択し、Route 53にCNAMEレコードを登録（コンソールからワンクリックで追加可能）しておくと、証明書が使用されている限りACMが有効期限切れの前に完全自動で証明書を更新（マネージド自動更新）してくれます。Eメール検証と異なり、年次更新時の人間による手動承認作業が一切発生しません。"
+}

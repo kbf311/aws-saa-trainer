@@ -1,0 +1,178 @@
+{
+  "major": "高パフォーマンスアーキテクチャの設計",
+  "minor": "高性能ストレージ",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "00130567-ffbc-4f17-a023-53584eedba82",
+      "title": "Amazon FSx for Windows File ServerとDFSによる高可用・高性能エンタープライズファイル共有",
+      "services": [
+        "Amazon FSx for Windows File Server",
+        "AWS Directory Service"
+      ],
+      "question_type": "single",
+      "file_name": "00130567-ffbc-4f17-a023-53584eedba82.json"
+    },
+    {
+      "id": "19e6dbb8-8499-43c0-a57c-19cc4cea85e6",
+      "title": "Amazon EBS Multi-Attach機能によるクラスタ対応共有ブロックストレージの構築",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "19e6dbb8-8499-43c0-a57c-19cc4cea85e6.json"
+    },
+    {
+      "id": "1bf1f38f-d5ba-431a-9b1b-ad821786eb9f",
+      "title": "マルチパートアップロードとバイトレンジGETによる大容量オブジェクトの転送効率化（複数選択）",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "multiple",
+      "file_name": "1bf1f38f-d5ba-431a-9b1b-ad821786eb9f.json"
+    },
+    {
+      "id": "2002336e-f988-43ce-8298-7afd0a65f84a",
+      "title": "Amazon EBS gp3ボリュームによるストレージ容量と独立したIOPS・スループットの性能拡張",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "2002336e-f988-43ce-8298-7afd0a65f84a.json"
+    },
+    {
+      "id": "21c32ea5-6043-456b-afb8-c3a27717751b",
+      "title": "Amazon FSx for Lustreにおけるスクラッチファイルシステムによる一時的HPCジョブのコスト性能最適化",
+      "services": [
+        "Amazon FSx for Lustre",
+        "Amazon S3",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "21c32ea5-6043-456b-afb8-c3a27717751b.json"
+    },
+    {
+      "id": "444c3d92-86ed-435f-9319-7d7e9a1291aa",
+      "title": "Amazon S3におけるプレフィックス分散によるリクエストスループットのスケーリング",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "444c3d92-86ed-435f-9319-7d7e9a1291aa.json"
+    },
+    {
+      "id": "58415ae7-a400-4d54-a62e-eba3e36917de",
+      "title": "Amazon FSx for LustreとS3連携による機械学習トレーニングの高速化",
+      "services": [
+        "Amazon FSx for Lustre",
+        "Amazon S3",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "58415ae7-a400-4d54-a62e-eba3e36917de.json"
+    },
+    {
+      "id": "58e7f00f-3550-49bf-8eba-bd8ba157ccf2",
+      "title": "WebアプリケーションにおけるAmazon EFSパフォーマンスモードの選定と低遅延設計",
+      "services": [
+        "Amazon EFS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "58e7f00f-3550-49bf-8eba-bd8ba157ccf2.json"
+    },
+    {
+      "id": "5a644309-07ad-4210-9913-c86e58e46fbf",
+      "title": "Amazon S3におけるバイトレンジGET（Range HTTPヘッダー）による大容量ファイルの並列ダウンロード高速化",
+      "services": [
+        "Amazon S3",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "5a644309-07ad-4210-9913-c86e58e46fbf.json"
+    },
+    {
+      "id": "a3051368-c3d4-442b-b692-1b4d1b74c516",
+      "title": "大規模分散ログ処理クラスターにおけるEBSスループット最適化HDD (st1) の選定",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "a3051368-c3d4-442b-b692-1b4d1b74c516.json"
+    },
+    {
+      "id": "aabd374d-3cfd-4cf0-ac3a-1cdf6b7d149a",
+      "title": "Amazon S3 Express One Zoneによる1桁ミリ秒レイテンシの超高速アクセス実現",
+      "services": [
+        "Amazon S3",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "aabd374d-3cfd-4cf0-ac3a-1cdf6b7d149a.json"
+    },
+    {
+      "id": "ac2aa31c-4a69-4b4e-a9ab-7e1146d757bf",
+      "title": "Amazon EFSにおけるAZローカルマウント設計によるネットワーク遅延最小化とコスト最適化",
+      "services": [
+        "Amazon EFS",
+        "Amazon EC2",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "ac2aa31c-4a69-4b4e-a9ab-7e1146d757bf.json"
+    },
+    {
+      "id": "c5547115-ea03-4be4-bb95-61cbaaf8b2ca",
+      "title": "Amazon S3 Transfer Accelerationによるグローバルクライアントからの長距離データアップロード高速化",
+      "services": [
+        "Amazon S3",
+        "Amazon CloudFront"
+      ],
+      "question_type": "single",
+      "file_name": "c5547115-ea03-4be4-bb95-61cbaaf8b2ca.json"
+    },
+    {
+      "id": "eafd8cc3-16da-4d8a-9b38-7a5ae056ab30",
+      "title": "ミッションクリティカルDBに対するEBSボリュームタイプ（io2 Block Express）の選定",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "eafd8cc3-16da-4d8a-9b38-7a5ae056ab30.json"
+    },
+    {
+      "id": "f3f9303a-231b-41ad-9a3b-65805a20ce18",
+      "title": "Amazon EFSにおけるエラスティックスループットモードによる予測不能なファイルI/Oの高速化",
+      "services": [
+        "Amazon EFS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "f3f9303a-231b-41ad-9a3b-65805a20ce18.json"
+    },
+    {
+      "id": "f87c64cc-6eb9-42bf-8f6b-0e06ccb0db30",
+      "title": "Amazon FSx for NetApp ONTAPによるマルチプロトコル共有ファイルアクセスと高機能ストレージ統合",
+      "services": [
+        "Amazon FSx for NetApp ONTAP",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "f87c64cc-6eb9-42bf-8f6b-0e06ccb0db30.json"
+    },
+    {
+      "id": "fd744b66-6496-4a6e-b40e-cf4070e3e534",
+      "title": "EC2とEBS間のネットワーク競合解消とストレージスループット最大化（2つ選択）",
+      "services": [
+        "Amazon EC2",
+        "Amazon EBS"
+      ],
+      "question_type": "multiple",
+      "file_name": "fd744b66-6496-4a6e-b40e-cf4070e3e534.json"
+    }
+  ]
+}

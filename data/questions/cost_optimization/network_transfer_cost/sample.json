@@ -1,0 +1,39 @@
+{
+  "id": "000",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "Gateway型VPCエンドポイント導入によるNAT Gateway経由S3データ転送料金の削減",
+  "services": [
+    "VPC Endpoints",
+    "NAT Gateway",
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業では、プライベートサブネット内のAmazon EC2インスタンス群で稼働するETLデータパイプラインが、毎日数十テラバイトのログデータをAmazon S3バケットへアップロードおよびダウンロードしています。現在、プライベートサブネットからのアウトバウンド通信はすべてNAT Gatewayを経由してインターネット上のS3パブリックエンドポイントと通信しています。月次AWS請求書を確認したところ、NAT Gatewayの「データ処理料金 (Data Processing Charges)」がインフラ費用全体の半分以上を占めていることが判明しました。\n\nセキュリティを強化しつつ、NAT Gatewayのデータ処理コストを完全に削減する最も費用対効果の高いソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "プライベートサブネット内の全EC2インスタンスにパブリックIPv4アドレスを割り当て、Internet Gateway経由でS3に直接アクセスさせる。",
+      "explanation": "**パブリックIPv4アドレスの割り当て**: プライベートEC2にパブリックIPを付与することはセキュリティ境界を破壊し、セキュリティポリシーに違反します。またIPv4パブリックIPの利用料金も発生します。"
+    },
+    {
+      "id": "B",
+      "text": "S3用のGateway型VPCエンドポイント (Gateway VPC Endpoint) を作成し、プライベートサブネットのルートテーブルにS3プレフィックスリスト宛てのターゲットとしてこのエンドポイントを設定する。",
+      "explanation": "**Gateway型VPCエンドポイント (Gateway VPC Endpoint)**: Amazon S3およびDynamoDB向けに提供されており、**利用料およびデータ処理料金が完全無料**です。プライベートサブネットのルートテーブルにエントリを追加するだけで、EC2インスタンスとS3間の通信がAWSプライベートネットワーク内で直接ルーティングされます。これにより、高価なNAT Gateway（1GBあたり約0.045ドルのデータ処理費用）を迂回でき、ネットワークデータ転送コストを劇的に削減できます。さらにトラフィックがパブリックインターネットに出ないためセキュリティも向上します。"
+    },
+    {
+      "id": "C",
+      "text": "S3用のInterface型VPCエンドポイント (AWS PrivateLink) を各プライベートサブネットにデプロイし、DNS解決を有効にする。",
+      "explanation": "**Interface型VPCエンドポイント (AWS PrivateLink)**: PrivateLinkは利用可能ですが、エンドポイント稼働時間料金（時間単価）およびデータ処理料金（GB単価）が発生するため、無料のGateway型エンドポイントに比べてコスト面で劣ります（オンプレミスからのアクセス等がない限りS3にはGateway型が推奨されます）。"
+    },
+    {
+      "id": "D",
+      "text": "NAT Gatewayを複数台に増やしてトラフィックを分散させ、CloudWatchアラームで帯域幅を監視する。",
+      "explanation": "**NAT Gatewayの増設**: NAT Gatewayを増やしてもGBあたりのデータ処理料金は変わらず、時間あたりの稼働基本料金が倍増するためコストが増加します。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Gateway型VPCエンドポイント導入によるNAT Gateway経由S3データ転送料金の削減に関する設問です。本問では「Gateway型VPCエンドポイント (Gateway VPC Endpoint)」が要件を満たす最適なアプローチとなります。"
+}

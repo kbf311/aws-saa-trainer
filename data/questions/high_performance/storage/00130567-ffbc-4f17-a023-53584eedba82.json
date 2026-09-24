@@ -1,0 +1,38 @@
+{
+  "id": "00130567-ffbc-4f17-a023-53584eedba82",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "高性能ストレージ",
+  "title": "Amazon FSx for Windows File ServerとDFSによる高可用・高性能エンタープライズファイル共有",
+  "services": [
+    "Amazon FSx for Windows File Server",
+    "AWS Directory Service"
+  ],
+  "question_type": "single",
+  "question_text": "ある多国籍企業が、オンプレミスで運用しているWindowsベースのファイルサーバー環境（数千名の社員が共有、Active Directory連携、SMBプロトコル必須、DFS名前空間によるフォルダ統合）をAWSクラウドへ移行しようとしています。高スループットと低レイテンシを維持しつつ、マルチAZ構成による高可用性を確保し、既存のWindowsアクセス権限（NTFS ACL）をそのまま維持したいと考えています。最も適切なマネージドサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon EFS をプロビジョンドスループットでデプロイし、NFS v4.1 クライアントを使用してWindowsインスタンスにマウントする。",
+      "explanation": "Amazon EFSはLinuxベースのPOSIXファイルシステムであり、SMBプロトコルやWindowsのNTFS ACL、ネイティブなActive Directoryドメイン統合をフルサポートしていません。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Managed Microsoft AD と統合されたマルチAZ配置の Amazon FSx for Windows File Server をプロビジョニングする。",
+      "explanation": "Amazon FSx for Windows File Serverは完全マネージド型のWindowsファイルシステムであり、ネイティブなSMBサポート、NTFS権限、Active Directory統合、DFS（分散ファイルシステム）名前空間、およびマルチAZ自動フェイルオーバーを提供するため、要件をすべて満たします。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon S3 バケットを作成し、各クライアントPCに AWS CLI をインストールして同期スクリプトを実行させる。",
+      "explanation": "S3はオブジェクトストレージでありファイルシステムではないため、SMBプロトコル経由のリアルタイムファイルオープンやロック、NTFSアクセス権限を直接サポートできません。"
+    },
+    {
+      "id": "D",
+      "text": "単一のEC2 Linuxインスタンス上にSambaサーバーを構築し、EBS gp3ボリュームを共有する。",
+      "explanation": "単一EC2上のSambaサーバーは単一障害点（SPOF）となり、OSのパッチ適用や高可用性設計、フェイルオーバー自動化などの大きな管理運用負荷が残ります。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Windowsワークロード向けの共有ファイルストレージには、Amazon FSx for Windows File Serverが最適です。Windows Server上に構築された完全マネージド型サービスであり、SMBプロトコル（2.0〜3.1.1）、NTFSアクセス許可、Microsoft Active Directory統合、シャドウコピー（VSS）、データ重複排除、DFS名前空間をネイティブにサポートします。マルチAZ配置を選択することで、AZ障害時にもデータ損失なしで自動フェイルオーバーが行われます。"
+}

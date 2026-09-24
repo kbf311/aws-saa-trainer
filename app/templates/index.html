@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+
+{% block title %}AWS SAA-C03 Trainer - 合格ダッシュボード{% endblock %}
+
+{% block content %}
+<main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-6">
+
+  <!-- Welcome Hero Banner -->
+  <div class="bg-aws-card border border-aws-border rounded-2xl p-6 sm:p-8 shadow-xl">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div>
+        <div class="flex items-center space-x-2 text-xs text-aws-orange font-bold uppercase tracking-wider mb-2">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>AWS Certified Solutions Architect - Associate</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          AWS SAA-C03 合格ダッシュボード
+        </h1>
+      </div>
+
+      <!-- Big CTA Button to Setup -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+        <a href="/setup"
+          class="inline-flex items-center justify-center space-x-3 px-6 py-3.5 rounded-xl bg-aws-orange hover:bg-aws-orangeHover text-slate-950 font-bold text-sm shadow-md transition text-center">
+          <i class="fa-solid fa-play"></i>
+          <span>演習セッションを開始</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top KPI Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+    <!-- 1. 累計回答問題数 -->
+    <div class="bg-aws-card border border-aws-border rounded-xl p-5 shadow-sm hover:border-slate-600 transition">
+      <div class="flex items-center justify-between text-slate-400 text-xs">
+        <span>累計回答問題数</span>
+        <i class="fa-solid fa-chart-line text-aws-orange"></i>
+      </div>
+      <div class="mt-3 flex items-baseline space-x-2">
+        <span id="kpiTotalAnswers" class="text-3xl font-extrabold text-white">0</span>
+        <span class="text-xs text-slate-400">問</span>
+      </div>
+      <div class="mt-2 text-[11px] text-slate-400 flex items-center">
+        <span>今日: +<span id="kpiTodayAnswers">{{ summary.today_answers if summary else '0' }}</span>問</span>
+      </div>
+    </div>
+
+    <!-- 2. 通算学習日数 -->
+    <div class="bg-aws-card border border-aws-border rounded-xl p-5 shadow-sm hover:border-slate-600 transition">
+      <div class="flex items-center justify-between text-slate-400 text-xs">
+        <span>通算学習日数</span>
+        <i class="fa-solid fa-calendar-check text-amber-400"></i>
+      </div>
+      <div class="mt-3 flex items-baseline space-x-2">
+        <span id="kpiDaysCount" class="text-3xl font-extrabold text-white">0</span>
+        <span class="text-xs text-slate-400">日</span>
+      </div>
+      <div class="mt-2 text-[11px] text-slate-400">
+        最終学習日: <span id="kpiLastLearnedDate">{{ summary.last_learned_date if summary and summary.last_learned_date else
+          ('未学習' if summary and summary.total_answers == 0 else '-') }}</span>
+      </div>
+    </div>
+
+    <!-- 3. 直近n問 正解率 -->
+    <div class="bg-aws-card border border-aws-border rounded-xl p-5 shadow-sm hover:border-slate-600 transition">
+      <div class="flex items-center justify-between text-slate-400 text-xs">
+        <span>直近 <span id="kpiRecentNLabel">{{ summary.recent_n if summary else 20 }}</span> 問 正解率</span>
+        <i class="fa-solid fa-bullseye text-blue-400"></i>
+      </div>
+      <div class="mt-3 flex items-baseline space-x-2">
+        <span id="kpiAccuracyRate" class="text-3xl font-extrabold text-white">0.0</span>
+        <span class="text-xs text-slate-400">%</span>
+      </div>
+      <div class="mt-2 text-[11px] text-slate-400 flex items-center space-x-1">
+        <span>目標合格ライン: 72.0%</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 回答問題数の推移（折れ線グラフ） -->
+  <section class="bg-aws-card border border-aws-border rounded-xl p-6 shadow-md">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+      <div>
+        <h2 class="text-base font-bold text-white flex items-center space-x-2">
+          <i class="fa-solid fa-arrow-trend-up text-aws-orange"></i>
+          <span id="cumulativeChartTitle">直近 {{ configured_recent_days }} 日間の回答推移</span>
+        </h2>
+      </div>
+
+      <!-- 期間切り替えボタングループ（右上に配置） -->
+      <div
+        class="inline-flex p-1 bg-slate-900/90 border border-slate-700/80 rounded-xl self-start sm:self-auto shadow-inner">
+        <button id="btnPeriodAll" type="button"
+          class="period-tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-earth-americas text-[11px]"></i>
+          <span>全期間</span>
+        </button>
+        <button id="btnPeriodRecent" type="button"
+          class="period-tab-btn px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 bg-aws-orange text-slate-950 shadow">
+          <i class="fa-solid fa-calendar-day text-[11px]"></i>
+          <span>直近 <span id="btnRecentDaysCount">{{ configured_recent_days }}</span> 日</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="relative h-64 w-full">
+      <canvas id="cumulativeChart"></canvas>
+    </div>
+  </section>
+
+  <!-- カテゴリー別 正解率分析 & 直近n問スライダー -->
+  <section class="bg-aws-card border border-aws-border rounded-xl p-6 shadow-md">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div>
+        <h2 class="text-base font-bold text-white flex items-center space-x-2">
+          <i class="fa-solid fa-chart-pie text-aws-orange"></i>
+          <span id="categorySectionTitle">カテゴリー別 正解率分析</span>
+        </h2>
+        <p class="text-xs text-slate-400 mt-1">
+          各カテゴリーの「直近 <span id="sliderLabel" class="text-aws-orange font-bold">20</span> 問」の平均正解率を算出しています。
+        </p>
+      </div>
+
+      <!-- Dynamic Slider Component -->
+      <div class="bg-slate-900/80 border border-slate-700/70 rounded-xl p-3 flex items-center space-x-4">
+        <div class="text-xs text-slate-300 font-medium whitespace-nowrap">
+          評価範囲:
+        </div>
+        <div class="flex items-center space-x-2">
+          <span class="text-[10px] text-slate-500">10問</span>
+          <input type="range" id="recentRangeSlider" min="10" max="50" step="5" value="20"
+            class="w-32 sm:w-40 h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-aws-orange">
+          <span class="text-[10px] text-slate-500">50問</span>
+        </div>
+        <span id="sliderValueBadge"
+          class="text-xs font-bold text-aws-orange bg-aws-orange/10 px-2 py-0.5 rounded border border-aws-orange/20">
+          直近 20 問
+        </span>
+      </div>
+    </div>
+
+    <!-- Category Bars Grid -->
+    <div id="categoryBarsContainer" class="space-y-4">
+      <!-- Injected by JavaScript -->
+    </div>
+  </section>
+
+  <!-- 学習ヒートマップ (草カレンダー) -->
+  <section class="bg-aws-card border border-aws-border rounded-xl p-6 shadow-md">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+      <div class="flex items-center space-x-3">
+        <h2 class="text-base font-bold text-white flex items-center space-x-2">
+          <i class="fa-solid fa-calendar-days text-emerald-400"></i>
+          <span>学習アクティビティ・ヒートマップ</span>
+        </h2>
+        <span id="heatmapYearBadge"
+          class="text-xs font-bold text-aws-orange bg-aws-orange/10 px-2 py-0.5 rounded border border-aws-orange/20">
+          2026年
+        </span>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <!-- 年選択ボタングループ (GitHub風) -->
+        <div id="heatmapYearButtonGroup"
+          class="inline-flex p-1 bg-slate-900 border border-slate-700/80 rounded-xl shadow-inner text-xs">
+          <!-- Injected by JavaScript -->
+        </div>
+
+        <!-- 凡例 -->
+        <div class="hidden sm:flex items-center space-x-1.5 text-[10px] text-slate-400">
+          <span>Less</span>
+          <span class="w-2.5 h-2.5 rounded-sm bg-slate-800/90 border border-slate-700/60" title="0問"></span>
+          <span class="w-2.5 h-2.5 rounded-sm bg-emerald-950 border border-emerald-800" title="1-5問"></span>
+          <span class="w-2.5 h-2.5 rounded-sm bg-emerald-800 border border-emerald-600" title="6-15問"></span>
+          <span class="w-2.5 h-2.5 rounded-sm bg-emerald-600 border border-emerald-500" title="16-30問"></span>
+          <span class="w-2.5 h-2.5 rounded-sm bg-emerald-400 border border-emerald-300" title="31問以上"></span>
+          <span>More</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calendar Grid Scroll Area (GitHub Style) -->
+    <div class="overflow-x-auto custom-scrollbar pb-2">
+      <div class="inline-flex flex-col select-none min-w-[700px]">
+        <!-- 月ラベル行 -->
+        <div class="flex items-center mb-1.5">
+          <div class="w-6 mr-2"></div><!-- 曜日ラベル列用の余白 -->
+          <div id="heatmapMonthRow" class="flex gap-1.5 h-4 text-[10px] text-slate-400 font-medium">
+            <!-- Injected by JavaScript -->
+          </div>
+        </div>
+
+        <!-- 曜日ラベル + カレンダー本体 -->
+        <div class="flex items-start">
+          <!-- 曜日ラベル列（GitHub公式準拠: 月・水・金） -->
+          <div class="flex flex-col gap-1.5 mr-2 text-[10px] text-slate-400 font-medium w-6 text-right select-none">
+            <span class="h-3 leading-3"></span><!-- 日 -->
+            <span class="h-3 leading-3">月</span>
+            <span class="h-3 leading-3"></span><!-- 火 -->
+            <span class="h-3 leading-3">水</span>
+            <span class="h-3 leading-3"></span><!-- 木 -->
+            <span class="h-3 leading-3">金</span>
+            <span class="h-3 leading-3"></span><!-- 土 -->
+          </div>
+
+          <!-- 週ごとのセル列 -->
+          <div id="heatmapGrid" class="flex gap-1.5">
+            <!-- Injected by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 直近の演習履歴 -->
+  <section class="bg-aws-card border border-aws-border rounded-xl p-6 shadow-md">
+    <h2 class="text-base font-bold text-white flex items-center space-x-2 mb-4">
+      <i class="fa-solid fa-clock-rotate-left text-slate-400"></i>
+      <span id="sessionsSectionTitle">直近の演習セッション履歴</span>
+    </h2>
+
+    <div id="recentSessionsTableContainer" class="overflow-x-auto">
+      <table class="w-full text-left text-xs text-slate-300">
+        <thead class="bg-slate-900/60 text-slate-400 uppercase text-[10px] border-b border-slate-700">
+          <tr>
+            <th class="py-2.5 px-3">日時</th>
+            <th class="py-2.5 px-3">モード</th>
+            <th class="py-2.5 px-3">回答数</th>
+            <th class="py-2.5 px-3">正解率</th>
+          </tr>
+        </thead>
+        <tbody id="recentSessionsBody" class="divide-y divide-slate-800">
+          <!-- Injected by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.APP_CONFIG = {
+    configuredRecentDays: {{ configured_recent_days | default (7) }},
+  };
+</script>
+<script src="/static/js/dashboard.js?v=3"></script>
+{% endblock %}

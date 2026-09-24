@@ -1,0 +1,39 @@
+{
+  "id": "000",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "ディザスタリカバリ",
+  "title": "AWS Elastic Disaster Recovery (AWS DRS) を利用したオンプレミス環境の最小コストDR",
+  "services": [
+    "AWS Elastic Disaster Recovery",
+    "Amazon EC2",
+    "Amazon EBS"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業が、オンプレミスのデータセンターで稼働しているミッションクリティカルなWindowsおよびLinuxサーバー群のディザスタリカバリ（DR）計画をAWS上に構築しようとしています。要件として、目標復旧時点（RPO）を数秒、目標復旧時間（RTO）を数分以内とし、平常時のDRインフラ運用コストおよび管理負担を最小限に抑える必要があります。\n\nこれらの要件を最も効果的に満たすソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "オンプレミスサーバーのVMイメージをAWS Application Migration Service (AWS MGN) で毎日エクスポートし、セカンダリリージョンに常時フル稼働のEC2インスタンスとしてプロビジョニングしておく。",
+      "explanation": "**AWS Application Migration Service (AWS MGN) の利用**: AWS MGNは主に「移行（マイグレーション）」を目的としたサービスであり、継続的なディザスタリカバリの運用には適していません。また、常時フル稼働させるとコストが増加します。"
+    },
+    {
+      "id": "B",
+      "text": "オンプレミスサーバーにAWS Elastic Disaster Recovery (AWS DRS) エージェントをインストールし、低コストのステージングエリア（小規模EC2および低コストEBSボリューム）へ継続的にブロックレベルでデータレプリケーションを行う。障害発生時のみターゲットのフルスペックEC2インスタンスを自動起動する。",
+      "explanation": "**AWS Elastic Disaster Recovery (AWS DRS)**: オンプレミスやクラウドの物理/仮想サーバーを、低コストのストレージと最小限のコンピュートリソースで構成される「ステージングエリア」へ継続的（ブロックレベル）にレプリケーションします。これにより、RPO数秒・RTO数分という厳しい復旧目標を満たしつつ、平常時のコスト（フルスペックのコンピュートを常時起動しないため）を大幅に削減できます。災害発生時には、事前定義された起動設定に従って数分以内に本番インスタンスを自動プロビジョニングできます。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Backupを使用してオンプレミスの全仮想マシンを毎時間Amazon S3 Glacier Deep Archiveにバックアップし、災害発生時にAWS CloudFormationテンプレートを使用してEC2環境を再構築する。",
+      "explanation": "**Glacier Deep Archiveへのバックアップ**: Glacier Deep Archiveへのバックアップは安価ですが、リストアに数時間〜数十時間かかり、RTO数分・RPO数秒の要件を達成できません。"
+    },
+    {
+      "id": "D",
+      "text": "オンプレミス環境とAWS Direct Connectで接続し、AWS Systems Manager Automationを使用して災害時にオンプレミスのスクリプトからAWS CLI経由でEC2インスタンスをプロビジョニングする。",
+      "explanation": "**Systems Manager Automationによるスクリプトプロビジョニング**: 継続的なデータレプリケーションが行われていないため、最新データへの復旧（RPO数秒）が不可能です。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "AWS Elastic Disaster Recovery (AWS DRS) を利用したオンプレミス環境の最小コストDRに関する設問です。本問では「AWS Elastic Disaster Recovery (AWS DRS)」が要件を満たす最適なアプローチとなります。"
+}

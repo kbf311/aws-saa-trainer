@@ -1,0 +1,40 @@
+{
+  "id": "e79be1b3-1278-4794-a048-8a9553660443",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "ネットワークセキュリティ",
+  "title": "大規模DDoS攻撃に対するAWS Shield Advancedの導入とコスト保護",
+  "services": [
+    "AWS Shield",
+    "AWS WAF",
+    "Amazon CloudFront",
+    "Amazon Route 53"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバルなゲーム開発会社が、Amazon CloudFront、Route 53、およびApplication Load Balancer (ALB) を使用して、世界中のプレイヤーに向けたオンライン対戦ゲームのプラットフォームを運用しています。同社は過去に数回の大規模な分散型サービス拒否 (DDoS) 攻撃を受け、サービスが断続的に停止しただけでなく、攻撃トラフィックによってバックエンドが過剰にスケールアウトし、予期せぬ多額のAWS料金が発生してしまいました。企業は高度なレイヤー3、4、7のDDoS攻撃に対する24時間365日のAWS専門チームによるインシデント支援、リアルタイムの攻撃可視性、および攻撃に起因する予期せぬスケールアウト費用の保護（DDoSコスト保護）を求めています。\n\nこれらの要件を満たす最適なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Shield Advanced に加入し、CloudFrontディストリビューション、Route 53ホストゾーン、およびALBを保護対象リソースとして登録する。AWS Shield Response Team (SRT) に対するプロアクティブエンゲージメントを有効化する。",
+      "explanation": "AWS Shield Advanced は、大規模・巧妙なDDoS攻撃に対する包括的なマネージド型保護サービスです。追加料金なしでAWS WAFのフル機能が利用できるほか、専門の「AWS Shield Response Team (SRT)」が24時間体制でカスタム緩和ルールの作成・適用を支援します。さらに、DDoS攻撃によるトラフィック急増で発生したEC2、ELB、CloudFrontなどのスパイク料金を相殺する「DDoSコスト保護 (Cost Protection)」が提供されるため、すべての要件に合致します。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Shield Standard を有効化し、CloudWatchアラームを設定してトラフィック急増時にAuto Scalingの最大キャパシティを自動的にゼロにするLambda関数を作成する。",
+      "explanation": "AWS Shield Standard は基本的なL3/L4保護のみを提供し、SRTによる直接支援やDDoSコスト保護は含まれません。また、キャパシティをゼロにすることは攻撃者の目的であるサービス停止（DoS）を自ら引き起こすことになり、本末転倒です。"
+    },
+    {
+      "id": "C",
+      "text": "ALBの前段にサードパーティのソフトウェアファイアウォールアプライアンスをEC2クラスターとして手動でデプロイし、BGP Anycastルーティングを設定する。",
+      "explanation": "サードパーティのアプライアンス管理は多大な運用オーバーヘッドと単一障害点のリスクを伴います。また、AWS Shield Advancedが提供するAWSインフラレベルのDDoSコスト保護やSRT支援を受けることはできません。"
+    },
+    {
+      "id": "D",
+      "text": "すべてのエンドポイントのDNSレコードをRoute 53からオンプレミスのプライベートDNSサーバーに変更し、すべてのトラフィックをVPN経由で社内ファイアウォールにルーティングする。",
+      "explanation": "グローバルな一般ゲームプレイヤーの通信を社内VPNやオンプレミス経由にすることはレイテンシーを極端に悪化させ、オンプレミス回線がDDoS攻撃によって即座にパンクしてしまいます。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Shield Standard（無料・自動適用）に対し、AWS Shield Advanced（有料サブスクリプション）は、洗練されたDDoS攻撃に対するより高度な検知・緩和、AWS WAFルールの無償利用、AWS Shield Response Team (SRT) による24/7の緊急支援、そしてDDoS攻撃に起因する予期せぬリソース使用料の急増を補償する「DDoSコスト保護」を提供します。"
+}

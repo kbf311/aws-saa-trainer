@@ -1,0 +1,110 @@
+{
+  "updated_at": "2026-09-24T14:21:30Z",
+  "total_questions": 150,
+  "categories": [
+    {
+      "major_id": "resilient",
+      "major_name": "レジリエント・アーキテクチャの設計",
+      "minor_id": "high_availability",
+      "minor_name": "高可用性と耐障害性",
+      "dir_path": "questions/resilient/high_availability",
+      "question_count": 20
+    },
+    {
+      "major_id": "resilient",
+      "major_name": "レジリエント・アーキテクチャの設計",
+      "minor_id": "decoupling",
+      "minor_name": "スケーラビリティと疎結合",
+      "dir_path": "questions/resilient/decoupling",
+      "question_count": 10
+    },
+    {
+      "major_id": "resilient",
+      "major_name": "レジリエント・アーキテクチャの設計",
+      "minor_id": "disaster_recovery",
+      "minor_name": "ディザスタリカバリ",
+      "dir_path": "questions/resilient/disaster_recovery",
+      "question_count": 12
+    },
+    {
+      "major_id": "high_performance",
+      "major_name": "高パフォーマンスアーキテクチャの設計",
+      "minor_id": "compute",
+      "minor_name": "コンピューティングとスケーリング",
+      "dir_path": "questions/high_performance/compute",
+      "question_count": 17
+    },
+    {
+      "major_id": "high_performance",
+      "major_name": "高パフォーマンスアーキテクチャの設計",
+      "minor_id": "storage",
+      "minor_name": "高性能ストレージ",
+      "dir_path": "questions/high_performance/storage",
+      "question_count": 17
+    },
+    {
+      "major_id": "high_performance",
+      "major_name": "高パフォーマンスアーキテクチャの設計",
+      "minor_id": "database",
+      "minor_name": "データベースとキャッシング",
+      "dir_path": "questions/high_performance/database",
+      "question_count": 7
+    },
+    {
+      "major_id": "high_performance",
+      "major_name": "高パフォーマンスアーキテクチャの設計",
+      "minor_id": "networking",
+      "minor_name": "ネットワークとコンテンツ配信",
+      "dir_path": "questions/high_performance/networking",
+      "question_count": 7
+    },
+    {
+      "major_id": "security",
+      "major_name": "セキュアアーキテクチャの設計",
+      "minor_id": "iam_access",
+      "minor_name": "IAMとアクセス制御",
+      "dir_path": "questions/security/iam_access",
+      "question_count": 7
+    },
+    {
+      "major_id": "security",
+      "major_name": "セキュアアーキテクチャの設計",
+      "minor_id": "data_security",
+      "minor_name": "データ保護と暗号化",
+      "dir_path": "questions/security/data_security",
+      "question_count": 13
+    },
+    {
+      "major_id": "security",
+      "major_name": "セキュアアーキテクチャの設計",
+      "minor_id": "network_security",
+      "minor_name": "ネットワークセキュリティ",
+      "dir_path": "questions/security/network_security",
+      "question_count": 7
+    },
+    {
+      "major_id": "cost_optimization",
+      "major_name": "コスト最適化アーキテクチャの設計",
+      "minor_id": "storage_cost",
+      "minor_name": "ストレージコスト最適化",
+      "dir_path": "questions/cost_optimization/storage_cost",
+      "question_count": 13
+    },
+    {
+      "major_id": "cost_optimization",
+      "major_name": "コスト最適化アーキテクチャの設計",
+      "minor_id": "compute_cost",
+      "minor_name": "コンピュートコスト最適化",
+      "dir_path": "questions/cost_optimization/compute_cost",
+      "question_count": 7
+    },
+    {
+      "major_id": "cost_optimization",
+      "major_name": "コスト最適化アーキテクチャの設計",
+      "minor_id": "network_transfer_cost",
+      "minor_name": "データ転送・ネットワークコスト最適化",
+      "dir_path": "questions/cost_optimization/network_transfer_cost",
+      "question_count": 13
+    }
+  ]
+}

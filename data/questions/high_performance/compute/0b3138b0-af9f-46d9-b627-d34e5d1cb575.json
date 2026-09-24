@@ -1,0 +1,39 @@
+{
+  "id": "0b3138b0-af9f-46d9-b627-d34e5d1cb575",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "コンピューティングとスケーリング",
+  "title": "EC2 Auto Scalingライフサイクルフックを活用した事前データ初期化とトラフィック受信の同期制御",
+  "services": [
+    "Amazon EC2 Auto Scaling",
+    "Application Load Balancer",
+    "Amazon EventBridge"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業が、Amazon EC2 Auto ScalingグループとApplication Load Balancer（ALB）の配下で稼働する検索APIサービスを運用しています。スケールアウトによって新しいEC2インスタンスが起動する際、検索インデックスとなる数十ギガバイトのデータをAmazon S3からローカルSSDにダウンロードしてメモリにロードする初期化処理に約5分かかります。しかし、初期化処理が完了する前にインスタンスが「InService」状態になってALBのターゲットグループに登録されてしまい、検索クエリを受け取った新規インスタンスがエラー（500内部サーバーエラー）を返してしまう問題が発生しています。この問題を解決し、初期化が完全に完了するまでトラフィックが送られないようにする最も適切な方法はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Auto Scalingグループに起動ライフサイクルフック（autoscaling:EC2_INSTANCE_LAUNCHING）を設定し、インスタンスをPending:Wait状態に保持して、初期化スクリプトが完了した時点でcomplete-lifecycle-actionコマンドを実行してインスタンスをInServiceに移行させる。",
+      "explanation": "ライフサイクルフックを設定することで、インスタンスが起動してALBに登録される前の段階（Pending:Wait）で一時停止させることができます。ユーザーデータスクリプト等でデータのダウンロードやインデックスのメモリ展開が完了した後に「complete-lifecycle-action」を呼び出すことで、確実に初期化完了後のみトラフィックを受信させることが可能です。"
+    },
+    {
+      "id": "B",
+      "text": "Application Load Balancerのヘルスチェックの間隔（Interval）を300秒に延長し、正常判定閾値（Healthy threshold）を1回に設定する。",
+      "explanation": "ALBのヘルスチェック間隔を極端に長くすると、インスタンスがInServiceになった直後にヘルスチェックが行われずにトラフィックが流れてしまう可能性が高まる上、既存の健全なノードで障害が発生した際の異常検知が極めて遅れるため、運用上重大なリスクとなります。"
+    },
+    {
+      "id": "C",
+      "text": "EC2インスタンスのユーザーデータスクリプトの末尾に「sleep 300」コマンドを挿入して待機時間を設ける。",
+      "explanation": "ユーザーデータはバックグラウンドで非同期に実行されるため、sleepを入れてもAuto ScalingのInService移行のタイミングを遅らせることはできません。Auto Scalingは起動通知を受け取ると独自にInServiceへ遷移させてしまいます。"
+    },
+    {
+      "id": "D",
+      "text": "Auto Scalingグループの終了ポリシー（Termination Policy）を「OldestInstance」に変更する。",
+      "explanation": "終了ポリシーはスケールイン時にどのインスタンスを終了するかを決定するルールであり、新規インスタンスのスケールアウト時の初期化待機やトラフィック制御には何の影響もありません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "EC2 Auto Scalingの「ライフサイクルフック（Lifecycle Hooks）」は、インスタンスの起動（スケールアウト）時や終了（スケールイン）時に、インスタンスの状態遷移を一時停止（Pending:Wait または Terminating:Wait）させる機能です。起動時に大容量データのダウンロードやソフトウェア設定、キャッシュウォームアップなどの重い初期化が必要な場合、ライフサイクルフックにより初期化完了通知（complete-lifecycle-action）を送るまでインスタンスがロードバランサーに登録されないため、未準備のインスタンスにトラフィックが流れる障害を確実に防止できます。"
+}

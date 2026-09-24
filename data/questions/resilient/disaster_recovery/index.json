@@ -1,0 +1,141 @@
+{
+  "major": "レジリエント・アーキテクチャの設計",
+  "minor": "ディザスタリカバリ",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "03b05544-25f1-4220-9103-1852c5840ee6",
+      "title": "AWS Storage Gateway (Volume Gateway) を活用したオンプレミスブロックストレージのAWSクラウドDR",
+      "services": [
+        "AWS Storage Gateway",
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "03b05544-25f1-4220-9103-1852c5840ee6.json"
+    },
+    {
+      "id": "108f6a56-67cd-40d1-bd1d-2b248a3e5524",
+      "title": "RTO数十・RPO数分要件を満たすコスト効率の高いパイロットライト型DR戦略",
+      "services": [
+        "Amazon EC2",
+        "Amazon RDS",
+        "Amazon Route 53",
+        "AWS CloudFormation"
+      ],
+      "question_type": "single",
+      "file_name": "108f6a56-67cd-40d1-bd1d-2b248a3e5524.json"
+    },
+    {
+      "id": "16d6f1c0-ecdd-47d1-b191-1eaaae215934",
+      "title": "S3クロスリージョンレプリケーションとCloudFrontによる静的サイトの自動フェイルオーバー",
+      "services": [
+        "Amazon S3",
+        "Amazon CloudFront",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "16d6f1c0-ecdd-47d1-b191-1eaaae215934.json"
+    },
+    {
+      "id": "2eadd994-9a70-45ea-ba13-5c2d43b20dee",
+      "title": "Amazon RDS クロスリージョンリードレプリカのスタンドアロン昇格によるディザスタリカバリ手順",
+      "services": [
+        "Amazon RDS",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "2eadd994-9a70-45ea-ba13-5c2d43b20dee.json"
+    },
+    {
+      "id": "36a9ec9a-eb61-4ca9-b587-a7a474437692",
+      "title": "AWS Elastic Disaster Recovery (AWS DRS) によるオンプレミスサーバーの低コストかつ継続的なDR保護",
+      "services": [
+        "AWS Elastic Disaster Recovery",
+        "Amazon EC2",
+        "Amazon EBS"
+      ],
+      "question_type": "single",
+      "file_name": "36a9ec9a-eb61-4ca9-b587-a7a474437692.json"
+    },
+    {
+      "id": "548764a1-45b9-4a1a-a277-95be0fb9ded4",
+      "title": "Amazon DynamoDB グローバルテーブルを活用したマルチサイトActive/Active型DRアーキテクチャ",
+      "services": [
+        "Amazon DynamoDB",
+        "Amazon Route 53",
+        "AWS Global Accelerator"
+      ],
+      "question_type": "multiple",
+      "file_name": "548764a1-45b9-4a1a-a277-95be0fb9ded4.json"
+    },
+    {
+      "id": "6e1f0112-d380-4fbb-8784-1b19c2091260",
+      "title": "Amazon S3 レプリケーションタイムコントロール (RTC) による予測可能なDRデータ同期とコンプライアンス遵守",
+      "services": [
+        "Amazon S3",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "6e1f0112-d380-4fbb-8784-1b19c2091260.json"
+    },
+    {
+      "id": "948031ef-9978-43f3-96df-61ee0ff7ae27",
+      "title": "AWSにおける4大ディザスタリカバリ（DR）戦略の特徴とRTO/RPO・コストのトレードオフ評価",
+      "services": [
+        "Amazon Route 53",
+        "Amazon EC2",
+        "Amazon RDS",
+        "AWS Backup"
+      ],
+      "question_type": "multiple",
+      "file_name": "948031ef-9978-43f3-96df-61ee0ff7ae27.json"
+    },
+    {
+      "id": "af019216-f9c5-4c18-a929-f30e7f8506ec",
+      "title": "ウォームスタンバイ型ディザスタリカバリ戦略による短時間復旧（低RTO）とコスト最適化",
+      "services": [
+        "Amazon Route 53",
+        "Amazon EC2 Auto Scaling",
+        "Amazon RDS",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "af019216-f9c5-4c18-a929-f30e7f8506ec.json"
+    },
+    {
+      "id": "b28c7ac2-f51e-408f-a747-758dfe27b4bd",
+      "title": "Amazon CloudFront オリジングループによる自動フェイルオーバーと静的エラーページの迅速な表示",
+      "services": [
+        "Amazon CloudFront",
+        "Amazon S3",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "b28c7ac2-f51e-408f-a747-758dfe27b4bd.json"
+    },
+    {
+      "id": "cdcf17f0-c6a2-4a41-aab2-f196dfcdfcaf",
+      "title": "Amazon Aurora Global Database によるクロスリージョン低遅延レプリケーションと高速フェイルオーバー",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "cdcf17f0-c6a2-4a41-aab2-f196dfcdfcaf.json"
+    },
+    {
+      "id": "f950e79c-a906-47fd-9369-b5d4d4ff543a",
+      "title": "AWS Backup によるクロスリージョン・クロスアカウントDRとVault Lockによるランサムウェア対策",
+      "services": [
+        "AWS Backup",
+        "Amazon EBS",
+        "Amazon RDS",
+        "Amazon S3",
+        "AWS Organizations"
+      ],
+      "question_type": "single",
+      "file_name": "f950e79c-a906-47fd-9369-b5d4d4ff543a.json"
+    }
+  ]
+}

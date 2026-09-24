@@ -1,0 +1,77 @@
+{
+  "major": "高パフォーマンスアーキテクチャの設計",
+  "minor": "ネットワークとコンテンツ配信",
+  "updated_at": "2026-09-24T14:21:30Z",
+  "questions": [
+    {
+      "id": "1c173de1-0f3e-430d-8c09-9c248d019799",
+      "title": "Amazon CloudFrontを活用した動的WebアプリケーションのTTFB短縮（複数選択）",
+      "services": [
+        "Amazon CloudFront",
+        "Application Load Balancer"
+      ],
+      "question_type": "multiple",
+      "file_name": "1c173de1-0f3e-430d-8c09-9c248d019799.json"
+    },
+    {
+      "id": "26da0e98-ede2-4228-8e64-590e5fb0525e",
+      "title": "AWS Global Acceleratorによる非HTTPトラフィックの低遅延ルーティングと固定Anycast IPの提供",
+      "services": [
+        "AWS Global Accelerator",
+        "Amazon CloudFront",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "26da0e98-ede2-4228-8e64-590e5fb0525e.json"
+    },
+    {
+      "id": "27aa1ec8-0b5d-4104-aac8-896b79fa9e62",
+      "title": "CloudFrontキャッシュポリシーとオリジンリクエストポリシーによるキャッシュヒット率の最大化",
+      "services": [
+        "Amazon CloudFront"
+      ],
+      "question_type": "single",
+      "file_name": "27aa1ec8-0b5d-4104-aac8-896b79fa9e62.json"
+    },
+    {
+      "id": "66ea7aaa-fa73-408b-91d2-848ed0c62737",
+      "title": "Network Load Balancer (NLB) による突発的超高トラフィックと超低遅延TCP通信の処理",
+      "services": [
+        "Elastic Load Balancing",
+        "Network Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "66ea7aaa-fa73-408b-91d2-848ed0c62737.json"
+    },
+    {
+      "id": "6f8bd15b-faf8-4978-beb0-f332ca026980",
+      "title": "AWS Transit GatewayとECMP（等コストマルチパス）による相互接続帯域のスケーリング",
+      "services": [
+        "AWS Transit Gateway",
+        "Amazon VPC",
+        "AWS Site-to-Site VPN"
+      ],
+      "question_type": "single",
+      "file_name": "6f8bd15b-faf8-4978-beb0-f332ca026980.json"
+    },
+    {
+      "id": "add5554e-8dd8-4149-b202-9d92934656e6",
+      "title": "Amazon CloudFront Origin Shieldによるオリジン保護とグローバルキャッシュヒット率向上",
+      "services": [
+        "Amazon CloudFront"
+      ],
+      "question_type": "single",
+      "file_name": "add5554e-8dd8-4149-b202-9d92934656e6.json"
+    },
+    {
+      "id": "d4b5a5af-514c-4e60-8078-539c66d4f796",
+      "title": "AWS Direct Connectとジャンボフレームによるオンプレミス間大容量データ転送の最適化",
+      "services": [
+        "AWS Direct Connect",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "d4b5a5af-514c-4e60-8078-539c66d4f796.json"
+    }
+  ]
+}
