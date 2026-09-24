@@ -1,8 +1,17 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "データベースとキャッシング",
-  "updated_at": "2026-09-24T14:21:30Z",
+  "updated_at": "2026-09-24T22:05:58Z",
   "questions": [
+    {
+      "id": "115f8f8f-067e-4165-bef1-ece4ce28fce0",
+      "title": "Amazon Redshift RA3ノードとマネージドストレージ（RMS）によるコンピュートとストレージの独立スケーリング",
+      "services": [
+        "Amazon Redshift"
+      ],
+      "question_type": "single",
+      "file_name": "115f8f8f-067e-4165-bef1-ece4ce28fce0.json"
+    },
     {
       "id": "2a90e67f-ff0c-49a7-99f2-dce761bd2bd0",
       "title": "Amazon ElastiCacheを活用した遅延読み込み（Cache-Aside）とTTLによるDB負荷軽減",
@@ -33,6 +42,44 @@
       "file_name": "3c6af892-984f-4655-850d-80bb76032bdf.json"
     },
     {
+      "id": "58589145-f112-4c85-b8b1-9c272a0c834b",
+      "title": "Amazon DynamoDB TTL（Time to Live）による不要データ自動パージとパフォーマンス維持",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "58589145-f112-4c85-b8b1-9c272a0c834b.json"
+    },
+    {
+      "id": "63c8412c-6a13-471c-819a-5fda9efc3d10",
+      "title": "DynamoDBのグローバルセカンダリインデックス（GSI）と射影属性（PROJECTION）によるクエリ性能とスループット最適化",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "63c8412c-6a13-471c-819a-5fda9efc3d10.json"
+    },
+    {
+      "id": "79344711-92de-4764-b2b5-78ffddfedf28",
+      "title": "Amazon RDS ProxyによるLambda急増時のコネクション枯渇防止とパフォーマンス向上",
+      "services": [
+        "Amazon RDS Proxy",
+        "Amazon Aurora",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "79344711-92de-4764-b2b5-78ffddfedf28.json"
+    },
+    {
+      "id": "7e14db71-47e6-4c47-ba0f-2f1b8b977a65",
+      "title": "突発的かつ予測不能なトラフィック急増に対するAmazon DynamoDBオンデマンドキャパシティモードの選定",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "7e14db71-47e6-4c47-ba0f-2f1b8b977a65.json"
+    },
+    {
       "id": "81a715ab-7929-41bf-a661-5a8c61b13391",
       "title": "Amazon Redshift Spectrumを活用したS3データレイクへの高速アドホッククエリ",
       "services": [
@@ -55,6 +102,26 @@
       "file_name": "8709abcd-eda3-4025-8f61-e7e4d16d5ff1.json"
     },
     {
+      "id": "8733c26e-89f5-4fc7-a6dc-6de754c316e5",
+      "title": "Amazon RDSにおけるリードレプリカの活用と参照ワークロードのオフロード（2つ選択）",
+      "services": [
+        "Amazon RDS",
+        "Amazon Aurora"
+      ],
+      "question_type": "multiple",
+      "file_name": "8733c26e-89f5-4fc7-a6dc-6de754c316e5.json"
+    },
+    {
+      "id": "96f04cc6-a80c-425f-93f7-d15f6f599128",
+      "title": "Amazon ElastiCacheにおける書き込みスルー（Write-Through）とTTLによるキャッシュ整合性と読み取り性能の両立",
+      "services": [
+        "Amazon ElastiCache",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "96f04cc6-a80c-425f-93f7-d15f6f599128.json"
+    },
+    {
       "id": "aaaf8eea-52b7-470a-b39a-2d67b2040d64",
       "title": "予測不能な突発的トラフィックに対するAmazon Aurora Serverless v2の自動キャパシティ調整",
       "services": [
@@ -62,6 +129,35 @@
       ],
       "question_type": "single",
       "file_name": "aaaf8eea-52b7-470a-b39a-2d67b2040d64.json"
+    },
+    {
+      "id": "bb86aabe-f005-4109-9426-a011d6b41acf",
+      "title": "Amazon Aurora Global Databaseを活用したクロスリージョンでの低レイテンシー読み取りと性能最適化",
+      "services": [
+        "Amazon Aurora",
+        "Amazon Aurora Global Database"
+      ],
+      "question_type": "single",
+      "file_name": "bb86aabe-f005-4109-9426-a011d6b41acf.json"
+    },
+    {
+      "id": "c0c505dc-a404-4fae-b009-4120963f2424",
+      "title": "Amazon ElastiCacheにおけるMemcachedエンジンの選定（マルチスレッド処理と水平スケーリング）",
+      "services": [
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "c0c505dc-a404-4fae-b009-4120963f2424.json"
+    },
+    {
+      "id": "defc2bcf-fc25-4776-9de9-b684f7a89be9",
+      "title": "Amazon MemoryDB for Redisによるマイクロ秒単位の応答とマルチAZ耐久性を兼ね備えたプライマリデータベース構築",
+      "services": [
+        "Amazon MemoryDB for Redis",
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "defc2bcf-fc25-4776-9de9-b684f7a89be9.json"
     },
     {
       "id": "f5abb4d3-9360-4e15-b121-94c7a0afc78a",

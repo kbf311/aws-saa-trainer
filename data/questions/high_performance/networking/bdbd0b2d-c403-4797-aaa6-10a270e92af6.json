@@ -1,0 +1,39 @@
+{
+  "id": "bdbd0b2d-c403-4797-aaa6-10a270e92af6",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "AWS Direct Connect GatewayとTransit Gatewayを組み合わせたマルチリージョン高帯域ネットワーク構成",
+  "services": [
+    "AWS Direct Connect",
+    "AWS Transit Gateway",
+    "Amazon VPC"
+  ],
+  "question_type": "single",
+  "question_text": "ある多国籍企業が、オンプレミスのプライベートデータセンターと、東京リージョン（ap-northeast-1）およびシンガポールリージョン（ap-southeast-1）に展開されている数十個のVPCを相互接続することを計画しています。オンプレミスとAWS間では機密データの大規模なリアルタイム同期が発生するため、公衆インターネットを経由しない専用回線による安定した超高スループットと低遅延が求められます。\n\nまた、将来的にVPC数や利用リージョンが増加した場合でも、ネットワーク構成の複雑化（フルメッシュピアリング等）を防ぎつつ、各VPCアタッチメントあたり最大50Gbpsのスループットを確保できる拡張性の高いアーキテクチャを採用したいと考えています。\n\nこれらの要件を満たす最も適切なハイブリッドネットワーク構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "オンプレミスから10GbpsのAWS Direct Connect専用線を敷設し、Direct Connect Gateway（DXGW）を作成する。各リージョンにAWS Transit Gateway（TGW）を作成してそれぞれのVPCをアタッチし、DXGWをTransit VIF（Transit Virtual Interface）経由で両リージョンのTransit Gatewayに関連付ける。",
+      "explanation": "Direct Connect Gateway（DXGW）とTransit Gateway（TGW）を組み合わせ、Transit VIFを使用することで、単一のDirect Connect専用線から複数リージョンのTransit Gatewayへ高帯域・低遅延なプライベート接続を集約できます。Transit Gatewayは各VPCアタッチメントあたりバースト最大50Gbpsのスループットを提供し、ハブ＆スポーク型アーキテクチャによって数十〜数百のVPC追加にも容易に対応可能です。"
+    },
+    {
+      "id": "B",
+      "text": "各リージョンの各VPCに対してオンプレミスルーターから個別にAWS Site-to-Site VPNトンネルを確立し、ECMP（等コストマルチパス）を有効化して帯域を束ねる。",
+      "explanation": "公衆インターネットを経由するSite-to-Site VPNはIPsecトンネル1本あたり最大1.25Gbpsの帯域制限があり、数十のVPCに対して個別トンネルを張る運用は極めて複雑で、専用線のような安定した超高スループット・低遅延要件を満たせません。"
+    },
+    {
+      "id": "C",
+      "text": "Direct Connect専用線上にパブリックVIFを作成し、各リージョンのVPCにインターネットゲートウェイ（IGW）を配置してパブリックIP経由で直接通信する。",
+      "explanation": "パブリックVIFはAWSのパブリックサービス（S3やDynamoDBなど）にアクセスするためのものであり、VPC内のプライベートリソースとのセキュアかつ低遅延なプライベート通信には適していません。"
+    },
+    {
+      "id": "D",
+      "text": "東京リージョンの単一VPCにDirect ConnectプライベートVIFを終端させ、そのVPCから各リージョンの全VPCへVPCピアリング接続を設定して通信を中継（トランジットルーティング）する。",
+      "explanation": "VPCピアリング接続では推移的ルーティング（Transitive Routing）がサポートされていないため、あるVPCを経由して別のVPCやオンプレミスへ通信を転送することはできません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "複数リージョンにまたがる多数のVPCとオンプレミス拠点を高帯域・低遅延で接続する場合、Direct Connect Gateway（DXGW）と各リージョンのAWS Transit Gateway（TGW）をトランジット仮想インターフェイス（Transit VIF）で接続する構成がAWSの標準ベストプラクティスです。Transit GatewayはVPCアタッチメントごとに最大50Gbpsのスループットを提供し、ネットワークの集約・集中管理を可能にします。Direct ConnectプライベートVIF単体ではTGWに接続できず、VPCピアリングでは推移的ルーティングができない点に注意が必要です。"
+}

@@ -1,7 +1,7 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "ネットワークとコンテンツ配信",
-  "updated_at": "2026-09-24T14:21:30Z",
+  "updated_at": "2026-09-24T22:05:58Z",
   "questions": [
     {
       "id": "1c173de1-0f3e-430d-8c09-9c248d019799",
@@ -34,6 +34,17 @@
       "file_name": "27aa1ec8-0b5d-4104-aac8-896b79fa9e62.json"
     },
     {
+      "id": "2e017274-1eaf-4c10-92bd-4771d890916a",
+      "title": "Amazon CloudFrontオリジングループによる自動フェイルオーバーと高パフォーマンス配信",
+      "services": [
+        "Amazon CloudFront",
+        "Amazon S3",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "2e017274-1eaf-4c10-92bd-4771d890916a.json"
+    },
+    {
       "id": "66ea7aaa-fa73-408b-91d2-848ed0c62737",
       "title": "Network Load Balancer (NLB) による突発的超高トラフィックと超低遅延TCP通信の処理",
       "services": [
@@ -55,6 +66,37 @@
       "file_name": "6f8bd15b-faf8-4978-beb0-f332ca026980.json"
     },
     {
+      "id": "7a65dd3c-b0ee-4db9-9e23-5d450108d59f",
+      "title": "クラスタープレイスメントグループと拡張ネットワーキング（ENA）によるノード間超低遅延通信",
+      "services": [
+        "Amazon EC2",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "7a65dd3c-b0ee-4db9-9e23-5d450108d59f.json"
+    },
+    {
+      "id": "83918ec8-cd3e-4c69-8a1e-09532e9b9ac5",
+      "title": "AWS Direct Connectのリンクアグリゲーショングループ（LAG）による専用線帯域のスケーリング",
+      "services": [
+        "AWS Direct Connect",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "83918ec8-cd3e-4c69-8a1e-09532e9b9ac5.json"
+    },
+    {
+      "id": "a15bbaa9-0db3-4885-94a2-dc648939af2e",
+      "title": "CloudFront FunctionsとLambda@Edgeの特性比較によるエッジURLリライトの超低遅延化",
+      "services": [
+        "Amazon CloudFront",
+        "CloudFront Functions",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "a15bbaa9-0db3-4885-94a2-dc648939af2e.json"
+    },
+    {
       "id": "add5554e-8dd8-4149-b202-9d92934656e6",
       "title": "Amazon CloudFront Origin Shieldによるオリジン保護とグローバルキャッシュヒット率向上",
       "services": [
@@ -62,6 +104,39 @@
       ],
       "question_type": "single",
       "file_name": "add5554e-8dd8-4149-b202-9d92934656e6.json"
+    },
+    {
+      "id": "bdbd0b2d-c403-4797-aaa6-10a270e92af6",
+      "title": "AWS Direct Connect GatewayとTransit Gatewayを組み合わせたマルチリージョン高帯域ネットワーク構成",
+      "services": [
+        "AWS Direct Connect",
+        "AWS Transit Gateway",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "bdbd0b2d-c403-4797-aaa6-10a270e92af6.json"
+    },
+    {
+      "id": "beccd418-28fe-4815-897b-2b896bb1dc8b",
+      "title": "Route 53の地理的近接性ルーティング（Geoproximity）とバイアス調整によるトラフィック最適化",
+      "services": [
+        "Amazon Route 53",
+        "Application Load Balancer",
+        "Elastic Load Balancing"
+      ],
+      "question_type": "single",
+      "file_name": "beccd418-28fe-4815-897b-2b896bb1dc8b.json"
+    },
+    {
+      "id": "c2749448-1f6f-4402-8153-e310e923696c",
+      "title": "AWS PrivateLinkとNLBによるクロスVPC・マルチアカウント間の高パフォーマンス・セキュアプライベート接続",
+      "services": [
+        "AWS PrivateLink",
+        "Network Load Balancer",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "c2749448-1f6f-4402-8153-e310e923696c.json"
     },
     {
       "id": "d4b5a5af-514c-4e60-8078-539c66d4f796",
@@ -72,6 +147,39 @@
       ],
       "question_type": "single",
       "file_name": "d4b5a5af-514c-4e60-8078-539c66d4f796.json"
+    },
+    {
+      "id": "e10e3407-480c-4088-9bb2-1414736f0513",
+      "title": "Amazon CloudFrontのリアルタイムログとKinesis Data Streamsを活用した配信パフォーマンスの即時監視",
+      "services": [
+        "Amazon CloudFront",
+        "Amazon Kinesis Data Streams",
+        "Amazon OpenSearch Service"
+      ],
+      "question_type": "single",
+      "file_name": "e10e3407-480c-4088-9bb2-1414736f0513.json"
+    },
+    {
+      "id": "e6a5aab2-e278-46ff-9321-0ceaa15b5d42",
+      "title": "AWS Global Acceleratorを活用したリアルタイムゲーム向けUDP通信の低遅延化とパケットロス削減",
+      "services": [
+        "AWS Global Accelerator",
+        "Network Load Balancer",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "e6a5aab2-e278-46ff-9321-0ceaa15b5d42.json"
+    },
+    {
+      "id": "f41cf5e0-ee80-4a24-ad6f-c5de70c54afe",
+      "title": "Application Load BalancerにおけるgRPCおよびHTTP/2を活用したマイクロサービス間高速API通信の実現（複数選択）",
+      "services": [
+        "Application Load Balancer",
+        "Amazon ECS",
+        "Elastic Load Balancing"
+      ],
+      "question_type": "multiple",
+      "file_name": "f41cf5e0-ee80-4a24-ad6f-c5de70c54afe.json"
     }
   ]
 }

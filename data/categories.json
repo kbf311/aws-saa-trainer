@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-24T14:21:30Z",
-  "total_questions": 150,
+  "updated_at": "2026-09-24T22:05:58Z",
+  "total_questions": 170,
   "categories": [
     {
       "major_id": "resilient",
@@ -48,7 +48,7 @@
       "minor_id": "database",
       "minor_name": "データベースとキャッシング",
       "dir_path": "questions/high_performance/database",
-      "question_count": 7
+      "question_count": 17
     },
     {
       "major_id": "high_performance",
@@ -56,7 +56,7 @@
       "minor_id": "networking",
       "minor_name": "ネットワークとコンテンツ配信",
       "dir_path": "questions/high_performance/networking",
-      "question_count": 7
+      "question_count": 17
     },
     {
       "major_id": "security",
