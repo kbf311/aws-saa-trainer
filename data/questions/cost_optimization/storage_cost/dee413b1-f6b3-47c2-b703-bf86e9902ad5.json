@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "dee413b1-f6b3-47c2-b703-bf86e9902ad5",
   "category_major": "コスト最適化アーキテクチャの設計",
   "category_minor": "ストレージコスト最適化",
@@ -27,8 +27,8 @@
     },
     {
       "id": "D",
-      "text": "S3 Glacier Flexible Recovery",
-      "explanation": "S3 Glacier Flexible Recovery は数分〜数時間（迅速取り出しで1〜5分、標準で3〜5時間）でデータを復元できますが、保管単価は S3 Glacier Deep Archive の約 3 倍から 4 倍程度高いため、12 時間の遅延が許容される本要件では最適ではありません。"
+      "text": "S3 Glacier Flexible Retrieval",
+      "explanation": "S3 Glacier Flexible Retrieval は数分〜数時間（迅速取り出しで1〜5分、標準で3〜5時間）でデータを復元できますが、保管単価は S3 Glacier Deep Archive の約 3 倍から 4 倍程度高いため、12 時間の遅延が許容される本要件では最適ではありません。"
     }
   ],
   "correct_answers": [

@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "58415ae7-a400-4d54-a62e-eba3e36917de",
   "category_major": "高パフォーマンスアーキテクチャの設計",
   "category_minor": "高性能ストレージ",
@@ -28,7 +28,7 @@
     },
     {
       "id": "D",
-      "text": "Amazon S3 Glacier Flexible Recovery にすべてのデータをアーカイブし、Expedited（迅速）取り出しリクエストを実行する。",
+      "text": "Amazon S3 Glacier Flexible Retrieval にすべてのデータをアーカイブし、Expedited（迅速）取り出しリクエストを実行する。",
       "explanation": "S3 Glacierはアーカイブ用途のコールドストレージであり、並列分散ファイルアクセスによるリアルタイムなモデルトレーニング処理には使用できません。"
     }
   ],

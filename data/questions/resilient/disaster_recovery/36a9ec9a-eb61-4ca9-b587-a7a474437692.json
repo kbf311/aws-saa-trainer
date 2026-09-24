@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "36a9ec9a-eb61-4ca9-b587-a7a474437692",
   "category_major": "レジリエント・アーキテクチャの設計",
   "category_minor": "ディザスタリカバリ",
@@ -23,7 +23,7 @@
     },
     {
       "id": "C",
-      "text": "AWS DataSync を設定し、オンプレミスのすべてのサーバーのファイルシステム全体を毎晩Amazon S3 Glacier Flexible Recoveryに同期転送する。",
+      "text": "AWS DataSync を設定し、オンプレミスのすべてのサーバーのファイルシステム全体を毎晩Amazon S3 Glacier Flexible Retrievalに同期転送する。",
       "explanation": "DataSyncによる夜間ファイル同期はファイルレベルのバックアップであり、ブロックレベルのOS状態の保持が難しく、RPOが最大24時間、リストア時間（RTO）も数時間以上かかるため要件を満たせません。"
     },
     {
