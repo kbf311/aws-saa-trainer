@@ -1,0 +1,38 @@
+{
+  "id": "361fa6a7-b6ec-4b81-b8ad-a006ed31a5b9",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "S3バケットポリシーとaws:SecureTransportによる転送中データのTLS/HTTPS暗号化強制",
+  "services": [
+    "AWS IAM",
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "セキュリティ監査の結果、ある企業が保有する機密性の高いAmazon S3バケットへの一部のリクエストが暗号化されていないHTTP通信で行われていることが判明しました。セキュリティ担当者は、コンプライアンス基準に準拠するため、暗号化されたTLS（HTTPS）通信以外のすべてのリクエスト（アップロードおよびダウンロード）を直ちに遮断したいと考えています。既存のIAMユーザーやIAMロールの権限を個別に変更することなく、この保護を達成するための最も適切な方法はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "対象のS3バケットポリシーに、Effectが `Deny`、Actionが `s3:*`、Conditionに `{\"Bool\": {\"aws:SecureTransport\": \"false\"}}` を指定したステートメントを追加する。",
+      "explanation": "`aws:SecureTransport: false` の条件キーを用いて明示的なDenyを設定することで、TLS（HTTPS）暗号化を使用していないHTTPリクエストをバケットレベルで一律に遮断できます。各IAMロールやユーザーを変更する必要がなく、最も効率的かつ確実です。"
+    },
+    {
+      "id": "B",
+      "text": "すべてのIAMユーザーおよびロールのインラインポリシーを更新し、S3アクションのエンドポイントを `https://` で始まるURLに限定するResource条件を追加する。",
+      "explanation": "すべてのIAMエンティティのポリシーを個別に編集するのは管理負荷が非常に高く、新規ロールが作成された際の漏れが発生するリスクがあります。また、Resource要素にプロトコルプレフィックスを指定することはできません。"
+    },
+    {
+      "id": "C",
+      "text": "S3のデフォルト暗号化設定でSSE-KMSを有効化し、暗号化キーにAWSマネージドキーを指定する。",
+      "explanation": "デフォルト暗号化はディスク保管時（データ保管時）の暗号化を制御するものであり、クライアントとS3間の通信プロトコル（HTTP/HTTPS）による転送中データの暗号化を強制することはできません。"
+    },
+    {
+      "id": "D",
+      "text": "S3バケットの前段にAWS WAFを直接アタッチし、HTTPヘッダーにSSL証明書が含まれていないリクエストをブロックするルールを構成する。",
+      "explanation": "AWS WAFはAmazon S3バケットに直接アタッチすることはできません（CloudFrontやALB、API Gateway等と併用する必要があります）。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWSグローバル条件キー `aws:SecureTransport` は、リクエストがTLS/HTTPSを使用して送信されたかどうかをブール値（true/false）で示します。S3バケットポリシーで `aws:SecureTransport` が `false` の場合にリクエストを拒否（Deny）するステートメントを1つ配置するだけで、バケット全体に対して暗号化されていない平文通信（HTTP）を一括して完全に禁止することができます。"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "a21b6c30-2b14-4741-965a-721f6846aa8f",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "大容量データ通信におけるAWS Direct ConnectとSite-to-Site VPNの転送料金比較と選定",
+  "services": [
+    "AWS Direct Connect",
+    "AWS Site-to-Site VPN",
+    "Amazon VPC"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、自社のオンプレミスデータセンターとAWSの間で、毎月100TB以上の大容量データを双方向に転送しています。現在はAWS Site-to-Site VPN（インターネット経由）を利用していますが、AWSからオンプレミス側へのデータ転送アウト（DTO）料金が毎月の請求額の大部分を占めています。回線専用の固定費（ポート料金）を考慮しても、月額トータルコストを大幅に削減するための最も適切なネットワーク接続方法はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Direct Connect専用線を導入する。AWSからDirect Connectを経由したアウトバウンドデータ転送料金は、インターネット（VPN経由）のデータ転送料金と比較して大幅に安価に設定されているため、毎月100TB規模の大容量転送では全体の通信コストを大幅に削減できる。",
+      "explanation": "AWS Direct Connect経由のアウトバウンドデータ転送料金（DTO）は、パブリックインターネット（Site-to-Site VPNを含む）経由のDTO料金に比べて約50〜70%安価です。月間数十TB以上の大量データ転送がある場合、Direct Connectのポート時間料金や回線費用を差し引いても、大幅なコスト削減（ROI改善）が達成できます。"
+    },
+    {
+      "id": "B",
+      "text": "Site-to-Site VPN接続をさらに5本追加してECMP（等コストマルチパス）を構成し、トラフィックを分散させる。",
+      "explanation": "VPN接続を追加してもインターネット向けデータ転送アウト単価は変わらないため、コスト削減にはならず、接続時間費用が増加します。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Transit Gatewayを導入し、VPN接続をTransit Gatewayに集約する。",
+      "explanation": "Transit Gatewayを経由すると追加のデータ処理料金（GB単位）が発生するため、大容量データ転送ではコストがさらに増加します。"
+    },
+    {
+      "id": "D",
+      "text": "すべてのオンプレミスデータをAWS Snowball Edge物理アプライアンスで週1回収集・配送する運用に切り替える。",
+      "explanation": "週次配送はリアルタイム性が失われ、デバイス利用料と物流費用の継続発生により双方向の大容量通信には適していません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "大容量（月間数十TB以上）のハイブリッドクラウド通信では、AWS Direct Connectの割安なデータ転送アウト料金（DTO）がインターネットVPN経由の通信費削減に決定的な効果をもたらします。"
+}

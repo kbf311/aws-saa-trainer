@@ -1,8 +1,18 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "ネットワークとコンテンツ配信",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
+    {
+      "id": "0ddf03b4-a774-4edb-be1d-78caf3c0c5b8",
+      "title": "Amazon CloudFront オリジンシールド（Origin Shield）による中央集中キャッシュとオリジン負荷極小化",
+      "services": [
+        "Amazon CloudFront",
+        "Elastic Load Balancing"
+      ],
+      "question_type": "single",
+      "file_name": "0ddf03b4-a774-4edb-be1d-78caf3c0c5b8.json"
+    },
     {
       "id": "1c173de1-0f3e-430d-8c09-9c248d019799",
       "title": "Amazon CloudFrontを活用した動的WebアプリケーションのTTFB短縮（複数選択）",
@@ -86,6 +96,16 @@
       "file_name": "83918ec8-cd3e-4c69-8a1e-09532e9b9ac5.json"
     },
     {
+      "id": "960826a9-6609-4469-848a-ed5437964c6f",
+      "title": "AWS Global AcceleratorのクライアントIP保持（Client IP Preservation）とマルチリージョン高可用性",
+      "services": [
+        "AWS Global Accelerator",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "960826a9-6609-4469-848a-ed5437964c6f.json"
+    },
+    {
       "id": "a15bbaa9-0db3-4885-94a2-dc648939af2e",
       "title": "CloudFront FunctionsとLambda@Edgeの特性比較によるエッジURLリライトの超低遅延化",
       "services": [
@@ -104,6 +124,16 @@
       ],
       "question_type": "single",
       "file_name": "add5554e-8dd8-4149-b202-9d92934656e6.json"
+    },
+    {
+      "id": "b1b270dd-1a5e-4e43-b9c5-12538dd1c362",
+      "title": "Elastic Fabric Adapter (EFA) によるEC2ノード間MPI通信のOSバイパスと超低遅延化",
+      "services": [
+        "Amazon EC2",
+        "Elastic Fabric Adapter"
+      ],
+      "question_type": "single",
+      "file_name": "b1b270dd-1a5e-4e43-b9c5-12538dd1c362.json"
     },
     {
       "id": "bdbd0b2d-c403-4797-aaa6-10a270e92af6",

@@ -1,0 +1,39 @@
+{
+  "id": "f3b10ed3-6426-4157-b32a-fc6398f302a9",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "スケーラビリティと疎結合",
+  "title": "Amazon Kinesis Data Firehose動的パーティショニングによるS3への効率的なストリーミングデータ蓄積",
+  "services": [
+    "Amazon Kinesis Data Firehose",
+    "Amazon S3",
+    "AWS Lambda"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバルWebサービスでは、世界中のユーザー行動ログをリアルタイムで収集し、Amazon S3データレイクに保存しています。後続のAmazon Athenaクエリ性能を最大化しスキャンコストを削減するため、S3のキープレフィックスを `year=YYYY/month=MM/customer_id=XXXX/` のようにログ内の顧客IDやタイムスタンプに基づいて自動的に階層分割（パーティショニング）して保存したいと考えています。最も運用管理オーバーヘッドが少ないサーバーレスアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon Kinesis Data Firehoseの動的パーティショニング（Dynamic Partitioning）機能を有効にし、着信JSONログから顧客IDとタイムスタンプを抽出してS3プレフィックスを自動構築して直接配信する。",
+      "explanation": "Kinesis Data Firehoseの動的パーティショニングを使用すると、インライン解析やjqクエリによりJSONレコード内の特定フィールド（顧客IDや日付）を抽出し、S3バケット内の構造化されたプレフィックスに自動で振り分けて配信できます。追加サーバーやカスタムETLコードが不要です。"
+    },
+    {
+      "id": "B",
+      "text": "ログデータをすべて1つのS3プレフィックスに保存した後、毎日深夜にAWS Glue ETLジョブを実行して全ファイルを読み込み、パーティションごとに再書き込みする。",
+      "explanation": "バッチETLによる後処理はリアルタイム性がなく、大容量ログの全量再読み込み・再書き込みによって不要なコンピューティング費用とS3リクエスト費用が発生します。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon EC2インスタンス群でFluentdを稼働させ、各EC2上で顧客IDごとにローカルバッファファイルを作成してS3に個別アップロードする。",
+      "explanation": "EC2インスタンスフリートの管理、オートスケーリング、ディスク障害時のデータ損失対策など、多大な運用管理オーバーヘッドが発生します。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon S3のバケット通知からLambda関数をオブジェクト作成ごとにトリガーし、ファイルをダウンロードして行ごとに分割し別バケットに再アップロードする。",
+      "explanation": "高頻度ストリーミングデータに対してS3イベントからLambdaを起動してオブジェクト再書き込みを行うと、Lambdaの同時実行数枯渇や大量のS3 PUTリクエスト課金が発生します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon Kinesis Data Firehoseの動的パーティショニング（Dynamic Partitioning）は、ストリーミングデータをリアルタイムにパースし、キー値に応じたS3プレフィックスへ自動格納できるフルマネージドな最適解です。"
+}

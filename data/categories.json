@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-24T22:05:58Z",
-  "total_questions": 170,
+  "updated_at": "2026-09-24T22:17:15Z",
+  "total_questions": 260,
   "categories": [
     {
       "major_id": "resilient",
@@ -16,7 +16,7 @@
       "minor_id": "decoupling",
       "minor_name": "スケーラビリティと疎結合",
       "dir_path": "questions/resilient/decoupling",
-      "question_count": 10
+      "question_count": 20
     },
     {
       "major_id": "resilient",
@@ -24,7 +24,7 @@
       "minor_id": "disaster_recovery",
       "minor_name": "ディザスタリカバリ",
       "dir_path": "questions/resilient/disaster_recovery",
-      "question_count": 12
+      "question_count": 20
     },
     {
       "major_id": "high_performance",
@@ -32,7 +32,7 @@
       "minor_id": "compute",
       "minor_name": "コンピューティングとスケーリング",
       "dir_path": "questions/high_performance/compute",
-      "question_count": 17
+      "question_count": 20
     },
     {
       "major_id": "high_performance",
@@ -40,7 +40,7 @@
       "minor_id": "storage",
       "minor_name": "高性能ストレージ",
       "dir_path": "questions/high_performance/storage",
-      "question_count": 17
+      "question_count": 20
     },
     {
       "major_id": "high_performance",
@@ -48,7 +48,7 @@
       "minor_id": "database",
       "minor_name": "データベースとキャッシング",
       "dir_path": "questions/high_performance/database",
-      "question_count": 17
+      "question_count": 20
     },
     {
       "major_id": "high_performance",
@@ -56,7 +56,7 @@
       "minor_id": "networking",
       "minor_name": "ネットワークとコンテンツ配信",
       "dir_path": "questions/high_performance/networking",
-      "question_count": 17
+      "question_count": 20
     },
     {
       "major_id": "security",
@@ -64,7 +64,7 @@
       "minor_id": "iam_access",
       "minor_name": "IAMとアクセス制御",
       "dir_path": "questions/security/iam_access",
-      "question_count": 7
+      "question_count": 20
     },
     {
       "major_id": "security",
@@ -72,7 +72,7 @@
       "minor_id": "data_security",
       "minor_name": "データ保護と暗号化",
       "dir_path": "questions/security/data_security",
-      "question_count": 13
+      "question_count": 20
     },
     {
       "major_id": "security",
@@ -80,7 +80,7 @@
       "minor_id": "network_security",
       "minor_name": "ネットワークセキュリティ",
       "dir_path": "questions/security/network_security",
-      "question_count": 7
+      "question_count": 20
     },
     {
       "major_id": "cost_optimization",
@@ -88,7 +88,7 @@
       "minor_id": "storage_cost",
       "minor_name": "ストレージコスト最適化",
       "dir_path": "questions/cost_optimization/storage_cost",
-      "question_count": 13
+      "question_count": 20
     },
     {
       "major_id": "cost_optimization",
@@ -96,7 +96,7 @@
       "minor_id": "compute_cost",
       "minor_name": "コンピュートコスト最適化",
       "dir_path": "questions/cost_optimization/compute_cost",
-      "question_count": 7
+      "question_count": 20
     },
     {
       "major_id": "cost_optimization",
@@ -104,7 +104,7 @@
       "minor_id": "network_transfer_cost",
       "minor_name": "データ転送・ネットワークコスト最適化",
       "dir_path": "questions/cost_optimization/network_transfer_cost",
-      "question_count": 13
+      "question_count": 20
     }
   ]
 }

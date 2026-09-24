@@ -1,7 +1,7 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "高性能ストレージ",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
     {
       "id": "00130567-ffbc-4f17-a023-53584eedba82",
@@ -12,6 +12,15 @@
       ],
       "question_type": "single",
       "file_name": "00130567-ffbc-4f17-a023-53584eedba82.json"
+    },
+    {
+      "id": "005a8a7d-b6c7-49c7-91e9-02fca99b2c31",
+      "title": "Amazon S3 Express One Zoneによる1桁ミリ秒データアクセスと高頻度AI/ML処理の高速化",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "005a8a7d-b6c7-49c7-91e9-02fca99b2c31.json"
     },
     {
       "id": "19e6dbb8-8499-43c0-a57c-19cc4cea85e6",
@@ -61,6 +70,15 @@
       ],
       "question_type": "single",
       "file_name": "444c3d92-86ed-435f-9319-7d7e9a1291aa.json"
+    },
+    {
+      "id": "4e3a6be7-d7dd-4118-b222-73ce029d2d12",
+      "title": "Amazon FSx for OpenZFSによる数万〜数十万IOPSの超低遅延共有ファイルストレージ",
+      "services": [
+        "Amazon FSx for OpenZFS"
+      ],
+      "question_type": "single",
+      "file_name": "4e3a6be7-d7dd-4118-b222-73ce029d2d12.json"
     },
     {
       "id": "58415ae7-a400-4d54-a62e-eba3e36917de",
@@ -133,6 +151,16 @@
       ],
       "question_type": "single",
       "file_name": "c5547115-ea03-4be4-bb95-61cbaaf8b2ca.json"
+    },
+    {
+      "id": "d7f3851c-b44e-45ef-89b3-6d477e1eb697",
+      "title": "Amazon EBS io2 Block ExpressによるミッションクリティカルDB向けの極限IOPSとサブミリ秒レイテンシー",
+      "services": [
+        "Amazon Elastic Block Store",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "d7f3851c-b44e-45ef-89b3-6d477e1eb697.json"
     },
     {
       "id": "eafd8cc3-16da-4d8a-9b38-7a5ae056ab30",

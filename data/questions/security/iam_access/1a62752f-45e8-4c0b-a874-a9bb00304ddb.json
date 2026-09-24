@@ -1,0 +1,38 @@
+{
+  "id": "1a62752f-45e8-4c0b-a874-a9bb00304ddb",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "SAML 2.0フェデレーションによるオンプレミスActive DirectoryとAWSコンソールのシングルサインオン連携",
+  "services": [
+    "AWS IAM",
+    "AWS STS"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、自社のオンプレミスActive Directory環境に所属する数千人のエンジニアに対し、個別のIAMユーザーを作成することなく、既存のActive Directoryの資格情報を使用してAWSマネジメントコンソールへシングルサインオン（SSO）できるようにしたいと考えています。運用の管理オーバーヘッドを最小限に抑えつつ、ユーザーのグループ所属に基づいて適切なAWS権限を割り当てるための最も適切なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS IAMでSAML 2.0互換のIDプロバイダー（IdP）を作成し、社内のAD FS（Active Directory Federation Services）と連携させる。IdPを信頼するIAMロールを作成し、SAMLアサーション内の属性に基づいて適切なロールへの引き受け（AssumeRoleWithSAML）を設定する。",
+      "explanation": "SAML 2.0互換のIDプロバイダーをIAMに登録し、AD FS等と信頼関係を結ぶことで、オンプレミスのID情報を利用して一時的な認証情報を取得するフェデレーションSSOが実現できます。IAMユーザーの個別作成や管理が不要となり、管理オーバーヘッドを最小化できます。"
+    },
+    {
+      "id": "B",
+      "text": "各エンジニアのIAMユーザーをAWS上に事前に作成し、オンプレミスADのパスワードハッシュをAWS Directory Serviceに同期させるバッチスクリプトを定期実行する。",
+      "explanation": "数千人分のIAMユーザーを手動またはスクリプトで管理し、パスワードの同期を自前で行う構成は運用の手間が非常に大きく、資格情報の漏洩リスクも高まるため不適切です。"
+    },
+    {
+      "id": "C",
+      "text": "オンプレミスサーバー上にプロキシアプリケーションを構築し、AWS STSのAssumeRole APIを使用して取得した長期的なIAMアクセスキーを全エンジニアのクライアントPCに配布する。",
+      "explanation": "長期的なアクセスキーをクライアント端末に配布することはセキュリティベストプラクティスに反しており、STSで発行される認証情報は一時的なものであるため長期キーとして配布することはできません。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Secrets Managerに全従業員のActive Directory認証情報を保存し、Lambda関数を経由してコンソールログインを行うカスタム認証ポータルを構築する。",
+      "explanation": "従業員のActive DirectoryパスワードをSecrets Managerに保存してカスタム認証ポータルを独自開発することは、運用のオーバーヘッドが極めて大きく、標準的なフェデレーション手法に比べてセキュリティリスクが高くなります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "オンプレミスのActive DirectoryやSAML 2.0互換のIDプロバイダー（AD FS、Okta、PingFederateなど）とAWSを連携させる場合、IAM IDプロバイダー（SAML）を作成し、STSのAssumeRoleWithSAML APIを利用して一時的なセキュリティ認証情報を払い出すSAML 2.0フェデレーションがベストプラクティスです。これにより、個別のIAMユーザーのライフサイクル管理が不要となり、企業の集中型ディレクトリによるガバナンスとセキュリティが担保されます。"
+}

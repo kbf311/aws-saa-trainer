@@ -1,8 +1,19 @@
 {
   "major": "レジリエント・アーキテクチャの設計",
   "minor": "スケーラビリティと疎結合",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
+    {
+      "id": "12a19dd1-046a-4678-a406-ba5e6e1916aa",
+      "title": "Amazon EventBridgeアーカイブとリプレイ機能による障害復旧とメッセージ再処理",
+      "services": [
+        "Amazon EventBridge",
+        "AWS Lambda",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "12a19dd1-046a-4678-a406-ba5e6e1916aa.json"
+    },
     {
       "id": "1445ff36-8874-4722-8e7d-ec33fdd33399",
       "title": "Amazon MQ によるレガシーメッセージブローカー（ActiveMQ/RabbitMQ）の最小改修クラウド移行",
@@ -12,6 +23,17 @@
       ],
       "question_type": "single",
       "file_name": "1445ff36-8874-4722-8e7d-ec33fdd33399.json"
+    },
+    {
+      "id": "238c338a-81b1-45d2-9ab2-f4b18ec9105c",
+      "title": "AWS Step Functionsタスクトークンを活用した人間の承認プロセスの非同期オーケストレーション",
+      "services": [
+        "AWS Step Functions",
+        "Amazon SES",
+        "Amazon API Gateway"
+      ],
+      "question_type": "single",
+      "file_name": "238c338a-81b1-45d2-9ab2-f4b18ec9105c.json"
     },
     {
       "id": "3aaaade2-1ed2-4d66-bba0-407cfa5e9a84",
@@ -47,6 +69,16 @@
       "file_name": "3e738539-7e5f-429c-8afd-f3c056d7bc38.json"
     },
     {
+      "id": "6c2d1376-83ff-4104-9b71-fae5504d4ffc",
+      "title": "Amazon SQS遅延キューによる決済確定後の確認メール送信タイミング制御",
+      "services": [
+        "Amazon SQS",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "6c2d1376-83ff-4104-9b71-fae5504d4ffc.json"
+    },
+    {
       "id": "81200453-34fb-4367-8035-939c9b492c40",
       "title": "Amazon Kinesis Data Streams によるリアルタイムデータ収集と複数コンシューマーの独立並列処理",
       "services": [
@@ -78,6 +110,27 @@
       "file_name": "8d1458f1-d582-4312-84c4-6b9feed7ecd6.json"
     },
     {
+      "id": "949bba4c-d0d9-4f33-af5a-a237631e520a",
+      "title": "Amazon EventBridge API送信先（API Destinations）によるサードパーティSaaSへのセキュアなWebhook連携",
+      "services": [
+        "Amazon EventBridge",
+        "AWS Secrets Manager"
+      ],
+      "question_type": "single",
+      "file_name": "949bba4c-d0d9-4f33-af5a-a237631e520a.json"
+    },
+    {
+      "id": "aaad77c4-e6e4-4d36-a5c7-bb4a30cd32dd",
+      "title": "Amazon SQS Extended ClientとS3を活用した256KB超過ペイロードの安全な非同期処理",
+      "services": [
+        "Amazon SQS",
+        "Amazon S3",
+        "AWS SDK"
+      ],
+      "question_type": "single",
+      "file_name": "aaad77c4-e6e4-4d36-a5c7-bb4a30cd32dd.json"
+    },
+    {
       "id": "bba0301f-a534-4dae-bf66-b00a60b28609",
       "title": "Amazon SQS 可視性タイムアウトとデッドレターキュー（DLQ）による処理失敗メッセージの適切な隔離",
       "services": [
@@ -85,6 +138,16 @@
       ],
       "question_type": "single",
       "file_name": "bba0301f-a534-4dae-bf66-b00a60b28609.json"
+    },
+    {
+      "id": "c00d89f0-d0b8-4355-a53f-147fa3be9475",
+      "title": "Amazon SQS FIFOキューのメッセージグループIDによるテナントごとの並列処理と順序保証の両立",
+      "services": [
+        "Amazon SQS",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "c00d89f0-d0b8-4355-a53f-147fa3be9475.json"
     },
     {
       "id": "c1627c12-0f42-4025-b5d8-27b09277bee8",
@@ -95,6 +158,49 @@
       ],
       "question_type": "single",
       "file_name": "c1627c12-0f42-4025-b5d8-27b09277bee8.json"
+    },
+    {
+      "id": "cc763e46-ec11-4c11-a0fc-21e19f3b27b8",
+      "title": "Amazon AppFlowを活用したSalesforceデータのAWSデータレイクへのセキュアかつサーバーレスな自動連携",
+      "services": [
+        "Amazon AppFlow",
+        "Amazon S3",
+        "AWS KMS"
+      ],
+      "question_type": "single",
+      "file_name": "cc763e46-ec11-4c11-a0fc-21e19f3b27b8.json"
+    },
+    {
+      "id": "e2a73912-1e62-4d1b-bbd3-7a7903298a4e",
+      "title": "Amazon Kinesis Video Streamsによるライブ監視カメラ映像の安全な取り込みと機械学習リアルタイム解析",
+      "services": [
+        "Amazon Kinesis Video Streams",
+        "Amazon Rekognition",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "e2a73912-1e62-4d1b-bbd3-7a7903298a4e.json"
+    },
+    {
+      "id": "f31fce5f-635e-4f78-8c59-4a434e5b318d",
+      "title": "AWS Step Functionsにおけるスタンダードとエクスプレスワークフローの特性比較と選定",
+      "services": [
+        "AWS Step Functions",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "f31fce5f-635e-4f78-8c59-4a434e5b318d.json"
+    },
+    {
+      "id": "f3b10ed3-6426-4157-b32a-fc6398f302a9",
+      "title": "Amazon Kinesis Data Firehose動的パーティショニングによるS3への効率的なストリーミングデータ蓄積",
+      "services": [
+        "Amazon Kinesis Data Firehose",
+        "Amazon S3",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "f3b10ed3-6426-4157-b32a-fc6398f302a9.json"
     },
     {
       "id": "fb5a9f4a-9f4f-4a9a-bb1e-8ffb3117f283",

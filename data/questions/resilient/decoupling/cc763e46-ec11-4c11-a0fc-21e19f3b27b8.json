@@ -1,0 +1,39 @@
+{
+  "id": "cc763e46-ec11-4c11-a0fc-21e19f3b27b8",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "スケーラビリティと疎結合",
+  "title": "Amazon AppFlowを活用したSalesforceデータのAWSデータレイクへのセキュアかつサーバーレスな自動連携",
+  "services": [
+    "Amazon AppFlow",
+    "Amazon S3",
+    "AWS KMS"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、マーケティング部門が利用しているSalesforce（SaaS）内の顧客データを、分析のために毎晩Amazon S3データレイクに自動同期したいと考えています。開発チームはカスタム連携コードやEC2サーバーを構築・管理したくありません。また、データ転送は暗号化され、パブリックインターネットを経由しないセキュアなプライベート通信であることが求められています。最も適切なAWSサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon AppFlowを使用し、AWS PrivateLink経由でSalesforceと接続するスケジュールされたデータフローを作成し、KMSキーで暗号化してAmazon S3に直接転送する。",
+      "explanation": "Amazon AppFlowは、SalesforceやServiceNowなどのSaaSアプリケーションとAWSサービス間でデータを安全に双方向転送できる完全マネージド型の統合サービスです。PrivateLinkによるプライベート通信やKMS暗号化をサポートし、コード記述不要でデータレイク連携が可能です。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon EC2インスタンス上でCronジョブを設定し、Salesforce REST APIを叩くPythonスクリプトを実行してCSVファイルをS3にアップロードする。",
+      "explanation": "EC2インスタンスのプロビジョニング、OSパッチ適用、認証情報の管理、耐障害性担保など、多大な管理オーバーヘッドが発生します。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Storage GatewayのFile Gatewayをオンプレミスに導入し、SalesforceのバックアップをNFS共有経由でS3に書き込ませる。",
+      "explanation": "Storage Gatewayはオンプレミスのファイル/ボリュームをS3に接続するサービスであり、SaaSアプリケーションとのデータ同期には適していません。"
+    },
+    {
+      "id": "D",
+      "text": "AWS DataSyncエージェントをSalesforceのクラウド環境にインストールし、S3バケットへの直接データ同期タスクを設定する。",
+      "explanation": "AWS DataSyncはオンプレミスストレージやAWSストレージ間のファイル転送サービスであり、SaaS環境にエージェントをインストールすることはできません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "SaaS（Salesforce等）とAWSサービス間のノーコード・セキュアなデータ連携にはAmazon AppFlowが最適解です。"
+}

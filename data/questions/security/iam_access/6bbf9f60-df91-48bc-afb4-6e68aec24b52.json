@@ -1,0 +1,39 @@
+{
+  "id": "6bbf9f60-df91-48bc-afb4-6e68aec24b52",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "IAM Access Analyzerポリシー生成ツールによるCloudTrailログからの最小権限ポリシー自動作成",
+  "services": [
+    "AWS IAM Access Analyzer",
+    "AWS CloudTrail",
+    "AWS Identity and Access Management"
+  ],
+  "question_type": "single",
+  "question_text": "あるセキュリティアーキテクトは、開発環境で長期間稼働してきたレガシーなIAMロールの権限を見直し、最小権限の原則（Principle of Least Privilege）を適用したいと考えています。このロールには現在広範な管理者権限が付与されていますが、実際には特定のS3バケットとDynamoDBテーブルの特定アクションしか利用されていません。過去90日間の実際のリソースアクセス履歴に基づいて、真に必要なアクセス権のみを定義した洗練されたIAMポリシーを自動生成する最適な機能はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS IAM Access Analyzerの「ポリシーの生成（Generate Policy）」機能を使用し、対象ロールが過去90日間に記録したAWS CloudTrailイベントログを分析させて、実際に実行されたアクションのみを含むきめ細かい最小権限ポリシーを自動生成する。",
+      "explanation": "IAM Access Analyzerのポリシー生成機能は、CloudTrailに記録された過去のアクセスアクティビティログを自動分析し、実際に使用されたアクションとリソースのみを正確に定義したIAMポリシーテンプレートをワンクリックで生成します。手動でのログ調査を不要にし、最小権限の適用を迅速化します。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Trusted Advisorを開き、IAMロールの権限削減ボタンを押して自動適用させる。",
+      "explanation": "Trusted AdvisorにはCloudTrailアクティビティから個別IAMポリシーコードを自動生成・置換する機能はありません。"
+    },
+    {
+      "id": "C",
+      "text": "IAMロールを即座に削除し、エラーが発生するたびに1つずつ手動でアクションを追加していく。",
+      "explanation": "稼働中の本番・開発システムを即座に破壊し、障害を誘発する極めて危険で非現実的な手法です。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Configのマネージドルールを使用して、すべてのIAMポリシーをPowerUserAccessに自動置換する。",
+      "explanation": "PowerUserAccessは広範な権限を付与するマネージドポリシーであり、最小権限の原則に反します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "IAM Access Analyzerのポリシー生成機能（Policy Generation）は、CloudTrailログのアクセス履歴から必要最小限の権限を持つカスタムIAMポリシーを自動作成するベストプラクティスツールです。"
+}

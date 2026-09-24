@@ -1,0 +1,38 @@
+{
+  "id": "80e7d407-0a49-4d71-a522-1bdf653a044b",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "コンピュートコスト最適化",
+  "title": "EC2 Auto Scalingにおける属性ベースのインスタンスタイプ選定（Attribute-Based Instance Type Selection）",
+  "services": [
+    "Amazon EC2 Auto Scaling",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "あるデータ処理企業は、大規模な分散バッチ処理ワークロードをEC2スポットインスタンスフリート上で実行しています。個別のインスタンスタイプ（c5.largeやm5.large等）を手動で列挙するのではなく、「vCPU数: 4〜8、メモリ: 16〜32GiB、現世代」といったリソース要件の範囲（属性）を指定するだけで、利用可能な数百の最適なスポットインスタンスプールから最もコスト効率の良いインスタンスをAuto Scalingが自動選択できるようにしたいと考えています。この要件を実現する新機能はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Auto Scalingグループの起動テンプレート設定で「属性ベースのインスタンスタイプ選定（Attribute-Based Instance Type Selection）」を使用し、必要なvCPU、メモリ、ストレージ要件などの属性範囲を定義する。",
+      "explanation": "属性ベースのインスタンスタイプ選定（Attribute-Based Instance Type Selection）機能を使用すると、特定のインスタンスタイプを手動指定する代わりに、必要なハードウェア要件（vCPU、メモリ範囲、アーキテクチャ等）を指定できます。EC2 Auto Scalingが一致する数十〜数百のインスタンスプールを自動検出し、スポットキャパシティプールを広範に分散させることで、コストを最小化しつつスポット中断耐性を最大化できます。"
+    },
+    {
+      "id": "B",
+      "text": "EC2インスタンスのユーザーデータスクリプト内で `curl` コマンドを用いてインスタンスメタデータを取得し、OS内でメモリを動的に拡張する。",
+      "explanation": "ユーザーデータによるOS内スクリプトは、起動するインスタンスタイプの自動選定やスポットプールの分散スケーリングには対応できません。"
+    },
+    {
+      "id": "C",
+      "text": "単一のオンデマンドインスタンスタイプのみを起動設定で固定指定する。",
+      "explanation": "単一タイプの固定指定はスポットプールの枯渇耐性がなく、コスト削減効果も得られません。"
+    },
+    {
+      "id": "D",
+      "text": "すべてのEC2を停止し、AWS BatchでFargateオンデマンドのみを使用するよう制限する。",
+      "explanation": "Fargateオンデマンドのみへの限定は、スポットインスタンスを活用した最大90%のコスト削減機会を放棄することになります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Auto Scalingの「Attribute-Based Instance Type Selection（属性ベース選定）」は、リソース要件を指定するだけで多様なスポットプールを自動活用し、大幅なコスト削減と高い耐障害性を両立できる機能です。"
+}

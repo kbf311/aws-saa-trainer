@@ -1,8 +1,60 @@
 {
   "major": "セキュアアーキテクチャの設計",
   "minor": "ネットワークセキュリティ",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
+    {
+      "id": "12575374-3ab2-4602-b166-1819367f706a",
+      "title": "Amazon InspectorによるEC2インスタンスおよびコンテナイメージの自動脆弱性スキャンと修復管理",
+      "services": [
+        "Amazon Inspector",
+        "Amazon EC2",
+        "Amazon ECR"
+      ],
+      "question_type": "single",
+      "file_name": "12575374-3ab2-4602-b166-1819367f706a.json"
+    },
+    {
+      "id": "1b558a3c-30d5-44f3-a988-877d4081641d",
+      "title": "CloudFrontカスタムヘッダーとALBまたはWAFによるオリジンへの直接アクセス制限",
+      "services": [
+        "Amazon CloudFront",
+        "Application Load Balancer",
+        "AWS WAF"
+      ],
+      "question_type": "single",
+      "file_name": "1b558a3c-30d5-44f3-a988-877d4081641d.json"
+    },
+    {
+      "id": "213eaec4-fdcd-474b-8146-c42d71b91396",
+      "title": "AWS WAFの地理的制限 (Geo Match) ルールによる特定地域からのアクセス制御とライセンス遵守",
+      "services": [
+        "AWS WAF",
+        "Amazon CloudFront",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "213eaec4-fdcd-474b-8146-c42d71b91396.json"
+    },
+    {
+      "id": "294bbdf0-b373-49a0-9364-4009777277bf",
+      "title": "VPCピアリングにおける非推移的ルーティング特性とセキュリティ境界の分離維持",
+      "services": [
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "294bbdf0-b373-49a0-9364-4009777277bf.json"
+    },
+    {
+      "id": "2ea2f927-1b67-418d-afd1-9d4b36bb1532",
+      "title": "ネットワークACL (NACL) のステートレス特性とエフェメラルポート (一時ポート) の要件理解",
+      "services": [
+        "Amazon VPC",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "2ea2f927-1b67-418d-afd1-9d4b36bb1532.json"
+    },
     {
       "id": "372aecdc-0a73-4f90-97e2-39842931cc7c",
       "title": "3層Webアーキテクチャにおけるセキュリティグループの連鎖参照による最小権限設計",
@@ -16,6 +68,37 @@
       "file_name": "372aecdc-0a73-4f90-97e2-39842931cc7c.json"
     },
     {
+      "id": "4f4e851c-d414-46ae-a91f-4867a29bf00b",
+      "title": "Amazon GuardDutyとVPCフローログ連携による不正な暗号資産マイニングやC&C通信の自動検知",
+      "services": [
+        "Amazon GuardDuty",
+        "Amazon VPC",
+        "AWS Security Hub"
+      ],
+      "question_type": "single",
+      "file_name": "4f4e851c-d414-46ae-a91f-4867a29bf00b.json"
+    },
+    {
+      "id": "53bcaba2-ef41-4ce0-8cd5-1d409097242a",
+      "title": "ゲートウェイ型VPCエンドポイントポリシーによる特定S3バケットへのアクセス制限とデータ持ち出し防止",
+      "services": [
+        "Amazon VPC",
+        "Amazon S3",
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "53bcaba2-ef41-4ce0-8cd5-1d409097242a.json"
+    },
+    {
+      "id": "586cb0de-62cb-4ab6-960c-7561ca58feac",
+      "title": "AWS Site-to-Site VPNとカスタマーゲートウェイによるオンプレミス-VPC間の暗号化トンネル構築",
+      "services": [
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "586cb0de-62cb-4ab6-960c-7561ca58feac.json"
+    },
+    {
       "id": "6a390fb7-2f56-453b-9dfd-c33c51b9b6aa",
       "title": "AWS PrivateLink (インターフェイス型VPCエンドポイント) による完全閉域でのAWSサービスアクセス",
       "services": [
@@ -25,6 +108,26 @@
       ],
       "question_type": "single",
       "file_name": "6a390fb7-2f56-453b-9dfd-c33c51b9b6aa.json"
+    },
+    {
+      "id": "82e45c9d-c14b-4950-9771-f6952e5c4549",
+      "title": "AWS Network FirewallによるVPCアウトバウンドトラフィックのステートフル検査とドメインフィルタリング",
+      "services": [
+        "AWS Network Firewall",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "82e45c9d-c14b-4950-9771-f6952e5c4549.json"
+    },
+    {
+      "id": "8bf1746c-7cf5-434f-ae72-d887ad48d992",
+      "title": "VPCフローログとCloudWatch Logs Insightsを活用したネットワークセキュリティ脅威の検出とトラフィック分析",
+      "services": [
+        "Amazon VPC",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "8bf1746c-7cf5-434f-ae72-d887ad48d992.json"
     },
     {
       "id": "9c340c26-f51d-46cb-9bf9-fe585e24621a",
@@ -37,6 +140,16 @@
       ],
       "question_type": "single",
       "file_name": "9c340c26-f51d-46cb-9bf9-fe585e24621a.json"
+    },
+    {
+      "id": "c36013a7-fdc2-48f9-8744-a5811a22388c",
+      "title": "AWS WAFレートベースルールによるブルートフォース攻撃やWebスクレイピングの自動遮断",
+      "services": [
+        "AWS WAF",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "c36013a7-fdc2-48f9-8744-a5811a22388c.json"
     },
     {
       "id": "dd7b6ca0-7482-4392-b970-3692840b9063",
@@ -71,6 +184,28 @@
       ],
       "question_type": "single",
       "file_name": "ec05a97a-b698-44d2-aa2b-5a2d0cf98ad4.json"
+    },
+    {
+      "id": "ee9e614e-9b56-44e0-ae04-f869356b4339",
+      "title": "AWS Security Hubによるマルチアカウント環境のセキュリティ基準統合監視とコンプライアンス自動評価",
+      "services": [
+        "Amazon VPC",
+        "AWS Organizations",
+        "Amazon GuardDuty",
+        "Amazon Inspector"
+      ],
+      "question_type": "single",
+      "file_name": "ee9e614e-9b56-44e0-ae04-f869356b4339.json"
+    },
+    {
+      "id": "f54a58ac-21da-44bd-9424-ec728b1f41a5",
+      "title": "AWS Client VPNを活用したリモート従業員によるVPCプライベートリソースへのセキュアなエンドポイント接続",
+      "services": [
+        "Amazon VPC",
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "f54a58ac-21da-44bd-9424-ec728b1f41a5.json"
     },
     {
       "id": "fcbd2d83-71d4-4a5f-adc1-d2c12f075618",

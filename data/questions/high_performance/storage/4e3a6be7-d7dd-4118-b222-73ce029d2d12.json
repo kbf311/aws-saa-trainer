@@ -1,0 +1,37 @@
+{
+  "id": "4e3a6be7-d7dd-4118-b222-73ce029d2d12",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "高性能ストレージ",
+  "title": "Amazon FSx for OpenZFSによる数万〜数十万IOPSの超低遅延共有ファイルストレージ",
+  "services": [
+    "Amazon FSx for OpenZFS"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融分析アプリケーションは、Linuxクライアント群からNFSプロトコル経由で共有ファイルストレージにアクセスしています。ミリ秒未満（数百マイクロ秒）の極めて低いアクセスレイテンシーと、数十万IOPS、および最大数GB/sのスループットを必要としています。また、ZFSネイティブのスナップショットやクローン機能を活用したいと考えています。最も適切なフルマネージドファイルシステムサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon FSx for OpenZFS",
+      "explanation": "Amazon FSx for OpenZFSは、人気のOpenZFSファイルシステムを搭載したフルマネージド共有ストレージです。NVMeストレージとインメモリキャッシュを活用し、数百マイクロ秒のレイテンシー、最大100万IOPS超、最大20GB/s以上のスループットを提供し、ZFSの高度なスナップショットや即時データクローンをネイティブにサポートします。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon FSx for Windows File Server",
+      "explanation": "FSx for Windows File ServerはSMBプロトコルおよびWindows NTFS向けであり、LinuxネイティブのNFS超低遅延OpenZFSワークロードには適していません。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon S3 Standard",
+      "explanation": "S3はオブジェクトストレージ（HTTP REST API）であり、Linuxクライアントから低遅延NFS共有ファイルシステムとしてマウントしてマイクロ秒アクセスを行うことはできません。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Storage Gateway (Tape Gateway)",
+      "explanation": "Tape Gatewayは物理テープバックアップの代替用であり、低遅延共有ストレージではありません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "NFSクライアント向けの数百マイクロ秒レイテンシーと数十万IOPS、およびZFS機能の活用には「Amazon FSx for OpenZFS」が最適です。"
+}

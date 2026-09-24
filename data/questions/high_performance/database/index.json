@@ -1,7 +1,7 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "データベースとキャッシング",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
     {
       "id": "115f8f8f-067e-4165-bef1-ece4ce28fce0",
@@ -11,6 +11,15 @@
       ],
       "question_type": "single",
       "file_name": "115f8f8f-067e-4165-bef1-ece4ce28fce0.json"
+    },
+    {
+      "id": "1b93f146-d593-4f6b-a8dd-339827e36479",
+      "title": "Amazon Aurora パ行クエリ（Parallel Query）による大規模集計・分析クエリの高速化",
+      "services": [
+        "Amazon Aurora"
+      ],
+      "question_type": "single",
+      "file_name": "1b93f146-d593-4f6b-a8dd-339827e36479.json"
     },
     {
       "id": "2a90e67f-ff0c-49a7-99f2-dce761bd2bd0",
@@ -150,6 +159,16 @@
       "file_name": "c0c505dc-a404-4fae-b009-4120963f2424.json"
     },
     {
+      "id": "ce8a5e17-f1b5-4d6b-b8db-9d8b91cc945e",
+      "title": "Amazon DynamoDBにおけるオンデマンドキャパシティからプロビジョンドキャパシティ＋Auto Scalingへの適正移行",
+      "services": [
+        "Amazon DynamoDB",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "ce8a5e17-f1b5-4d6b-b8db-9d8b91cc945e.json"
+    },
+    {
       "id": "defc2bcf-fc25-4776-9de9-b684f7a89be9",
       "title": "Amazon MemoryDB for Redisによるマイクロ秒単位の応答とマルチAZ耐久性を兼ね備えたプライマリデータベース構築",
       "services": [
@@ -158,6 +177,16 @@
       ],
       "question_type": "single",
       "file_name": "defc2bcf-fc25-4776-9de9-b684f7a89be9.json"
+    },
+    {
+      "id": "f331bce1-7ff7-482e-98fc-fc815f06bed7",
+      "title": "Amazon MemoryDB for Redisによるマイクロ秒読み取り・一桁ミリ秒書き込みと耐久性の両立",
+      "services": [
+        "Amazon MemoryDB for Redis",
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "f331bce1-7ff7-482e-98fc-fc815f06bed7.json"
     },
     {
       "id": "f5abb4d3-9360-4e15-b121-94c7a0afc78a",

@@ -1,0 +1,38 @@
+{
+  "id": "b6402b59-b4a3-413a-9288-33ecad63ecda",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "コンピュートコスト最適化",
+  "title": "AWS Compute OptimizerによるAWS Lambda関数のメモリサイズ最適化と実行コスト削減",
+  "services": [
+    "AWS Compute Optimizer",
+    "AWS Lambda"
+  ],
+  "question_type": "single",
+  "question_text": "あるサーバーレスアーキテクチャを採用している企業では、数十個のAWS Lambda関数が毎月数億回実行されており、Lambdaの実行コストが増加しています。多くの開発者が安全のためにメモリ設定を一律最大（10,240MB）や高めの設定（3,008MB等）に設定しています。機械学習を活用して各Lambda関数の実際のCPU・メモリ使用率実績を分析し、パフォーマンス要件を満たしながらコストを最小化する最適なメモリ構成の推奨事項を取得できるサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Compute Optimizerを有効化し、Lambda関数のメモリサイズ推奨事項（Lambda function recommendations）を確認してメモリ構成を適正化する。",
+      "explanation": "AWS Compute Optimizerは、AWS Lambda関数の過去の実行履歴メトリクス（呼び出し回数、実行時間、メモリ使用率）を機械学習で分析します。メモリの過剰割り当てや逆にメモリ不足によるCPU制限（Lambdaではメモリに比例してCPUが割り当てられる）を評価し、コストと実行時間を両立する最適な推奨メモリサイズを自動提示します。"
+    },
+    {
+      "id": "B",
+      "text": "すべてのLambda関数のメモリを無条件で最小の128MBに強制変更するスクリプトを実行する。",
+      "explanation": "一律128MBに削減するとCPU割り当ても最小となり、実行時間が何倍にも延びて逆にタイムアウトやコスト増加を引き起こす可能性があります。"
+    },
+    {
+      "id": "C",
+      "text": "Lambda関数をすべて削除し、EC2 t2.nanoインスタンス1台にすべての処理を集約する。",
+      "explanation": "毎月数億回の処理を極小EC2に集約することは不可能であり、システム全停止を引き起こします。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Cost and Usage Report (CUR) を手動でダウンロードし、電卓で計算する。",
+      "explanation": "CURの手動計算では関数の内部リソース使用率（CPU・メモリ相関）に応じた最適なメモリ設定を算出することは困難です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Compute Optimizerは、Lambda関数のメモリ最適化推奨をネイティブにサポートしており、メモリとCPU配分のバランスを分析して実行時間と課金コストの双方を最適化します。"
+}

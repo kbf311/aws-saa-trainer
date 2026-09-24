@@ -1,7 +1,7 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "コンピューティングとスケーリング",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
     {
       "id": "0b3138b0-af9f-46d9-b627-d34e5d1cb575",
@@ -125,6 +125,36 @@
       ],
       "question_type": "single",
       "file_name": "795ebd21-9e46-4eff-a4df-331c526af32f.json"
+    },
+    {
+      "id": "7bb84e58-d9d2-41e7-902e-62dafb6581a9",
+      "title": "クラスタープレイスメントグループによる分散並列コンピューティングの超低遅延ノード間通信",
+      "services": [
+        "Amazon EC2",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "7bb84e58-d9d2-41e7-902e-62dafb6581a9.json"
+    },
+    {
+      "id": "936a8d2e-ebf4-4a13-9253-cf3a2b7f38b7",
+      "title": "AWS Gravitonプロセッサ搭載インスタンスへの移行によるコンピュート性能向上とコスト削減",
+      "services": [
+        "Amazon EC2",
+        "AWS Graviton"
+      ],
+      "question_type": "single",
+      "file_name": "936a8d2e-ebf4-4a13-9253-cf3a2b7f38b7.json"
+    },
+    {
+      "id": "a3829a6d-3ff4-4b6b-a3e1-b10c7345075e",
+      "title": "EC2 Auto Scaling予測スケーリング（Predictive Scaling）による周期的トラフィック急増への事前対応",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "a3829a6d-3ff4-4b6b-a3e1-b10c7345075e.json"
     },
     {
       "id": "b7114822-a80a-4b8c-8f4f-fd9c601b5f5b",

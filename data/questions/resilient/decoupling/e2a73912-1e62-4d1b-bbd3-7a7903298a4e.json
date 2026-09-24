@@ -1,0 +1,39 @@
+{
+  "id": "e2a73912-1e62-4d1b-bbd3-7a7903298a4e",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "スケーラビリティと疎結合",
+  "title": "Amazon Kinesis Video Streamsによるライブ監視カメラ映像の安全な取り込みと機械学習リアルタイム解析",
+  "services": [
+    "Amazon Kinesis Video Streams",
+    "Amazon Rekognition",
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "ある警備会社は、全国数千箇所の施設に設置されたIP監視カメラからリアルタイムで映像ストリームを収集し、不審者の自動顔認識を行うシステムを設計しています。映像ストリームを低遅延でセキュアにクラウドへ取り込み、機械学習サービスとシームレスに連携させてリアルタイム顔検出を実行するための最も適切なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各カメラデバイスからAmazon Kinesis Video Streamsへ映像データを直接ストリーミングし、Amazon Rekognition Videoと統合してリアルタイムの顔検出・ストリーミングビデオ分析を行う。",
+      "explanation": "Amazon Kinesis Video Streamsは、数百万台のカメラデバイスからライブ映像・音声をセキュアに取り込み、保存・再生できるマネージドサービスです。Amazon Rekognition Videoとネイティブに統合されており、リアルタイムの顔検索や物体検出パイプラインを疎結合に構築できます。"
+    },
+    {
+      "id": "B",
+      "text": "各カメラからAmazon SQSキューに映像フレームをバイナリデータとして毎秒送信し、Lambda関数でRekognition APIを呼び出す。",
+      "explanation": "SQSはテキスト/メッセージ処理向けであり、大容量かつ連続的な動画ストリーミングデータの取り込みには適しておらず、メッセージサイズ制限（256KB）にも抵触します。"
+    },
+    {
+      "id": "C",
+      "text": "各カメラからAmazon S3バケットに1秒ごとの動画クリップを連続アップロードし、S3イベント通知でEC2インスタンス群を呼び出してOpenCVで解析する。",
+      "explanation": "毎秒数千個の動画クリップをS3に保存してイベント起動するアーキテクチャはレイテンシーが大きく、リアルタイムな顔認識やアラート通知の要件を満たせません。"
+    },
+    {
+      "id": "D",
+      "text": "カメラ映像をAmazon Kinesis Data Streamsの標準シャードに取り込み、Apache Flinkで動画フレームをデコードして分析する。",
+      "explanation": "Kinesis Data Streamsは一般的なイベント・ログデータのストリーミング用であり、動画コーデックの処理やフレームインデックス管理などのビデオ特化機能を持つKinesis Video Streamsの方が適しています。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "カメラやIoTデバイスからのリアルタイム動画ストリーミング取り込みと機械学習連携には、Amazon Kinesis Video StreamsとAmazon Rekognition Videoの組み合わせが標準的なアーキテクチャです。"
+}

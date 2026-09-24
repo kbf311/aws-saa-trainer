@@ -1,0 +1,38 @@
+{
+  "id": "d7f3851c-b44e-45ef-89b3-6d477e1eb697",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "高性能ストレージ",
+  "title": "Amazon EBS io2 Block ExpressによるミッションクリティカルDB向けの極限IOPSとサブミリ秒レイテンシー",
+  "services": [
+    "Amazon Elastic Block Store",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバル金融取引プラットフォームは、基幹OracleデータベースをEC2インスタンス上で運用しています。トランザクションのピーク時には200,000 IOPS以上の極めて高いI/O処理能力と、一貫したサブミリ秒単位のストレージレイテンシー、および99.999%のストレージ耐久性が要求されています。複数のボリュームをOS上でソフトウェアRAIDストライピングすることなく、単一のEBSボリュームでこの要件を満たすストレージタイプはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon EBS io2 Block Express ボリューム",
+      "explanation": "Amazon EBS io2 Block Expressは、AWS Nitro Systemを基盤とする最高性能のSSDボリュームです。単一ボリュームで最大256,000 IOPS、最大4,000 MB/sのスループット、サブミリ秒の低レイテンシー、および99.999%の最高耐久性（5つのナイン）を提供し、最も要求の厳しいミッションクリティカルなデータベースに最適です。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon EBS 汎用SSD (gp3) ボリューム",
+      "explanation": "gp3ボリュームの最大性能は単一ボリュームあたり16,000 IOPSおよび1,000 MB/sであり、200,000 IOPSの要件を満たすことはできません。"
+    },
+    {
+      "id": "C",
+      "text": "スループット最適化HDD (st1) ボリューム",
+      "explanation": "st1はシーケンシャルアクセスのビッグデータ向け磁気ディスクであり、ランダムIOPS性能は極めて低く（最大500 IOPS）、データベースの要件を満たせません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon S3 Glacier Flexible Archive",
+      "explanation": "Glacierはコールドデータアーカイブ用であり、データベースのブロックストレージとしてアタッチすることはできません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "200,000 IOPSを超える超高スループットとサブミリ秒レイテンシーが求められるミッションクリティカルDBには、最大256,000 IOPSを誇る「Amazon EBS io2 Block Express」が唯一の最適解です。"
+}

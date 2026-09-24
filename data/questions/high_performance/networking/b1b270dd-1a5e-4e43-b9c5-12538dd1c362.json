@@ -1,0 +1,38 @@
+{
+  "id": "b1b270dd-1a5e-4e43-b9c5-12538dd1c362",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "Elastic Fabric Adapter (EFA) によるEC2ノード間MPI通信のOSバイパスと超低遅延化",
+  "services": [
+    "Amazon EC2",
+    "Elastic Fabric Adapter"
+  ],
+  "question_type": "single",
+  "question_text": "ある気象予測研究機関は、数百台のEC2インスタンスを使用して流体力学シミュレーションを実行しています。アプリケーションはMessage Passing Interface (MPI) を使用してノード間で大量の同期通信を行っており、標準のElastic Network Adapter (ENA) ではOSのTCP/IPスタックのオーバーヘッドによる遅延がボトルネックになっています。OSカーネルをバイパスしてハードウェアレベルでダイレクトに通信し、極限の低遅延ノード間通信を実現するネットワークインターフェイス機能はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Elastic Fabric Adapter (EFA)",
+      "explanation": "Elastic Fabric Adapter (EFA) は、Amazon EC2インスタンス向けに特化されたネットワークインターフェイスであり、OSカーネルをバイパスするカスタムLibfabricインターフェイスを提供します。これにより、ノード間MPI通信のオーバーヘッドを劇的に排除し、HPCや大規模分散機械学習ワークロードにおいて超低遅延かつ高スループットな通信を実現します。"
+    },
+    {
+      "id": "B",
+      "text": "Enhanced Networking (SR-IOV ENA)",
+      "explanation": "標準のENA拡張ネットワーキングは高スループットを提供しますが、OSカーネルのTCP/IPスタックを経由するため、EFAのようなOSバイパスによる極小遅延は得られません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Direct Connect",
+      "explanation": "Direct ConnectはオンプレミスとAWS間の専用線接続用であり、同一VPC内のEC2インスタンス間通信には関係ありません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon Route 53 レイテンシールーティング",
+      "explanation": "Route 53はDNSレベルの地理的ルーティング機能であり、ノード間の物理パケット通信の高速化機能ではありません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "HPCや分散ディープラーニングにおけるMPI並列処理のノード間通信において、OSバイパスによる超低遅延通信を提供する機能は「Elastic Fabric Adapter (EFA)」です。"
+}

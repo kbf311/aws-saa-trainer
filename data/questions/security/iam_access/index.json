@@ -1,8 +1,38 @@
 {
   "major": "セキュアアーキテクチャの設計",
   "minor": "IAMとアクセス制御",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
+    {
+      "id": "0309c97c-1e60-4359-851d-4cfc52ec69f1",
+      "title": "AWS Directory Service (AD Connector) を活用したオンプレミスActive Directory認証のプロキシ連携",
+      "services": [
+        "AWS IAM",
+        "AWS Directory Service"
+      ],
+      "question_type": "single",
+      "file_name": "0309c97c-1e60-4359-851d-4cfc52ec69f1.json"
+    },
+    {
+      "id": "1a62752f-45e8-4c0b-a874-a9bb00304ddb",
+      "title": "SAML 2.0フェデレーションによるオンプレミスActive DirectoryとAWSコンソールのシングルサインオン連携",
+      "services": [
+        "AWS IAM",
+        "AWS STS"
+      ],
+      "question_type": "single",
+      "file_name": "1a62752f-45e8-4c0b-a874-a9bb00304ddb.json"
+    },
+    {
+      "id": "1b33f5d9-815e-4ced-8170-1e9385f683c3",
+      "title": "Amazon S3 Object Ownership (BucketOwnerEnforced) によるクロスアカウントアップロード時のオブジェクト所有権統一とアクセス権管理の簡素化",
+      "services": [
+        "AWS IAM",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "1b33f5d9-815e-4ced-8170-1e9385f683c3.json"
+    },
     {
       "id": "1bcd6bf2-6ac0-4494-b4ee-7f00912c2b81",
       "title": "EC2インスタンスプロファイルとIAMロールによるセキュアなAWSリソースアクセス",
@@ -23,6 +53,47 @@
       ],
       "question_type": "single",
       "file_name": "31ff74ff-853b-4abd-bb69-bf5342e59667.json"
+    },
+    {
+      "id": "361fa6a7-b6ec-4b81-b8ad-a006ed31a5b9",
+      "title": "S3バケットポリシーとaws:SecureTransportによる転送中データのTLS/HTTPS暗号化強制",
+      "services": [
+        "AWS IAM",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "361fa6a7-b6ec-4b81-b8ad-a006ed31a5b9.json"
+    },
+    {
+      "id": "3f238a88-fe3c-4019-94f6-9381860816d0",
+      "title": "AWS KMSカスタマーマネージドキーで暗号化されたS3バケットへのクロスアカウントアクセス権限設計",
+      "services": [
+        "AWS IAM",
+        "Amazon S3",
+        "AWS KMS"
+      ],
+      "question_type": "single",
+      "file_name": "3f238a88-fe3c-4019-94f6-9381860816d0.json"
+    },
+    {
+      "id": "6bbf9f60-df91-48bc-afb4-6e68aec24b52",
+      "title": "IAM Access Analyzerポリシー生成ツールによるCloudTrailログからの最小権限ポリシー自動作成",
+      "services": [
+        "AWS IAM Access Analyzer",
+        "AWS CloudTrail",
+        "AWS Identity and Access Management"
+      ],
+      "question_type": "single",
+      "file_name": "6bbf9f60-df91-48bc-afb4-6e68aec24b52.json"
+    },
+    {
+      "id": "6c315abd-56a7-44fc-ab77-3a0b7a8acc82",
+      "title": "ABACとタグベースの認可制御によるプロジェクトリソースへのスケーラブルなアクセス管理",
+      "services": [
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "6c315abd-56a7-44fc-ab77-3a0b7a8acc82.json"
     },
     {
       "id": "7873833f-aae8-4218-91df-18d5b5997575",
@@ -47,6 +118,16 @@
       "file_name": "7953c710-dee0-4714-8591-77c2ce47be40.json"
     },
     {
+      "id": "81f0995d-5cda-41a6-8967-91c1ec7a2358",
+      "title": "AWS IAM Identity Centerにおけるアクセス許可セットとセッション期間管理によるマルチアカウントガバナンス",
+      "services": [
+        "AWS IAM Identity Center",
+        "AWS Organizations"
+      ],
+      "question_type": "single",
+      "file_name": "81f0995d-5cda-41a6-8967-91c1ec7a2358.json"
+    },
+    {
       "id": "9011349c-e52c-4c5c-8882-da5a6981b697",
       "title": "Amazon Cognito IDプールによるモバイルアプリユーザーのセキュアなS3個別フォルダアクセス",
       "services": [
@@ -57,6 +138,57 @@
       ],
       "question_type": "single",
       "file_name": "9011349c-e52c-4c5c-8882-da5a6981b697.json"
+    },
+    {
+      "id": "98553d47-968d-4bb7-a037-0d53d04e6817",
+      "title": "IAMポリシーの条件キーを活用した機密データ削除時の多要素認証 (MFA) の強制",
+      "services": [
+        "AWS IAM",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "98553d47-968d-4bb7-a037-0d53d04e6817.json"
+    },
+    {
+      "id": "a47f2425-bedf-478b-93e9-d24cf4d16de7",
+      "title": "AWS Organizations SCPによるメンバーアカウント内の監査リソースおよび特定IAMロールの保護ガードレール",
+      "services": [
+        "AWS Organizations",
+        "AWS IAM",
+        "AWS CloudTrail"
+      ],
+      "question_type": "single",
+      "file_name": "a47f2425-bedf-478b-93e9-d24cf4d16de7.json"
+    },
+    {
+      "id": "ac2c4e60-c1c4-462b-9db1-a720a0639ed5",
+      "title": "AWS IAMポリシー評価論理における明示的拒否とアクセス許可境界・SCPの優先関係",
+      "services": [
+        "AWS Identity and Access Management",
+        "AWS Organizations"
+      ],
+      "question_type": "single",
+      "file_name": "ac2c4e60-c1c4-462b-9db1-a720a0639ed5.json"
+    },
+    {
+      "id": "b247022b-4928-4615-b42e-c1bf982abe7b",
+      "title": "AWS Organizationsタグポリシーによるマルチアカウント環境でのタグ命名規則と大文字小文字の標準化強制",
+      "services": [
+        "AWS Organizations",
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "b247022b-4928-4615-b42e-c1bf982abe7b.json"
+    },
+    {
+      "id": "bf2c68ea-7192-4d0c-9604-a26d07c41fc7",
+      "title": "AWS STS AssumeRoleにおけるセッション期間のカスタマイズと最小権限・最小曝露の管理",
+      "services": [
+        "AWS IAM",
+        "AWS STS"
+      ],
+      "question_type": "single",
+      "file_name": "bf2c68ea-7192-4d0c-9604-a26d07c41fc7.json"
     },
     {
       "id": "da903c41-8d64-4fbb-b4fa-23d8204a97b3",

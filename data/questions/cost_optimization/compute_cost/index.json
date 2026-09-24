@@ -1,7 +1,7 @@
 {
   "major": "コスト最適化アーキテクチャの設計",
   "minor": "コンピュートコスト最適化",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
     {
       "id": "1f3c18d0-9a6e-43a8-bd1b-42e37a8187ab",
@@ -11,6 +11,16 @@
       ],
       "question_type": "single",
       "file_name": "1f3c18d0-9a6e-43a8-bd1b-42e37a8187ab.json"
+    },
+    {
+      "id": "26a3df2b-397e-4532-8231-d889e2738d7d",
+      "title": "AWS Fargate Spotを活用したコンテナ化バッチ処理のコスト最大化と耐障害設計",
+      "services": [
+        "AWS Fargate",
+        "Amazon ECS"
+      ],
+      "question_type": "single",
+      "file_name": "26a3df2b-397e-4532-8231-d889e2738d7d.json"
     },
     {
       "id": "2ccebcbf-a0ab-45c4-9058-6654cbabfa3f",
@@ -34,6 +44,27 @@
       "file_name": "3159c0e8-f66f-404f-84e7-b4241c695498.json"
     },
     {
+      "id": "4df6b8d2-af81-4daa-83fe-c3f277bd63ea",
+      "title": "Amazon EC2 休止状態 (Hibernation) を活用したステートフル開発インスタンスのアイドル停止と起動時間短縮によるコスト最適化",
+      "services": [
+        "Amazon EC2",
+        "Amazon EBS"
+      ],
+      "question_type": "single",
+      "file_name": "4df6b8d2-af81-4daa-83fe-c3f277bd63ea.json"
+    },
+    {
+      "id": "575ac8c6-c29a-43a7-9ee7-3d6ff332abdc",
+      "title": "CloudWatch統合エージェントによるメモリメトリクス収集とAWS Compute Optimizerの高精度な適正サイジング",
+      "services": [
+        "AWS Compute Optimizer",
+        "Amazon CloudWatch",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "575ac8c6-c29a-43a7-9ee7-3d6ff332abdc.json"
+    },
+    {
       "id": "5b737255-d7c0-4d2d-bff5-3461f93fb586",
       "title": "スケジュールされたスケーリングによる非本番環境の夜間・休日インスタンス停止とコスト削減",
       "services": [
@@ -42,6 +73,26 @@
       ],
       "question_type": "single",
       "file_name": "5b737255-d7c0-4d2d-bff5-3461f93fb586.json"
+    },
+    {
+      "id": "661f308c-7eb2-400d-92a1-17bce6f1a642",
+      "title": "オンデマンドキャパシティ予約 (ODCR) とSavings Plansの併用による可用性確保とコスト最適化",
+      "services": [
+        "Amazon EC2",
+        "AWS Cost Explorer"
+      ],
+      "question_type": "single",
+      "file_name": "661f308c-7eb2-400d-92a1-17bce6f1a642.json"
+    },
+    {
+      "id": "6b287c19-96e7-4acd-920e-61b9b5441880",
+      "title": "属性ベースのインスタンスタイプ選択 (Attribute-Based Instance Type Selection) によるスポット調達とコスト最小化",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "6b287c19-96e7-4acd-920e-61b9b5441880.json"
     },
     {
       "id": "6fda4da5-351c-4cb2-877c-5a6bf5261de0",
@@ -56,6 +107,26 @@
       "file_name": "6fda4da5-351c-4cb2-877c-5a6bf5261de0.json"
     },
     {
+      "id": "80e7d407-0a49-4d71-a522-1bdf653a044b",
+      "title": "EC2 Auto Scalingにおける属性ベースのインスタンスタイプ選定（Attribute-Based Instance Type Selection）",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "80e7d407-0a49-4d71-a522-1bdf653a044b.json"
+    },
+    {
+      "id": "b6402b59-b4a3-413a-9288-33ecad63ecda",
+      "title": "AWS Compute OptimizerによるAWS Lambda関数のメモリサイズ最適化と実行コスト削減",
+      "services": [
+        "AWS Compute Optimizer",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "b6402b59-b4a3-413a-9288-33ecad63ecda.json"
+    },
+    {
       "id": "d21905f6-e2e3-476b-907c-1107ee2ae7f6",
       "title": "Compute Savings Plansによる将来のアーキテクチャ変更に柔軟な割引コミットメント",
       "services": [
@@ -68,6 +139,45 @@
       "file_name": "d21905f6-e2e3-476b-907c-1107ee2ae7f6.json"
     },
     {
+      "id": "d69ec042-c09a-4b75-baec-5b7ed135029a",
+      "title": "AWS Batchにおけるマネージドスポット環境とSPOT_CAPACITY_OPTIMIZED割り当て戦略によるコストと中断率の最小化",
+      "services": [
+        "AWS Batch",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "d69ec042-c09a-4b75-baec-5b7ed135029a.json"
+    },
+    {
+      "id": "ea314e1f-a32b-4e15-ab7e-b98889985e72",
+      "title": "コンバーティブルリザーブドインスタンス (Convertible RI) の交換機能を活用したアーキテクチャ変更への適応",
+      "services": [
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "ea314e1f-a32b-4e15-ab7e-b98889985e72.json"
+    },
+    {
+      "id": "ec305cdc-b0b5-4703-ae09-88c3022a133e",
+      "title": "AWS Lambdaのメモリ割り当て最適化によるCPU処理時間短縮と実行コスト削減",
+      "services": [
+        "AWS Lambda",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "ec305cdc-b0b5-4703-ae09-88c3022a133e.json"
+    },
+    {
+      "id": "ef6cf762-2c26-48ed-b32d-55f4cd8eb9d4",
+      "title": "EC2 Instance Savings PlansとCompute Savings Plansの特性比較と最適なコスト削減オプション選定",
+      "services": [
+        "Amazon EC2",
+        "AWS Cost Explorer"
+      ],
+      "question_type": "single",
+      "file_name": "ef6cf762-2c26-48ed-b32d-55f4cd8eb9d4.json"
+    },
+    {
       "id": "ef7c9d22-b5f1-47d5-a220-c43e84ef0d99",
       "title": "EC2購買オプションの最適な組み合わせによるワークロード全体のコスト最小化",
       "services": [
@@ -76,6 +186,28 @@
       ],
       "question_type": "single",
       "file_name": "ef7c9d22-b5f1-47d5-a220-c43e84ef0d99.json"
+    },
+    {
+      "id": "f6166c12-c9ba-41a7-9d93-fb318ce686ee",
+      "title": "Compute Savings PlansとEC2 Instance Savings Plansの柔軟性と割引率の比較選定",
+      "services": [
+        "AWS Savings Plans",
+        "Amazon EC2",
+        "AWS Lambda",
+        "AWS Fargate"
+      ],
+      "question_type": "single",
+      "file_name": "f6166c12-c9ba-41a7-9d93-fb318ce686ee.json"
+    },
+    {
+      "id": "ffac42a4-128b-47c7-932d-b446eb3f5d3e",
+      "title": "EC2 Auto Scalingにおける予測スケーリング (Predictive Scaling) と動的スケーリングの併用による過剰プロビジョニング排除",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "ffac42a4-128b-47c7-932d-b446eb3f5d3e.json"
     }
   ]
 }

@@ -1,0 +1,40 @@
+{
+  "id": "9d054db7-b3bd-4293-a2b4-6f6df964994b",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "ディザスタリカバリ",
+  "title": "AWS DataSyncを活用したオンプレミスNASからAWSクラウドへの定期的な自動DRデータ同期",
+  "services": [
+    "AWS DataSync",
+    "Amazon EFS",
+    "Amazon S3",
+    "AWS Direct Connect"
+  ],
+  "question_type": "single",
+  "question_text": "ある製造企業は、オンプレミスのデータセンターにある大容量NAS（NFSファイル共有）に数十テラバイトの設計図面データを保管しています。データセンターの災害に備え、AWS Direct Connect接続を経由して、変更された差分データのみを毎晩Amazon EFSに自動的かつセキュアに同期するDRパイプラインを構築したいと考えています。スクリプトの開発・保守を行わずにデータ整合性を検証しながら同期を実現する最適なサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS DataSyncエージェントをオンプレミス環境にデプロイし、NFS共有からAmazon EFSへのデータ転送タスクをスケジュール設定して、転送時および転送完了後のデータ整合性検証を有効化する。",
+      "explanation": "AWS DataSyncは、オンプレミスストレージとAWS（EFS、S3、FSx）間で大量データを高速かつ安全に移動・同期するためのフルマネージドサービスです。差分同期、帯域幅制限、エンドツーエンドのデータ整合性チェックが自動化されており、管理工数を最小化できます。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Storage GatewayのVolume Gatewayをデプロイし、NASデータをiSCSIボリュームとしてマウントさせてS3に同期する。",
+      "explanation": "Volume Gatewayはブロックストレージ（iSCSI）向けであり、既存のNFSファイル共有の差分同期やEFSへのファイル単位同期には適していません。"
+    },
+    {
+      "id": "C",
+      "text": "オンプレミスサーバーにAWS CLIをインストールし、シェルスクリプトで `aws s3 sync` コマンドを実行してデータをEFSにアップロードする。",
+      "explanation": "`aws s3 sync` はS3専用のCLIコマンドであり、EFSに直接同期することはできません。また手動スクリプトの保守負担が発生します。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Snowball Edgeデバイスを定期的に発注・配送し、物理デバイス経由でEFSにデータを移行する。",
+      "explanation": "Snowballは初期の大規模移行向けであり、毎晩の継続的な差分同期・DR対策には適していません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "オンプレミスNAS/ファイルサーバーとAWSストレージ（EFS/S3/FSx）間の高速・自動化された差分DR同期には、AWS DataSyncが最適です。"
+}

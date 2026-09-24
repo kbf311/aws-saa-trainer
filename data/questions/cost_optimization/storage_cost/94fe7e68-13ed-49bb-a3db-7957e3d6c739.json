@@ -1,0 +1,38 @@
+{
+  "id": "94fe7e68-13ed-49bb-a3db-7957e3d6c739",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "ストレージコスト最適化",
+  "title": "S3 Glacier Flexible Archive取り出しオプション（迅速・標準・大容量）の選定と取り出しコスト抑制",
+  "services": [
+    "Amazon S3",
+    "Amazon S3 Glacier"
+  ],
+  "question_type": "single",
+  "question_text": "ある医療データ管理企業は、数テラバイトの過去カルテアーカイブをAmazon S3 Glacier Flexible Archiveに保存しています。年次監査のために一度に大量（数テラバイト）のアーカイブデータを取得・確認する必要がありますが、監査報告までに数日間の猶予があり、取り出し（データリストア）にかかる費用をできる限り安く抑えたいと考えています。最もコスト効率の高い取り出しティア（Retrieval Tier）はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "大容量取り出し（Bulk retrieval）を使用する。取り出し完了までに5〜12時間かかるが、GBあたりのデータ取り出し費用が最も安価（または無料）である。",
+      "explanation": "Glacier Flexible Archiveの「Bulk（大容量）取り出し」は、5〜12時間程度の時間を要しますが、データ取り出しコストが最も低く（場合によっては無料枠内）、数日間の猶予がある大規模データの低コストな取り出しに最適です。"
+    },
+    {
+      "id": "B",
+      "text": "迅速取り出し（Expedited retrieval）を使用する。1〜5分で取り出せるため、最も低コストである。",
+      "explanation": "Expedited取り出しは1〜5分で緊急復旧できますが、取り出しリクエストおよびデータ容量あたりの単価が最も高額です。"
+    },
+    {
+      "id": "C",
+      "text": "標準取り出し（Standard retrieval）を使用し、すべてのデータを3〜5時間以内に取り出す。",
+      "explanation": "Standard取り出しはバランス型ですが、Bulk取り出しと比較すると取り出し料金が高くなります。"
+    },
+    {
+      "id": "D",
+      "text": "Glacierのプロビジョンドキャパシティユニットを10ユニット購入し、迅速取り出しを常に予約実行する。",
+      "explanation": "プロビジョンドキャパシティは月額固定料金が発生し、年に1回の大規模取り出しに対しては極めて不経済です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon S3 Glacier Flexible Archiveの大規模データ取り出しにおいて、時間的猶予がある場合は「Bulk（大容量）取り出し」を選択することで取り出しコストを大幅に抑制できます。"
+}

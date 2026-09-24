@@ -1,0 +1,38 @@
+{
+  "id": "0309c97c-1e60-4359-851d-4cfc52ec69f1",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "AWS Directory Service (AD Connector) を活用したオンプレミスActive Directory認証のプロキシ連携",
+  "services": [
+    "AWS IAM",
+    "AWS Directory Service"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、自社のオンプレミス環境にあるMicrosoft Active Directoryのユーザー資格情報を利用して、AWS WorkSpacesおよびAWSマネジメントコンソールへのアクセスを可能にしたいと考えています。企業のセキュリティポリシーでは、社外のクラウド環境にユーザーパスワードやディレクトリ情報のキャッシュ・同期を行うことを厳格に禁止しています。クラウド側でのディレクトリ管理作業を最小限にしつつ、このセキュリティ要件を満たす最適なサービス構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Directory Service の AD Connector をデプロイし、オンプレミス環境とAWS間のVPNまたはDirect Connect接続を経由して、認証リクエストをオンプレミスのActive Directoryに直接プロキシ転送する。",
+      "explanation": "AD Connectorはクラウド側にディレクトリ情報やパスワードを一切キャッシュ・同期せず、認証要求を既存のオンプレミスActive Directoryに透過的にリダイレクト（プロキシ）するディレクトリゲートウェイです。管理オーバーヘッドを最小化し、社外同期禁止ポリシーを完全に満たします。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Managed Microsoft AD をAWS上に新規作成し、オンプレミスのActive Directoryとの間に双方向のフォレスト信頼関係を結んで全オブジェクトを同期する。",
+      "explanation": "AWS Managed Microsoft ADはクラウド上にドメインコントローラーを立ち上げるサービスであり、自前管理の手間が発生する上、オブジェクトの同期や維持が必要になるためポリシーや要件に最適ではありません。"
+    },
+    {
+      "id": "C",
+      "text": "Simple AD をVPC内に構築し、オンプレミスサーバーからLDIFエクスポートファイルを取り込んで定期的に手動インポートする。",
+      "explanation": "Simple ADはSambaベースの軽量ディレクトリであり、Active Directoryとの信頼関係や透過プロキシに対応しておらず、手動インポートの運用負荷やパスワード同期の禁止ポリシーに違反します。"
+    },
+    {
+      "id": "D",
+      "text": "IAMユーザーを一括作成し、各ユーザーのパスワード変更スクリプトをオンプレミスADのパスワード変更フックからリアルタイムにAWS CLI経由で呼び出す。",
+      "explanation": "パスワードをスクリプト経由でAWSに送信・同期する仕組みはセキュリティリスクが極めて高く、AWS外への同期禁止ポリシーに明確に反します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Directory Service の AD Connector は、オンプレミスのMicrosoft Active Directoryに対する認証リクエストをプロキシ転送するゲートウェイです。クラウド上に情報をキャッシュしたり同期したりしないため、「クラウドに資格情報を同期・保持したくない」という厳しいコンプライアンス要件に最適です。Direct ConnectまたはVPN経由でオンプレミスADと通信し、AWSマネジメントコンソール、WorkSpaces、Amazon QuickSight等の認証をシームレスに処理できます。"
+}

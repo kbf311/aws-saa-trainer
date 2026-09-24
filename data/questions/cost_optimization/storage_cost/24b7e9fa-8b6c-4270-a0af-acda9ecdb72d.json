@@ -1,0 +1,37 @@
+{
+  "id": "24b7e9fa-8b6c-4270-a0af-acda9ecdb72d",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "ストレージコスト最適化",
+  "title": "S3 Intelligent-Tieringにおけるアーカイブアクセス階層のオプトインによる長期保管コストの極小化",
+  "services": [
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "あるメディア企業は、数十ペタバイトの過去映像素材をAmazon S3バケットに保管しており、アクセスパターンが予測できないためS3 Intelligent-Tieringを導入しています。多くのオブジェクトは90日以上、あるいは180日以上まったくアクセスされません。取り出し性能（数分から数時間の取り出し許容）を前提として、これらの超長期未アクセスオブジェクトの月額保管コストをS3 GlacierやGlacier Deep Archiveと同等の極小水準まで自動削減するための追加設定はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "S3 Intelligent-Tieringのアーカイブ設定で「Archive Access tier（90日以上未アクセスで自動移行）」と「Deep Archive Access tier（180日以上未アクセスで自動移行）」の双方をオプトイン（有効化）する。",
+      "explanation": "S3 Intelligent-Tieringの「Frequent」「Infrequent」「Archive Instant Access」階層は自動適用されますが、非同期取り出しとなる「Archive Access tier（90日）」と「Deep Archive Access tier（180日）」は明示的なオプトイン（有効化）が必要です。これを有効化することで、Glacier Deep Archiveと同等の最低コスト水準まで自動階層化されます。"
+    },
+    {
+      "id": "B",
+      "text": "S3ライフサイクルルールを新規作成し、Intelligent-Tieringストレージクラスの全オブジェクトを90日後にS3 Glacier Flexible Archiveへ強制変換する。",
+      "explanation": "S3 Intelligent-Tiering内のオブジェクトを別ストレージクラスへ変換するライフサイクルルールを設定すると、階層の自動最適化ロジックと衝突し、意図しない移行手数料が発生する可能性があります。Intelligent-Tiering組み込みのアーカイブ階層をオプトインするのがベストプラクティスです。"
+    },
+    {
+      "id": "C",
+      "text": "オブジェクトをすべてダウンロードし、ローカルでtar.gz形式に圧縮してからS3 Standardに再アップロードする。",
+      "explanation": "ペタバイト規模のデータを手動でダウンロード・再圧縮・再アップロードすることは膨大な転送量と処理コストが発生し、現実的ではありません。"
+    },
+    {
+      "id": "D",
+      "text": "S3バケットのバージョニングを無効化し、オブジェクトロックを適用する。",
+      "explanation": "バージョニングの無効化やオブジェクトロックは、長期アクセスがないオブジェクトのストレージ単価引き下げとは直接関係ありません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "S3 Intelligent-TieringでGlacier/Deep Archive相当の最低ストレージ単価を実現するには、「Archive Access tier」および「Deep Archive Access tier」のオプトイン設定を有効化します。"
+}

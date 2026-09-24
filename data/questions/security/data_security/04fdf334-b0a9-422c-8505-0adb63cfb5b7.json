@@ -1,0 +1,38 @@
+{
+  "id": "04fdf334-b0a9-422c-8505-0adb63cfb5b7",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "AWS KMSキーポリシーとIAMポリシーによるキー管理者とキー使用者の職務分掌の徹底",
+  "services": [
+    "AWS Key Management Service",
+    "AWS Identity and Access Management"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業のセキュリティコンプライアンス基準では、暗号化キーのライフサイクル管理（削除・ポリシー変更・キーローテーション）を行う「セキュリティ管理者」と、データを暗号化・復号する「アプリケーション開発者・サービス」の権限を完全に分離（職務分掌）することが義務付けられています。AWS KMSのカスタマーマネージドキー（CMK）において、この要件を最もセキュアに満たす実装はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "KMSキーポリシー内でキー管理者（Key Administrators）のプリンシパルにはキー管理アクション（kms:Create*, kms:Put*, kms:ScheduleKeyDeletion等）のみを許可し、暗号化操作（kms:Encrypt, kms:Decrypt）は許可しない。キー使用者（Key Users）には暗号化操作のみを許可する。",
+      "explanation": "KMSキーポリシーで「Key Administrators」と「Key Users」の権限を厳格に分離することがAWSのベストプラクティスです。キー管理者がデータの暗号化・復号を行えないようにし、逆にアプリケーション側がキーの変更や削除を行えないようにすることで、職務分掌を完全に徹底できます。"
+    },
+    {
+      "id": "B",
+      "text": "キーポリシーでAWSアカウントルートユーザーにすべての権限（kms:*）を付与し、セキュリティ管理者と開発者の双方にAdministratorAccess IAMポリシーをアタッチする。",
+      "explanation": "双方にAdministratorAccessを付与すると権限の分離が完全に崩壊し、セキュリティ要件に違反します。"
+    },
+    {
+      "id": "C",
+      "text": "IAMポリシーでのみ権限を制御し、KMSキーポリシーはデフォルトの空（ポリシーなし）の状態で作成する。",
+      "explanation": "KMSキーは有効なキーポリシーを持たなければアクセスできず、キーポリシーでルートアカウントまたはプリンシパルへの委譲を定義しない限りIAMポリシー単体では機能しません。"
+    },
+    {
+      "id": "D",
+      "text": "暗号化キーをAWSマネージドキーに統一し、AWSサポートに依頼して管理者と使用者のアクセスログを分離管理してもらう。",
+      "explanation": "AWSマネージドキーはキーポリシーをカスタマイズできず、職務分掌の要件を柔軟に満たすことができません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "KMSキーポリシーにおける職務分掌（Separation of Duties）では、キーの管理権限（Admin）とデータの暗号化・復号権限（User）を明確に別々のプリンシパルに割り当てることが不可欠です。"
+}

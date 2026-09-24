@@ -1,0 +1,37 @@
+{
+  "id": "428a484f-12f7-4c89-b168-88fd5d600117",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "ストレージコスト最適化",
+  "title": "Amazon FSx for Windows File Serverにおけるデータ重複排除とHDDストレージによるファイル共有コスト最適化",
+  "services": [
+    "Amazon FSx for Windows File Server"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、オンプレミスから100TBのWindowsファイル共有（社内文書、プロジェクト共有フォルダ）をAWSへ移行する計画を立てています。データの大半はアクセス頻度が低く、重複したコピーファイルが多数存在します。また、極めて高いIOPSは必要とされていません。ファイル共有の可用性とアクセス権限（NTFS ACL）を維持しつつ、ストレージ費用を最小化するための最もコスト効率の高いFSx構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon FSx for Windows File ServerでストレージタイプにHDD（ハードディスクドライブ）を選択し、データ重複排除（Data Deduplication）機能を有効化する。",
+      "explanation": "FSx for Windows File Serverでは、アクセス頻度の低い汎用ファイル共有向けに安価なHDDストレージを選択でき（SSDの約1/10の容量単価）、さらにWindowsネイティブのデータ重複排除（Data Deduplication）を有効化することで、重複データの容量を通常50〜60%削減できるため、トータルコストを劇的に最小化できます。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon FSx for Windows File ServerでSSDストレージを選択し、最大スループットキャパシティをプロビジョニングする。",
+      "explanation": "SSDストレージおよび最大スループットの選択は最も高コストな構成となり、高いIOPSを必要としない要件に対して過剰です。"
+    },
+    {
+      "id": "C",
+      "text": "データをAmazon S3 Glacier Deep Archiveに直接アップロードし、Windowsエクスプローラーから直接マウントする。",
+      "explanation": "Glacier Deep Archiveはアーカイブ専用であり、ファイルシステムとしてWindowsクライアントから直接SMBマウントして日常業務に利用することはできません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon EFSをプロビジョンドスループットでデプロイし、Windows Active Directoryと統合する。",
+      "explanation": "Amazon EFSはLinux/POSIXファイルシステム向け（NFS）であり、ネイティブなWindows NTFS権限やSMBプロトコルを必要とするWindowsファイル共有にはFSx for Windowsが適しています。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Windowsファイル共有のコスト最適化では、「HDDストレージタイプの選択」と「データ重複排除（Data Deduplication）の有効化」を組み合わせることで、SSD構成に比べて大幅な費用削減が達成できます。"
+}

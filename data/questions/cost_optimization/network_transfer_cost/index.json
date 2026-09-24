@@ -1,7 +1,7 @@
 {
   "major": "コスト最適化アーキテクチャの設計",
   "minor": "データ転送・ネットワークコスト最適化",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
     {
       "id": "162e3d0f-68f7-4fbe-a6db-966a081ce795",
@@ -13,6 +13,16 @@
       ],
       "question_type": "single",
       "file_name": "162e3d0f-68f7-4fbe-a6db-966a081ce795.json"
+    },
+    {
+      "id": "302e00e6-4372-4f50-9ced-1eea59acfb8c",
+      "title": "Amazon S3 Transfer Accelerationの費用対効果評価と遠隔地アップロードの最適化",
+      "services": [
+        "Amazon S3",
+        "Amazon CloudFront"
+      ],
+      "question_type": "single",
+      "file_name": "302e00e6-4372-4f50-9ced-1eea59acfb8c.json"
     },
     {
       "id": "397d291e-640a-4b18-a5a7-9c3a6964b522",
@@ -45,6 +55,26 @@
       ],
       "question_type": "single",
       "file_name": "436d7d51-c53d-4a98-aa3d-cd5e01824cc2.json"
+    },
+    {
+      "id": "523c5c3b-2210-45c2-848e-da1ebc8af579",
+      "title": "Amazon CloudFrontの自動圧縮（Gzip/Brotli）有効化によるエッジデータ転送アウトコストの直接削減",
+      "services": [
+        "Amazon CloudFront",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "523c5c3b-2210-45c2-848e-da1ebc8af579.json"
+    },
+    {
+      "id": "5c5b310f-095e-49cc-b336-70a76172be91",
+      "title": "Transit Gatewayピアリングを活用した複数リージョン接続のネットワーク集約とコスト最適化",
+      "services": [
+        "AWS Transit Gateway",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "5c5b310f-095e-49cc-b336-70a76172be91.json"
     },
     {
       "id": "6072e87d-17c7-4962-ade5-251ea369f918",
@@ -122,6 +152,17 @@
       "file_name": "a1259a18-8c6c-4308-8c55-39e145b3d129.json"
     },
     {
+      "id": "a21b6c30-2b14-4741-965a-721f6846aa8f",
+      "title": "大容量データ通信におけるAWS Direct ConnectとSite-to-Site VPNの転送料金比較と選定",
+      "services": [
+        "AWS Direct Connect",
+        "AWS Site-to-Site VPN",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "a21b6c30-2b14-4741-965a-721f6846aa8f.json"
+    },
+    {
       "id": "bdaaeabb-ec74-4d76-ab4a-f8cbdfcde09c",
       "title": "CloudFront価格クラス（Price Class）の適切な選定によるコンテンツ配信データ転送費用の削減",
       "services": [
@@ -130,6 +171,17 @@
       ],
       "question_type": "single",
       "file_name": "bdaaeabb-ec74-4d76-ab4a-f8cbdfcde09c.json"
+    },
+    {
+      "id": "be0f645d-b8ca-452f-84eb-99f83aa7dc50",
+      "title": "VPC内NAT Gatewayの単一AZ集約 vs 複数AZ分散における耐障害性とAZ間データ転送コストの評価",
+      "services": [
+        "Amazon VPC",
+        "NAT Gateway",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "be0f645d-b8ca-452f-84eb-99f83aa7dc50.json"
     },
     {
       "id": "c0846c00-eb20-4431-9ec3-9a3ca250485c",
@@ -142,6 +194,28 @@
       ],
       "question_type": "multiple",
       "file_name": "c0846c00-eb20-4431-9ec3-9a3ca250485c.json"
+    },
+    {
+      "id": "c65f71bb-069e-4256-8ba4-f964b7569220",
+      "title": "Amazon ECRからのコンテナイメージプルにおけるInterface型VPCエンドポイント導入によるNAT Gateway通信費削減",
+      "services": [
+        "Amazon ECR",
+        "Amazon VPC",
+        "NAT Gateway",
+        "Amazon ECS"
+      ],
+      "question_type": "single",
+      "file_name": "c65f71bb-069e-4256-8ba4-f964b7569220.json"
+    },
+    {
+      "id": "d04a94bf-ad34-4819-8376-8d5026b06359",
+      "title": "AWS Global AcceleratorとCloudFrontのデータ転送料金体系の比較と最適選定",
+      "services": [
+        "AWS Global Accelerator",
+        "Amazon CloudFront"
+      ],
+      "question_type": "single",
+      "file_name": "d04a94bf-ad34-4819-8376-8d5026b06359.json"
     }
   ]
 }

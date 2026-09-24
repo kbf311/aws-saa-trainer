@@ -1,0 +1,38 @@
+{
+  "id": "d04a94bf-ad34-4819-8376-8d5026b06359",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "AWS Global AcceleratorとCloudFrontのデータ転送料金体系の比較と最適選定",
+  "services": [
+    "AWS Global Accelerator",
+    "Amazon CloudFront"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、世界中のユーザー向けに静的Webアセット（画像、動画、HTML）と動的APIの両方を提供するWebアプリケーションを運用しています。ネットワークエンジニアは、トラフィックのルーティングをAWS Global Acceleratorに全面移行することを提案しました。しかし、コスト最適化の観点からソリューションアーキテクトが評価を行ったところ、静的コンテンツ配信においてはAmazon CloudFrontを維持すべきであると判断しました。その最大の理由はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "CloudFrontはオリジン（S3/EC2）からのデータ取得が無料でエッジキャッシュによりオリジン通信自体を抑制でき、データ転送アウト単価もGlobal Accelerator（固定費＋プレミアム転送料金が発生）より割安であるため。",
+      "explanation": "CloudFrontはエッジでコンテンツをキャッシュするためオリジン通信を劇的に削減でき、AWSオリジンからCloudFrontへのデータ転送は無料です。一方、Global Acceleratorはキャッシュを持たず、固定の時間料金に加えプレミアムデータ転送料金が全トラフィックに課金されるため、Webコンテンツ配信にはCloudFrontの方が圧倒的にコスト効率が高くなります。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Global AcceleratorはHTTPプロトコルを一切サポートしておらず、Webトラフィックを転送できないため。",
+      "explanation": "Global AcceleratorはTCP/UDP全般をサポートしており、HTTP/HTTPSトラフィックも転送可能です。"
+    },
+    {
+      "id": "C",
+      "text": "CloudFrontはAWS Organizationsの請求統合をサポートしていないため。",
+      "explanation": "CloudFrontもAWS Organizationsの一括請求に対応しています。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Global Acceleratorは単一のAWSリージョンでのみ利用可能であり、グローバル展開ができないため。",
+      "explanation": "Global Acceleratorは世界中のエッジロケーションに展開されるグローバルサービスです。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "キャッシュ可能なWeb/APIコンテンツ配信において、オリジン無料転送とエッジキャッシュ効果を持つCloudFrontは、プロキシ型のGlobal Acceleratorよりもデータ転送コスト面で遥かに有利です。"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "ef6cf762-2c26-48ed-b32d-55f4cd8eb9d4",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "コンピュートコスト最適化",
+  "title": "EC2 Instance Savings PlansとCompute Savings Plansの特性比較と最適なコスト削減オプション選定",
+  "services": [
+    "Amazon EC2",
+    "AWS Cost Explorer"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、東京リージョン（ap-northeast-1）内で稼働している基幹データベースのバックエンドEC2インスタンス（すべて c6i ファミリーを使用）について、今後3年間にわたり同リージョン・同インスタンスファミリーで継続利用することが確定しています。OSの変更やリージョン移転の予定はなく、割引率を最大化することを最優先としています。この安定したワークロードに対して最も大幅な割引（最大72%）を享受できる購入オプションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "東京リージョンの `c6i` ファミリーを対象とする、全額前払いの3年契約「EC2 Instance Savings Plans」を購入する。",
+      "explanation": "EC2 Instance Savings Plansは、特定のリージョン内の特定のインスタンスファミリー（例: 東京リージョンのc6i）にコミットすることで、最も高い割引率（最大72%）が適用されます。サイズ（c6i.largeからc6i.xlarge等）やOSの変更には柔軟に対応できるため、要件に最適です。"
+    },
+    {
+      "id": "B",
+      "text": "3年契約の「Compute Savings Plans」を購入する。",
+      "explanation": "Compute Savings Plansはインスタンスファミリー、リージョン、OS、Fargate/Lambdaをまたぐ高い柔軟性を提供しますが、割引率は最大66%であり、ファミリーとリージョンが固定されている前提ではEC2 Instance Savings Plansより割引率が低くなります。"
+    },
+    {
+      "id": "C",
+      "text": "スポットインスタンスを3年間の定期ブロック予約で購入する。",
+      "explanation": "EC2スポットブロック機能は提供が終了しており、スポットインスタンスは中断の可能性があるため常時稼働が必要な基幹DBには適していません。"
+    },
+    {
+      "id": "D",
+      "text": "オンデマンドインスタンスをそのまま利用し、AWS Budgetsで予算アラートのみを設定する。",
+      "explanation": "オンデマンドインスタンスは割引が一切適用されず、確定している3年間の継続利用に対してコスト最適化の恩恵を受けられません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Savings Plansには主に「Compute Savings Plans」と「EC2 Instance Savings Plans」の2種類があります。Compute Savings Plansはリージョンやファミリー、コンピュート種別（EC2/Fargate/Lambda）を柔軟に変更できる代わりに割引率が最大66%です。一方、EC2 Instance Savings Plansは特定リージョン内の特定ファミリー（例: 東京リージョンのc6i）に限定される代わりに、スタンダードリザーブドインスタンスと同等の最大72%という最高水準の割引を提供します。"
+}

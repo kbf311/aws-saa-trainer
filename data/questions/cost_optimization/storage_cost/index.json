@@ -1,7 +1,7 @@
 {
   "major": "コスト最適化アーキテクチャの設計",
   "minor": "ストレージコスト最適化",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
     {
       "id": "073b221b-d515-44fd-aadc-ef7c4709f927",
@@ -12,6 +12,16 @@
       ],
       "question_type": "multiple",
       "file_name": "073b221b-d515-44fd-aadc-ef7c4709f927.json"
+    },
+    {
+      "id": "1452875d-3a8f-4960-b2f0-f76860b4160e",
+      "title": "AWS DataSyncによるオンプレミスファイルストレージからS3各ストレージクラスへの直接移行とコスト最適化",
+      "services": [
+        "AWS DataSync",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "1452875d-3a8f-4960-b2f0-f76860b4160e.json"
     },
     {
       "id": "146a07cc-afb1-434d-b25e-1d654eac70c0",
@@ -35,6 +45,34 @@
       "file_name": "1d63ec18-078e-468c-8c1c-9829b4aa0c25.json"
     },
     {
+      "id": "24b7e9fa-8b6c-4270-a0af-acda9ecdb72d",
+      "title": "S3 Intelligent-Tieringにおけるアーカイブアクセス階層のオプトインによる長期保管コストの極小化",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "24b7e9fa-8b6c-4270-a0af-acda9ecdb72d.json"
+    },
+    {
+      "id": "428a484f-12f7-4c89-b168-88fd5d600117",
+      "title": "Amazon FSx for Windows File Serverにおけるデータ重複排除とHDDストレージによるファイル共有コスト最適化",
+      "services": [
+        "Amazon FSx for Windows File Server"
+      ],
+      "question_type": "single",
+      "file_name": "428a484f-12f7-4c89-b168-88fd5d600117.json"
+    },
+    {
+      "id": "7c3b1d0b-1ffd-4670-82d4-8cec51f7a493",
+      "title": "Amazon FSx for LustreにおけるスクラッチファイルシステムとS3データリポジトリ連携によるHPCコスト最小化",
+      "services": [
+        "Amazon FSx for Lustre",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "7c3b1d0b-1ffd-4670-82d4-8cec51f7a493.json"
+    },
+    {
       "id": "7d336f6a-78e1-4f9d-aaf3-053830395276",
       "title": "Elastic Volumesを活用したEBSボリュームタイプ（gp2からgp3）の移行によるコスト最適化",
       "services": [
@@ -45,6 +83,26 @@
       "file_name": "7d336f6a-78e1-4f9d-aaf3-053830395276.json"
     },
     {
+      "id": "94fe7e68-13ed-49bb-a3db-7957e3d6c739",
+      "title": "S3 Glacier Flexible Archive取り出しオプション（迅速・標準・大容量）の選定と取り出しコスト抑制",
+      "services": [
+        "Amazon S3",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "single",
+      "file_name": "94fe7e68-13ed-49bb-a3db-7957e3d6c739.json"
+    },
+    {
+      "id": "9dfdc74e-5663-46fa-b5e8-dd7b0e5fde31",
+      "title": "Amazon S3バッチオペレーション（Batch Operations）による大規模オブジェクトのメタデータ一括変更とライフサイクル適用",
+      "services": [
+        "Amazon S3",
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "9dfdc74e-5663-46fa-b5e8-dd7b0e5fde31.json"
+    },
+    {
       "id": "9e12b2a6-5eb8-4a57-9ef4-3b9a04b33902",
       "title": "S3ライフサイクルルールを活用した長期ログデータの段階的移行と削除",
       "services": [
@@ -53,6 +111,16 @@
       ],
       "question_type": "single",
       "file_name": "9e12b2a6-5eb8-4a57-9ef4-3b9a04b33902.json"
+    },
+    {
+      "id": "be33d813-d044-4717-96d0-ba1ac20928f8",
+      "title": "AWS Compute Optimizerを活用した過剰プロビジョニングEBSボリュームの特定と適正サイズ化",
+      "services": [
+        "AWS Compute Optimizer",
+        "Amazon EBS"
+      ],
+      "question_type": "single",
+      "file_name": "be33d813-d044-4717-96d0-ba1ac20928f8.json"
     },
     {
       "id": "c000aa28-7b7a-4f8c-8b74-5a762860fba1",

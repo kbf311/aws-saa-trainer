@@ -1,0 +1,38 @@
+{
+  "id": "f331bce1-7ff7-482e-98fc-fc815f06bed7",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "データベースとキャッシング",
+  "title": "Amazon MemoryDB for Redisによるマイクロ秒読み取り・一桁ミリ秒書き込みと耐久性の両立",
+  "services": [
+    "Amazon MemoryDB for Redis",
+    "Amazon ElastiCache"
+  ],
+  "question_type": "single",
+  "question_text": "あるソーシャルゲーム企業は、全プレイヤーのリーダーボードとリアルタイムインベントリを管理するプライマリデータベースを検討しています。読み取りはマイクロ秒単位、書き込みは1桁ミリ秒単位の超高速パフォーマンスが必須であり、かつキャッシュ障害時でもデータ喪失が許されないため、マルチAZにまたがる完全なデータ永続性（トランザクションログの永続化）が求められています。インメモリの超高速性とプライマリDBとしての耐久性を両立する最適なAWSサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon MemoryDB for Redis",
+      "explanation": "Amazon MemoryDB for Redisは、Redis互換の耐久性に優れたインメモリデータベースサービスです。マイクロ秒の読み取りレイテンシーと1桁ミリ秒の書き込みレイテンシーを実現しつつ、分散トランザクションログを複数AZに永続化するため、プライマリデータベースとして安全に使用できます（データ損失ゼロ）。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon ElastiCache for Memcached",
+      "explanation": "ElastiCache for Memcachedは揮発性の純粋なインメモリキャッシュであり、永続化機能やマルチAZレプリケーション、トランザクションログを持たないため、プライマリDBとして使用するとデータが全消失します。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon RDS for MySQL（シングルAZ配置）",
+      "explanation": "ディスクベースのMySQLシングルAZ配置では、マイクロ秒単位のインメモリ性能を提供できず、高可用性も満たせません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon Redshift",
+      "explanation": "Redshiftは列指向の分析用データウェアハウス（OLAP）であり、ミリ秒以下のオンライントランザクション（OLTP）処理には適していません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Redisの超高速インメモリ性能（マイクロ秒読み取り）と、マルチAZトランザクションログによるプライマリデータベースとしての強固なデータ耐久性を同時に提供するサービスは「Amazon MemoryDB for Redis」です。"
+}

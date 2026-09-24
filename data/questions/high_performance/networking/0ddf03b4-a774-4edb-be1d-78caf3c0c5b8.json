@@ -1,0 +1,38 @@
+{
+  "id": "0ddf03b4-a774-4edb-be1d-78caf3c0c5b8",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "Amazon CloudFront オリジンシールド（Origin Shield）による中央集中キャッシュとオリジン負荷極小化",
+  "services": [
+    "Amazon CloudFront",
+    "Elastic Load Balancing"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバル動画配信プラットフォームは、Amazon CloudFrontをフロントに配置し、東京リージョンのALBおよびEC2フリートをオリジンとして動的・静的コンテンツを世界中に配信しています。世界数十箇所のエッジロケーションからのキャッシュミスが同時に東京のオリジンに集中すると、オリジンサーバーのCPU使用率がスパイクして過負荷に陥ります。世界中のエッジロケーションとオリジンの中間に中央集中型のキャッシュ層を追加し、オリジン負荷を最小限に抑えるCloudFrontの機能はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "CloudFront オリジンシールド（Origin Shield）を東京リージョンで有効化する。",
+      "explanation": "CloudFront Origin Shieldは、オリジンの直前に配置される中央集中型の追加キャッシュレイヤーです。世界中のエッジロケーションからのリクエストはまずOrigin Shieldに集約されるため、キャッシュヒット率が劇的に向上し、オリジンサーバーに到達する同時リクエスト数と負荷を極小化できます。"
+    },
+    {
+      "id": "B",
+      "text": "CloudFrontの価格クラスをPrice Class 100に変更する。",
+      "explanation": "Price Class 100はエッジロケーションの利用範囲を限定してコストを下げる設定であり、オリジンの負荷軽減には寄与しません。"
+    },
+    {
+      "id": "C",
+      "text": "ALBの前にAWS WAFを配置し、すべてのHTTP GETリクエストをブロックする。",
+      "explanation": "正規ユーザーのGETリクエストがすべて遮断され、配信サービスが完全に停止します。"
+    },
+    {
+      "id": "D",
+      "text": "CloudFrontのディストリビューションを削除し、各リージョンに個別にALBを構築する。",
+      "explanation": "エッジキャッシュが完全に失われ、オリジンおよびシステム全体の負荷とインフラ費用が激増します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "グローバル配信において世界中のエッジからのキャッシュミス集中を防ぎ、オリジン保護とキャッシュヒット率最大化を図るには「Amazon CloudFront Origin Shield」が最適です。"
+}

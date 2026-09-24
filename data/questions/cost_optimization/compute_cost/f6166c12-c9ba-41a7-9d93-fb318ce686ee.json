@@ -1,0 +1,40 @@
+{
+  "id": "f6166c12-c9ba-41a7-9d93-fb318ce686ee",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "コンピュートコスト最適化",
+  "title": "Compute Savings PlansとEC2 Instance Savings Plansの柔軟性と割引率の比較選定",
+  "services": [
+    "AWS Savings Plans",
+    "Amazon EC2",
+    "AWS Lambda",
+    "AWS Fargate"
+  ],
+  "question_type": "single",
+  "question_text": "ある成長中のスタートアップ企業は、今後1〜3年間にわたり継続的なコンピュートリソースの利用をコミットしてコストを大幅に削減したいと考えています。現在EC2上で稼働しているシステムの一部を、将来的にAWS Fargate（コンテナ）やAWS Lambda（サーバーレス）へ段階的にアーキテクチャ移行する計画があります。また、EC2インスタンスファミリー（例: C5から最新のC7gへの変更）や実行リージョンの変更にも柔軟に対応しながら最大66%の割引を享受できる最適な割引プランはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Compute Savings Plans（コンピュート・セービングスプラン）を選択する。インスタンスファミリー、サイズ、OS、リージョンに関係なく適用され、EC2に加えてAWS FargateおよびAWS Lambdaの利用料金に対しても自動的に割引が適用される。",
+      "explanation": "Compute Savings Plansは最も柔軟性の高い割引プランです。インスタンスファミリーやOS、リージョンの変更はもちろん、将来的なFargateやLambdaへのモダン移行に対しても継続して割引が適用されるため、アーキテクチャ変更を予定している組織に最適です。"
+    },
+    {
+      "id": "B",
+      "text": "EC2 Instance Savings Plans（EC2インスタンス・セービングスプラン）を選択し、単一のインスタンスファミリーおよびリージョンに固定コミットする。",
+      "explanation": "EC2 Instance Savings Plansは割引率がやや高い（最大72%）ものの、特定のリージョン・特定のインスタンスファミリー（例: 東京リージョンのC5のみ）に固定されるため、将来のFargate/Lambda移行や別ファミリー・別リージョンへの変更には適用されません。"
+    },
+    {
+      "id": "C",
+      "text": "スタンダードリザーブドインスタンス（Standard RI）を3年全額前払いで購入し、一切の変更を行わない。",
+      "explanation": "Standard RIはFargateやLambdaには適用されず、柔軟性が低いためアーキテクチャ刷新の妨げになります。"
+    },
+    {
+      "id": "D",
+      "text": "すべての本番ワークロードを無条件でスポットインスタンスに切り替える。",
+      "explanation": "本番基幹システムを中断耐性のないままスポットに全面移行することは可用性の観点から危険です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "将来的なインスタンスファミリー変更、リージョン変更、およびFargate/Lambdaへのコンテナ・サーバーレス移行を予定している場合、最も適した選択肢は「Compute Savings Plans」です。"
+}

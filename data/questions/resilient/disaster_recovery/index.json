@@ -1,8 +1,20 @@
 {
   "major": "レジリエント・アーキテクチャの設計",
   "minor": "ディザスタリカバリ",
-  "updated_at": "2026-09-24T22:05:58Z",
+  "updated_at": "2026-09-24T22:17:15Z",
   "questions": [
+    {
+      "id": "0365662c-42c0-4e9c-bda0-5f0852e53423",
+      "title": "バックアップ＆リストア型DR戦略におけるAWS BackupとIaCによる復旧自動化とコスト最小化",
+      "services": [
+        "AWS Backup",
+        "AWS CloudFormation",
+        "Amazon S3",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "0365662c-42c0-4e9c-bda0-5f0852e53423.json"
+    },
     {
       "id": "03b05544-25f1-4220-9103-1852c5840ee6",
       "title": "AWS Storage Gateway (Volume Gateway) を活用したオンプレミスブロックストレージのAWSクラウドDR",
@@ -59,6 +71,26 @@
       "file_name": "36a9ec9a-eb61-4ca9-b587-a7a474437692.json"
     },
     {
+      "id": "39c6b74b-20dd-494e-aba1-209efc784588",
+      "title": "EBSスナップショットの高速スナップショット復元（FSR）によるDRボリューム初期化遅延の解消",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "39c6b74b-20dd-494e-aba1-209efc784588.json"
+    },
+    {
+      "id": "3fdca49d-c787-45ef-8a8b-ff5e54a2a25c",
+      "title": "Amazon Redshiftのクロスリージョンスナップショット自動コピーによるデータウェアハウスのDR保護",
+      "services": [
+        "Amazon Redshift",
+        "AWS KMS"
+      ],
+      "question_type": "single",
+      "file_name": "3fdca49d-c787-45ef-8a8b-ff5e54a2a25c.json"
+    },
+    {
       "id": "548764a1-45b9-4a1a-a277-95be0fb9ded4",
       "title": "Amazon DynamoDB グローバルテーブルを活用したマルチサイトActive/Active型DRアーキテクチャ",
       "services": [
@@ -80,6 +112,25 @@
       "file_name": "6e1f0112-d380-4fbb-8784-1b19c2091260.json"
     },
     {
+      "id": "8ac76fe4-de27-48b0-a563-dc706c9cbf72",
+      "title": "AWS CloudFormation StackSetsによるマルチリージョンDRインフラの一貫した自動プロビジョニング",
+      "services": [
+        "AWS CloudFormation",
+        "AWS Organizations"
+      ],
+      "question_type": "single",
+      "file_name": "8ac76fe4-de27-48b0-a563-dc706c9cbf72.json"
+    },
+    {
+      "id": "8f35080b-7f12-4df1-8df6-eba81e1c46b8",
+      "title": "Amazon EFSレプリケーションによる完全マネージドなリージョン間ファイルシステムDR保護",
+      "services": [
+        "Amazon EFS"
+      ],
+      "question_type": "single",
+      "file_name": "8f35080b-7f12-4df1-8df6-eba81e1c46b8.json"
+    },
+    {
       "id": "948031ef-9978-43f3-96df-61ee0ff7ae27",
       "title": "AWSにおける4大ディザスタリカバリ（DR）戦略の特徴とRTO/RPO・コストのトレードオフ評価",
       "services": [
@@ -90,6 +141,28 @@
       ],
       "question_type": "multiple",
       "file_name": "948031ef-9978-43f3-96df-61ee0ff7ae27.json"
+    },
+    {
+      "id": "9d054db7-b3bd-4293-a2b4-6f6df964994b",
+      "title": "AWS DataSyncを活用したオンプレミスNASからAWSクラウドへの定期的な自動DRデータ同期",
+      "services": [
+        "AWS DataSync",
+        "Amazon EFS",
+        "Amazon S3",
+        "AWS Direct Connect"
+      ],
+      "question_type": "single",
+      "file_name": "9d054db7-b3bd-4293-a2b4-6f6df964994b.json"
+    },
+    {
+      "id": "a1f8186e-2cd7-48c4-8877-ea7c7da3a3e3",
+      "title": "Amazon Route 53 Application Recovery Controller (ARC) による安全なマルチリージョンフェイルオーバー制御",
+      "services": [
+        "Amazon Route 53 Application Recovery Controller",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "a1f8186e-2cd7-48c4-8877-ea7c7da3a3e3.json"
     },
     {
       "id": "af019216-f9c5-4c18-a929-f30e7f8506ec",
@@ -123,6 +196,15 @@
       ],
       "question_type": "single",
       "file_name": "cdcf17f0-c6a2-4a41-aab2-f196dfcdfcaf.json"
+    },
+    {
+      "id": "ead4f1a1-c0fb-41c9-9ee9-160630014b50",
+      "title": "Amazon OpenSearch Serviceクロスクラスターレプリケーションによる検索インデックスのマルチリージョンDR",
+      "services": [
+        "Amazon OpenSearch Service"
+      ],
+      "question_type": "single",
+      "file_name": "ead4f1a1-c0fb-41c9-9ee9-160630014b50.json"
     },
     {
       "id": "f950e79c-a906-47fd-9369-b5d4d4ff543a",
