@@ -1,0 +1,46 @@
+{
+  "id": "d0bc664e-87fe-4c44-b2d1-9e3c493ea55d",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "グローバルハイブリッドワークロードにおけるエッジアクセラレーションと低遅延ルーティングの最適選定（2つ選択）",
+  "services": [
+    "Amazon CloudFront",
+    "AWS Global Accelerator",
+    "Application Load Balancer",
+    "Network Load Balancer"
+  ],
+  "question_type": "multiple",
+  "question_text": "あるグローバル企業が、世界各地のクライアント端末（モバイルアプリおよびIoTデバイス）に向けて、2種類の異なるサービスをAWS上で提供しています：\n\n1. **サービス1（静的および動的HTTP/HTTPS Web API）**: 世界中のユーザーがブラウザやアプリからアクセスし、画像のキャッシュ配信やJSON REST APIの応答速度（TTFB）を劇的に短縮したい。\n2. **サービス2（非HTTPのリアルタイムゲーム・IoT通信）**: 独自のUDPプロトコルを使用し、各デバイスにファイアウォール許可用の「固定パブリックIPアドレス」を提供しつつ、パケットロスを最小化して超低レイテンシで最も近いAWSリージョンへルーティングしたい。\n\nこれらの2つのサービス要件に対して、それぞれ最も高いパフォーマンスを提供する最適なAWSエッジネットワーキングサービスはどれですか？（2つ選択してください）",
+  "options": [
+    {
+      "id": "A",
+      "text": "サービス1に対して、エッジでの静的コンテンツキャッシング、TLS終端、およびオリジンへのTCP接続維持を行うAmazon CloudFrontを採用する。",
+      "explanation": "Amazon CloudFrontはHTTP/HTTPSトラフィックに特化したグローバルコンテンツ配信ネットワーク（CDN）であり、静的アセットのローカルエッジキャッシュ、動的APIリクエストのエッジ終端とAWSバックボーン経由のオリジン高速ルーティング（接続再利用）により、Web/APIのレイテンシとTTFBを最短化します。"
+    },
+    {
+      "id": "B",
+      "text": "サービス2に対して、2つの静的Anycast IPアドレスを提供し、AWSグローバルネットワークを活用してUDP通信を高速ルーティングするAWS Global Acceleratorを採用する。",
+      "explanation": "AWS Global AcceleratorはTCPおよびUDP（非HTTPを含む）の任意のIPトラフィックに対応し、クライアント向けに2つの静的Anycast IPv4アドレスを提供します。エッジで取り込んだUDPパケットをAWSの超高速プライベートバックボーン経由で最短ルーティングするため、パケットロスとジッターを最小限に抑えられます。"
+    },
+    {
+      "id": "C",
+      "text": "サービス1に対して、Amazon Route 53の複数値回答ルーティングのみを適用して直接EC2インスタンス群へ接続させる。",
+      "explanation": "Route 53単体ではエッジキャッシングやTCP接続最適化（動的アクセラレーション）は行えず、世界中からのHTTPリクエストの遅延を大幅に削減することはできません。"
+    },
+    {
+      "id": "D",
+      "text": "サービス2に対して、Amazon CloudFrontを配置し、Origin Protocol PolicyをUDPに設定する。",
+      "explanation": "Amazon CloudFrontはHTTP/HTTPSおよびWebSocketのみをサポートしており、純粋な非HTTP UDPプロトコルのルーティングには対応していません。"
+    },
+    {
+      "id": "E",
+      "text": "サービス1およびサービス2の両方に対して、各リージョンにNAT Gatewayを配置してインターネット経由で通信させる。",
+      "explanation": "NAT Gatewayはプライベートサブネットからのアウトバウンド通信用であり、インバウンドのクライアント向けグローバルアクセラレーション機能は持ちません。"
+    }
+  ],
+  "correct_answers": [
+    "A",
+    "B"
+  ],
+  "explanation": "AWSにおけるグローバルアクセラレーションの使い分け原則として、「HTTP/HTTPSベースでキャッシュや動的Web最適化が必要なワークロード」にはAmazon CloudFrontが最適であり、「非HTTP（UDPやTCP）、固定IPアドレス（Anycast IP）が必須なゲーム・IoTワークロード」にはAWS Global Acceleratorが最適です。両者を適切に組み合わせることで、多様なプロトコルのパフォーマンスを最大化できます。"
+}

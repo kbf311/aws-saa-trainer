@@ -1,8 +1,19 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "ネットワークとコンテンツ配信",
-  "updated_at": "2026-09-25T07:58:26Z",
+  "updated_at": "2026-09-25T08:50:05Z",
   "questions": [
+    {
+      "id": "0010449b-66ec-44dc-99fe-f1a248be1fbe",
+      "title": "Application Load Balancerにおけるクロスゾーン負荷分散によるトラフィックの均等分散と特定AZ過負荷の解消",
+      "services": [
+        "Application Load Balancer",
+        "Amazon EC2",
+        "Elastic Load Balancing"
+      ],
+      "question_type": "single",
+      "file_name": "0010449b-66ec-44dc-99fe-f1a248be1fbe.json"
+    },
     {
       "id": "0ddf03b4-a774-4edb-be1d-78caf3c0c5b8",
       "title": "Amazon CloudFront オリジンシールド（Origin Shield）による中央集中キャッシュとオリジン負荷極小化",
@@ -14,6 +25,27 @@
       "file_name": "0ddf03b4-a774-4edb-be1d-78caf3c0c5b8.json"
     },
     {
+      "id": "1683629e-48e7-4635-a666-d79bf2ecb4aa",
+      "title": "Amazon Route 53 複数値回答ルーティングによるDNSベースの健全ノード負荷分散",
+      "services": [
+        "Amazon Route 53",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "1683629e-48e7-4635-a666-d79bf2ecb4aa.json"
+    },
+    {
+      "id": "1ae61000-61c8-4305-8e6e-c3e0f3694b7b",
+      "title": "AWS Transit Gateway マルチキャストによる複数VPCへの高スループット市場データ同時配信",
+      "services": [
+        "AWS Transit Gateway",
+        "Amazon VPC",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "1ae61000-61c8-4305-8e6e-c3e0f3694b7b.json"
+    },
+    {
       "id": "1c173de1-0f3e-430d-8c09-9c248d019799",
       "title": "Amazon CloudFrontを活用した動的WebアプリケーションのTTFB短縮（複数選択）",
       "services": [
@@ -22,6 +54,16 @@
       ],
       "question_type": "multiple",
       "file_name": "1c173de1-0f3e-430d-8c09-9c248d019799.json"
+    },
+    {
+      "id": "25398463-de24-4187-a08c-e682abe2c83d",
+      "title": "Amazon CloudFront 署名付きCookieによる複数メディアストリーミングアセットの高速認証と安全な配信",
+      "services": [
+        "Amazon CloudFront",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "25398463-de24-4187-a08c-e682abe2c83d.json"
     },
     {
       "id": "26da0e98-ede2-4228-8e64-590e5fb0525e",
@@ -55,6 +97,16 @@
       "file_name": "2e017274-1eaf-4c10-92bd-4771d890916a.json"
     },
     {
+      "id": "337ce71d-bb21-4283-9713-9ea4f4f998c0",
+      "title": "大規模データ移行におけるVPCピアリングとTransit Gatewayのパフォーマンス・帯域特性比較",
+      "services": [
+        "Amazon VPC",
+        "AWS Transit Gateway"
+      ],
+      "question_type": "single",
+      "file_name": "337ce71d-bb21-4283-9713-9ea4f4f998c0.json"
+    },
+    {
       "id": "66ea7aaa-fa73-408b-91d2-848ed0c62737",
       "title": "Network Load Balancer (NLB) による突発的超高トラフィックと超低遅延TCP通信の処理",
       "services": [
@@ -86,6 +138,17 @@
       "file_name": "7a65dd3c-b0ee-4db9-9e23-5d450108d59f.json"
     },
     {
+      "id": "800a8047-a146-4104-b1af-2c5a122c0ca8",
+      "title": "Amazon Route 53 レイテンシールーティングによるグローバルユーザーのネットワーク遅延最小化",
+      "services": [
+        "Amazon Route 53",
+        "Application Load Balancer",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "800a8047-a146-4104-b1af-2c5a122c0ca8.json"
+    },
+    {
       "id": "83918ec8-cd3e-4c69-8a1e-09532e9b9ac5",
       "title": "AWS Direct Connectのリンクアグリゲーショングループ（LAG）による専用線帯域のスケーリング",
       "services": [
@@ -106,6 +169,17 @@
       "file_name": "960826a9-6609-4469-848a-ed5437964c6f.json"
     },
     {
+      "id": "9f770a39-37f1-42dd-af35-6132c3bc1ef2",
+      "title": "Amazon CloudFront フィールドレベル暗号化による機密POSTデータの安全かつ高速なエンドツーエンド保護",
+      "services": [
+        "Amazon CloudFront",
+        "Application Load Balancer",
+        "AWS KMS"
+      ],
+      "question_type": "single",
+      "file_name": "9f770a39-37f1-42dd-af35-6132c3bc1ef2.json"
+    },
+    {
       "id": "a15bbaa9-0db3-4885-94a2-dc648939af2e",
       "title": "CloudFront FunctionsとLambda@Edgeの特性比較によるエッジURLリライトの超低遅延化",
       "services": [
@@ -115,6 +189,16 @@
       ],
       "question_type": "single",
       "file_name": "a15bbaa9-0db3-4885-94a2-dc648939af2e.json"
+    },
+    {
+      "id": "ad354d3c-00b6-4f79-ad7e-a48a49ca8fb0",
+      "title": "AWS Direct Connect MACsecによるラインレート（ワイヤスピード）暗号化と超高スループット通信",
+      "services": [
+        "AWS Direct Connect",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "ad354d3c-00b6-4f79-ad7e-a48a49ca8fb0.json"
     },
     {
       "id": "add5554e-8dd8-4149-b202-9d92934656e6",
@@ -134,6 +218,16 @@
       ],
       "question_type": "single",
       "file_name": "b1b270dd-1a5e-4e43-b9c5-12538dd1c362.json"
+    },
+    {
+      "id": "b66af061-c277-43f7-913c-b51a2999c013",
+      "title": "Amazon CloudFrontの自動圧縮（BrotliおよびGzip）による転送ペイロード削減と初回レンダリング高速化",
+      "services": [
+        "Amazon CloudFront",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "b66af061-c277-43f7-913c-b51a2999c013.json"
     },
     {
       "id": "bdbd0b2d-c403-4797-aaa6-10a270e92af6",
@@ -167,6 +261,18 @@
       ],
       "question_type": "single",
       "file_name": "c2749448-1f6f-4402-8153-e310e923696c.json"
+    },
+    {
+      "id": "d0bc664e-87fe-4c44-b2d1-9e3c493ea55d",
+      "title": "グローバルハイブリッドワークロードにおけるエッジアクセラレーションと低遅延ルーティングの最適選定（2つ選択）",
+      "services": [
+        "Amazon CloudFront",
+        "AWS Global Accelerator",
+        "Application Load Balancer",
+        "Network Load Balancer"
+      ],
+      "question_type": "multiple",
+      "file_name": "d0bc664e-87fe-4c44-b2d1-9e3c493ea55d.json"
     },
     {
       "id": "d4b5a5af-514c-4e60-8078-539c66d4f796",

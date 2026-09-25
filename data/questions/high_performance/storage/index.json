@@ -1,7 +1,7 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "高性能ストレージ",
-  "updated_at": "2026-09-25T07:58:26Z",
+  "updated_at": "2026-09-25T08:50:05Z",
   "questions": [
     {
       "id": "00130567-ffbc-4f17-a023-53584eedba82",
@@ -42,6 +42,16 @@
       "file_name": "1bf1f38f-d5ba-431a-9b1b-ad821786eb9f.json"
     },
     {
+      "id": "1da94707-5859-4060-8281-1684cd3b9403",
+      "title": "複数Amazon EBSボリュームによるRAID 0ストライピング構成とI/O性能の最大化",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "1da94707-5859-4060-8281-1684cd3b9403.json"
+    },
+    {
       "id": "2002336e-f988-43ce-8298-7afd0a65f84a",
       "title": "Amazon EBS gp3ボリュームによるストレージ容量と独立したIOPS・スループットの性能拡張",
       "services": [
@@ -63,6 +73,27 @@
       "file_name": "21c32ea5-6043-456b-afb8-c3a27717751b.json"
     },
     {
+      "id": "2d602e11-03b0-48df-84e7-937fedb2c499",
+      "title": "EC2インスタンスストア（NVMe SSD）による超高速一時データ処理と揮発性への対応",
+      "services": [
+        "Amazon EC2",
+        "Amazon EBS",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "2d602e11-03b0-48df-84e7-937fedb2c499.json"
+    },
+    {
+      "id": "3661192e-0e99-4f80-9225-c7022fa26264",
+      "title": "Amazon FSx for Lustreの永続的 (Persistent) ファイルシステムとデータリポジトリ自動同期",
+      "services": [
+        "Amazon FSx for Lustre",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "3661192e-0e99-4f80-9225-c7022fa26264.json"
+    },
+    {
       "id": "444c3d92-86ed-435f-9319-7d7e9a1291aa",
       "title": "Amazon S3におけるプレフィックス分散によるリクエストスループットのスケーリング",
       "services": [
@@ -72,6 +103,16 @@
       "file_name": "444c3d92-86ed-435f-9319-7d7e9a1291aa.json"
     },
     {
+      "id": "4af4c44c-8e6d-4335-81e7-79278e47bc74",
+      "title": "Amazon S3 Selectによる大容量オブジェクトのインプレイスフィルタリングと転送性能最適化",
+      "services": [
+        "Amazon S3",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "4af4c44c-8e6d-4335-81e7-79278e47bc74.json"
+    },
+    {
       "id": "4e3a6be7-d7dd-4118-b222-73ce029d2d12",
       "title": "Amazon FSx for OpenZFSによる数万〜数十万IOPSの超低遅延共有ファイルストレージ",
       "services": [
@@ -79,6 +120,16 @@
       ],
       "question_type": "single",
       "file_name": "4e3a6be7-d7dd-4118-b222-73ce029d2d12.json"
+    },
+    {
+      "id": "5356f2ef-16c4-40fb-8a6b-ef856dc9cb21",
+      "title": "Amazon S3 Object Lambdaによるオンザフライのデータ変換とストレージ冗長化の排除",
+      "services": [
+        "Amazon S3",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "5356f2ef-16c4-40fb-8a6b-ef856dc9cb21.json"
     },
     {
       "id": "58e7f00f-3550-49bf-8eba-bd8ba157ccf2",
@@ -99,6 +150,27 @@
       ],
       "question_type": "single",
       "file_name": "5a644309-07ad-4210-9913-c86e58e46fbf.json"
+    },
+    {
+      "id": "603c0bd5-75a7-442f-8fcc-f4a3f6725e4c",
+      "title": "Amazon EBS Elastic Volumesによるオンラインでのボリュームタイプ変更と性能拡張",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "603c0bd5-75a7-442f-8fcc-f4a3f6725e4c.json"
+    },
+    {
+      "id": "72f2b296-d6c1-4f5b-8d19-921b56c6b508",
+      "title": "AWS DataSyncを活用したオンプレミスNFSからAmazon EFSへの高速並列データ移行",
+      "services": [
+        "AWS DataSync",
+        "Amazon EFS",
+        "AWS Direct Connect"
+      ],
+      "question_type": "single",
+      "file_name": "72f2b296-d6c1-4f5b-8d19-921b56c6b508.json"
     },
     {
       "id": "a3051368-c3d4-442b-b692-1b4d1b74c516",
@@ -130,6 +202,38 @@
       ],
       "question_type": "single",
       "file_name": "ac2aa31c-4a69-4b4e-a9ab-7e1146d757bf.json"
+    },
+    {
+      "id": "adeb79be-d1a1-4548-ab09-2b766f2fb9aa",
+      "title": "Amazon EBS 高速スナップショット復元 (FSR) による初期アクセス時のI/Oレイテンシ解消",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "adeb79be-d1a1-4548-ab09-2b766f2fb9aa.json"
+    },
+    {
+      "id": "b4718375-3b4b-46d3-a730-5de174c78800",
+      "title": "Amazon FSx for Windows File Serverにおけるスループットキャパシティの動的スケーリング",
+      "services": [
+        "Amazon FSx for Windows File Server",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "b4718375-3b4b-46d3-a730-5de174c78800.json"
+    },
+    {
+      "id": "b76d7f06-ca20-4b5b-9483-8706af967230",
+      "title": "大規模分散機械学習ワークロードにおける多層ストレージアーキテクチャの選定（2つ選択）",
+      "services": [
+        "Amazon S3",
+        "Amazon FSx for Lustre",
+        "Amazon EC2",
+        "Amazon EBS"
+      ],
+      "question_type": "multiple",
+      "file_name": "b76d7f06-ca20-4b5b-9483-8706af967230.json"
     },
     {
       "id": "c5547115-ea03-4be4-bb95-61cbaaf8b2ca",

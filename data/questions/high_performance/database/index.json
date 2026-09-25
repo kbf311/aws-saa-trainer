@@ -1,7 +1,7 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "データベースとキャッシング",
-  "updated_at": "2026-09-25T07:58:26Z",
+  "updated_at": "2026-09-25T08:50:05Z",
   "questions": [
     {
       "id": "115f8f8f-067e-4165-bef1-ece4ce28fce0",
@@ -13,6 +13,26 @@
       "file_name": "115f8f8f-067e-4165-bef1-ece4ce28fce0.json"
     },
     {
+      "id": "123808dc-a62e-4959-aaf6-6e3993eca13a",
+      "title": "Amazon Aurora カスタムエンドポイントによる重い分析ワークロードとWeb読み取りトラフィックの完全分離",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "123808dc-a62e-4959-aaf6-6e3993eca13a.json"
+    },
+    {
+      "id": "190c9941-5ed5-4b29-966b-7da715c17099",
+      "title": "Amazon Redshift Serverlessによる予測不能な分析ワークロードの自動キャパシティ調整と高速化",
+      "services": [
+        "Amazon Redshift",
+        "Amazon Redshift Serverless"
+      ],
+      "question_type": "single",
+      "file_name": "190c9941-5ed5-4b29-966b-7da715c17099.json"
+    },
+    {
       "id": "1b93f146-d593-4f6b-a8dd-339827e36479",
       "title": "Amazon Aurora パ行クエリ（Parallel Query）による大規模集計・分析クエリの高速化",
       "services": [
@@ -20,6 +40,16 @@
       ],
       "question_type": "single",
       "file_name": "1b93f146-d593-4f6b-a8dd-339827e36479.json"
+    },
+    {
+      "id": "2362cad7-df6b-4741-ae87-30ffe6d74b03",
+      "title": "Amazon Aurora クラスターキャッシュ管理 (CCM) によるフェイルオーバー直後のキャッシュ維持と性能低下防止",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "2362cad7-df6b-4741-ae87-30ffe6d74b03.json"
     },
     {
       "id": "2a90e67f-ff0c-49a7-99f2-dce761bd2bd0",
@@ -30,6 +60,17 @@
       ],
       "question_type": "single",
       "file_name": "2a90e67f-ff0c-49a7-99f2-dce761bd2bd0.json"
+    },
+    {
+      "id": "2c4d6e41-b0cc-418d-a3b6-839a9a3dd29c",
+      "title": "Amazon RDS Performance Insightsによるデータベース負荷（AAS）の可視化と高負荷クエリの特定",
+      "services": [
+        "Amazon RDS",
+        "Amazon Aurora",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "2c4d6e41-b0cc-418d-a3b6-839a9a3dd29c.json"
     },
     {
       "id": "38624700-f3f5-46bd-9645-49b7e124685f",
@@ -121,6 +162,37 @@
       "file_name": "8733c26e-89f5-4fc7-a6dc-6de754c316e5.json"
     },
     {
+      "id": "8b77d7d0-c5f8-48f0-ad6c-75d34bbe6d07",
+      "title": "Amazon Keyspaces (for Apache Cassandra) によるサーバーレスな大規模ワイドカラムNoSQLの運用と高速スケール",
+      "services": [
+        "Amazon Keyspaces",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "8b77d7d0-c5f8-48f0-ad6c-75d34bbe6d07.json"
+    },
+    {
+      "id": "912539bd-9702-4ee2-ba9e-cc0621d3ece4",
+      "title": "Amazon DynamoDB トランザクション (TransactWriteItems) による複数アイテムの原子的更新と整合性確保",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "912539bd-9702-4ee2-ba9e-cc0621d3ece4.json"
+    },
+    {
+      "id": "94aafa54-ac02-4105-8bbe-cdcfc6e52546",
+      "title": "高トラフィックECサイトにおける多層キャッシングとNoSQL/RDB適材適所アーキテクチャ設計（2つ選択）",
+      "services": [
+        "Amazon ElastiCache",
+        "Amazon DynamoDB",
+        "Amazon Aurora",
+        "Amazon CloudFront"
+      ],
+      "question_type": "multiple",
+      "file_name": "94aafa54-ac02-4105-8bbe-cdcfc6e52546.json"
+    },
+    {
       "id": "96f04cc6-a80c-425f-93f7-d15f6f599128",
       "title": "Amazon ElastiCacheにおける書き込みスルー（Write-Through）とTTLによるキャッシュ整合性と読み取り性能の両立",
       "services": [
@@ -167,6 +239,35 @@
       ],
       "question_type": "single",
       "file_name": "ce8a5e17-f1b5-4d6b-b8db-9d8b91cc945e.json"
+    },
+    {
+      "id": "d04e43ea-651f-447a-8732-cbe4ba1aaaa9",
+      "title": "Amazon RDS クロスリージョンリードレプリカによる海外ユーザー向け読み取りレイテンシの最小化",
+      "services": [
+        "Amazon RDS",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "d04e43ea-651f-447a-8732-cbe4ba1aaaa9.json"
+    },
+    {
+      "id": "d593ba8c-0d3b-4511-a44a-7a0e6c61fa87",
+      "title": "Amazon DocumentDBによる大規模JSONドキュメントワークロードのスケーラブルな高速検索",
+      "services": [
+        "Amazon DocumentDB",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "d593ba8c-0d3b-4511-a44a-7a0e6c61fa87.json"
+    },
+    {
+      "id": "dc390a94-801a-413b-a45a-c2a89ef1cd91",
+      "title": "Amazon ElastiCache for Redis クラスターモード有効化による書き込み負荷の水平スケーリング（シャーディング）",
+      "services": [
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "dc390a94-801a-413b-a45a-c2a89ef1cd91.json"
     },
     {
       "id": "defc2bcf-fc25-4776-9de9-b684f7a89be9",

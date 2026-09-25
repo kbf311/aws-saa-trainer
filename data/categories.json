@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-25T07:58:26Z",
-  "total_questions": 300,
+  "updated_at": "2026-09-25T08:50:05Z",
+  "total_questions": 330,
   "categories": [
     {
       "major_id": "resilient",
@@ -40,7 +40,7 @@
       "minor_id": "storage",
       "minor_name": "高性能ストレージ",
       "dir_path": "questions/high_performance/storage",
-      "question_count": 20
+      "question_count": 30
     },
     {
       "major_id": "high_performance",
@@ -48,7 +48,7 @@
       "minor_id": "database",
       "minor_name": "データベースとキャッシング",
       "dir_path": "questions/high_performance/database",
-      "question_count": 20
+      "question_count": 30
     },
     {
       "major_id": "high_performance",
@@ -56,7 +56,7 @@
       "minor_id": "networking",
       "minor_name": "ネットワークとコンテンツ配信",
       "dir_path": "questions/high_performance/networking",
-      "question_count": 20
+      "question_count": 30
     },
     {
       "major_id": "security",
