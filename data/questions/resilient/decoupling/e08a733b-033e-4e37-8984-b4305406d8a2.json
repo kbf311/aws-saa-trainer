@@ -1,0 +1,39 @@
+{
+  "id": "e08a733b-033e-4e37-8984-b4305406d8a2",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "スケーラビリティと疎結合",
+  "title": "Amazon EventBridge Pipes によるDynamoDB Streamsと後続処理のポイントツーポイント連携・フィルタリングのコードレス化",
+  "services": [
+    "Amazon EventBridge",
+    "Amazon DynamoDB",
+    "AWS Step Functions"
+  ],
+  "question_type": "single",
+  "question_text": "あるECプラットフォームでは、注文ステータスを管理する Amazon DynamoDB テーブルの変更履歴（DynamoDB Streams）を監視し、「ステータスがキャンセルに変更された注文」のみを抽出して、AWS Step Functions の注文キャンセル・返金ワークフローをトリガーする仕組みを構築したいと考えています。これまで開発チームは、DynamoDB Streams からイベントをポーリングして不要なイベントを除外し、データを整形して Step Functions を呼び出すカスタムの AWS Lambda 関数を実装・管理していましたが、コードの保守負担やコールドスタートによるレイテンシーを解消したいと考えています。\n\nカスタムコードの作成や保守を不要にし、最小の運用管理でこの連携を実現する最も適切なサービス機能はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon EventBridge Pipes を作成し、ソースに DynamoDB Streams、イベントフィルターにキャンセルステータス条件を指定し、ターゲットとして Step Functions ステートマシンを直接設定する。",
+      "explanation": "**Amazon EventBridge Pipes の活用**: EventBridge Pipes は、イベントプロデューサー（ソース: DynamoDB Streams、SQS、Kinesisなど）とコンシューマー（ターゲット: Step Functions、SQS、API Destinationsなど）間のポイントツーポイント統合をコードレスで実現します。組み込みのフィルタリング機能や入力トランスフォーマー、エンリッチメント（LambdaやAPI呼び出し）をパイプライン内で宣言的に定義できるため、糊付け用のLambda関数が不要になり、運用負荷とレイテンシーを最小化できます。"
+    },
+    {
+      "id": "B",
+      "text": "DynamoDB テーブルの TTL（Time to Live）機能を有効にし、キャンセル時にアイテムを期限切れにして削除イベントを S3 バケット通知経由で Step Functions に送信する。",
+      "explanation": "**TTLとS3通知**: DynamoDBのTTLは有効期限切れによる自動削除を行う機能であり、削除が実行されるタイミングは数日遅延する場合があるため、即座の返金・キャンセル処理のトリガーとしては使用できません。"
+    },
+    {
+      "id": "C",
+      "text": "DynamoDB Streams の代わりに Amazon SNS トピックを作成し、DynamoDB テーブルから直接SNSトピックへメッセージをプッシュするトリガーを設定する。",
+      "explanation": "**DynamoDBからSNSへの直接プッシュ**: DynamoDBテーブルにはSNSトピックへ直接イベントをプッシュ配信するネイティブ機能は存在せず、DynamoDB StreamsまたはEventBridge統合が必要です。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Glue のストリーミング ETL ジョブを常時稼働させ、DynamoDB Streams のデータを読み取ってフィルタリングし、Step Functions を呼び出す。",
+      "explanation": "**AWS Glue ストリーミング ETL**: Glue ストリーミングジョブは大規模なビッグデータ変換向けであり、単一イベントに基づくステートマシン起動に対しては過剰なインフラコストと起動遅延が発生します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon EventBridge Pipes を利用したサーバーレス統合の簡素化に関する設問です。従来、DynamoDB Streams や SQS などのストリーミング/キューサービスから Step Functions などのターゲットへデータを連携する際、フィルタリングやペイロード変換のためにカスタム Lambda コードを記述して「グルーコード（糊付けコード）」として運用する必要がありました。EventBridge Pipes を採用することで、ソース、フィルター、エンリッチメント、ターゲットを統合コンポーネントとして宣言的に設定可能となり、コードレスで高信頼なポイントツーポイント疎結合アーキテクチャが実現できます。"
+}

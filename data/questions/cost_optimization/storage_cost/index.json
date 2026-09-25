@@ -1,7 +1,7 @@
 {
   "major": "コスト最適化アーキテクチャの設計",
   "minor": "ストレージコスト最適化",
-  "updated_at": "2026-09-24T22:17:15Z",
+  "updated_at": "2026-09-25T07:24:43Z",
   "questions": [
     {
       "id": "073b221b-d515-44fd-aadc-ef7c4709f927",
@@ -168,16 +168,6 @@
       ],
       "question_type": "single",
       "file_name": "dd88fcff-4900-498e-9ede-186e916663c4.json"
-    },
-    {
-      "id": "dee413b1-f6b3-47c2-b703-bf86e9902ad5",
-      "title": "規制監査ログの長期保管におけるS3 Glacier Deep Archiveの選定",
-      "services": [
-        "Amazon S3",
-        "Amazon S3 Glacier"
-      ],
-      "question_type": "single",
-      "file_name": "dee413b1-f6b3-47c2-b703-bf86e9902ad5.json"
     },
     {
       "id": "e8a54e03-916f-4846-a5ea-58b9660a2778",

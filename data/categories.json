@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-24T22:17:15Z",
-  "total_questions": 260,
+  "updated_at": "2026-09-25T07:24:43Z",
+  "total_questions": 290,
   "categories": [
     {
       "major_id": "resilient",
@@ -8,7 +8,7 @@
       "minor_id": "high_availability",
       "minor_name": "高可用性と耐障害性",
       "dir_path": "questions/resilient/high_availability",
-      "question_count": 20
+      "question_count": 30
     },
     {
       "major_id": "resilient",
@@ -16,7 +16,7 @@
       "minor_id": "decoupling",
       "minor_name": "スケーラビリティと疎結合",
       "dir_path": "questions/resilient/decoupling",
-      "question_count": 20
+      "question_count": 30
     },
     {
       "major_id": "resilient",
@@ -24,7 +24,7 @@
       "minor_id": "disaster_recovery",
       "minor_name": "ディザスタリカバリ",
       "dir_path": "questions/resilient/disaster_recovery",
-      "question_count": 20
+      "question_count": 30
     },
     {
       "major_id": "high_performance",

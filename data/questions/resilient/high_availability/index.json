@@ -1,7 +1,7 @@
 {
   "major": "レジリエント・アーキテクチャの設計",
   "minor": "高可用性と耐障害性",
-  "updated_at": "2026-09-24T22:17:15Z",
+  "updated_at": "2026-09-25T07:24:43Z",
   "questions": [
     {
       "id": "0c514b21-6de0-4071-b95e-58baf14716e9",
@@ -12,6 +12,16 @@
       ],
       "question_type": "single",
       "file_name": "0c514b21-6de0-4071-b95e-58baf14716e9.json"
+    },
+    {
+      "id": "14add5a7-771e-4016-b46a-303a9af8de95",
+      "title": "Amazon DynamoDB グローバルテーブルを活用したマルチリージョン・アクティブ/アクティブ高可用性アーキテクチャ",
+      "services": [
+        "Amazon DynamoDB",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "14add5a7-771e-4016-b46a-303a9af8de95.json"
     },
     {
       "id": "1abf833a-052e-4555-807f-ea8e18603e95",
@@ -57,6 +67,17 @@
       "file_name": "3c89ba5d-e850-4446-939f-f72c56a6c4c4.json"
     },
     {
+      "id": "3d6991d9-044e-4480-8bab-4869f649352d",
+      "title": "Amazon Route 53 位置情報ルーティングとヘルスチェックによる地域特化型フォールバック高可用性設計",
+      "services": [
+        "Amazon Route 53",
+        "Application Load Balancer",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "3d6991d9-044e-4480-8bab-4869f649352d.json"
+    },
+    {
       "id": "4043324d-351d-456b-8ca8-4d850e4130d7",
       "title": "Amazon Route 53 複数値回答ルーティングによるDNSベースの耐障害性とロードバランシング",
       "services": [
@@ -98,6 +119,27 @@
       "file_name": "5508597b-af64-4a50-a637-e1f1b6bb1fa4.json"
     },
     {
+      "id": "59378195-afe3-4df9-9079-b14f5b431fe0",
+      "title": "Amazon RDS リードレプリカのマルチAZ化による分析ワークロードの高可用性担保",
+      "services": [
+        "Amazon RDS",
+        "Amazon VPC"
+      ],
+      "question_type": "single",
+      "file_name": "59378195-afe3-4df9-9079-b14f5b431fe0.json"
+    },
+    {
+      "id": "5c1bf398-5d00-4d33-9979-8c4cea118971",
+      "title": "AWS Global Accelerator と Network Load Balancer による固定IPと高速フェイルオーバーを備えた高可用性UDPアーキテクチャ",
+      "services": [
+        "AWS Global Accelerator",
+        "Network Load Balancer",
+        "Amazon EC2"
+      ],
+      "question_type": "multiple",
+      "file_name": "5c1bf398-5d00-4d33-9979-8c4cea118971.json"
+    },
+    {
       "id": "5e44641b-5883-43c2-9eda-19d3216b51c3",
       "title": "AWS Global Acceleratorを活用したクライアントDNSキャッシュに依存しない即時フェイルオーバー",
       "services": [
@@ -107,6 +149,17 @@
       ],
       "question_type": "single",
       "file_name": "5e44641b-5883-43c2-9eda-19d3216b51c3.json"
+    },
+    {
+      "id": "5e55ca44-dd87-4648-aac8-73c1cd5642d7",
+      "title": "Amazon CloudFront オリジングループを活用したWeb層の自動オリジンフェイルオーバー",
+      "services": [
+        "Amazon CloudFront",
+        "Application Load Balancer",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "5e55ca44-dd87-4648-aac8-73c1cd5642d7.json"
     },
     {
       "id": "5f7b47e1-f21e-486a-b664-23e830a894b3",
@@ -120,6 +173,17 @@
       "file_name": "5f7b47e1-f21e-486a-b664-23e830a894b3.json"
     },
     {
+      "id": "698e14e6-325f-494f-be71-2711feb1b05e",
+      "title": "Application Load Balancer 加重ターゲットグループを活用した無停止カナリアリリースとロールバック設計",
+      "services": [
+        "Application Load Balancer",
+        "Amazon EC2",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "698e14e6-325f-494f-be71-2711feb1b05e.json"
+    },
+    {
       "id": "7b7be414-c9e1-408b-b9fe-ccc277e0ef5e",
       "title": "Amazon Route 53 レイテンシールーティングとヘルスチェックによるマルチリージョン高可用性",
       "services": [
@@ -129,6 +193,16 @@
       ],
       "question_type": "single",
       "file_name": "7b7be414-c9e1-408b-b9fe-ccc277e0ef5e.json"
+    },
+    {
+      "id": "805c9369-5078-44e2-8f24-ce005a1c1efa",
+      "title": "EC2 Auto Scaling カスタム終了ポリシーによるマルチAZ耐障害性と旧バージョンインスタンスの計画的終了",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "805c9369-5078-44e2-8f24-ce005a1c1efa.json"
     },
     {
       "id": "8e68e823-29c7-48ec-9fca-d4f17c6dbb61",
@@ -150,6 +224,15 @@
       ],
       "question_type": "single",
       "file_name": "9619a0ae-f714-46b7-a847-55d24a81ed3c.json"
+    },
+    {
+      "id": "966575a4-1381-43a9-93a0-54b02ef55e20",
+      "title": "Amazon Aurora バックトラックを活用した論理障害からのインプレース高速巻き戻し復旧",
+      "services": [
+        "Amazon Aurora"
+      ],
+      "question_type": "single",
+      "file_name": "966575a4-1381-43a9-93a0-54b02ef55e20.json"
     },
     {
       "id": "aed3016a-9162-40bb-a7ab-e81df1b77a43",
@@ -192,6 +275,27 @@
       ],
       "question_type": "multiple",
       "file_name": "c2046d33-6659-43d0-84ee-cdf26b24cb30.json"
+    },
+    {
+      "id": "cc3e850f-22b9-4701-b172-b837b44627a0",
+      "title": "EC2 Auto Scaling ウォームプールを活用したブート時間の長いワークロードの迅速なスケールアウトと可用性維持",
+      "services": [
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2",
+        "Application Load Balancer"
+      ],
+      "question_type": "single",
+      "file_name": "cc3e850f-22b9-4701-b172-b837b44627a0.json"
+    },
+    {
+      "id": "f75475f9-404b-41cb-b243-05d6e3646ca8",
+      "title": "Amazon Aurora Global Database によるマルチリージョン高可用性と低遅延災害復旧",
+      "services": [
+        "Amazon Aurora",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "f75475f9-404b-41cb-b243-05d6e3646ca8.json"
     },
     {
       "id": "fc3ed036-1f72-4f37-84d7-986ae291bd08",

@@ -1,7 +1,7 @@
 {
   "major": "レジリエント・アーキテクチャの設計",
   "minor": "ディザスタリカバリ",
-  "updated_at": "2026-09-24T22:17:15Z",
+  "updated_at": "2026-09-25T07:24:43Z",
   "questions": [
     {
       "id": "0365662c-42c0-4e9c-bda0-5f0852e53423",
@@ -25,6 +25,15 @@
       ],
       "question_type": "single",
       "file_name": "03b05544-25f1-4220-9103-1852c5840ee6.json"
+    },
+    {
+      "id": "0514e999-7778-4b6d-879d-3860f8240ec3",
+      "title": "Amazon S3 双方向レプリケーション（双方向CRR）とレプリカ変更同期によるActive/Activeマルチリージョンデータ同期",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "0514e999-7778-4b6d-879d-3860f8240ec3.json"
     },
     {
       "id": "108f6a56-67cd-40d1-bd1d-2b248a3e5524",
@@ -60,17 +69,6 @@
       "file_name": "2eadd994-9a70-45ea-ba13-5c2d43b20dee.json"
     },
     {
-      "id": "36a9ec9a-eb61-4ca9-b587-a7a474437692",
-      "title": "AWS Elastic Disaster Recovery (AWS DRS) によるオンプレミスサーバーの低コストかつ継続的なDR保護",
-      "services": [
-        "AWS Elastic Disaster Recovery",
-        "Amazon EC2",
-        "Amazon EBS"
-      ],
-      "question_type": "single",
-      "file_name": "36a9ec9a-eb61-4ca9-b587-a7a474437692.json"
-    },
-    {
       "id": "39c6b74b-20dd-494e-aba1-209efc784588",
       "title": "EBSスナップショットの高速スナップショット復元（FSR）によるDRボリューム初期化遅延の解消",
       "services": [
@@ -102,6 +100,28 @@
       "file_name": "548764a1-45b9-4a1a-a277-95be0fb9ded4.json"
     },
     {
+      "id": "5e4c9be6-82f5-46e1-93c2-e45738e5c63d",
+      "title": "Amazon FSx for Windows File Server におけるDFS名前空間とAWS DataSyncを活用したマルチリージョンDR設計",
+      "services": [
+        "Amazon FSx",
+        "AWS DataSync",
+        "AWS Backup"
+      ],
+      "question_type": "single",
+      "file_name": "5e4c9be6-82f5-46e1-93c2-e45738e5c63d.json"
+    },
+    {
+      "id": "60fd99aa-af99-43dc-950f-5a8e74698249",
+      "title": "AWS Backup の復旧テスト（Restore Testing）と別アカウントへのクロスアカウントバックアップによるランサムウェア隔離保護",
+      "services": [
+        "AWS Backup",
+        "AWS Organizations",
+        "AWS KMS"
+      ],
+      "question_type": "single",
+      "file_name": "60fd99aa-af99-43dc-950f-5a8e74698249.json"
+    },
+    {
       "id": "6e1f0112-d380-4fbb-8784-1b19c2091260",
       "title": "Amazon S3 レプリケーションタイムコントロール (RTC) による予測可能なDRデータ同期とコンプライアンス遵守",
       "services": [
@@ -112,6 +132,17 @@
       "file_name": "6e1f0112-d380-4fbb-8784-1b19c2091260.json"
     },
     {
+      "id": "6ee24ef4-7ff1-49c5-b2fe-18e273eb728b",
+      "title": "Amazon Route 53 フェイルオーバールーティングとヘルスチェックによるマルチリージョン自動切り替えアーキテクチャ",
+      "services": [
+        "Amazon Route 53",
+        "Application Load Balancer",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "multiple",
+      "file_name": "6ee24ef4-7ff1-49c5-b2fe-18e273eb728b.json"
+    },
+    {
       "id": "8ac76fe4-de27-48b0-a563-dc706c9cbf72",
       "title": "AWS CloudFormation StackSetsによるマルチリージョンDRインフラの一貫した自動プロビジョニング",
       "services": [
@@ -120,6 +151,16 @@
       ],
       "question_type": "single",
       "file_name": "8ac76fe4-de27-48b0-a563-dc706c9cbf72.json"
+    },
+    {
+      "id": "8e8f0f3f-aa8d-4e8f-9aa5-4d40d0b1b177",
+      "title": "Amazon RDS クロスリージョン自動バックアップを活用した低コストなデータベースDR設計",
+      "services": [
+        "Amazon RDS",
+        "AWS KMS"
+      ],
+      "question_type": "single",
+      "file_name": "8e8f0f3f-aa8d-4e8f-9aa5-4d40d0b1b177.json"
     },
     {
       "id": "8f35080b-7f12-4df1-8df6-eba81e1c46b8",
@@ -165,6 +206,40 @@
       "file_name": "a1f8186e-2cd7-48c4-8877-ea7c7da3a3e3.json"
     },
     {
+      "id": "a99afaa4-89c6-4d05-99de-dc68e21d017a",
+      "title": "AWS Storage Gateway（テープゲートウェイ）による物理磁気テープ運用のクラウド移行とDR強化",
+      "services": [
+        "AWS Storage Gateway",
+        "Amazon S3 Glacier",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "a99afaa4-89c6-4d05-99de-dc68e21d017a.json"
+    },
+    {
+      "id": "ab205009-0c14-49a0-acb8-7cf7532e30fd",
+      "title": "AWS Global Accelerator によるクライアントDNSキャッシュ遅延のないマルチリージョン高速自動フェイルオーバー",
+      "services": [
+        "AWS Global Accelerator",
+        "Application Load Balancer",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "ab205009-0c14-49a0-acb8-7cf7532e30fd.json"
+    },
+    {
+      "id": "abe138c3-a91d-4db4-a58d-823897a4ebd7",
+      "title": "Amazon ECRクロスリージョンレプリケーションとECS/Fargateによるパイロットライト型コンテナDR",
+      "services": [
+        "Amazon ECR",
+        "Amazon ECS",
+        "AWS Fargate",
+        "AWS CloudFormation"
+      ],
+      "question_type": "single",
+      "file_name": "abe138c3-a91d-4db4-a58d-823897a4ebd7.json"
+    },
+    {
       "id": "af019216-f9c5-4c18-a929-f30e7f8506ec",
       "title": "ウォームスタンバイ型ディザスタリカバリ戦略による短時間復旧（低RTO）とコスト最適化",
       "services": [
@@ -198,6 +273,16 @@
       "file_name": "cdcf17f0-c6a2-4a41-aab2-f196dfcdfcaf.json"
     },
     {
+      "id": "db4f17d5-b5e2-4ff4-82ca-a9d57f2f8791",
+      "title": "Amazon Aurora Global Database の計画的フェイルオーバー（スイッチオーバー）によるデータ損失ゼロのDR訓練運用",
+      "services": [
+        "Amazon Aurora",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "db4f17d5-b5e2-4ff4-82ca-a9d57f2f8791.json"
+    },
+    {
       "id": "ead4f1a1-c0fb-41c9-9ee9-160630014b50",
       "title": "Amazon OpenSearch Serviceクロスクラスターレプリケーションによる検索インデックスのマルチリージョンDR",
       "services": [
@@ -218,6 +303,16 @@
       ],
       "question_type": "single",
       "file_name": "f950e79c-a906-47fd-9369-b5d4d4ff543a.json"
+    },
+    {
+      "id": "ff54138e-f28c-49a5-91be-2ac3db4d0123",
+      "title": "AWS Elastic Disaster Recovery (AWS DRS) における業務影響のないDR復旧ドリルとオンプレミスへのフェイルバック",
+      "services": [
+        "AWS Elastic Disaster Recovery",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "ff54138e-f28c-49a5-91be-2ac3db4d0123.json"
     }
   ]
 }

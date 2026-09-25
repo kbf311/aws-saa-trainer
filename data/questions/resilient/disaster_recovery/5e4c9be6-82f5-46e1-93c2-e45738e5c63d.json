@@ -1,0 +1,39 @@
+{
+  "id": "5e4c9be6-82f5-46e1-93c2-e45738e5c63d",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "ディザスタリカバリ",
+  "title": "Amazon FSx for Windows File Server におけるDFS名前空間とAWS DataSyncを活用したマルチリージョンDR設計",
+  "services": [
+    "Amazon FSx",
+    "AWS DataSync",
+    "AWS Backup"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、東京リージョンにおいて複数部門（法務、人事、財務）の基幹ファイル共有システムとして、マルチAZ配置の Amazon FSx for Windows File Server を運用しています。同社は広域災害対策として大阪リージョンへのディザスタリカバリ（DR）計画を構築しようとしています。ファイル共有は Active Directory ドメインに参加しており、大阪リージョンへ定期的にファイルメタデータ（NTFSアクセス権/ACL、タイムスタンプ等）を維持したまま同期する必要があります。また、災害フェイルオーバー時に各ユーザーのPC端末側のネットワークドライブ割り当てパス（共有UNCパス）を再設定することなく、シームレスに大阪リージョンのファイルシステムへ切り替えられるようにする必要があります。\n\nこれらの要件を満たす最も適切なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "大阪リージョンにセカンダリの FSx for Windows File Server を作成し、分散ファイルシステム（DFS）名前空間を構成して単一のドメイン共有名前空間配下に東京と大阪の共有フォルダをフォルダーターゲットとして登録する。東京から大阪へのデータ同期には AWS DataSync のスケジュールタスクを利用し、NTFS権限とメタデータを保持して定期同期する。",
+      "explanation": "DFS名前空間（DFS Namespaces）を使用することで、クライアント端末は個別のファイルサーバー名ではなく共通のドメイン名（例: \\\\example.com\\shares\\legal）でアクセスできるため、DR切り替え時にもクライアント側のパス再設定が一切不要です。また、FSx for Windows File Server 間のクロスリージョンデータ同期には AWS DataSync が最適であり、NTFSパーミッション（ACL）、所有権、タイムスタンプを完全保持した状態で効率的な差分同期を実行できます。"
+    },
+    {
+      "id": "B",
+      "text": "東京リージョンの FSx for Windows File Server のストレージタイプを HDD から SSD に変更し、大阪リージョンへの Amazon EFS レプリケーションタスクを作成してクライアントから NFS プロトコルでアクセスさせる。",
+      "explanation": "WindowsクライアントやActive Directory統合ファイル共有はSMBプロトコルおよびNTFSアクセス権に依存しており、Amazon EFS（NFS）への移行は既存のWindows権限管理やアプリケーション要件と互換性がありません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Backup を使用して毎晩 FSx for Windows File Server のバックアップを大阪リージョンにコピーする。災害発生時には大阪リージョンの Active Directory ドメインコントローラーを停止し、手動で新規FSxファイルシステムを起動してDNS CNAMEレコードを更新する。",
+      "explanation": "日次のAWS Backupのみでは復旧時点目標（RPO）が最大24時間となり、災害発生時のリストア時間（RTO）も大きくなります。また、Active Directoryドメインコントローラーを停止すると認証自体ができなくなります。"
+    },
+    {
+      "id": "D",
+      "text": "大阪リージョンに Amazon S3 バケットを作成し、FSx のデータを AWS Transfer Family 経由で毎時アップロードする。クライアント端末には S3 をマウントするサードパーティ製ドライバーを配布する。",
+      "explanation": "全クライアント端末へのサードパーティ製ソフトウェアの配布・管理は運用負荷が非常に大きく、NTFSアクセス権やActive Directoryグループポリシーとの連携が失われます。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon FSx for Windows File Server におけるマルチリージョンディザスタリカバリ（DR）とDFS名前空間の設計に関する設問です。\nWindowsファイル共有のDRにおける重要ポイントは以下の通りです：\n1. **分散ファイルシステム（DFS）名前空間**:\n   `\\\\corp.example.com\\dfs\\dept` のような論理的・透過的なUNCパスを提供します。配下のフォルダーターゲットとしてプライマリ（東京）とスタンバイ（大阪）を登録しておくことで、ユーザー側のマウント設定を変更することなく、ターゲットの優先度変更や切り替えのみでDR移行が完了します。\n2. **AWS DataSync によるクロスリージョン同期**:\n   FSx for Windows File Server はリージョン間の自動ネイティブレプリケーションを直接持たないため、リージョン間同期には AWS DataSync を使用します。DataSync はSMB共有間の転送において、NTFSセキュリティ記述子（ACL）、ファイル属性、タイムスタンプを完全に保持しながら高速に差分同期を行います。"
+}

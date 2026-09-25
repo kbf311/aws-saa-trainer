@@ -1,7 +1,7 @@
 {
   "major": "高パフォーマンスアーキテクチャの設計",
   "minor": "高性能ストレージ",
-  "updated_at": "2026-09-24T22:17:15Z",
+  "updated_at": "2026-09-25T07:24:43Z",
   "questions": [
     {
       "id": "00130567-ffbc-4f17-a023-53584eedba82",
@@ -79,17 +79,6 @@
       ],
       "question_type": "single",
       "file_name": "4e3a6be7-d7dd-4118-b222-73ce029d2d12.json"
-    },
-    {
-      "id": "58415ae7-a400-4d54-a62e-eba3e36917de",
-      "title": "Amazon FSx for LustreとS3連携による機械学習トレーニングの高速化",
-      "services": [
-        "Amazon FSx for Lustre",
-        "Amazon S3",
-        "Amazon EC2"
-      ],
-      "question_type": "single",
-      "file_name": "58415ae7-a400-4d54-a62e-eba3e36917de.json"
     },
     {
       "id": "58e7f00f-3550-49bf-8eba-bd8ba157ccf2",

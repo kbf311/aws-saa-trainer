@@ -1,0 +1,45 @@
+{
+  "id": "5c1bf398-5d00-4d33-9979-8c4cea118971",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "高可用性と耐障害性",
+  "title": "AWS Global Accelerator と Network Load Balancer による固定IPと高速フェイルオーバーを備えた高可用性UDPアーキテクチャ",
+  "services": [
+    "AWS Global Accelerator",
+    "Network Load Balancer",
+    "Amazon EC2"
+  ],
+  "question_type": "multiple",
+  "question_text": "あるゲーム開発会社が、グローバルなマルチプレイヤー対戦ゲーム用のバックエンドインフラをAWS上に構築しています。ゲームクライアントは極めて低遅延が要求される独自のUDPベースのプロトコルを使用して通信します。クライアント環境の企業ファイアウォール等の制約により、接続先エンドポイントとして静的なグローバルIPアドレスを提供し、IPアドレスの変更が発生しないようにする必要があります。さらに、単一アベイラビリティーゾーンやリージョン全体の障害が発生した場合でも、クライアント側のDNSキャッシュや再接続設定変更に依存せず、数秒以内に健全なエンドポイントへ自動的にフェイルオーバーできる耐障害性を実現したいと考えています。\n\nこれらの要件を満たすために組み合わせるべきソリューションはどれですか？（2つ選択してください。）",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Global Acceleratorをプロビジョニングし、提供される2つの静的エニキャストIPアドレスをゲームクライアントのエンドポイントとして設定する。",
+      "explanation": "AWS Global Acceleratorは、グローバルに一意な2つの静的エニキャストIPアドレスを提供します。このIPアドレスはAWSのグローバルエッジネットワークにアナウンスされ、リージョン障害時にもIPアドレスを変更することなく、健全なバックエンドへ数秒で自動フェイルオーバーできるため要件を完全に満たします。"
+    },
+    {
+      "id": "B",
+      "text": "各リージョンの複数アベイラビリティーゾーンにまたがるNetwork Load Balancer (NLB) を作成し、UDPリスナーを設定してゲームサーバーEC2インスタンス群をターゲットとして登録する。NLBをAWS Global Acceleratorのエンドポイントとして関連付ける。",
+      "explanation": "Network Load Balancer (NLB) はレイヤー4で動作し、超低遅延で数百万のTCP/UDPトラフィックを効率的に処理できます。マルチAZに展開したNLBをGlobal Acceleratorのエンドポイントとすることで、インスタンス単位およびAZ単位の障害時にヘルスチェックに基づいて健全なターゲットへ瞬時にルーティングされます。"
+    },
+    {
+      "id": "C",
+      "text": "Application Load Balancer (ALB) を作成し、UDPリスナーを設定してゲームサーバーインスタンス群へ負荷分散する。",
+      "explanation": "Application Load Balancer (ALB) はレイヤー7のロードバランサーであり、HTTP/HTTPS/gRPCのみをサポートしています。UDPトラフィックを処理することはできません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon CloudFrontディストリビューションを構成し、ゲームクライアントからのUDP通信をプロキシさせる。",
+      "explanation": "Amazon CloudFrontはHTTP/HTTPSおよびWebSocketプロトコルのみをサポートしており、任意のUDPトラフィックを直接プロキシすることはできません。"
+    },
+    {
+      "id": "E",
+      "text": "Amazon Route 53のフェイルオーバールーティングポリシーを使用して、EC2インスタンスのパブリックIPアドレスを直接DNSレコードとして登録する。",
+      "explanation": "DNSフェイルオーバーはクライアントやプロバイダのDNSキャッシュ（TTL）に依存するため、障害発生時の切り替えに数分以上の遅延が生じます。また固定IP要件を満たせません。"
+    }
+  ],
+  "correct_answers": [
+    "A",
+    "B"
+  ],
+  "explanation": "UDPプロトコルを使用し、かつ静的IPアドレスとクライアントDNS非依存の高速フェイルオーバーを同時に実現するには、AWS Global AcceleratorとNetwork Load Balancer (NLB) の組み合わせが最適です。Global Acceleratorは2つの静的Anycast IPアドレスを提供し、AWSグローバルプライベートネットワーク経由で低遅延ルーティングを行います。NLBはUDPトラフィックを毎秒数百万リクエスト規模・超低遅延でマルチAZのEC2インスタンス群に分散し、継続的なヘルスチェックによって障害コンポーネントを即座にバイパスします。"
+}
