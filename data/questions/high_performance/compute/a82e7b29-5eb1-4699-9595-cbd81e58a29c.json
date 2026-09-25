@@ -1,0 +1,38 @@
+{
+  "id": "a82e7b29-5eb1-4699-9595-cbd81e58a29c",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "コンピューティングとスケーリング",
+  "title": "Amazon EKSにおけるKarpenterを活用したPodリソース要求に応じた高速ジャストインタイムノードスケーリング",
+  "services": [
+    "Amazon EKS",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "あるSaaS企業では、Amazon EKSクラスター上で多様なワークロード（軽量なWeb API、大規模データ集計タスク、GPUを要求するML推論ジョブなど）を混在させて運用しています。現在、Kubernetes Cluster Autoscalerと複数の固定インスタンスタイプを持つEC2 Auto Scalingグループ（ASG）を組み合わせてノードをスケーリングしていますが、インスタンスタイプごとに多数のASGを事前設計・維持する必要があり、運用が極めて複雑化しています。また、未割り当て（Pending）のPodが発生してからASGが新しいノードを立ち上げてPodが稼働開始するまでに数分以上（3〜5分）の遅延が発生し、スパイク時の性能要件を満たせません。\n\n複数の固定Auto Scalingグループの管理オーバーヘッドを排除し、各Podの固有のリソース要件（CPU、メモリ、GPUなど）に最適なEC2インスタンスを数秒〜数十秒の極めて短いレイテンシーで直接プロビジョニングするための最適なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "EKSクラスターに「Karpenter」を導入し、NodePoolを定義して、Pending状態のPodのリソース要求や制約に合致する最適なEC2インスタンスをダイレクトに高速プロビジョニングする。",
+      "explanation": "KarpenterはKubernetes向けに設計されたオープンソースの柔軟かつ高速なノード自動プロビジョニングツールです。中間層であるEC2 Auto Scalingグループをバイパスし、スケジュールできない（Pending）Podのリソース要求（CPU、メモリ、GPU、アーキテクチャ等）をリアルタイムに評価して、最適なEC2インスタンスを数秒〜数十秒で直接起動します。これにより、事前のASG設計が不要になり、ノード起動のレイテンシーとクラスタ利用効率が劇的に改善されます。"
+    },
+    {
+      "id": "B",
+      "text": "すべてのPodをAWS Fargateプロファイルに移行し、タスクの実行ノードとして常に最大サイズの仮想ノードを固定割り当てする。",
+      "explanation": "EKS on AWS FargateはGPUをサポートしておらず、またFargateはPodごとに固定のマイクロVMを起動するため、GPUを必要とするML推論ジョブの要件を満たすことができません。"
+    },
+    {
+      "id": "C",
+      "text": "EC2 Auto Scalingグループの起動テンプレートでEC2インスタンスストアボリュームのみを指定し、ストレージIOPSを引き上げる。",
+      "explanation": "インスタンスストアの採用はノード内部のエフェメラルストレージIOPSを向上させるものですが、ノードのプロビジョニング速度の向上や、多様なPod要求に応じた柔軟なインスタンス選択の課題は解決できません。"
+    },
+    {
+      "id": "D",
+      "text": "Kubernetes Horizontal Pod Autoscaler（HPA）の同期インターバル（horizontal-pod-autoscaler-sync-period）を1秒に設定する。",
+      "explanation": "HPAの評価周期を短縮してもPodの必要レプリカ数が素早く増えるだけであり、背後にあるEC2インフラノードの起動遅延やAuto Scalingグループの管理複雑性は解消されません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon EKSにおける大規模かつ多様なワークロードのノードスケーリングにおいて、従来のCluster Autoscaler（CAS）に代わる最新のベストプラクティスが「Karpenter」です。\n- **柔軟なインスタンス選択**: Podの要件（vCPU、メモリ、GPU、ゾーン、Gravitonなど）に合わせて、AWSの提供する数多くのインスタンスタイプから最適なものをジャストインタイムで直接選択・プロビジョニングします。\n- **超高速な起動**: Auto Scalingグループの抽象化レイヤーを介さずEC2フリートAPIを直接呼び出すため、PendingになってからノードがReadyになるまでの時間が大幅に短縮されます。\n- **自動統合・最適化 (Consolidation)**: 不要になったノードを自動削除したり、安価なノードへ再配置（パッキング）してコストと性能を最適化します。"
+}

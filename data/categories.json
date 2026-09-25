@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-25T07:24:43Z",
-  "total_questions": 290,
+  "updated_at": "2026-09-25T07:58:26Z",
+  "total_questions": 300,
   "categories": [
     {
       "major_id": "resilient",
@@ -32,7 +32,7 @@
       "minor_id": "compute",
       "minor_name": "コンピューティングとスケーリング",
       "dir_path": "questions/high_performance/compute",
-      "question_count": 20
+      "question_count": 30
     },
     {
       "major_id": "high_performance",
