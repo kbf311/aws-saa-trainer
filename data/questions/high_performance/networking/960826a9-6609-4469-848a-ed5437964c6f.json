@@ -1,0 +1,38 @@
+{
+  "id": "960826a9-6609-4469-848a-ed5437964c6f",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "AWS Global AcceleratorのクライアントIP保持（Client IP Preservation）とマルチリージョン高可用性",
+  "services": [
+    "AWS Global Accelerator",
+    "Application Load Balancer"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバル企業は、複数リージョン（バージニア、アイルランド、東京）にApplication Load Balancer（ALB）とEC2インスタンスを配置し、AWS Global AcceleratorをエンドポイントとしてWebアプリケーションを公開しています。バックエンドのセキュリティ監査およびアクセス解析要件により、各EC2インスタンス側で接続元クライアントの元のパブリックIPアドレスを直接パケットレベルで認識・ロギングする必要があります。クライアントのIPアドレスを偽装やプロキシ変換なしに保持するための設定はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Global Acceleratorのエンドポイントグループ設定で、ALBエンドポイントに対する「クライアントIPアドレスの保持（Client IP Preservation）」を有効化する。",
+      "explanation": "AWS Global Acceleratorは、ALBおよびEC2エンドポイントに対して「クライアントIPアドレスの保持（Client IP Preservation）」をサポートしています。これにより、クライアントの送信元IPアドレスがパケットヘッダー内でそのまま保持され、バックエンドのセキュリティグループ評価やコンプライアンス監査に直接利用できます。"
+    },
+    {
+      "id": "B",
+      "text": "すべてのクライアントに自社VPNクライアントソフトをインストールさせ、VPNトンネル内でIPを固定する。",
+      "explanation": "不特定多数のWeb一般ユーザーに対してVPNクライアントの強制導入を求めることは不可能です。"
+    },
+    {
+      "id": "C",
+      "text": "Global Acceleratorを削除し、Route 53の複数値回答ルーティングのみに切り替える。",
+      "explanation": "DNSルーティングのみではクライアントのAnycast高速ネットワーク経由のトラフィック最適化やインスタンス障害時の即時自動フェイルオーバーが得られません。"
+    },
+    {
+      "id": "D",
+      "text": "EC2インスタンス上でリバースプロキシとしてNginxを起動し、クライアントIPをランダムな文字列に置換する。",
+      "explanation": "クライアントIPをランダム値に置換すると、セキュリティ監査要件を完全に満たせなくなります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Global Acceleratorの「Client IP Preservation」機能により、ALBやEC2エンドポイント側で送信元クライアントの真のIPアドレスをパケットレベルで確実に保持・監査できます。"
+}

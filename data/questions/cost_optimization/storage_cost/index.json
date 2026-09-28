@@ -1,0 +1,292 @@
+{
+  "major": "コスト最適化アーキテクチャの設計",
+  "minor": "ストレージコスト最適化",
+  "updated_at": "2026-09-27T23:49:04Z",
+  "questions": [
+    {
+      "id": "073b221b-d515-44fd-aadc-ef7c4709f927",
+      "title": "Amazon S3ストレージレンズを活用した組織全体のコスト最適化と無駄なストレージの可視化",
+      "services": [
+        "Amazon S3",
+        "AWS Organizations"
+      ],
+      "question_type": "multiple",
+      "file_name": "073b221b-d515-44fd-aadc-ef7c4709f927.json"
+    },
+    {
+      "id": "08448852-7fc6-45a3-9f1a-66edfd8f2a3f",
+      "title": "AWS Backupのライフサイクルルールを活用した定期バックアップのコールドストレージ階層化と自動削除",
+      "services": [
+        "AWS Backup",
+        "Amazon EBS",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "08448852-7fc6-45a3-9f1a-66edfd8f2a3f.json"
+    },
+    {
+      "id": "0ca08eb0-1fb7-4984-94f4-51ae6e810d0c",
+      "title": "Amazon FSx for NetApp ONTAPにおけるキャパシティプール階層化を活用したストレージTCOの最小化",
+      "services": [
+        "Amazon FSx for NetApp ONTAP",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "0ca08eb0-1fb7-4984-94f4-51ae6e810d0c.json"
+    },
+    {
+      "id": "1452875d-3a8f-4960-b2f0-f76860b4160e",
+      "title": "AWS DataSyncによるオンプレミスファイルストレージからS3各ストレージクラスへの直接移行とコスト最適化",
+      "services": [
+        "AWS DataSync",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "1452875d-3a8f-4960-b2f0-f76860b4160e.json"
+    },
+    {
+      "id": "146a07cc-afb1-434d-b25e-1d654eac70c0",
+      "title": "AWS ConfigとSystems Managerを活用した未アタッチEBSボリュームの検出と自動クリーンアップ",
+      "services": [
+        "Amazon EBS",
+        "AWS Config",
+        "AWS Systems Manager"
+      ],
+      "question_type": "single",
+      "file_name": "146a07cc-afb1-434d-b25e-1d654eac70c0.json"
+    },
+    {
+      "id": "1d63ec18-078e-468c-8c1c-9829b4aa0c25",
+      "title": "AWS Storage Gateway Tape Gatewayを活用したオンプレミス物理テープの移行と保管コスト削減",
+      "services": [
+        "AWS Storage Gateway",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "single",
+      "file_name": "1d63ec18-078e-468c-8c1c-9829b4aa0c25.json"
+    },
+    {
+      "id": "24b7e9fa-8b6c-4270-a0af-acda9ecdb72d",
+      "title": "S3 Intelligent-Tieringにおけるアーカイブアクセス階層のオプトインによる長期保管コストの極小化",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "24b7e9fa-8b6c-4270-a0af-acda9ecdb72d.json"
+    },
+    {
+      "id": "428a484f-12f7-4c89-b168-88fd5d600117",
+      "title": "Amazon FSx for Windows File Serverにおけるデータ重複排除とHDDストレージによるファイル共有コスト最適化",
+      "services": [
+        "Amazon FSx for Windows File Server"
+      ],
+      "question_type": "single",
+      "file_name": "428a484f-12f7-4c89-b168-88fd5d600117.json"
+    },
+    {
+      "id": "47e5e580-1487-4a4e-ad1e-0d37445e242e",
+      "title": "AWS Storage Gatewayキャッシュ型ボリュームの採用によるオンプレミスローカルストレージの削減とS3低コスト保管",
+      "services": [
+        "AWS Storage Gateway",
+        "Amazon S3",
+        "Amazon Elastic Block Store"
+      ],
+      "question_type": "single",
+      "file_name": "47e5e580-1487-4a4e-ad1e-0d37445e242e.json"
+    },
+    {
+      "id": "526e8940-ecd5-428e-954a-1a2358bedbb4",
+      "title": "Amazon EFSアーカイブストレージクラスの導入によるアクセス頻度の極めて低いファイル共有データのコスト最適化",
+      "services": [
+        "Amazon Elastic File System",
+        "Amazon Elastic Compute Cloud"
+      ],
+      "question_type": "single",
+      "file_name": "526e8940-ecd5-428e-954a-1a2358bedbb4.json"
+    },
+    {
+      "id": "7180532b-52ca-4593-9b9d-21dd7b8d196f",
+      "title": "Amazon S3ライフサイクルルールにおける小サイズオブジェクト（128KB未満）の移行除外とコスト増加防止",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "7180532b-52ca-4593-9b9d-21dd7b8d196f.json"
+    },
+    {
+      "id": "7c3b1d0b-1ffd-4670-82d4-8cec51f7a493",
+      "title": "Amazon FSx for LustreにおけるスクラッチファイルシステムとS3データリポジトリ連携によるHPCコスト最小化",
+      "services": [
+        "Amazon FSx for Lustre",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "7c3b1d0b-1ffd-4670-82d4-8cec51f7a493.json"
+    },
+    {
+      "id": "7d336f6a-78e1-4f9d-aaf3-053830395276",
+      "title": "Elastic Volumesを活用したEBSボリュームタイプ（gp2からgp3）の移行によるコスト最適化",
+      "services": [
+        "Amazon EBS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "7d336f6a-78e1-4f9d-aaf3-053830395276.json"
+    },
+    {
+      "id": "7f80d895-7503-4fdd-afe2-65f9803f8543",
+      "title": "Amazon EBSプロビジョンドIOPS（io2）からgp3への適正化によるストレージ費用の大幅削減",
+      "services": [
+        "Amazon Elastic Block Store",
+        "Amazon EC2",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "7f80d895-7503-4fdd-afe2-65f9803f8543.json"
+    },
+    {
+      "id": "94fe7e68-13ed-49bb-a3db-7957e3d6c739",
+      "title": "S3 Glacier Flexible Archive取り出しオプション（迅速・標準・大容量）の選定と取り出しコスト抑制",
+      "services": [
+        "Amazon S3",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "single",
+      "file_name": "94fe7e68-13ed-49bb-a3db-7957e3d6c739.json"
+    },
+    {
+      "id": "9dfdc74e-5663-46fa-b5e8-dd7b0e5fde31",
+      "title": "Amazon S3バッチオペレーション（Batch Operations）による大規模オブジェクトのメタデータ一括変更とライフサイクル適用",
+      "services": [
+        "Amazon S3",
+        "AWS IAM"
+      ],
+      "question_type": "single",
+      "file_name": "9dfdc74e-5663-46fa-b5e8-dd7b0e5fde31.json"
+    },
+    {
+      "id": "9e12b2a6-5eb8-4a57-9ef4-3b9a04b33902",
+      "title": "S3ライフサイクルルールを活用した長期ログデータの段階的移行と削除",
+      "services": [
+        "Amazon S3",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "single",
+      "file_name": "9e12b2a6-5eb8-4a57-9ef4-3b9a04b33902.json"
+    },
+    {
+      "id": "a4894e9f-de34-4afd-b9ba-8a71d91ed453",
+      "title": "大規模シーケンシャルデータ処理におけるEBSスループット最適化HDD（st1）の選定とストレージ単価抑制",
+      "services": [
+        "Amazon Elastic Block Store",
+        "Amazon Elastic Compute Cloud"
+      ],
+      "question_type": "single",
+      "file_name": "a4894e9f-de34-4afd-b9ba-8a71d91ed453.json"
+    },
+    {
+      "id": "b2e7f317-8dd0-4710-806e-36ade6278d5c",
+      "title": "長期コンプライアンス監査ログに対するS3 Glacier Deep Archiveの選定とストレージコストの極小化",
+      "services": [
+        "Amazon S3",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "single",
+      "file_name": "b2e7f317-8dd0-4710-806e-36ade6278d5c.json"
+    },
+    {
+      "id": "be33d813-d044-4717-96d0-ba1ac20928f8",
+      "title": "AWS Compute Optimizerを活用した過剰プロビジョニングEBSボリュームの特定と適正サイズ化",
+      "services": [
+        "AWS Compute Optimizer",
+        "Amazon EBS"
+      ],
+      "question_type": "single",
+      "file_name": "be33d813-d044-4717-96d0-ba1ac20928f8.json"
+    },
+    {
+      "id": "c000aa28-7b7a-4f8c-8b74-5a762860fba1",
+      "title": "AWS Backupを活用した組織全体のバックアップ統合とコールドストレージ自動移行",
+      "services": [
+        "AWS Backup",
+        "AWS Organizations"
+      ],
+      "question_type": "multiple",
+      "file_name": "c000aa28-7b7a-4f8c-8b74-5a762860fba1.json"
+    },
+    {
+      "id": "ca3b7b16-62e4-4329-90d8-6074c199044a",
+      "title": "再作成可能な二次バックアップデータに対するS3 One Zone-IAの選定によるコスト最適化",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "ca3b7b16-62e4-4329-90d8-6074c199044a.json"
+    },
+    {
+      "id": "cfc5066d-fc59-4eec-a2d1-11fe8a2c1ce0",
+      "title": "S3ライフサイクルルールによる不完全なマルチパートアップロードの自動クリーンアップ",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "cfc5066d-fc59-4eec-a2d1-11fe8a2c1ce0.json"
+    },
+    {
+      "id": "d14c3156-d9bf-4095-a43c-5438dea7e3d4",
+      "title": "S3バージョニング有効バケットにおける非最新バージョンのライフサイクル管理によるコスト最適化",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "d14c3156-d9bf-4095-a43c-5438dea7e3d4.json"
+    },
+    {
+      "id": "dd88fcff-4900-498e-9ede-186e916663c4",
+      "title": "Amazon EFSライフサイクル管理によるアクセス頻度の低い共有データの階層化とコスト削減",
+      "services": [
+        "Amazon EFS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "dd88fcff-4900-498e-9ede-186e916663c4.json"
+    },
+    {
+      "id": "de007ed3-612e-4872-9e47-faf097ac90b2",
+      "title": "Amazon FSx for OpenZFSの内蔵データ圧縮とシングルAZプロビジョニングによる開発ストレージコストの最適化",
+      "services": [
+        "Amazon FSx for OpenZFS"
+      ],
+      "question_type": "single",
+      "file_name": "de007ed3-612e-4872-9e47-faf097ac90b2.json"
+    },
+    {
+      "id": "e8a54e03-916f-4846-a5ea-58b9660a2778",
+      "title": "アクセスパターンが変動する非構造化データに対するS3 Intelligent-Tieringの適用",
+      "services": [
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "e8a54e03-916f-4846-a5ea-58b9660a2778.json"
+    },
+    {
+      "id": "f23d52e5-971b-40d6-9935-2c970def8dd7",
+      "title": "S3 Intelligent-Tieringとライフサイクルルールの組み合わせによる長期データ保管コストの包括的最適化（2つ選択）",
+      "services": [
+        "Amazon S3",
+        "Amazon S3 Glacier"
+      ],
+      "question_type": "multiple",
+      "file_name": "f23d52e5-971b-40d6-9935-2c970def8dd7.json"
+    },
+    {
+      "id": "f269991e-fe19-4228-94e9-79e352fb8e4c",
+      "title": "長期コンプライアンス保持要件におけるEBSスナップショットアーカイブの活用",
+      "services": [
+        "Amazon EBS"
+      ],
+      "question_type": "single",
+      "file_name": "f269991e-fe19-4228-94e9-79e352fb8e4c.json"
+    }
+  ]
+}

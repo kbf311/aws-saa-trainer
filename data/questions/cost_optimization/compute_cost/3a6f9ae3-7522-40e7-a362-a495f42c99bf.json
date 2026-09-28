@@ -1,0 +1,37 @@
+{
+  "id": "3a6f9ae3-7522-40e7-a362-a495f42c99bf",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "コンピュートコスト最適化",
+  "title": "AWS Lambda関数URL（Function URLs）の採用によるAPI Gateway/ALB経費削減とシンプルなエンドポイント設計",
+  "services": [
+    "AWS Lambda"
+  ],
+  "question_type": "single",
+  "question_text": "あるSaaS企業が、外部パートナーからのWebhookイベント通知を受け取って処理する単一のバックエンドマイクロサービスを運用しています。このサービスは月間数千万件のリクエストを受け取りますが、認証はカスタムトークン（ヘッダー検証）で行っており、API Gatewayの高度な機能（リクエスト変換、APIキー管理、スロットリング等）やALBのパスベースルーティング機能は使用していません。請求書を確認したところ、Lambdaの実行料金よりもAmazon API GatewayのAPI呼び出し料金（ミリオンリクエスト単位課金）の方が高額になっていることが判明しました。\n\n既存の機能を損なうことなく、呼び出し経路のコストを最小化する最も適切なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Lambda関数URL（Function URLs）を有効化し、専用のHTTPSエンドポイントを直接パートナーに提供してリクエストを受信する。",
+      "explanation": "AWS Lambda関数URL（Function URLs）は、Lambda関数に組み込みの専用HTTPSエンドポイントを追加料金なしで提供する機能です。追加のロードバランサー（ALB）やAmazon API Gatewayが不要になるため、API Gatewayの月間数百〜数千万件のリクエスト課金を完全にゼロにし、Lambdaの実行時間およびデータ転送料金のみにコストを圧縮できます。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon API Gateway REST APIからHTTP APIに移行する。",
+      "explanation": "HTTP APIはREST APIより約70%安価ですが、依然としてミリオンリクエストごとの従量課金が発生します。単一関数のWebhook用途であれば追加費用ゼロのLambda関数URLを採用する方がコスト削減効果が最大になります。"
+    },
+    {
+      "id": "C",
+      "text": "Lambda関数の前にNetwork Load Balancer（NLB）を配置し、TCPリスナーで通信を直接Lambdaに転送する。",
+      "explanation": "NLBのロードバランサー時間料金（固定費）およびLCU（Load Balancer Capacity Units）処理量に基づく料金が発生し、かつ単一関数のWebhook受け口としては構成が不必要に複雑化してコストが増加します。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon CloudFrontをLambda関数の直接のオリジンとして設定し、API Gatewayを迂回する。",
+      "explanation": "Amazon CloudFrontはLambda関数URL（Function URLs）をカスタムオリジンとして設定することが技術的には可能です。しかし、単一関数のWebhookエンドポイントにCDNレイヤーを追加するのは過剰設計であり、CloudFrontのリクエスト料金・データ転送料金が加算されるため、Lambda関数URLを直接パートナーに提供する場合と比較してコストが増加します。コスト最小化の要件を満たしません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Lambda関数URL（Function URLs）に関する設問です。単一のマイクロサービスやWebhook、シンプルなパブリック/プライベートエンドポイントの構築において、Amazon API Gatewayの高度な機能が不要な場合、Lambda関数URLを採用することでAPI Gatewayの呼び出し課金を完全に排除し、追加インフラコストなしでHTTPSエンドポイントを運用できます。"
+}

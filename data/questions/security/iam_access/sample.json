@@ -1,0 +1,39 @@
+{
+  "id": "000",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "AWS IAM Identity Centerとアクセス許可セットによるマルチアカウント環境の一元的なアクセス管理",
+  "services": [
+    "AWS IAM Identity Center",
+    "AWS Organizations",
+    "AWS IAM"
+  ],
+  "question_type": "single",
+  "question_text": "ある成長中の企業が、AWS Organizationsを使用して本番、ステージング、開発など数十個のAWSアカウントを管理しています。現在、各アカウントに個別のIAMユーザーを作成し、開発者に長期的なアクセスキー（Access Key ID / Secret Access Key）を発行して運用していますが、退職者のアカウント削除漏れやアクセスキーの漏洩リスクがセキュリティ監査で重大な課題として指摘されました。企業は既存の外部IDプロバイダー（IdP：OktaやAzure ADなど）と連携し、長期的な認証情報を廃止して、最小権限の原則に基づく一元的なアクセス制御を確立したいと考えています。\n\nこれらの要件を満たす最も安全で運用効率の高いソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各AWSアカウントで個別にSAML 2.0フェデレーションを設定し、IAMロールとIdP属性のマッピングをアカウントごとに手動で構築する。",
+      "explanation": "**各アカウントでの個別SAML設定**: 数十のアカウントそれぞれで個別にSAMLを設定・保守するのは運用負荷が極めて高く、ヒューマンエラーの原因になります。"
+    },
+    {
+      "id": "B",
+      "text": "AWS IAM Identity Center (旧AWS Single Sign-On) をAWS Organizationsの管理アカウント（または委任管理者アカウント）で有効化し、外部IdPとSAML/SCIM連携を行う。アクセス許可セット（Permission Sets）を定義して、ユーザーやグループに必要なAWSアカウントへのアクセス権限を集中管理する。",
+      "explanation": "**AWS IAM Identity Center (旧 AWS SSO)**: AWS Organizationsとネイティブに統合された推奨のID・アクセス管理サービスです。Okta、Microsoft Entra ID (旧Azure AD) などの外部IdPとSAML 2.0およびSCIM（ユーザー・グループの自動プロビジョニング）連携が可能です。\n\n**アクセス許可セット (Permission Sets)**: 集中管理されたコンソールから、どのユーザー/グループがどのアカウントに対してどのような権限を持つかを一元管理・割り当てできます。ユーザーはAWSアクセスポータルから一時的なセキュリティ認証情報（STS）を使用して安全にAWSリソースやマネジメントコンソールへアクセスするため、長期的なアクセスキーの管理や漏洩リスクを完全に排除できます。"
+    },
+    {
+      "id": "C",
+      "text": "中央の認証用AWSアカウントに全開発者のIAMユーザーを作成し、各メンバーアカウントのAdministratorAccessロールを引き受けるクロスアカウントアクセスを設定して長期アクセスキーを定期ローテーションする。",
+      "explanation": "**中央認証アカウントでの長期キー運用**: 長期的なアクセスキーを発行し続けるアプローチであり、セキュリティベストプラクティス（一時的認証情報の利用）に反します。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Directory Service for Microsoft ADをデプロイし、全AWSアカウントの全EC2インスタンスをドメイン参加させてActive Directoryのグループポリシーでアクセス制御を行う。",
+      "explanation": "**Directory ServiceとEC2ドメイン参加**: Directory ServiceとEC2ドメイン参加はOSログインの管理手法であり、AWS APIやマネジメントコンソールへのマルチアカウントアクセス制御の根本解決にはなりません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "AWS IAM Identity Centerとアクセス許可セットによるマルチアカウント環境の一元的なアクセス管理に関する設問です。AWS IAM Identity Center (旧 AWS SSO)を活用することで、要件を満たしつつ最適なアーキテクチャを実現できます。"
+}

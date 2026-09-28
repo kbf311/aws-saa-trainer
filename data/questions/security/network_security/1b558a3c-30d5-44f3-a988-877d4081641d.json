@@ -1,0 +1,39 @@
+{
+  "id": "1b558a3c-30d5-44f3-a988-877d4081641d",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "ネットワークセキュリティ",
+  "title": "CloudFrontカスタムヘッダーとALBまたはWAFによるオリジンへの直接アクセス制限",
+  "services": [
+    "Amazon CloudFront",
+    "Application Load Balancer",
+    "AWS WAF"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、グローバルユーザー向けのWebアプリケーションを運用しており、Amazon CloudFrontディストリビューションを前段に配置し、オリジンとしてパブリックApplication Load Balancer (ALB) を使用しています。セキュリティチームは、CloudFrontに適用されているAWS WAFの保護ルールや地理的制限をバイパスして、攻撃者がALBのパブリックDNS名またはIPアドレスに対して直接HTTP/HTTPSリクエストを送信することを懸念しています。ALBへのアクセスをCloudFront経由のリクエストのみに厳格に限定するための最も推奨される設計パターンはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "CloudFrontのオリジンリクエスト設定でカスタムHTTPヘッダー（例: `X-Origin-Verify` と秘密のトークン値）を付与するように構成し、ALBのリスナールールまたはALBに関連付けたAWS WAFで、そのカスタムヘッダーと正しいトークンが存在しないすべてのリクエストを拒否（403 Forbidden）するように設定する。",
+      "explanation": "CloudFrontからオリジンへのリクエストに秘密のカスタムヘッダーを自動付与させ、ALBまたはWAF側でそのヘッダーの有無と値を検証することで、CloudFrontを経由していない直接のアクセスを確実に検知・遮断できます。"
+    },
+    {
+      "id": "B",
+      "text": "ALBのセキュリティグループのインバウンドルールで、送信元をCloudFrontのARNに設定する。",
+      "explanation": "セキュリティグループのインバウンドルールにリソースARNを指定することはできず、CIDRブロックまたはセキュリティグループIDのみが指定可能です。"
+    },
+    {
+      "id": "C",
+      "text": "ALBを内部ロードバランサー（internal）に変更し、CloudFrontのオリジンにALBのプライベートIPアドレスを直接指定する。",
+      "explanation": "CloudFrontはパブリックなインターネット経由でオリジンと通信するため、VPC内の内部ALBのプライベートIPを直接オリジンとして解決・通信することはできません（VPCオリジン機能など特別なプライベート接続構成を除く）。"
+    },
+    {
+      "id": "D",
+      "text": "ALBのDNSレコード（Aレコード）をAmazon Route 53から削除し、IPアドレスを非公開にする。",
+      "explanation": "DNSレコードを削除してもCloudFrontからALBにリクエストを転送できなくなるか、IPアドレスが判明している場合は直接アクセスを防ぐことができません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "CloudFrontを前段に配置したパブリックALB構成では、攻撃者がALBのエンドポイントを特定して直接アクセスし、CloudFront側のキャッシュやWAFルールを迂回するリスクがあります。標準的なベストプラクティスは、CloudFrontからオリジンへ転送する際にカスタムHTTPヘッダー（例: `X-Origin-Verify: <secret-value>`）を付与し、ALBのリスナールールまたはALBにアタッチしたAWS WAFでそのヘッダーを検証することです。ヘッダーが存在しないか値が不一致のリクエストを拒否することで、CloudFront経由の通信のみを確実に強制できます。"
+}

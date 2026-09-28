@@ -1,0 +1,39 @@
+{
+  "id": "6a390fb7-2f56-453b-9dfd-c33c51b9b6aa",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "ネットワークセキュリティ",
+  "title": "AWS PrivateLink (インターフェイス型VPCエンドポイント) による完全閉域でのAWSサービスアクセス",
+  "services": [
+    "Amazon VPC",
+    "AWS Secrets Manager",
+    "AWS Systems Manager"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融機関のセキュリティポリシーでは、機密データを処理するEC2インスタンスが配置されたVPC環境において、インターネットゲートウェイ (IGW)、NAT Gateway、仮想プライベートゲートウェイ (VGW) などのいかなるインターネット接続装置の設置も厳格に禁止されています。しかし、プライベートサブネット内のEC2インスタンスで動作するバッチ処理アプリケーションは、データベースの認証情報を安全に取得するために「AWS Secrets Manager」APIと通信する必要があります。また、運用チームは「AWS Systems Manager (SSM) Session Manager」を使用してEC2インスタンスへの安全なリモート管理を行いたいと考えています。\n\nインターネットトラフィックを一切発生させず、この要件を満たすネットワークアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Secrets Manager および AWS Systems Manager のインターフェイス型 VPC エンドポイント (Interface VPC Endpoints / AWS PrivateLink) をVPC内のプライベートサブネットに作成し、プライベートDNSを有効化する。適切なセキュリティグループをエンドポイントのElastic Network Interface (ENI) にアタッチする。",
+      "explanation": "インターフェイス型 VPC エンドポイント (AWS PrivateLink) を作成すると、指定したサブネット内にAWSサービス専用のプライベートIPアドレスを持つElastic Network Interface (ENI) がプロビジョニングされます。プライベートDNSを有効化することで、アプリケーションはデフォルトのサービスエンドポイントURL（例: secretsmanager.ap-northeast-1.amazonaws.com）宛の通信のまま、インターネットやNAT Gatewayを経由することなく、AWS内部のプライベートネットワーク経由で安全に通信できます。"
+    },
+    {
+      "id": "B",
+      "text": "Secrets Manager および Systems Manager のゲートウェイ型 VPC エンドポイント (Gateway VPC Endpoints) を作成し、プライベートサブネットのルートテーブルに関連付ける。",
+      "explanation": "ゲートウェイ型 VPC エンドポイントがサポートされているAWSサービスは「Amazon S3」と「Amazon DynamoDB」の2つのみです。Secrets ManagerやSystems Managerはゲートウェイ型エンドポイントをサポートしておらず、インターフェイス型（PrivateLink）を使用する必要があります。"
+    },
+    {
+      "id": "C",
+      "text": "プライベートサブネットにNATインスタンスを一時的に起動し、セキュリティグループのアウトバウンドルールでAWSサービスへのHTTPS (443) のみを許可する。",
+      "explanation": "NATインスタンスはインターネットゲートウェイを経由して通信するため、VPC内にインターネット接続装置の設置を一切禁止しているセキュリティポリシーに違反します。"
+    },
+    {
+      "id": "D",
+      "text": "EC2インスタンスのローカルhostsファイルを編集し、AWSマネジメントコンソールのパブリックIPアドレスをハードコードして静的ルーティングを設定する。",
+      "explanation": "AWSサービスのパブリックIPアドレスは動的であり保証されません。また、インターネットゲートウェイがない環境ではパブリックIP宛のルーティング自体が不可能です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "インターネットゲートウェイやNAT Gatewayを持たない完全なプライベートVPCからAWSサービス（Secrets Manager、Systems Manager、CloudWatchなど）にアクセスするには、AWS PrivateLinkを利用した「インターフェイス型 VPC エンドポイント」を使用します。これにより、トラフィックはAWSのバックボーンネットワーク内に完全に留まり、極めてセキュアな通信が実現します。"
+}

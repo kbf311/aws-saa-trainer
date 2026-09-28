@@ -1,0 +1,38 @@
+{
+  "id": "e56aeebd-017b-44c8-b556-7c26745eadd1",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "Amazon S3バケットポリシーによる転送中データのTLS暗号化強制と非暗号化通信の拒否",
+  "services": [
+    "Amazon S3",
+    "AWS Identity and Access Management"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融機関のセキュリティコンプライアンス基準では、AWSクラウド上に保存されるすべての機密データへのアクセスにおいて、転送中の暗号化（Encryption in Transit）を義務付けています。現在、顧客の取引明細ファイルがAmazon S3バケットに格納されています。セキュリティ管理者は、HTTPプロトコル（非暗号化）によるS3オブジェクトの取得・アップロード操作を完全にブロックし、TLS（HTTPS）経由の通信のみを許可する仕組みを導入したいと考えています。既存のネットワークインフラやIAMロールを改修することなく、最小限の管理工数でこの要件を強制できる設定はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "S3バケットポリシーを作成し、Effectを「Deny」、Principalを「*」、Actionを「s3:*」、Resourceをバケットとその中の全オブジェクトとし、Condition句で `\"aws:SecureTransport\": \"false\"` を指定して適用する。",
+      "explanation": "グローバル条件キー `aws:SecureTransport` が `false`（平文のHTTP接続）である場合に `Deny`（明示的な拒否）を適用するバケットポリシーを設定することで、TLS（HTTPS）を使用しないすべてのS3リクエストを確実にブロックできます。明示的な拒否はすべての許可に優先するため、最も確実かつ管理オーバーヘッドが最小のベストプラクティスです。"
+    },
+    {
+      "id": "B",
+      "text": "S3バケットポリシーを作成し、Effectを「Allow」、Principalを「*」、Actionを「s3:*」とし、Condition句で `\"aws:SecureTransport\": \"true\"` を指定して適用する。",
+      "explanation": "Allow効果のみで `aws:SecureTransport: true` を指定した場合、バケットポリシー以外のIAMポリシー等で許可が付与されている際に、HTTP通信が評価ロジックをすり抜けて許可されてしまうリスクがあります。確実にHTTP接続を遮断するには `aws:SecureTransport: false` に対する明示的な `Deny` が必要です。"
+    },
+    {
+      "id": "C",
+      "text": "S3バケットのデフォルト暗号化設定でSSE-KMSを有効化し、バケットのプロパティ画面で「HTTPS強制モード」のチェックボックスをオンにする。",
+      "explanation": "S3のデフォルト暗号化は「保管時の暗号化（Encryption at Rest）」を制御するものであり、ネットワーク転送中のプロトコル（HTTP/HTTPS）を強制するものではありません。また、S3のプロパティ画面に「HTTPS強制モード」という単一のチェックボックス設定は存在しません。"
+    },
+    {
+      "id": "D",
+      "text": "VPCエンドポイント（ゲートウェイ型）を作成し、エンドポイントポリシーでHTTPS通信のみを許可するルールを定義して、S3への全ルートをVPCエンドポイント経由にルーティングする。",
+      "explanation": "VPCエンドポイントはVPC内からのトラフィックをプライベートに接続するための機能であり、インターネット経由などVPC外からのアクセスに対して一貫してHTTPS通信を強制することはできません。S3バケット自体にバケットポリシーを適用する方が包括的でシンプルです。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon S3における転送中暗号化（Encryption in Transit）の強制は、S3バケットポリシーに条件キー `aws:SecureTransport` を用いた明示的な拒否（Explicit Deny）ステートメントを定義するのがAWSの標準的なベストプラクティスです。\nポリシー例：\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"EnforceTLSRequestsOnly\",\n      \"Effect\": \"Deny\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:*\",\n      \"Resource\": [\n        \"arn:aws:s3:::my-bucket\",\n        \"arn:aws:s3:::my-bucket/*\"\n      ],\n      \"Condition\": {\n        \"Bool\": {\n          \"aws:SecureTransport\": \"false\"\n        }\n      }\n    }\n  ]\n}\n```\nAWS IAMのポリシー評価論理では「明示的な拒否」はあらゆる許可（他のIAMポリシーやACL）に優先するため、HTTP接続で届いたあらゆるAPIコールは即座にアクセス拒否（403 Forbidden）となります。"
+}

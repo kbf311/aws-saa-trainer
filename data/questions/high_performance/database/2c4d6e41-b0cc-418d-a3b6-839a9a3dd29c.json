@@ -1,0 +1,39 @@
+{
+  "id": "2c4d6e41-b0cc-418d-a3b6-839a9a3dd29c",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "データベースとキャッシング",
+  "title": "Amazon RDS Performance Insightsによるデータベース負荷（AAS）の可視化と高負荷クエリの特定",
+  "services": [
+    "Amazon RDS",
+    "Amazon Aurora",
+    "Amazon CloudWatch"
+  ],
+  "question_type": "single",
+  "question_text": "あるWebアプリケーションのバックエンドとして稼働しているAmazon RDS for MySQLインスタンスにおいて、特定の時間帯にCPU使用率がスパイクし、アプリケーション全体のレスポンスタイムが著しく悪化しています。CloudWatchの標準メトリクス（CPUUtilization、DatabaseConnections、ReadIOPSなど）を確認しましたが、リソースの利用率が高いことは判別できるものの、「具体的にどのSQLステートメントがボトルネックを引き起こしているのか」「プロセスがCPU、ロック待機、またはディスクI/Oのどの待機イベントで時間を費やしているのか」を特定することができません。\n\nデータベースの負荷（Average Active Sessions: AAS）を視覚的に分析し、システムパフォーマンスを低下させている原因のSQLステートメントと待機イベントを即座に特定・分析するための最適な機能はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "RDSインスタンスで「Amazon RDS Performance Insights（パフォーマンスインサイト）」を有効化し、ダッシュボードで待機イベント別の負荷と上位のSQLステートメントを分析する。",
+      "explanation": "Amazon RDS Performance Insightsは、データベースのパフォーマンス問題を迅速に検出・分析するための専用チューニングツールです。「平均アクティブセッション数 (AAS: Average Active Sessions)」を主要メトリクスとし、CPU待機、ロック待機、I/O待機などの待機状態（待機イベント）ごとに色分けして表示します。さらに、どの具体的なSQLステートメントやユーザー、ホストが最も負荷を発生させているかを容易に特定できます。"
+    },
+    {
+      "id": "B",
+      "text": "CloudWatch Logs Insightsを使用してVPCフローログをクエリし、RDSのプライベートIP宛てのパケット送信元を調査する。",
+      "explanation": "VPCフローログはネットワークレイヤー（IP/ポート/パケット数）の監視であり、データベース内部で実行されている具体的なSQL文や待機イベント（ロック競合など）を特定することはできません。"
+    },
+    {
+      "id": "C",
+      "text": "RDSの一般ログ（General Log）を有効化してすべてのクエリをCloudWatch Logsに出力し、手動で目視確認する。",
+      "explanation": "一般ログはすべてのSQLを無差別に記録するため、データベースのI/OとCPUに深刻なオーバーヘッドを与え、さらなるパフォーマンス劣化を引き起こします。また負荷順の集計も行われません。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Trusted Advisorのコスト最適化チェックを実行し、推奨インスタンスサイズを確認する。",
+      "explanation": "Trusted Advisorはリソースのアイドル状態やベストプラクティスをチェックするものであり、リアルタイムなクエリの待機イベントやスロークエリの特定は行えません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon RDS Performance Insightsは、データベースの内部状態と負荷を「平均アクティブセッション数 (AAS)」として直感的に可視化するツールです。CPU処理、ディスクI/O待機、ロック待機などの待機イベントを色分けして表示し、負荷の根本原因となっている上位SQL（Top SQL）を素早く特定してチューニングを行うことができます。デフォルトで7日間のパフォーマンス履歴を無料で保持できます。"
+}

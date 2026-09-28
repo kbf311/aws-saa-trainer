@@ -1,0 +1,38 @@
+{
+  "id": "9a4de005-fad2-4773-a9a9-f9af37e49e01",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "AWS Database Encryption SDKを用いたDynamoDB特定属性のクライアント側暗号化による最小権限の徹底",
+  "services": [
+    "Amazon DynamoDB",
+    "AWS Key Management Service"
+  ],
+  "question_type": "single",
+  "question_text": "あるECサイト企業が、ユーザーの個人プロファイルやクレジットカード番号などの決済情報をAmazon DynamoDBテーブルに保存しています。テーブルレベルの保管時暗号化（AWS KMSによる暗号化）は既に有効化されていますが、セキュリティ要件が改定され、「DynamoDBテーブルを照会・保守するデータベース管理者であっても、クレジットカード番号などの極秘フィールド（属性）の平文データは閲覧できないようにしなければならない」と定められました。この厳格な職務分掌とフィールドレベル保護を最も効率的に実現するアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Database Encryption SDK（旧DynamoDB Encryption Client）をクライアントアプリケーションに導入し、クレジットカード番号属性をデータベース送信前にクライアント側で暗号化して保存する。復号に必要なKMSキーの権限は決済処理サービスのみに制限する。",
+      "explanation": "AWS Database Encryption SDK（旧DynamoDB Encryption Client）を使用すると、アイテム全体ではなく特定の機密属性（フィールド）を選択してクライアント側で暗号化・署名してからDynamoDBに保存できます。これにより、DynamoDB管理者やコンソール閲覧者には暗号化されたバイト列しか見えず、適切なAWS KMS復号権限を持つ決済アプリケーションのみが平文を取得できるようになります。"
+    },
+    {
+      "id": "B",
+      "text": "DynamoDBのテーブル設定でAWSマネージドキーからカスタマーマネージドキー (CMK) に切り替え、データベース管理者のIAMポリシーでkms:Decryptを明示的に拒否する。",
+      "explanation": "DynamoDBのテーブルレベル保管時暗号化はストレージ層で透過的に行われます。DynamoDB API（GetItem/Query等）を実行する際、IAMポリシーでDynamoDB読み取りが許可されていればDynamoDBサービス側が透過的に復号して結果を返すため、管理者に対して特定属性の平文閲覧のみを隠蔽することはできません。"
+    },
+    {
+      "id": "C",
+      "text": "DynamoDB StreamsとAWS Lambdaを設定し、クレジットカード番号属性が書き込まれた直後に非同期で暗号化してテーブルを更新する。",
+      "explanation": "DynamoDB Streamsはデータが書き込まれた「後」にイベントを発行するため、テーブルに一瞬でも平文が書き込まれてしまうリスクがあり、厳格なセキュリティ要件に違反します。"
+    },
+    {
+      "id": "D",
+      "text": "DynamoDB Accelerator (DAX) クラスターを導入し、DAXのキャッシュポリシーでクレジットカード番号属性をマスクするよう設定する。",
+      "explanation": "DAXはインメモリキャッシングサービスであり、特定の属性を動的にマスク・暗号化する機能はありません。また、クライアントが直接DynamoDBにアクセスした場合に保護されません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "データベースにおけるフィールドレベル暗号化と職務分掌に関する設問です。ストレージ全体の透過的暗号化（TDE）では防げないDB管理者からの機密閲覧リスクに対しては、AWS Database Encryption SDKを用いたクライアント側フィールド暗号化を適用することで、特定アプリケーションのみに平文アクセスを限定できます。"
+}

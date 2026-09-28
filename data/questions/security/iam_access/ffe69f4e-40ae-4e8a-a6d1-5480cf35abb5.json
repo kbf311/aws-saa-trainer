@@ -1,0 +1,38 @@
+{
+  "id": "ffe69f4e-40ae-4e8a-a6d1-5480cf35abb5",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "OpenID Connect (OIDC) IDプロバイダーとIAMロールを活用した外部CI/CDパイプラインからのセキュアな一時的認証情報連携",
+  "services": [
+    "AWS IAM",
+    "AWS STS"
+  ],
+  "question_type": "single",
+  "question_text": "ある開発チームは、外部のクラウド型CI/CDサービス（GitHub Actions）を使用して、Amazon S3への静的ウェブサイトアセットの自動デプロイとAmazon CloudFrontのキャッシュ無効化を行っています。現在のパイプラインには、長期間有効なIAMユーザーのアクセスキーIDとシークレットアクセスキーがシークレット変数として登録されています。セキュリティ監査により、長期的な認証情報の漏洩リスクを排除し、有効期限が短い一時的なセキュリティ認証情報を使用するようにアーキテクチャを改善することが求められました。最小限の運用オーバーヘッドでセキュリティ要件を満たす設計はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS IAMでGitHub Actionsを信頼するOIDC（OpenID Connect）IDプロバイダーを構成し、リポジトリとブランチを条件に指定した信頼ポリシーを持つIAMロールを作成して、ワークフロー実行時にSTS AssumeRoleWithWebIdentityで一時認証情報を取得する。",
+      "explanation": "IAM OIDC（OpenID Connect）IDプロバイダーを登録し、AssumeRoleWithWebIdentityを使用することで、外部CI/CD環境に固定の長期アクセスキーを保存することなく、ジョブ実行ごとに短時間のみ有効な一時的セキュリティ認証情報を取得できます。信頼ポリシーの条件（Condition）で対象のリポジトリやブランチ（subクレーム等）を厳密に制限できるため、最もセキュアで推奨されるベストプラクティスです。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Secrets ManagerにIAMユーザーのアクセスキーを保存し、Secrets Managerの自動ローテーション機能を有効にして、GitHub Actionsがデプロイのたびに最新キーをAPI経由で取得する構成にする。",
+      "explanation": "Secrets Managerからアクセスキーを取得するためには、そもそもSecrets Managerにアクセスするための認証情報が外部CI/CD側に必要となるため、認証情報のブートストラップ問題が解決せず、根本的な長期キー排除になりません。"
+    },
+    {
+      "id": "C",
+      "text": "CI/CD実行用の専用EC2インスタンスを自社VPC内にセルフホストランナーとして構築し、IAMインスタンスプロファイルをアタッチしてデプロイ処理を実行させる。",
+      "explanation": "セルフホストランナーをEC2上で構築・保守することは、OSのパッチ適用、スケーリング、インフラ管理などの大きな運用オーバーヘッドが発生するため、マネージドなGitHub ActionsとOIDCフェデレーションを直接連携させるアプローチと比較して最適ではありません。"
+    },
+    {
+      "id": "D",
+      "text": "IAMユーザーのアクセスキーの有効期限をIAMポリシーで最大1時間に制限し、CI/CDパイプライン実行の直前にAWS CLIスクリプトで新しいキーを発行・破棄する。",
+      "explanation": "IAMアクセスキー自体に有効期限を直接設定する機能は存在せず、APIキーの発行・破棄を外部から行うには依然としてマスター権限の長期認証情報が必要となるため、根本的な解決になりません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "外部CI/CDプラットフォーム（GitHub Actions、GitLab CIなど）からAWSリソースへ安全にアクセスする推奨ベストプラクティスは、IAM OIDC（OpenID Connect）IDプロバイダーとIAMロールを組み合わせた一時的セキュリティ認証情報（AssumeRoleWithWebIdentity）の利用です。長期的なIAMアクセスキーを外部サービスに保存する必要が一切なくなり、認証情報の漏洩リスクを完全に排除できます。また、信頼ポリシーでGitHubの特定の組織、リポジトリ、ブランチからのリクエストのみを許可するきめ細かなアクセス制御が可能です。"
+}

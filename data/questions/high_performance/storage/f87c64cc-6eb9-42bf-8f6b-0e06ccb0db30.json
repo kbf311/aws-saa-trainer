@@ -1,0 +1,38 @@
+{
+  "id": "f87c64cc-6eb9-42bf-8f6b-0e06ccb0db30",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "高性能ストレージ",
+  "title": "Amazon FSx for NetApp ONTAPによるマルチプロトコル共有ファイルアクセスと高機能ストレージ統合",
+  "services": [
+    "Amazon FSx for NetApp ONTAP",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融機関は、オンプレミス環境で稼働しているミッションクリティカルな分析基盤をAWSへ移行する計画を立てています。このワークロードでは、Linuxベースの分析ノード（NFS経由）とWindowsベースのレポート作成ノード（SMB経由）の双方が、同一の共有データセットに対して同時に低レイテンシで読み書きアクセスを行う必要があります。また、ブロックストレージアクセス（iSCSI）を使用する一部のレガシーサーバーとの互換性も求められています。インフラ管理のオーバーヘッドを最小限に抑えつつ、これらの複数プロトコル要件を満たす最も適切なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon EFSファイルシステムを作成し、NFSプロトコルでLinuxインスタンスにマウントするとともに、SambaプロキシサーバーをEC2上に構築してWindowsインスタンスへのSMBアクセスを提供する。",
+      "explanation": "Amazon EFSはネイティブではNFS (NFSv4) のみをサポートしており、SMBやiSCSIには対応していません。自前でSambaプロキシやプロトコル変換サーバーを構築・運用すると管理オーバーヘッドや単一障害点が生じるため不適切です。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon FSx for NetApp ONTAPファイルシステムをデプロイし、同一のストレージボリュームに対してNFS、SMB、およびiSCSIプロトコル経由でアクセスを提供する。",
+      "explanation": "Amazon FSx for NetApp ONTAPは、フルマネージド型でNetAppのONTAPファイルシステム機能を提供するサービスであり、単一の共有ストレージに対してNFS、SMB、iSCSIのマルチプロトコルアクセスをネイティブにサポートします。LinuxノードとWindowsノードからの同時アクセス要件を完全に満たし、独自のプロキシ構築も不要です。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon FSx for Windows File Serverをデプロイし、Linuxノードにはcifs-utilsをインストールしてSMB経由でファイルシステムにアクセスさせる。",
+      "explanation": "FSx for Windows File ServerはSMBプロトコルに特化しており、Linuxからもマウント可能ですが、NFSやiSCSIネイティブのプロトコル機能や高度なマルチプロトコル同時書き込みの整合性管理には適していません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon S3バケットを作成し、すべてのLinuxおよびWindowsインスタンスにAWS Storage Gateway（File Gateway）をデプロイしてアクセスさせる。",
+      "explanation": "Storage GatewayはオンプレミスとS3の連携に適したゲートウェイであり、低レイテンシが要求されるミッションクリティカルな分析基盤のクラスタファイル共有としては性能要件やリアルタイム整合性を満たせません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Amazon FSx for NetApp ONTAPは、業界標準のプロトコル（NFS、SMB、iSCSI、NVMe-over-TCP）を幅広くサポートするフルマネージドストレージサービスです。LinuxとWindowsが混在するハイブリッド・マルチOS環境において、同一データに対するシームレスな同時アクセスを実現できます。さらに、スナップショット、クローン、データの自動階層化（キャパシティプールストレージ）、インライン重複排除・圧縮などの高度なストレージ管理機能を備えており、オンプレミスのエンタープライズNAS/SANワークロードをAWSへ最小限の変更でリフト＆シフトするのに最適です。"
+}

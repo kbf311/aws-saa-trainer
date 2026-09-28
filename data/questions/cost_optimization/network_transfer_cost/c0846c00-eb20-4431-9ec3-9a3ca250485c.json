@@ -1,0 +1,46 @@
+{
+  "id": "c0846c00-eb20-4431-9ec3-9a3ca250485c",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "Systems Manager接続におけるInterface型VPCエンドポイント導入によるNAT Gateway費用の削減",
+  "services": [
+    "AWS Systems Manager",
+    "AWS PrivateLink",
+    "Amazon VPC",
+    "NAT Gateway"
+  ],
+  "question_type": "multiple",
+  "question_text": "ある企業は、セキュリティ要件に基づき、インターネットアクセスを必要としない数百台のAmazon EC2インスタンスをプライベートサブネットのみに配置しています。これらのインスタンスはパッチ適用、インベントリ収集、Session Managerによるリモート管理のため、AWS Systems Manager (SSM) Agentと常時通信しています。現在、この管理通信のためだけにマルチAZ構成で2台のNAT Gatewayを運用しており、NAT Gatewayの稼働時間料金（月額約65ドル以上）と継続的なヘルスチェック通信によるデータ転送料金が発生しています。\n\nソリューションアーキテクトはNAT Gatewayを完全に廃止し、AWSのプライベートネットワーク内でSystems Managerと通信させることでコストを最小限に抑えたいと考えています。このアーキテクチャを実現するために必要な設定手順はどれですか？（2つ選択してください）",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Systems Managerに必要な各サービス（ssm、ssmmessages、ec2messages）用のInterface型VPCエンドポイント (AWS PrivateLink) をVPC内に作成する。",
+      "explanation": "Systems ManagerおよびSession Managerの管理トラフィックをプライベートサブネットからインターネットを経由させずに疎通させるには、AWS PrivateLinkを利用した3つのインターフェイスエンドポイント（com.amazonaws.[region].ssm、com.amazonaws.[region].ssmmessages、com.amazonaws.[region].ec2messages）のプロビジョニングが必要です。"
+    },
+    {
+      "id": "B",
+      "text": "VPCエンドポイントで「プライベートDNS名を有効化 (Enable Private DNS Name)」を設定する。",
+      "explanation": "プライベートDNS名を有効化することで、EC2インスタンス上のSSM Agentが標準のAWSパブリックDNSホスト名（例: ssm.ap-northeast-1.amazonaws.com）へリクエストを送信した際、Route 53プライベートリゾルバーが自動的にVPCエンドポイントのプライベートIPアドレスに名前解決するようになります。これにより既存インスタンスやスクリプトの設定変更なしにNAT Gatewayを迂回できます。"
+    },
+    {
+      "id": "C",
+      "text": "プライベートサブネットのルートテーブルにSystems Manager用のGateway型VPCエンドポイントをターゲットとして追加する。",
+      "explanation": "Gateway型VPCエンドポイントはAmazon S3とAmazon DynamoDBの2つのサービスのみに提供されており、AWS Systems Managerには対応していません。"
+    },
+    {
+      "id": "D",
+      "text": "各EC2インスタンスにElastic IPアドレスを割り当て、セキュリティグループのアウトバウンドでSystems ManagerのIPのみを許可する。",
+      "explanation": "EC2インスタンスにパブリックIP（Elastic IP）を付与することはプライベートサブネットのセキュリティ原則に違反し、インターネットゲートウェイが必要になります。またパブリックIPv4アドレスの利用料金も発生します。"
+    },
+    {
+      "id": "E",
+      "text": "Internet Gatewayを作成し、プライベートサブネットのルートテーブルのデフォルトルート（0.0.0.0/0）をInternet Gatewayに向ける。",
+      "explanation": "プライベートサブネットのルートをInternet Gatewayに向けるとサブネットがパブリックサブネット化し、パブリックIPを持たないインスタンスは通信不能になるため不適切です。"
+    }
+  ],
+  "correct_answers": [
+    "A",
+    "B"
+  ],
+  "explanation": "プライベートサブネット内のEC2インスタンスが外部インターネットアクセスを一切行わず、AWS Systems Manager（Session Manager等を含む）とのみ通信している場合、高価なNAT Gateway（時間単価＋データ処理単価）を廃止し、AWS PrivateLink（Interface型VPCエンドポイント）に置き換えることでコストを削減できます。\n\n必要な構成手順は以下の通りです：\n1. Systems Managerに必要な3つのインターフェイスエンドポイント（`ssm`、`ssmmessages`、`ec2messages`）を作成する。\n2. エンドポイントの「プライベートDNS名」を有効化する。これにより、標準のSSMエンドポイントURLへのアクセスが自動的にエンドポイントのプライベートIP（ENI）に解決されるため、アプリケーションやエージェントの設定変更が不要になります。"
+}

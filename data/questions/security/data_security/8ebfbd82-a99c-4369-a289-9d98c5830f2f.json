@@ -1,0 +1,39 @@
+{
+  "id": "8ebfbd82-a99c-4369-a289-9d98c5830f2f",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "AWS Systems Manager Parameter Storeを用いた設定値と機密情報の階層的・低コストな安全管理",
+  "services": [
+    "AWS Systems Manager Parameter Store",
+    "AWS Key Management Service",
+    "AWS Identity and Access Management"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、自社のWebアプリケーションで使用するデータベース接続文字列、APIキー、および各種環境設定値をAWS上で一元管理するソリューションを設計しています。このアプリケーションには、開発環境、ステージング環境、本番環境の3つの環境が存在し、環境ごとに異なる構成パラメータを階層構造（パスベース）で管理する必要があります。機密情報（パスワードやAPIトークン）は暗号化して保存する必要があり、キーの自動ローテーション機能は不要ですが、追加のインフラ管理オーバーヘッドやリクエストごとのコストを可能な限り最小限に抑えたいと考えています。また、各環境のパラメータへのアクセスはIAMポリシーによって厳密に分離されなければなりません。この要件を満たす最も費用対効果の高いソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Systems Manager Parameter Storeの標準パラメータを使用し、機密情報をSecureString型としてAWS KMSのカスタマーマネージドキーで暗号化して保存する。パラメータ名に `/app/prod/` や `/app/dev/` などの階層プレフィックスを採用し、IAMポリシーのResource要素でパスを指定してアクセス制御を行う。",
+      "explanation": "Systems Manager Parameter Storeの標準パラメータは追加料金なしで利用でき、SecureString型を使用することでAWS KMSによる暗号化が可能です。また、パスベースの階層構造（例: `/app/prod/*`）によりIAMポリシーでのきめ細かなアクセス制御が実現でき、自動ローテーションが不要な場合の構成管理として最も費用対効果が高くなります。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Secrets Managerを使用してすべての環境の構成値と機密情報をシークレットとして保存する。タグベースのアクセスコントロール（ABAC）を設定し、自動ローテーション機能は明示的に無効化する。",
+      "explanation": "Secrets Managerはシークレット1件あたり月額料金が発生するため、大量の環境設定値やパラメータをすべて格納するとコストが高くなります。自動ローテーションが不要で単純な構成値や機密情報を低コストで管理する要件には、Parameter Storeの標準パラメータが最適です。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon S3バケットを作成し、環境ごとにフォルダを分けて設定ファイル（JSON形式）を配置する。S3のSSE-KMS暗号化を有効化し、各環境のEC2インスタンスプロファイルにバケットポリシーでプレフィックスごとのアクセス許可を付与する。",
+      "explanation": "S3に設定ファイルを平文やJSONで置く構成は、アプリケーションからの頻繁な読み取りや個別の暗号化・復号、バージョン管理、SDKを通じた動的な値の取得においてParameter Storeよりも運用のオーバーヘッドが大きく、設定値管理のベストプラクティスではありません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon DynamoDBテーブルを作成し、環境名、キー名、暗号化した値をアイテムとして保存する。暗号化にはAWS Encryption SDKを使用し、アプリケーション側で暗号化・復号のロジックを実装する。",
+      "explanation": "DynamoDBに独自の設定管理テーブルを作成しAWS Encryption SDKでアプリケーションコード内に暗号化・復号処理を実装する構成は、開発および運用のオーバーヘッドが非常に大きく、マネージドな設定管理サービスであるParameter Storeを利用するより非効率です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Systems Manager Parameter Storeは、構成データ管理および機密情報（パスワード、ライセンスキー等）の管理を提供するフルマネージドサービスです。標準パラメータ（Standard Parameter）は保管コストが無料で提供されており、値の暗号化が必要な場合は『SecureString』型を指定してAWS KMSキーで暗号化できます。また、`/環境名/アプリ名/キー名` のような階層パス構造（Hierarchical structure）をサポートしており、IAMポリシーで `arn:aws:ssm:region:account:parameter/app/prod/*` のようにリソースARNを指定することで、環境ごとのアクセス制御を簡潔かつ厳密に実現できます。Secrets Managerはデータベース認証情報の自動ローテーションなどの高度な機能を提供しますが、シークレットごとに月額固定料金（約0.40USD/シークレット/月）がかかるため、自動ローテーションが不要でコストを最小限に抑えたい場合はParameter Storeが推奨されます。"
+}

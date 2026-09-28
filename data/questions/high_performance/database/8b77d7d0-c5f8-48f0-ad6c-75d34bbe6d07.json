@@ -1,0 +1,38 @@
+{
+  "id": "8b77d7d0-c5f8-48f0-ad6c-75d34bbe6d07",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "データベースとキャッシング",
+  "title": "Amazon Keyspaces (for Apache Cassandra) によるサーバーレスな大規模ワイドカラムNoSQLの運用と高速スケール",
+  "services": [
+    "Amazon Keyspaces",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "ある通信事業者が、5G通信基地局から継続的に送信される毎秒数十万件のテレメトリ時系列データを収集・検索するシステムを運用しています。現在、自社データセンターで大規模なApache Cassandraクラスターを運用していますが、ノードの追加やリバランス、コンパクション、JVMガベージコレクションのチューニングなどの運用管理負担が非常に重く、トラフィック急増時のスケーリング遅延が課題となっています。同社は既存のCassandra Query Language (CQL) コード、テーブルスキーマ、およびCassandraクライアントドライバをそのまま再利用しつつ、サーバーのプロビジョニングや管理が不要で、秒間数百万リクエストへ数ミリ秒の応答時間で自動スケールするAWSサービスへの移行を求めています。\n\nこれらの要件を満たす最適なAWSサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon Keyspaces (for Apache Cassandra)",
+      "explanation": "Amazon Keyspaces (for Apache Cassandra) は、Apache Cassandraと互換性のあるスケーラブルで可用性の高いサーバーレスマネージドデータベースサービスです。既存のCassandra 2.0/3.0ドライバやCQLコードをそのまま使用でき、サーバーのプロビジョニング、パッチ適用、クラスターの再バランシングが不要です。トラフィックの増減に応じてテーブルキャパシティが自動的にスケールし、一貫して1桁ミリ秒の高速な読み取り・書き込みパフォーマンスを提供します。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon RDS for PostgreSQL",
+      "explanation": "RDS for PostgreSQLはリレーショナルデータベースであり、CassandraのCQLやワイドカラム型データモデルとの互換性はありません。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon OpenSearch Service",
+      "explanation": "OpenSearchは全文検索・ログ分析エンジンであり、CQL互換性や時系列ワイドカラムデータのCassandra代替データベースとしては設計されていません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon Neptune",
+      "explanation": "Amazon Neptuneはグラフデータベース（Property Graph / RDF）サービスであり、Cassandraの時系列・ワイドカラムストレージ要件には適合しません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Apache CassandraワークロードをAWSへ移行し、管理負荷をゼロにしつつミリ秒レベルの高速性能を維持したい場合、Amazon Keyspaces (for Apache Cassandra) が最適です。既存のCQLコードやクライアントドライバを改修することなくそのまま活用でき、サーバーレスアーキテクチャにより需要に応じた自動キャパシティ調整（オンデマンド/プロビジョンド）と高可用性を提供します。"
+}

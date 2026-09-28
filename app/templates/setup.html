@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+
+{% block title %}AWS SAA-C03 Trainer - 試験設定・開始{% endblock %}
+
+{% block content %}
+<main class="flex-1 max-w-3xl w-full mx-auto px-4 sm:px-6 py-8">
+
+  <!-- Welcome / Breadcrumb Header -->
+  <div class="mb-8">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center space-x-2 text-xs text-slate-400 mb-1">
+          <a href="/" class="hover:text-aws-orange transition">ダッシュボード</a>
+          <span>/</span>
+          <span class="text-slate-200">試験設定</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          セッション設定 & トレーニング開始
+        </h1>
+        <p class="text-sm text-slate-400 mt-1">
+          目標問題数と出題ジャンルを選択して、即時解説付きの演習を開始します。
+        </p>
+      </div>
+
+      <a href="/"
+        class="inline-flex items-center space-x-2 text-xs text-slate-400 hover:text-white px-3 py-2 rounded-lg bg-slate-800/80 border border-slate-700 hover:border-slate-600 transition w-fit">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>ダッシュボードへ戻る</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="space-y-6">
+
+    <!-- Step 1: Question Count -->
+    <section class="bg-aws-card border border-aws-border rounded-xl p-6 shadow-md">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-2.5">
+          <span
+            class="w-6 h-6 rounded-full bg-aws-orange/20 text-aws-orange text-xs font-bold flex items-center justify-center border border-aws-orange/30">1</span>
+          <h2 class="text-base font-bold text-white">問題数の選択</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="countSelectorGroup">
+        <!-- 10問 -->
+        <label class="cursor-pointer">
+          <input type="radio" name="question_count" value="10" checked class="peer sr-only">
+          <div
+            class="p-4 rounded-xl border border-slate-700 bg-slate-900/60 peer-checked:border-aws-orange peer-checked:bg-aws-orange/10 peer-checked:ring-1 peer-checked:ring-aws-orange transition text-center hover:border-slate-600 flex flex-col items-center justify-center">
+            <div class="h-8 flex items-baseline justify-center space-x-1.5">
+              <span class="text-2xl font-black text-white peer-checked:text-aws-orange">10</span>
+              <span class="text-xs font-semibold text-slate-400 peer-checked:text-aws-orange">問</span>
+            </div>
+            <span
+              class="mt-1.5 inline-block text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700/50">約15分</span>
+          </div>
+        </label>
+
+        <!-- 30問 -->
+        <label class="cursor-pointer">
+          <input type="radio" name="question_count" value="30" class="peer sr-only">
+          <div
+            class="p-4 rounded-xl border border-slate-700 bg-slate-900/60 peer-checked:border-aws-orange peer-checked:bg-aws-orange/10 peer-checked:ring-1 peer-checked:ring-aws-orange transition text-center hover:border-slate-600 flex flex-col items-center justify-center">
+            <div class="h-8 flex items-baseline justify-center space-x-1.5">
+              <span class="text-2xl font-black text-white peer-checked:text-aws-orange">30</span>
+              <span class="text-xs font-semibold text-slate-400 peer-checked:text-aws-orange">問</span>
+            </div>
+            <span
+              class="mt-1.5 inline-block text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700/50">約45分</span>
+          </div>
+        </label>
+
+        <!-- 50問 -->
+        <label class="cursor-pointer">
+          <input type="radio" name="question_count" value="50" class="peer sr-only">
+          <div
+            class="p-4 rounded-xl border border-slate-700 bg-slate-900/60 peer-checked:border-aws-orange peer-checked:bg-aws-orange/10 peer-checked:ring-1 peer-checked:ring-aws-orange transition text-center hover:border-slate-600 flex flex-col items-center justify-center">
+            <div class="h-8 flex items-baseline justify-center space-x-1.5">
+              <span class="text-2xl font-black text-white peer-checked:text-aws-orange">50</span>
+              <span class="text-xs font-semibold text-slate-400 peer-checked:text-aws-orange">問</span>
+            </div>
+            <span
+              class="mt-1.5 inline-block text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700/50">本番相当</span>
+          </div>
+        </label>
+
+        <!-- エンドレス -->
+        <label class="cursor-pointer">
+          <input type="radio" name="question_count" value="-1" class="peer sr-only">
+          <div
+            class="p-4 rounded-xl border border-slate-700 bg-slate-900/60 peer-checked:border-aws-orange peer-checked:bg-aws-orange/10 peer-checked:ring-1 peer-checked:ring-aws-orange transition text-center hover:border-slate-600 flex flex-col items-center justify-center">
+            <div class="h-8 flex items-center justify-center">
+              <span class="text-2xl font-black text-white peer-checked:text-aws-orange leading-none">∞</span>
+            </div>
+            <span
+              class="mt-1.5 inline-block text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded border border-slate-700/50">いつでも終了</span>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- Step 2: Mode Selector -->
+    <section class="bg-aws-card border border-aws-border rounded-xl p-6 shadow-md">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center space-x-2.5">
+          <span
+            class="w-6 h-6 rounded-full bg-aws-orange/20 text-aws-orange text-xs font-bold flex items-center justify-center border border-aws-orange/30">2</span>
+          <h2 class="text-base font-bold text-white">出題ジャンル・モード</h2>
+        </div>
+      </div>
+
+      <div class="space-y-3" id="modeSelectorGroup">
+        <!-- 1. ランダム (カテゴリ均等) -->
+        <label class="block cursor-pointer">
+          <input type="radio" name="mode" value="random" checked class="peer sr-only">
+          <div
+            class="p-4 rounded-xl border border-slate-700 bg-slate-900/60 peer-checked:border-aws-orange peer-checked:bg-aws-orange/10 peer-checked:ring-1 peer-checked:ring-aws-orange transition hover:border-slate-600">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div
+                  class="w-9 h-9 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
+                  <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white flex items-center space-x-2">
+                    <span>ランダム（カテゴリ均等）</span>
+                    <span
+                      class="text-[10px] bg-blue-500/20 text-blue-400 px-1.5 py-0.5 rounded border border-blue-500/30">おすすめ</span>
+                  </div>
+                  <p class="text-xs text-slate-400 mt-0.5">全カテゴリからバランスよく均等に問題を選定して出題します。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <!-- 2. 完全ランダム -->
+        <label class="block cursor-pointer">
+          <input type="radio" name="mode" value="all_random" class="peer sr-only">
+          <div
+            class="p-4 rounded-xl border border-slate-700 bg-slate-900/60 peer-checked:border-aws-orange peer-checked:bg-aws-orange/10 peer-checked:ring-1 peer-checked:ring-aws-orange transition hover:border-slate-600">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div
+                  class="w-9 h-9 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center border border-purple-500/30">
+                  <i class="fa-solid fa-shuffle"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white">完全ランダム</div>
+                  <p class="text-xs text-slate-400 mt-0.5">カテゴリの比率を考慮せず、全収録問題からランダムに出題します。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <!-- 3. 苦手カテゴリ集中 -->
+        <label class="block cursor-pointer">
+          <input type="radio" name="mode" value="category_weak" class="peer sr-only">
+          <div
+            class="p-4 rounded-xl border border-slate-700 bg-slate-900/60 peer-checked:border-aws-orange peer-checked:bg-aws-orange/10 peer-checked:ring-1 peer-checked:ring-aws-orange transition hover:border-slate-600">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div
+                  class="w-9 h-9 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/30">
+                  <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white flex items-center space-x-2">
+                    <span>苦手カテゴリ集中</span>
+                    <span
+                      class="text-[10px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded border border-amber-500/30">弱点克服</span>
+                  </div>
+                  <p class="text-xs text-slate-400 mt-0.5">直近の正解率が低いカテゴリ、または未学習のカテゴリから優先出題します。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+
+        <!-- 4. 苦手問題集中 -->
+        <label class="block cursor-pointer">
+          <input type="radio" name="mode" value="question_weak" class="peer sr-only">
+          <div
+            class="p-4 rounded-xl border border-slate-700 bg-slate-900/60 peer-checked:border-aws-orange peer-checked:bg-aws-orange/10 peer-checked:ring-1 peer-checked:ring-aws-orange transition hover:border-slate-600">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div
+                  class="w-9 h-9 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center border border-rose-500/30">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white flex items-center space-x-2">
+                    <span>苦手問題集中</span>
+                    <span
+                      class="text-[10px] bg-rose-500/20 text-rose-400 px-1.5 py-0.5 rounded border border-rose-500/30">ピンポイント</span>
+                  </div>
+                  <p class="text-xs text-slate-400 mt-0.5">直近で間違えた問題、または直近3回の正解率が50%未満の問題を出題します。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div id="weakModeWarning"
+        class="hidden mt-3 p-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
+        <i class="fa-solid fa-triangle-exclamation mr-1.5"></i>
+        <span>苦手問題のデータがまだ蓄積されていない場合は、通常ランダム出題に自動フォールバックします。</span>
+      </div>
+    </section>
+
+    <!-- Action Button -->
+    <div class="flex justify-center pt-2">
+      <button id="btnStartQuiz"
+        class="inline-flex items-center justify-center space-x-3 px-6 py-3.5 rounded-xl bg-aws-orange hover:bg-aws-orangeHover text-slate-950 font-bold text-sm shadow-md transition text-center">
+        <i class="fa-solid fa-play"></i>
+        <span>演習セッションを開始</span>
+      </button>
+    </div>
+
+  </div>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnStart = document.getElementById('btnStartQuiz');
+    const warningEl = document.getElementById('weakModeWarning');
+    const modeInputs = document.querySelectorAll('input[name="mode"]');
+
+    modeInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        if (input.value === 'question_weak') {
+          warningEl.classList.remove('hidden');
+        } else {
+          warningEl.classList.add('hidden');
+        }
+      });
+    });
+
+    btnStart.addEventListener('click', async () => {
+      const selectedCountInput = document.querySelector('input[name="question_count"]:checked');
+      const selectedModeInput = document.querySelector('input[name="mode"]:checked');
+
+      const count = parseInt(selectedCountInput ? selectedCountInput.value : "10", 10);
+      const mode = selectedModeInput ? selectedModeInput.value : "random";
+
+      btnStart.disabled = true;
+      btnStart.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> セッション準備中...';
+
+      try {
+        const res = await fetch('/api/quiz/session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mode: mode, question_count_target: count })
+        });
+
+        if (!res.ok) {
+          throw new Error('セッション作成に失敗しました');
+        }
+
+        const data = await res.json();
+        // 試験画面へ遷移
+        window.location.href = `/quiz?session_id=${data.session_id}`;
+      } catch (err) {
+        alert(err.message || 'エラーが発生しました');
+        btnStart.disabled = false;
+        btnStart.innerHTML = '<i class="fa-solid fa-play"></i> <span>演習セッションを開始</span>';
+      }
+    });
+  });
+</script>
+{% endblock %}

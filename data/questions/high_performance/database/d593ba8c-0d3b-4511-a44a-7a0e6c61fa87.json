@@ -1,0 +1,38 @@
+{
+  "id": "d593ba8c-0d3b-4511-a44a-7a0e6c61fa87",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "データベースとキャッシング",
+  "title": "Amazon DocumentDBによる大規模JSONドキュメントワークロードのスケーラブルな高速検索",
+  "services": [
+    "Amazon DocumentDB",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "あるモバイルアプリ開発企業が、ユーザーのプロファイル、カスタマイズ設定、動的なゲーム内インベントリなどの複雑でスキーマが頻繁に変動するネストされたJSONドキュメントを保存・クエリするデータベース基盤をAWS上に構築しようとしています。現在、セルフホストのMongoDBクラスターをEC2上で運用していますが、急速なユーザー増加に伴いストレージのスケーリングとバックアップ運用、および高スループットな読み取り負荷への対応に限界を感じています。企業は、MongoDBのAPIや既存のクエリコード・ドライバを書き換えることなく、ストレージが最大128TiBまで自動拡張し、最大15個のリードレプリカで読み取りをミリ秒単位で高速スケールできるフルマネージドサービスを求めています。\n\nこれらの要件を満たす最適なAWSサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon DocumentDB (with MongoDB compatibility)",
+      "explanation": "Amazon DocumentDBは、MongoDBと互換性のあるフルマネージドなドキュメント指向NoSQLデータベースサービスです。ストレージとコンピュートが分離された独自のクラウドネイティブアーキテクチャを採用しており、ストレージは最大128TiBまで自動拡張され、最大15個のリードレプリカによる低遅延な読み取り負荷分散を提供します。既存のMongoDBクライアントやドライバをそのまま活用して、運用管理負荷を大幅に削減しつつ高性能を達成できます。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon RDS for PostgreSQL",
+      "explanation": "RDS for PostgreSQLはJSONB型をサポートしていますが、MongoDBネイティブのAPI互換性はなく、既存のアプリケーションコードやクエリの全面的な書き換えが必要となります。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon DynamoDB",
+      "explanation": "DynamoDBは高パフォーマンスなNoSQLデータベースですが、MongoDBのクエリAPIや集計パイプライン構文との互換性がないため、既存コードの移行には大きな改修コストがかかります。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon Redshift",
+      "explanation": "Amazon Redshiftは列指向のデータウェアハウスサービスであり、ミリ秒単位のトランザクショナルなJSONドキュメントのCRUD操作やリアルタイムアプリのバックエンドには適していません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon DocumentDB (with MongoDB compatibility) は、ミッションクリティカルなJSONワークロード向けに設計されたフルマネージドNoSQLドキュメントデータベースです。Auroraと同様の分散ストレージエンジンを採用しており、ストレージの自動拡張（最大128TiB）、ミリ秒単位の低遅延、高スループットな読み取りレプリケーション（最大15個）を提供し、既存のMongoDBエコシステムをシームレスに移行・運用できます。"
+}

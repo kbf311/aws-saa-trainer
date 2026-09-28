@@ -1,0 +1,39 @@
+{
+  "id": "cfc0fbb7-7c03-4df2-853d-a37b62df9d62",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "AWS Secrets ManagerリソースベースポリシーによるクロスアカウントのセキュアなDB認証情報共有",
+  "services": [
+    "AWS Secrets Manager",
+    "AWS Key Management Service",
+    "AWS Identity and Access Management"
+  ],
+  "question_type": "single",
+  "question_text": "ある組織では、中央のセキュリティアカウント（アカウントA）で運用しているAmazon RDSの接続情報（パスワード）をAWS Secrets Managerで一元管理しています。別の本番アプリケーションアカウント（アカウントB）で稼働するAmazon ECSタスクから、AssumeRoleによるロール切り替えを行わずに、直接このシークレット値を取得させたいと考えています。最小限の複雑性で安全にクロスアカウントアクセスを許可する構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "アカウントAのシークレットにリソースベースポリシーをアタッチしてアカウントBのECSタスクロールに読み取り権限（secretsmanager:GetSecretValue）を許可し、シークレットの暗号化に使用しているKMSキーポリシーでもアカウントBのタスクロールにkms:Decryptを許可する。",
+      "explanation": "AWS Secrets Managerはリソースベースポリシーをサポートしており、他アカウントのIAMプリンシパルに対して直接アクセス権を付与できます。また、KMSカスタマーマネージドキーのキーポリシーでも共有先アカウントへの復号権限を許可することで、ロール引き受け（AssumeRole）不要で直接セキュアにシークレットを取得できます。"
+    },
+    {
+      "id": "B",
+      "text": "シークレットの値をJSONファイルとして出力し、アカウントBのS3バケットへ毎晩S3バッチコピーする。",
+      "explanation": "シークレットをファイルとして静的コピーすることは漏洩リスクが高く、Secrets Managerの自動ローテーション機能の恩恵を受けられません。"
+    },
+    {
+      "id": "C",
+      "text": "アカウントAでシークレットをデフォルトのAWSマネージドキー（aws/secretsmanager）で暗号化し、アカウントBに公開する。",
+      "explanation": "AWSマネージドキー（aws/secretsmanager）で暗号化されたシークレットはクロスアカウントアクセスに対応していません。クロスアカウント共有にはカスタマーマネージドキー（CMK）が必須です。"
+    },
+    {
+      "id": "D",
+      "text": "アカウントBのECSタスク定義の環境変数にアカウントAのデータベースパスワードを直接平文で記述する。",
+      "explanation": "タスク定義環境変数への平文パスワードの記述は重大なセキュリティ違反です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Secrets Managerのクロスアカウントアクセスでは、シークレットのリソースベースポリシーと暗号化KMSキー（CMK）のポリシーの双方でターゲットアカウントのプリンシパルを許可することが重要です。"
+}

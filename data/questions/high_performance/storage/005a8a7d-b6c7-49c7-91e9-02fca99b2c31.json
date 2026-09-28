@@ -1,0 +1,37 @@
+{
+  "id": "005a8a7d-b6c7-49c7-91e9-02fca99b2c31",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "高性能ストレージ",
+  "title": "Amazon S3 Express One Zoneによる1桁ミリ秒データアクセスと高頻度AI/ML処理の高速化",
+  "services": [
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "あるAI企業は、機械学習モデルのリアルタイム推論とトレーニングパイプラインを運用しています。数億個の小さなトレーニングデータセットに対して毎秒数十万回のリクエスト（GET/PUT）を極めて低遅延で行う必要があります。標準のS3 Standard（レイテンシー数十ミリ秒）よりも一貫して1桁ミリ秒（シングルディジットミリ秒）の超高速データアクセスを実現し、アクセス頻度の極めて高いワークロード向けに設計されたS3専用ストレージクラスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon S3 Express One Zone",
+      "explanation": "Amazon S3 Express One Zoneは、レイテンシーに最も敏感なアプリケーション（AI/MLトレーニング、リアルタイム広告、金融分析など）向けに設計された高性能単一AZストレージクラスです。S3 Standardと比較して最大10倍高速な一貫した1桁ミリ秒のデータアクセス速度を提供し、リクエストコストを最大50%削減します。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon S3 One Zone-IA",
+      "explanation": "S3 One Zone-IAはアクセス頻度の低い（月1回未満）再作成可能データ向けであり、データ取り出し料金が発生するため、高頻度リクエストワークロードには適していません。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon S3 Glacier Instant Retrieval",
+      "explanation": "Glacier Instant Retrievalは四半期に1回程度しかアクセスされない長期アーカイブ向けであり、リアルタイム高頻度アクセス用ではありません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon S3 Standard-Infrequent Access",
+      "explanation": "S3 Standard-IAも低頻度アクセス向けストレージクラスであり、毎秒数十万回の高頻度I/Oには不適です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AI/MLトレーニングや金融分析など、最も低遅延なオブジェクトアクセス（一貫した1桁ミリ秒）が求められる高頻度アクセスワークロードには「Amazon S3 Express One Zone」が最適です。"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "ad354d3c-00b6-4f79-ad7e-a48a49ca8fb0",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "AWS Direct Connect MACsecによるラインレート（ワイヤスピード）暗号化と超高スループット通信",
+  "services": [
+    "AWS Direct Connect",
+    "Amazon VPC"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融機関が、オンプレミスのデータセンターとAWSリージョン間を10GbpsのAWS Direct Connect専用接続で結び、ペタバイト規模の取引データを毎日高速レプリケーションしています。新たな業界コンプライアンス要件により、「専用線上のすべての物理リンクレイヤー通信を強力に暗号化しなければならない」という義務が課されました。同社は過去にIPsec VPNトンネルを専用線上で運用した経験がありますが、ルーターやアプライアンスのCPUによるパケット暗号化処理オーバーヘッドによってスループットが大幅に低下し、10Gbpsの専用線帯域幅を全く活かせなかったという経緯があります。\n\n10Gbpsの物理帯域幅を100%フル活用し（ラインレート/ワイヤスピード暗号化）、CPU暗号化オーバーヘッドによるパケット遅延を発生させずに通信を暗号化する最も適切なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Direct Connectで「MACsec (Media Access Control Security: IEEE 802.1AE)」を有効化し、オンプレミスルーターとの物理リンク間でレイヤー2暗号化を構成する。",
+      "explanation": "AWS Direct ConnectのMACsec（IEEE 802.1AE）機能は、対応するDirect Connect専用接続（10Gbpsまたは100Gbps）において、ルーターの専用ハードウェアチップ（ASIC）によるL2（データリンク層）でのラインレート（ワイヤスピード）暗号化を提供します。IPsecのようなOS/CPU処理によるオーバーヘッドやパケットサイズの増加（MTU低下）がなく、10Gbpsのフル帯域幅を維持しながらミリ秒未満の超低遅延で通信を安全に暗号化できます。"
+    },
+    {
+      "id": "B",
+      "text": "Direct Connect上で複数のAWS Site-to-Site VPNトンネルを構築し、ECMP（等コストマルチパス）で負荷分散する。",
+      "explanation": "IPsec VPNトンネルは単一トンネルあたり1.25Gbpsの制限があり、多数のトンネル管理が極めて複雑になるだけでなく、CPU暗号化オーバーヘッドによる遅延問題を解決できません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Transit GatewayにConnectピアを作成し、GREトンネルを暗号化なしで設定する。",
+      "explanation": "GREトンネル自体はカプセル化を行うだけであり暗号化は提供されず、コンプライアンス要件を満たせません。"
+    },
+    {
+      "id": "D",
+      "text": "送信元インスタンスと宛先インスタンスの間で、アプリケーション層のTLS暗号化のみを二重に適用する。",
+      "explanation": "物理リンクレイヤー（専用線通信そのもの）の暗号化要件を満たすことができず、またアプリケーションへの負荷が増加します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Direct ConnectのMACsec（IEEE 802.1AE）は、オンプレミスルーターとAWS Direct Connectロケーション間の物理レイヤー2接続をハードウェアレベルで暗号化する規格です。10Gbpsおよび100Gbps接続で利用可能であり、IPsec VPNのようなCPU負荷やスループット低下を一切引き起こすことなく、ラインレート（全帯域幅）での暗号化と超低レイテンシを両立できます。"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "5c5b310f-095e-49cc-b336-70a76172be91",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "Transit Gatewayピアリングを活用した複数リージョン接続のネットワーク集約とコスト最適化",
+  "services": [
+    "AWS Transit Gateway",
+    "Amazon VPC"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、世界3つのAWSリージョン（東京、バージニア、フランクフルト）にそれぞれ数十個のVPCを保有しています。各リージョンのVPC間およびリージョン間でセキュアな相互通信を実現したいと考えています。すべてのVPC間に個別のリージョン間VPCピアリング（フルメッシュ構成で数百本）を構築・管理する運用負荷と複雑性を解消しつつ、データ転送コストを予測可能に一元集約するための最も適切なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各リージョンにAWS Transit Gatewayを1台ずつデプロイしてローカルVPCをアタッチし、リージョン間のTransit Gateway同士を「Transit Gatewayピアリング接続」で相互接続してルーティングを一元管理する。",
+      "explanation": "各リージョンにTransit Gatewayを配置してローカルVPCを集約し、リージョン間をTransit Gatewayピアリングで接続する構成は、ハブ＆スポーク型の標準的なグローバルネットワーク設計です。数千本に及ぶフルメッシュ接続の管理崩壊を防ぎ、ルーティングとデータ転送トラフィックを一元管理・監視できます。"
+    },
+    {
+      "id": "B",
+      "text": "すべてのリージョンのすべてのVPC間にIPsec VPN接続を手動でフルメッシュに設定する。",
+      "explanation": "VPN接続数が膨大になり、接続時間課金と管理運用の複雑性が極めて高くなります。"
+    },
+    {
+      "id": "C",
+      "text": "東京リージョンの単一VPCにNAT Gatewayを1台配置し、世界中の全VPCのトラフィックをパブリックインターネット経由で東京のNAT Gatewayにルーティングする。",
+      "explanation": "莫大な大陸横断データ転送料金と極端なレイテンシーが発生し、耐障害性も完全に失われます。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Direct Connect回線を全リージョン間に自社で個別敷設する。",
+      "explanation": "Direct ConnectはオンプレミスとAWSの接続用であり、AWSリージョン間のVPC相互接続に敷設するものではありません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "マルチリージョンの大規模VPC間相互接続では、各リージョンのTransit Gatewayをローカルハブとし、それらを「Transit Gatewayピアリング」で連結するアーキテクチャが管理性と拡張性の観点で最適です。"
+}

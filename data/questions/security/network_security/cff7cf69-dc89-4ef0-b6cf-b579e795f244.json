@@ -1,0 +1,39 @@
+{
+  "id": "cff7cf69-dc89-4ef0-b6cf-b579e795f244",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "ネットワークセキュリティ",
+  "title": "Gateway Load Balancer（GWLB）とVPC進入ルーティングを用いたサードパーティ製セキュリティアプライアンスの透過的インライン検査",
+  "services": [
+    "Gateway Load Balancer",
+    "Amazon VPC",
+    "Amazon Elastic Compute Cloud"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、オンプレミス環境で長年利用してきた高度なサードパーティ製次世代ファイアウォール (NGFW) / 侵入防止システム (IPS) の仮想アプライアンスをAWS環境にも導入したいと考えています。インターネットゲートウェイ (IGW) からVPC内のアプリケーションサーバー群へ向かうすべてのインバウンドトラフィックを、ネットワークレイヤー（レイヤー3/レイヤー4）で透過的にこれら複数のNGFWアプライアンスへ振り分けてディープパケットインスペクション（DPI）を実施し、トラフィック量に応じてアプライアンスの台数を自動スケーリングさせたいと考えています。この要件を満たす最適なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Gateway Load Balancer (GWLB) をセキュリティVPCにプロビジョニングし、NGFW仮想アプライアンスをターゲットグループとして登録する。GENEVEプロトコル（ポート6081）による透過的カプセル化を利用し、IGWの進入ルーティング（Ingress Routing）でGWLBエンドポイントを経由させる。",
+      "explanation": "Gateway Load Balancer (GWLB) は、サードパーティ製の仮想セキュリティアプライアンス（ファイアウォール、IDS/IPS等）を水平スケーリングし、可用性を維持するために特化したロードバランサーです。GENEVEプロトコル（ポート6081）を用いて元のパケットヘッダーを保持したまま透過的にアプライアンスへトラフィックを転送でき、VPC進入ルーティング（Ingress Routing）と組み合わせることで、パケットの送信元・送信先IPを変更することなくインライン検査を実現できます。"
+    },
+    {
+      "id": "B",
+      "text": "Application Load Balancer (ALB) を配置し、リスナールールで各NGFWアプライアンスのプライベートIPへHTTP/HTTPSトラフィックをリダイレクトする。",
+      "explanation": "ALBはレイヤー7（HTTP/HTTPS）ロードバランサーであり、非HTTPトラフィックを扱えず、パケットを終端してプロキシするため、元のIPヘッダーやレイヤー3/4のパケットをそのまま透過的にNGFWでディープインスペクションする用途には適していません。"
+    },
+    {
+      "id": "C",
+      "text": "各アプリケーションサーバーのENI（Elastic Network Interface）の送信元/送信先チェックを無効にし、すべてのサーバーにNGFWソフトウェアを直接インストールする。",
+      "explanation": "各アプリケーションインスタンスに個別にNGFWを導入・管理する方法は、スケーラビリティ、運用保守性、ライセンス管理の観点から極めて非効率であり、中央集約的なセキュリティ検査の要件を満たせません。"
+    },
+    {
+      "id": "D",
+      "text": "Classic Load Balancerを配置し、EC2 Auto Scalingグループと連携させてNGFWインスタンスを管理する。",
+      "explanation": "Classic Load Balancerはレガシーなロードバランサーであり、透過的なレイヤー3/4パケットインスペクションやGENEVEカプセル化機能は提供していません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Gateway Load Balancer (GWLB) とVPC進入ルーティング（Ingress Routing）に関する設問です。GWLBはGENEVEカプセル化を用いて、サードパーティ製ファイアウォールやIDS/IPSフリートの負荷分散と自動スケーリングをシームレスに提供し、ネットワークトポロジを複雑化することなくインライン検査を可能にします。"
+}

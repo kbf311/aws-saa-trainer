@@ -1,0 +1,39 @@
+{
+  "id": "be0f645d-b8ca-452f-84eb-99f83aa7dc50",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "VPC内NAT Gatewayの単一AZ集約 vs 複数AZ分散における耐障害性とAZ間データ転送コストの評価",
+  "services": [
+    "Amazon VPC",
+    "NAT Gateway",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、本番環境のマルチAZ VPC（AZ-a、AZ-bの2つのAZ）で稼働するEC2インスタンス群からインターネットへのアウトバウンドアクセス用にNAT Gatewayを運用しています。コスト削減のためにNAT GatewayをAZ-aの1台のみに集約したところ、NAT Gatewayの時間料金は半減したものの、予期しない「AZ間データ転送料金（Inter-AZ Data Transfer）」が増加しました。さらに高可用性要件も満たせなくなりました。高可用性を維持しつつ通信コストの無駄を防ぐ推奨アーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各AZ（AZ-a、AZ-b）のパブリックサブネットにそれぞれNAT Gatewayを1台ずつ配置し、各AZのプライベートサブネットからのルートテーブルで同一AZ内のNAT Gatewayを宛先として設定する。",
+      "explanation": "各AZに独立したNAT Gatewayを配置することで、あるAZの障害が他AZの通信に影響しない耐障害性を確保できると同時に、プライベートサブネットとNAT Gateway間の通信が同一AZ内で完結するため、クロスAZデータ転送料金（有料）の発生を完全に回避できます。"
+    },
+    {
+      "id": "B",
+      "text": "NAT Gatewayをすべて廃止し、すべてのプライベートEC2インスタンスにパブリックIPアドレスを直接割り当てる。",
+      "explanation": "プライベートEC2にパブリックIPを割り当てて直接公開することは、重大なセキュリティリスクを招き要件に反します。"
+    },
+    {
+      "id": "C",
+      "text": "NAT GatewayをAZ-aに集約したまま、EC2インスタンスのOS側でiptablesを編集してパケットを圧縮する。",
+      "explanation": "OSでのiptables圧縮は標準的でなく、AZ-a障害時の全AZアウトバウンド通信停止という単一障害点（SPOF）の問題が残ります。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Transit Gatewayを介してオンプレミスのプロキシサーバーへすべてのインターネットトラフィックを迂回させる。",
+      "explanation": "Transit Gatewayのデータ処理費用とDirect Connect/VPNの転送費用が二重に発生し、大幅なコスト増加となります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "マルチAZ環境では、各AZにNAT Gatewayを配置して同一AZ内でトラフィックを処理させる構成が、アベイラビリティゾーン障害時の耐障害性とAZ間クロス通信費用の削減の両面でベストプラクティスです。"
+}

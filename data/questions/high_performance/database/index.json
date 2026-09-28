@@ -1,0 +1,302 @@
+{
+  "major": "高パフォーマンスアーキテクチャの設計",
+  "minor": "データベースとキャッシング",
+  "updated_at": "2026-09-27T23:49:04Z",
+  "questions": [
+    {
+      "id": "115f8f8f-067e-4165-bef1-ece4ce28fce0",
+      "title": "Amazon Redshift RA3ノードとマネージドストレージ（RMS）によるコンピュートとストレージの独立スケーリング",
+      "services": [
+        "Amazon Redshift"
+      ],
+      "question_type": "single",
+      "file_name": "115f8f8f-067e-4165-bef1-ece4ce28fce0.json"
+    },
+    {
+      "id": "123808dc-a62e-4959-aaf6-6e3993eca13a",
+      "title": "Amazon Aurora カスタムエンドポイントによる重い分析ワークロードとWeb読み取りトラフィックの完全分離",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "123808dc-a62e-4959-aaf6-6e3993eca13a.json"
+    },
+    {
+      "id": "190c9941-5ed5-4b29-966b-7da715c17099",
+      "title": "Amazon Redshift Serverlessによる予測不能な分析ワークロードの自動キャパシティ調整と高速化",
+      "services": [
+        "Amazon Redshift",
+        "Amazon Redshift Serverless"
+      ],
+      "question_type": "single",
+      "file_name": "190c9941-5ed5-4b29-966b-7da715c17099.json"
+    },
+    {
+      "id": "1b93f146-d593-4f6b-a8dd-339827e36479",
+      "title": "Amazon Aurora パ行クエリ（Parallel Query）による大規模集計・分析クエリの高速化",
+      "services": [
+        "Amazon Aurora"
+      ],
+      "question_type": "single",
+      "file_name": "1b93f146-d593-4f6b-a8dd-339827e36479.json"
+    },
+    {
+      "id": "2362cad7-df6b-4741-ae87-30ffe6d74b03",
+      "title": "Amazon Aurora クラスターキャッシュ管理 (CCM) によるフェイルオーバー直後のキャッシュ維持と性能低下防止",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "2362cad7-df6b-4741-ae87-30ffe6d74b03.json"
+    },
+    {
+      "id": "2a90e67f-ff0c-49a7-99f2-dce761bd2bd0",
+      "title": "Amazon ElastiCacheを活用した遅延読み込み（Cache-Aside）とTTLによるDB負荷軽減",
+      "services": [
+        "Amazon ElastiCache",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "2a90e67f-ff0c-49a7-99f2-dce761bd2bd0.json"
+    },
+    {
+      "id": "2c4d6e41-b0cc-418d-a3b6-839a9a3dd29c",
+      "title": "Amazon RDS Performance Insightsによるデータベース負荷（AAS）の可視化と高負荷クエリの特定",
+      "services": [
+        "Amazon RDS",
+        "Amazon Aurora",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "2c4d6e41-b0cc-418d-a3b6-839a9a3dd29c.json"
+    },
+    {
+      "id": "38624700-f3f5-46bd-9645-49b7e124685f",
+      "title": "DynamoDBにおけるパーティションキー設計と書き込みシャーディング（ソルト付与）",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "38624700-f3f5-46bd-9645-49b7e124685f.json"
+    },
+    {
+      "id": "3c6af892-984f-4655-850d-80bb76032bdf",
+      "title": "Amazon Auroraリーダーエンドポイントと自動スケーリングリードレプリカによる読み取り負荷分散",
+      "services": [
+        "Amazon Aurora",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "3c6af892-984f-4655-850d-80bb76032bdf.json"
+    },
+    {
+      "id": "58589145-f112-4c85-b8b1-9c272a0c834b",
+      "title": "Amazon DynamoDB TTL（Time to Live）による不要データ自動パージとパフォーマンス維持",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "58589145-f112-4c85-b8b1-9c272a0c834b.json"
+    },
+    {
+      "id": "63c8412c-6a13-471c-819a-5fda9efc3d10",
+      "title": "DynamoDBのグローバルセカンダリインデックス（GSI）と射影属性（PROJECTION）によるクエリ性能とスループット最適化",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "63c8412c-6a13-471c-819a-5fda9efc3d10.json"
+    },
+    {
+      "id": "79344711-92de-4764-b2b5-78ffddfedf28",
+      "title": "Amazon RDS ProxyによるLambda急増時のコネクション枯渇防止とパフォーマンス向上",
+      "services": [
+        "Amazon RDS Proxy",
+        "Amazon Aurora",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "79344711-92de-4764-b2b5-78ffddfedf28.json"
+    },
+    {
+      "id": "7e14db71-47e6-4c47-ba0f-2f1b8b977a65",
+      "title": "突発的かつ予測不能なトラフィック急増に対するAmazon DynamoDBオンデマンドキャパシティモードの選定",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "7e14db71-47e6-4c47-ba0f-2f1b8b977a65.json"
+    },
+    {
+      "id": "81a715ab-7929-41bf-a661-5a8c61b13391",
+      "title": "Amazon Redshift Spectrumを活用したS3データレイクへの高速アドホッククエリ",
+      "services": [
+        "Amazon Redshift",
+        "Amazon Redshift Spectrum",
+        "Amazon S3",
+        "AWS Glue"
+      ],
+      "question_type": "single",
+      "file_name": "81a715ab-7929-41bf-a661-5a8c61b13391.json"
+    },
+    {
+      "id": "8709abcd-eda3-4025-8f61-e7e4d16d5ff1",
+      "title": "DynamoDB Accelerator (DAX) によるマイクロ秒単位のインメモリ読み取りキャッシュ",
+      "services": [
+        "Amazon DynamoDB",
+        "Amazon DynamoDB Accelerator (DAX)"
+      ],
+      "question_type": "single",
+      "file_name": "8709abcd-eda3-4025-8f61-e7e4d16d5ff1.json"
+    },
+    {
+      "id": "8733c26e-89f5-4fc7-a6dc-6de754c316e5",
+      "title": "Amazon RDSにおけるリードレプリカの活用と参照ワークロードのオフロード（2つ選択）",
+      "services": [
+        "Amazon RDS",
+        "Amazon Aurora"
+      ],
+      "question_type": "multiple",
+      "file_name": "8733c26e-89f5-4fc7-a6dc-6de754c316e5.json"
+    },
+    {
+      "id": "8b77d7d0-c5f8-48f0-ad6c-75d34bbe6d07",
+      "title": "Amazon Keyspaces (for Apache Cassandra) によるサーバーレスな大規模ワイドカラムNoSQLの運用と高速スケール",
+      "services": [
+        "Amazon Keyspaces",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "8b77d7d0-c5f8-48f0-ad6c-75d34bbe6d07.json"
+    },
+    {
+      "id": "912539bd-9702-4ee2-ba9e-cc0621d3ece4",
+      "title": "Amazon DynamoDB トランザクション (TransactWriteItems) による複数アイテムの原子的更新と整合性確保",
+      "services": [
+        "Amazon DynamoDB"
+      ],
+      "question_type": "single",
+      "file_name": "912539bd-9702-4ee2-ba9e-cc0621d3ece4.json"
+    },
+    {
+      "id": "94aafa54-ac02-4105-8bbe-cdcfc6e52546",
+      "title": "高トラフィックECサイトにおける多層キャッシングとNoSQL/RDB適材適所アーキテクチャ設計（2つ選択）",
+      "services": [
+        "Amazon ElastiCache",
+        "Amazon DynamoDB",
+        "Amazon Aurora",
+        "Amazon CloudFront"
+      ],
+      "question_type": "multiple",
+      "file_name": "94aafa54-ac02-4105-8bbe-cdcfc6e52546.json"
+    },
+    {
+      "id": "96f04cc6-a80c-425f-93f7-d15f6f599128",
+      "title": "Amazon ElastiCacheにおける書き込みスルー（Write-Through）とTTLによるキャッシュ整合性と読み取り性能の両立",
+      "services": [
+        "Amazon ElastiCache",
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "96f04cc6-a80c-425f-93f7-d15f6f599128.json"
+    },
+    {
+      "id": "aaaf8eea-52b7-470a-b39a-2d67b2040d64",
+      "title": "予測不能な突発的トラフィックに対するAmazon Aurora Serverless v2の自動キャパシティ調整",
+      "services": [
+        "Amazon Aurora"
+      ],
+      "question_type": "single",
+      "file_name": "aaaf8eea-52b7-470a-b39a-2d67b2040d64.json"
+    },
+    {
+      "id": "bb86aabe-f005-4109-9426-a011d6b41acf",
+      "title": "Amazon Aurora Global Databaseを活用したクロスリージョンでの低レイテンシー読み取りと性能最適化",
+      "services": [
+        "Amazon Aurora",
+        "Amazon Aurora Global Database"
+      ],
+      "question_type": "single",
+      "file_name": "bb86aabe-f005-4109-9426-a011d6b41acf.json"
+    },
+    {
+      "id": "c0c505dc-a404-4fae-b009-4120963f2424",
+      "title": "Amazon ElastiCacheにおけるMemcachedエンジンの選定（マルチスレッド処理と水平スケーリング）",
+      "services": [
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "c0c505dc-a404-4fae-b009-4120963f2424.json"
+    },
+    {
+      "id": "ce8a5e17-f1b5-4d6b-b8db-9d8b91cc945e",
+      "title": "Amazon DynamoDBにおけるオンデマンドキャパシティからプロビジョンドキャパシティ＋Auto Scalingへの適正移行",
+      "services": [
+        "Amazon DynamoDB",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "ce8a5e17-f1b5-4d6b-b8db-9d8b91cc945e.json"
+    },
+    {
+      "id": "d04e43ea-651f-447a-8732-cbe4ba1aaaa9",
+      "title": "Amazon RDS クロスリージョンリードレプリカによる海外ユーザー向け読み取りレイテンシの最小化",
+      "services": [
+        "Amazon RDS",
+        "Amazon Route 53"
+      ],
+      "question_type": "single",
+      "file_name": "d04e43ea-651f-447a-8732-cbe4ba1aaaa9.json"
+    },
+    {
+      "id": "d593ba8c-0d3b-4511-a44a-7a0e6c61fa87",
+      "title": "Amazon DocumentDBによる大規模JSONドキュメントワークロードのスケーラブルな高速検索",
+      "services": [
+        "Amazon DocumentDB",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "d593ba8c-0d3b-4511-a44a-7a0e6c61fa87.json"
+    },
+    {
+      "id": "dc390a94-801a-413b-a45a-c2a89ef1cd91",
+      "title": "Amazon ElastiCache for Redis クラスターモード有効化による書き込み負荷の水平スケーリング（シャーディング）",
+      "services": [
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "dc390a94-801a-413b-a45a-c2a89ef1cd91.json"
+    },
+    {
+      "id": "defc2bcf-fc25-4776-9de9-b684f7a89be9",
+      "title": "Amazon MemoryDB for Redisによるマイクロ秒単位の応答とマルチAZ耐久性を兼ね備えたプライマリデータベース構築",
+      "services": [
+        "Amazon MemoryDB for Redis",
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "defc2bcf-fc25-4776-9de9-b684f7a89be9.json"
+    },
+    {
+      "id": "f331bce1-7ff7-482e-98fc-fc815f06bed7",
+      "title": "Amazon MemoryDB for Redisによるマイクロ秒読み取り・一桁ミリ秒書き込みと耐久性の両立",
+      "services": [
+        "Amazon MemoryDB for Redis",
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "f331bce1-7ff7-482e-98fc-fc815f06bed7.json"
+    },
+    {
+      "id": "f5abb4d3-9360-4e15-b121-94c7a0afc78a",
+      "title": "Amazon Redshiftにおける分散スタイル（KEY vs ALL）とソートキーの最適化",
+      "services": [
+        "Amazon Redshift"
+      ],
+      "question_type": "single",
+      "file_name": "f5abb4d3-9360-4e15-b121-94c7a0afc78a.json"
+    }
+  ]
+}

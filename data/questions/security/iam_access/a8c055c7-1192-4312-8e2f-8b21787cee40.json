@@ -1,0 +1,39 @@
+{
+  "id": "a8c055c7-1192-4312-8e2f-8b21787cee40",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "Amazon API GatewayのAWS_IAM認証と署名バージョン4 (SigV4) によるマイクロサービス間アクセスの保護",
+  "services": [
+    "AWS IAM",
+    "Amazon API Gateway",
+    "AWS Lambda"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、バックエンドの注文処理APIをAmazon API Gateway（REST API）とAWS Lambda関数で構築しています。このAPIは、社内の別のAWSアカウントで動作する複数のマイクロサービス（Amazon EC2およびAmazon ECS上のコンテナ）からのみ呼び出される設計です。社内ネットワークまたはAWSバックボーン経由でAPIを保護するにあたり、APIキーや静的な認証トークンの配布・管理を不要にし、呼び出し元が持つAWSの一時的セキュリティ認証情報（IAMロール）を利用してリクエストごとに暗号署名を検証したいと考えています。最も適切な認可メカニズムはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "API Gatewayのメソッド認証タイプとして「AWS_IAM」を設定し、呼び出し元サービスがアタッチされたIAMロールの認証情報を用いてリクエストにSigV4（AWS Signature Version 4）署名を付加してリクエストを送信する。",
+      "explanation": "API Gatewayの「AWS_IAM」認証を使用すると、呼び出し元はAWSリクエスト標準の署名バージョン4（SigV4）を使用してHTTPリクエストヘッダーに署名を付与します。API Gatewayは呼び出し元IAMプリンシパルの権限（execute-api:Invoke）を自動的に評価・認可するため、APIキーやJWTトークンなどの独自資格情報を管理・配布することなく、IAMネイティブの安全な認証・認可が実現できます。"
+    },
+    {
+      "id": "B",
+      "text": "API GatewayにAPIキーと使用量プラン（Usage Plan）を設定し、各マイクロサービスのコンテナ起動時の環境変数に固有のAPIキーを平文で設定して通信させる。",
+      "explanation": "APIキーは主にクライアントごとのレート制限や使用量モニタリングを目的としたものであり、真のセキュリティ認証・認可としては不十分です。また静的キーの管理・漏洩リスクが残ります。"
+    },
+    {
+      "id": "C",
+      "text": "Lambda オーソライザー（カスタムオーソライザー）を作成し、リクエストヘッダーに含まれるBasic認証のユーザー名とパスワードをハードコードされた値と比較してTrue/Falseを返す構成にする。",
+      "explanation": "Basic認証による静的なID/パスワードの検証はセキュリティベストプラクティスに反し、カスタムオーソライザーの管理・実行コストや運用オーバーヘッドが発生するため不適切です。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon Cognito ユーザープールを作成し、マイクロサービスごとにユーザーを登録して、API呼び出しのたびにユーザー名とパスワードでIDトークンを取得してBearerトークンとして送信させる。",
+      "explanation": "Cognito ユーザープールはエンドユーザー（人間）のサインアップやサインインを主な用途としており、AWSリソース（EC2/ECS）間で行われるマシンツーマシンの通信認証としては、IAMロールとSigV4署名（AWS_IAM認証）を利用する方がはるかにシンプルでセキュアです。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon API Gatewayでは、認証タイプとして「AWS_IAM」を選択できます。この構成では、APIの呼び出し側は標準のAWS SDKを利用して、一時的なセキュリティ認証情報（IAMロール）に基づく「Signature Version 4 (SigV4)」暗号署名をHTTPリクエストに付与します。API Gateway側はリクエスト受信時にこの署名を検証し、呼び出し元のIAMロールが「execute-api:Invoke」アクションを許可されているかを判定します。これにより、トークンのライフサイクル管理やAPIキーの配布を一切行うことなく、AWSネイティブの厳格な最小権限モデルをマイクロサービス間通信に適用できます。"
+}

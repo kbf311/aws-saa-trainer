@@ -1,0 +1,38 @@
+{
+  "id": "3661192e-0e99-4f80-9225-c7022fa26264",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "高性能ストレージ",
+  "title": "Amazon FSx for Lustreの永続的 (Persistent) ファイルシステムとデータリポジトリ自動同期",
+  "services": [
+    "Amazon FSx for Lustre",
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "あるバイオインフォマティクス研究機関が、Amazon FSx for Lustreを使用して数百台のEC2コンピュートノードから数週間継続する遺伝子シークエンス解析パイプラインを実行しています。解析処理は長期にわたるため、可用性と耐久性の高いファイルシステムが必要であり、ノード障害時にも自動復旧できる構成が求められています。また、計算ノードがFSxファイルシステム内に生成・変更した中間結果や最終出力ファイルを、自動的かつ継続的にAmazon S3バケットへ同期・永続化し、S3を単一の真実の情報源（Single Source of Truth）として維持したいと考えています。\n\nこれらの要件を最小の運用オーバーヘッドで満たす構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "スクラッチ (Scratch) デプロイタイプでFSx for Lustreを作成し、定期的なcronスクリプトでAWS CLIのS3 syncコマンドを実行してデータをS3へアップロードする。",
+      "explanation": "Scratchファイルシステムは一時的な短期処理向けであり、データは複製されないためストレージサーバー障害時にデータが失われるリスクがあります。また手動のS3 syncスクリプトは大量ファイルの変更検知に時間がかかり運用負荷が高くなります。"
+    },
+    {
+      "id": "B",
+      "text": "永続的 (Persistent) デプロイタイプでFSx for Lustreを作成し、データリポジトリの関連付けにおいて自動エクスポート（Data Repository Association: 自動エクスポートポリシー）を構成する。",
+      "explanation": "Persistentデプロイタイプは同一AZ内でデータを複製し、高い可用性と長期的なワークロード向けの高耐久性を提供します。さらにFSx for Lustreのデータリポジトリ自動エクスポート機能（DRA）を有効にすることで、FSx内で追加・更新・削除されたファイルが自動的にリンク先のAmazon S3バケットへ非同期同期され、スクリプト運用なしでS3と状態を一致させることができます。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon EFSを最大I/Oモードで作成し、AWS DataSyncのスケジュールタスクで1時間ごとにS3へエクスポートする。",
+      "explanation": "ゲノム解析パイプラインのような超並列・高スループットを要求するHPCワークロードにはFSx for Lustreが適しており、またDataSyncによる定期同期はリアルタイム同期に比べて反映遅延が発生します。"
+    },
+    {
+      "id": "D",
+      "text": "FSx for Windows File ServerをマルチAZ構成でデプロイし、シャドウコピー機能を用いてS3に直接バックアップする。",
+      "explanation": "FSx for Windows File ServerはWindows/SMB向けであり、LinuxベースのHPC並列クラスタには適していません。またシャドウコピーはS3直接同期機能ではありません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "長期間実行されるHPCや解析ワークロードでは、データが自動複製されてハードウェア障害から保護されるFSx for Lustreの「Persistent（永続的）」デプロイタイプを選択します。また、FSxとS3間のデータ同期にはデータリポジトリ関連付け（Data Repository Association: DRA）の自動インポート／自動エクスポート機能を設定することで、アプリケーションがファイルシステムに書き込んだ変更を自動的にS3へ反映できます。"
+}

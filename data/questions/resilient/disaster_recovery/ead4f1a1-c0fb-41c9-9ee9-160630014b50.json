@@ -1,0 +1,37 @@
+{
+  "id": "ead4f1a1-c0fb-41c9-9ee9-160630014b50",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "ディザスタリカバリ",
+  "title": "Amazon OpenSearch Serviceクロスクラスターレプリケーションによる検索インデックスのマルチリージョンDR",
+  "services": [
+    "Amazon OpenSearch Service"
+  ],
+  "question_type": "single",
+  "question_text": "あるECサイトでは、商品検索およびレコメンデーションエンジンとしてAmazon OpenSearch Serviceを使用しています。メインリージョンの障害発生時にも検索ダウンタイムをほぼゼロに抑えるため、セカンダリリージョンのOpenSearchクラスターに対して検索インデックスをリアルタイムに近い低遅延で継続同期させたいと考えています。最も適切な機能はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon OpenSearch Serviceのクロスクラスターレプリケーション（Cross-Cluster Replication: CCR）を設定し、リモート接続を介してフォロワーインデックスへ自動同期する。",
+      "explanation": "Amazon OpenSearch Serviceのクロスクラスターレプリケーション（CCR）を使用すると、異なるAWSリージョンや異なるクラスター間でインデックスを非同期に低遅延で自動複製できます。これにより、ディザスタリカバリ時にも最新の検索インデックスを即座に利用可能となります。"
+    },
+    {
+      "id": "B",
+      "text": "OpenSearchの手動スナップショットをS3に取得し、S3レプリケーションで別リージョンに転送して1時間おきに復元処理を行う。",
+      "explanation": "スナップショットの定期復元はリアルタイム性がなく、インデックスの差分同期が難しいためRPOが長くなり、クラスターリソースにも負荷がかかります。"
+    },
+    {
+      "id": "C",
+      "text": "LogstashサーバーをEC2上に構築し、2つのリージョンのOpenSearchエンドポイントに対して同時にデータをデュアル配信する。",
+      "explanation": "独自プロキシや配信サーバーの管理オーバーヘッドが生じ、ネットワーク遅延や一時障害時のインデックスの不整合が発生しやすくなります。"
+    },
+    {
+      "id": "D",
+      "text": "OpenSearchのUltraWarmストレージノードを別リージョンに直接アタッチしてデータを共有する。",
+      "explanation": "UltraWarmストレージノードは同一クラスター内でのみ利用可能であり、リージョンをまたいで共有することはできません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "OpenSearch Serviceのクロスクラスターレプリケーション（CCR）は、異なるリージョン間でのインデックス同期と高可用性・DR対策を実現するネイティブな最適解です。"
+}

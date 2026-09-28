@@ -1,0 +1,40 @@
+{
+  "id": "4eb68fb7-d89c-490f-bf18-4891a8557475",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "CloudWatch Logs向けInterface型VPCエンドポイントの導入によるNAT Gatewayデータ処理費用の削減",
+  "services": [
+    "Amazon CloudWatch",
+    "AWS PrivateLink",
+    "NAT Gateway",
+    "Amazon VPC"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融機関が、VPC内のプライベートサブネットで数百台のEC2インスタンスおよびコンテナタスクを実行しています。コンプライアンス要件により、すべてのアクセスログおよび詳細な監査ログ（合計月間数十テラバイト）をCloudWatch統合エージェント経由でAmazon CloudWatch Logsに継続送信しています。プライベートサブネットからのアウトバウンド通信はすべてNAT Gatewayを経由しており、AWS利用費用の請求書を分析したところ、NAT Gatewayのデータ処理料金（Data Processing Charge）がネットワーク費用の大半を占めていることが判明しました。\n\n既存のセキュリティ要件（プライベート環境の維持）を守りながら、ログ転送に伴うNAT Gatewayの通信・データ処理コストを大幅に削減する最適な方法はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "CloudWatch Logs用のInterface型VPCエンドポイント（AWS PrivateLink）をVPC内に作成し、ログ送信トラフィックをNAT Gateway経由から直接プライベートエンドポイント経由にルーティングする。",
+      "explanation": "CloudWatch Logs向けにInterface型VPCエンドポイントを作成すると、VPC内のENIを通じてトラフィックが直接AWS内部ネットワーク経由でCloudWatch Logsに送信されます。これにより、高額なNAT Gatewayのデータ処理料金（1GBあたり約0.045ドル〜0.062ドル）を完全に回避でき、エンドポイント自体の安価な時間料金およびデータ処理料金のみに抑えることができるため、大規模なログ転送では莫大なコスト削減となります。"
+    },
+    {
+      "id": "B",
+      "text": "CloudWatch Logs用のGateway型VPCエンドポイントを作成し、プライベートサブネットのルートテーブルを更新する。",
+      "explanation": "Gateway型VPCエンドポイントが提供されているのはAmazon S3とAmazon DynamoDBの2サービスのみであり、CloudWatch LogsにはGateway型エンドポイントは存在しません（Interface型エンドポイントのみ対応）。"
+    },
+    {
+      "id": "C",
+      "text": "すべてのEC2インスタンスにパブリックIPアドレスを割り当て、NAT Gatewayを削除してインターネットゲートウェイ経由で直接CloudWatch Logsに送信する。",
+      "explanation": "プライベートサブネットのインスタンスにパブリックIPを付与してインターネットに直接接続させることは、金融機関のプライベート環境維持要件およびセキュリティ要件に違反します。"
+    },
+    {
+      "id": "D",
+      "text": "CloudWatch統合エージェントをアンインストールし、ログを各インスタンスのローカルEBSボリュームにのみ蓄積する運用に変更する。",
+      "explanation": "ログの集中監査収集を行わないことはコンプライアンス要件に反し、またインスタンス終了時にログが喪失する重大な運用リスクが発生します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "大量のログデータをCloudWatch Logsへ送信する際のコスト最適化に関する設問です。プライベートサブネットからインターネット（パブリックAWSエンドポイント）への通信にNAT Gatewayを使用すると、大容量のデータ処理料金が発生します。Interface型VPCエンドポイント（AWS PrivateLink）を配置することで、トラフィックをVPC内からAWSバックボーンへ直接流し、NAT Gatewayの通信コストを劇的に削減できます。"
+}

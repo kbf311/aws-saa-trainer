@@ -1,0 +1,39 @@
+{
+  "id": "ffe82ec2-0f72-4d55-bea8-6c7e2f7b5ed8",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "Amazon OpenSearch Serviceにおける保管時暗号化とノード間通信TLS暗号化の包括的構成",
+  "services": [
+    "Amazon OpenSearch Service",
+    "AWS Key Management Service",
+    "AWS Identity and Access Management"
+  ],
+  "question_type": "single",
+  "question_text": "ある医療データ分析企業が、患者の行動ログや診察テキストデータを高速検索するためにAmazon OpenSearch Serviceドメインを新規にプロビジョニングしています。医療情報保護規制（HIPAA等）への準拠が必須であり、以下のセキュリティ要件が義務付けられています：\n\n1. ドメインのインデックス、スワップファイル、および自動スナップショットに保存されるすべてのデータはAWS KMSキーで暗号化されること\n2. クラスター内のノード同士がデータを送受信する際の通信はすべてTLSで暗号化されること\n3. クライアントとOpenSearchドメイン間のすべての通信はHTTPSのみに制限されること\n\nこれらの要件を最小限の管理工数で満たす構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "OpenSearchドメインの作成時に「保管時の暗号化（AWS KMSキー指定）」、「ノード間暗号化（TLS暗号化）」を有効化し、さらにドメイン設定で「HTTPSの強制」を有効にする。",
+      "explanation": "Amazon OpenSearch Serviceには、保管時暗号化（KMSキーによるインデックスやスナップショットの暗号化）、ノード間暗号化（クラスター内のノード間トラフィックに対するTLS暗号化）、およびHTTPS通信の強制（プレーンテキストHTTPリクエストの拒否）がマネージド機能として用意されています。ドメイン作成時または設定更新時にこれらを有効化するだけで、最小限の工数で厳格なセキュリティ要件を充足できます。"
+    },
+    {
+      "id": "B",
+      "text": "OpenSearchの背後に各ノード用の自己署名TLS証明書をEC2インスタンス内に手動配備し、EC2のIPsecトンネルを通じてノード間を接続する。",
+      "explanation": "Amazon OpenSearch Serviceはマネージドサービスであり、基盤ノードのOSへの直接アクセスや手動での証明書配備・IPsecトンネルの構築はサポートされておらず、運用のオーバーヘッドも極めて高くなります。"
+    },
+    {
+      "id": "C",
+      "text": "ドメインへの保管時暗号化のみを有効化し、ノード間通信はVPCのセキュリティグループでポート443のみを許可することで暗号化を代替する。",
+      "explanation": "セキュリティグループはアクセス許可を制御するステートフルファイアウォールであり、通信内容を暗号化するものではありません。ノード間の通信を保護するにはノード間暗号化（TLS）の明示的な有効化が必須です。"
+    },
+    {
+      "id": "D",
+      "text": "OpenSearchドメインをパブリックアクセス型でデプロイし、クライアント側ですべての検索クエリ文字列をハッシュ化して送信する。",
+      "explanation": "検索クエリ文字列のハッシュ化は検索インデックスの機能を損なう上、ドメイン内の保管時データやノード間通信自体の暗号化要件を満たすことにはなりません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon OpenSearch Service（旧Elasticsearch Service）のセキュリティ機能に関する設問です。OpenSearchでは、保管時暗号化（KMS）、ノード間暗号化（Node-to-node encryption: TLS）、HTTPSアクセスの強制の3つの主要な暗号化トグルが提供されており、医療・金融などの規制準拠ワークロードで必須の構成となります。"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "710283d6-799c-49d7-85ff-5cfad7d53343",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "AWS Systems Manager Session ManagerとIAMロールを活用したセキュアな踏み台不要のEC2リモートアクセス",
+  "services": [
+    "AWS IAM",
+    "AWS Systems Manager",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融機関では、プライベートサブネット内にある複数のAmazon EC2インスタンス上で動作する基幹バッチシステムを運用しています。インフラ運用チームは、障害調査や定期メンテナンスのためにこれらのEC2インスタンスへシェルアクセスする必要があります。セキュリティポリシーにより、パブリックIPの付与、インバウンドのSSH（ポート22）の開放、踏み台（Bastion）ホストの維持、および静的なSSHキーペアの配布は厳しく禁止されています。運用管理コストを最小限に抑えながら、IAM権限に基づいてユーザーごとのアクセスを制御・監査できる最も適切な設計はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各EC2インスタンスに「AmazonSSMManagedInstanceCore」ポリシーを含むIAMロールをアタッチし、VPC内にSSMのエンドポイント（またはNAT Gateway）を配置して、運用者がAWS Systems Manager Session Manager経由でIAM認証を用いてインスタンスに接続する。",
+      "explanation": "AWS Systems Manager Session Managerを使用すると、インバウンドのポート開放（SSHポート22含む）や踏み台サーバー、静的SSHキーの配布が一切不要になります。インスタンスに適切なIAMロールを付与しSSM Agentがアウトバウンド通信できる環境（エンドポイント等）を整えることで、AWSマネジメントコンソールやAWS CLIからIAMポリシーに基づいてセキュアにシェルセッションを開始でき、コマンド履歴もCloudWatch LogsやS3に監査ログとして保存できます。"
+    },
+    {
+      "id": "B",
+      "text": "プライベートサブネット内のインスタンスのセキュリティグループで社内VPNからのSSHポート（22）のみを許可し、EC2 Instance Connectを使用してIAMユーザーごとに短時間有効なSSH公開キーをプッシュして接続する。",
+      "explanation": "EC2 Instance Connectを使用する場合でも、依然としてインバウンドSSHポート（22）の通信許可とSSHクライアント接続が必要であり、インバウンドポートの完全遮断というセキュリティ要件を満たすことができません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Client VPNエンドポイントを作成してプライベートサブネットに関連付け、運用者がVPN経由でEC2インスタンスのプライベートIP宛てに従来のSSHキーを用いて接続する。",
+      "explanation": "Client VPNの構築・運用費用や管理オーバーヘッドが発生するだけでなく、静的なSSHキーペアを配布・維持する必要があるため、SSHキーの禁止要件に抵触します。"
+    },
+    {
+      "id": "D",
+      "text": "EC2シリアルコンソールアクセスを有効化し、インフラチームの各IAMユーザーにシリアルコンソールアクセスのIAM権限を付与して日常のメンテナンス作業を実施する。",
+      "explanation": "EC2シリアルコンソールはOSの起動トラブルシューティングやネットワーク到達不能時の緊急復旧を目的とした機能であり、日常的なシェルアクセスや作業ログの監査には適していません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Systems Manager Session Managerは、安全で監査可能なノード管理を提供するフルマネージドサービスです。EC2インスタンスに「AmazonSSMManagedInstanceCore」を含むIAMロールをアタッチし、アウトバウンド方向からSystems Managerサービスへ通信できるようにするだけで、インバウンドポートを完全に閉じたままセキュアなシェル接続を実現できます。アクセス制御はすべてIAMポリシーによって集中管理され、接続セッションの開始・終了や入力されたコマンドのログをS3バケットやCloudWatch Logsに自動転送して監査対応を行うことができます。"
+}

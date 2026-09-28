@@ -1,0 +1,39 @@
+{
+  "id": "b7114822-a80a-4b8c-8f4f-fd9c601b5f5b",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "コンピューティングとスケーリング",
+  "title": "Amazon EKSにおけるPodとワーカーノードの多層高速自動スケーリング設計",
+  "services": [
+    "Amazon EKS",
+    "Amazon EC2",
+    "AWS Auto Scaling"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業が、Amazon EKS（Kubernetes）クラスタ上で高トラフィックなマイクロサービス群を運用しています。キャンペーン時やセール時には特定サービスのトラフィックが数十倍に急増するため、コンテナ（Pod）の要求リソースに応じてPod数を迅速に自動拡張するとともに、クラスタ内の既存ノードのキャパシティが不足した場合には待機中のPod（Pending状態）を検知して数分以内に最適なEC2ノードを追加プロビジョニングする自動スケーリングの仕組みを求めています。この要件を最も効率的に満たす構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Horizontal Pod Autoscaler（HPA）を設定してトラフィック負荷に応じてPodレプリカ数を自動スケーリングし、ノード層にはPending状態のPodのリソース要求を直接監視して最適なEC2インスタンスを即座に起動するKarpenter（またはCluster Autoscaler）を導入する。",
+      "explanation": "Kubernetesにおけるスケーリングのベストプラクティスは、アプリケーション層（Pod）のスケーリングを担当するHPAと、基盤インフラ層（Node）のスケーリングを担当するKarpenter（またはCluster Autoscaler）の組み合わせです。Karpenterは保留中のPodが必要とするCPU・メモリ要件を直接評価し、最も適切なタイプとサイズのEC2インスタンスを迅速に調達してクラスタに追加します。"
+    },
+    {
+      "id": "B",
+      "text": "Vertical Pod Autoscaler（VPA）のみを設定し、トラフィック急増時に稼働中の全PodのCPU制限値を動的に引き上げつつ、ノードのEC2 Auto ScalingグループにCloudWatchのCPU使用率アラームを設定する。",
+      "explanation": "VPAはPodの単体サイズを変更する仕組みですが、反映には通常Podの再起動が必要となるため、リアルタイムの急激なトラフィック急増への即応には向きません。また、ノードの単純なCPUアラームによるAuto Scalingでは、Pending状態のPodが発生してもノードが追加されない（あるいは追加が遅れる）リスクがあります。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Batchのマネージドコンピューティング環境を作成し、EKSクラスタの全DeploymentをAWS Batchのジョブキューに登録して分散実行する。",
+      "explanation": "AWS Batchは並列バッチ処理やシミュレーション向けのサービスであり、Webリクエストを常時低遅延で処理するマイクロサービスのリアルタイムなPodスケーリング基盤としては不適切です。"
+    },
+    {
+      "id": "D",
+      "text": "すべてのEKSワーカーノードをクラスタープレイスメントグループに配置し、最大インスタンス数に固定してノードのスケーリングを無効化する。",
+      "explanation": "クラスタープレイスメントグループはHPCなどの低遅延通信向けであり、単一AZに制限されるため高可用性を損ないます。また、ノード数を固定することはスケーラビリティ要件およびコスト効率の観点から完全に逆行しています。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon EKSにおけるスケーリングは、「Podレベルのスケーリング」と「ノード（インフラ）レベルのスケーリング」の2層で設計します。Podレベルでは、CPU/メモリ使用率やカスタムメトリクスに基づいてPod数を動的に増減するHorizontal Pod Autoscaler（HPA）を利用します。ノードレベルでは、Podのスケジューリング待ち（Pending状態）を検知して必要なサイズ・タイプのEC2インスタンスを自動プロビジョニングするKarpenterやCluster Autoscalerを導入することで、急激な需要増加にも柔軟かつ無駄のない高速スケーリングが実現します。"
+}

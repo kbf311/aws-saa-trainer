@@ -1,0 +1,38 @@
+{
+  "id": "8ac76fe4-de27-48b0-a563-dc706c9cbf72",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "ディザスタリカバリ",
+  "title": "AWS CloudFormation StackSetsによるマルチリージョンDRインフラの一貫した自動プロビジョニング",
+  "services": [
+    "AWS CloudFormation",
+    "AWS Organizations"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバル企業は、メインリージョン（米国東部）とDRリージョン（欧州西部）において、VPC、サブネット、セキュリティグループ、ルーティング設定などのネットワークインフラ構成を常に100%同一に保ちたいと考えています。設定ドリフト（構成の乖離）を防ぎ、単一の操作で両リージョンに対して安全にインフラ変更を展開・管理するための最も適切なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS CloudFormation StackSetsを使用し、単一のテンプレートからメインリージョンとDRリージョンの両方に対してスタックを一元的に作成・更新・管理する。",
+      "explanation": "CloudFormation StackSetsを使用すると、単一のCloudFormationテンプレートから複数のAWSリージョンや複数のAWSアカウントにわたってスタックを一括デプロイ・更新できます。これによりDR環境と本番環境の構成ドリフトを確実に防止できます。"
+    },
+    {
+      "id": "B",
+      "text": "メインリージョンでCloudFormationスタックを作成し、スタックのリソースをAWS Backupで別リージョンに複製する。",
+      "explanation": "AWS Backupはデータストレージのバックアップを行うサービスであり、CloudFormationスタック構成自体を複製・展開することはできません。"
+    },
+    {
+      "id": "C",
+      "text": "各リージョンのマネジメントコンソールに個別にログインし、同一のパラメータを手動入力してVPCを構築する。",
+      "explanation": "手動設定は人為的ミスによる構成の不整合（ドリフト）を引き起こす最大の原因となります。"
+    },
+    {
+      "id": "D",
+      "text": "メインリージョンで作成したCloudFormationテンプレートを手動でダウンロードし、テキストエディタでリージョン名を置換した上で別リージョンで個別実行する。",
+      "explanation": "手動でのテンプレートコピーと個別適用は更新漏れやバージョンの不一致が発生しやすく、ガバナンスが担保できません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "複数リージョンや複数アカウントにまたがるインフラ（IaC）の一元デプロイ・整合性維持には、AWS CloudFormation StackSetsが最適なサービスです。"
+}

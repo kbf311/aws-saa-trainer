@@ -1,0 +1,39 @@
+{
+  "id": "c7a646bd-02d3-47e2-9f37-48b1af291bba",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "AWS Secrets ManagerとAWS LambdaによるサードパーティAPIキーのカスタム自動ローテーションの設計",
+  "services": [
+    "AWS Secrets Manager",
+    "AWS Lambda",
+    "AWS Key Management Service"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業が、外部決済プロバイダーのAPIキーなどの機密情報を安全に管理・運用したいと考えています。セキュリティポリシーでは、すべてのAPIキーを30日ごとに自動ローテーションし、平文のキーをコードリポジトリや設定ファイルにハードコードしないことが義務付けられています。外部プロバイダーはAPI経由で新しいAPIキーの発行と古いキーの無効化をサポートしています。この自動ローテーション要件をAWS上で実装する最も適切なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Secrets ManagerにAPIキーを保存し、自動ローテーションを有効化してカスタムAWS Lambda関数をターゲットに指定する。Lambda関数内で外部プロバイダーのAPIを呼び出して新しいキーを生成・検証・更新する処理を実装する。",
+      "explanation": "AWS Secrets Managerは組み込みのRDSローテーションだけでなく、任意のサードパーティAPIキーやトークンに対するカスタムローテーションをネイティブにサポートしています。ユーザー定義のAWS Lambda関数をローテーション関数として関連付けることで、ローテーションの各フェーズ（createSecret, setSecret, testSecret, finishSecret）に沿って安全に外部プロバイダーとのキー切り替えを完全自動化できます。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Systems Manager Parameter Storeの標準パラメータにAPIキーを保存し、Amazon EventBridgeのスケジュールルールで30日ごとにParameter Storeを直接トリガーして自動更新させる。",
+      "explanation": "Systems Manager Parameter StoreにはSecrets Managerのようなネイティブの自動ローテーション機構が備わっておらず、EventBridgeから直接Parameter Store内の文字列を自動生成・検証・更新することはできません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS KMSのカスタマーマネージドキー (CMK) の年次自動キーローテーションを有効にし、APIキー文字列をそのKMSキーで暗号化してAmazon S3に保存する。",
+      "explanation": "AWS KMSのキーローテーションはKMSキー自体のバッキングキー素材を更新するものであり、KMSで暗号化された外部サードパーティのAPIキーそのものを外部プロバイダーと通信してローテーションするわけではありません。"
+    },
+    {
+      "id": "D",
+      "text": "EC2インスタンス上のCronジョブで30日ごとにスクリプトを実行し、Gitリポジトリ内の環境変数ファイルを更新してアプリケーションサーバーを再起動する。",
+      "explanation": "環境変数ファイルに書き出す方法やインスタンスのCronに依存する方法は、認証情報が平文でディスクやリポジトリに晒されるリスクがあり、耐障害性やスケーラビリティの観点からも推奨されません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Secrets Managerのカスタムローテーション機能に関する設問です。RDSやDocumentDBなどのAWSマネージドDB以外の機密情報（OAuthトークン、サードパーティAPIキー等）であっても、Secrets ManagerとLambda関数を連携させることで安全かつ段階的な自動ローテーションを実装できます。"
+}

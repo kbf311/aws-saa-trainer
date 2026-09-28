@@ -1,0 +1,38 @@
+{
+  "id": "302e00e6-4372-4f50-9ced-1eea59acfb8c",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "Amazon S3 Transfer Accelerationの費用対効果評価と遠隔地アップロードの最適化",
+  "services": [
+    "Amazon S3",
+    "Amazon CloudFront"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、東京リージョンのS3バケットに対して、日本国内の拠点と南米・欧州の支社から日々数百GBのファイルをアップロードしています。転送速度向上のため、S3 Transfer Accelerationの導入を検討しています。追加の転送アクセラレーション料金（GB単位課金）を無駄にせず、最も費用対効果の高い利用戦略はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "「Amazon S3 Transfer Acceleration Speed Comparison Tool」を使用してネットワーク遅延とスループット改善度を事前測定し、地理的に遠く大幅な速度向上が見込める南米・欧州からのアップロードエンドポイントにのみアクセラレーションを適用し、東京と地理的に近い国内からのアップロードは通常のS3エンドポイントを使用する。",
+      "explanation": "S3 Transfer AccelerationはCloudFrontのグローバルエッジネットワークを利用して長距離転送を高速化しますが、追加の転送料金がかかります。東京リージョンに対して地理的に近い国内通信では速度向上の恩恵が少ないため、長距離転送（欧州・南米等）に絞って適用するのが最もコスト対効果が高くなります。"
+    },
+    {
+      "id": "B",
+      "text": "すべてのアップロードをS3 Transfer Accelerationに無条件で統一し、S3標準のエンドポイントアクセスをバケットポリシーで全面拒否する。",
+      "explanation": "地理的に近い近距離アップロードでも追加料金が発生するため、不要なコスト増加を招きます。"
+    },
+    {
+      "id": "C",
+      "text": "S3 Transfer Accelerationを有効化した上で、データをすべて一度S3 Glacier Deep Archiveに直接アップロードする。",
+      "explanation": "Transfer Accelerationの宛先は標準のS3バケット（S3 Standard等）であり、直接Glacier Deep ArchiveへPUTすることはできません。"
+    },
+    {
+      "id": "D",
+      "text": "南米・欧州の支社と東京リージョン間に個別のAWS Direct Connect 100Gbps専用線をそれぞれ敷設する。",
+      "explanation": "数拠点からのファイルアップロード用途に対して専用線を大陸横断で敷設するのは莫大な初期費用と固定費がかかり不経済です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "S3 Transfer Accelerationは長距離インターネット通信におけるスループット改善に絶大な効果を発揮しますが、近距離通信では恩恵が薄いため、遠隔地拠点を選択的に適用することがコスト最適化の定石です。"
+}

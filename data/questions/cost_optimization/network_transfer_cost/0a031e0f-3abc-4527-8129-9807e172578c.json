@@ -1,0 +1,40 @@
+{
+  "id": "0a031e0f-3abc-4527-8129-9807e172578c",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "AWS Direct Connect Transit VIFとプライベートVIFの選定比較による複数VPC接続コストの最適化",
+  "services": [
+    "AWS Direct Connect",
+    "AWS Transit Gateway",
+    "Direct Connect Gateway",
+    "Amazon VPC"
+  ],
+  "question_type": "single",
+  "question_text": "ある大企業が、単一のAWS Direct Connect専用回線（10Gbps）を保有しており、自社オンプレミスデータセンターとAWS環境を接続しています。現在、同リージョン内に新設された50個のVPC（それぞれ別のAWSアカウントが所有）に対してオンプレミスからのセキュア接続を提供する必要があります。各VPC間のトラフィック量は中程度であり、運用管理の簡素化と仮想インターフェイス（VIF）の作成上限およびデータ転送コストを考慮した最適なネットワーク設計が求められています。\n\nDirect Connectの単一物理回線からこれら50個のVPCすべてに最も効率的かつスケーラブルに接続するための推奨アーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Transit Gatewayをプロビジョニングして50個のVPCをアタッチし、Direct Connect回線上にTransit Virtual Interface（Transit VIF）を作成してDirect Connect Gateway経由でTransit Gatewayに接続する。",
+      "explanation": "Direct Connect回線上で作成できるプライベートVIFの数には物理ポートあたり最大50個（推奨は少なめ）などの制限があり、アカウントやVPCが増えるにつれて管理が破綻します。Transit Gatewayをハブとして配置し、Transit VIFとDirect Connect Gatewayを連携させることで、単一のBGPセッションと仮想インターフェイスで何十・何百ものVPCとオンプレミスを接続でき、拡張性と運用効率を最大化できます。"
+    },
+    {
+      "id": "B",
+      "text": "各VPCごとに個別のプライベートVIF（Private VIF）を50個作成し、各VPCの仮想プライベートゲートウェイ（VGW）に直接アタッチする。",
+      "explanation": "50個の個別VIFを作成・管理することはBGPピアリングの管理やルーティング設定の運用オーバーヘッドが極めて高く、今後のVPC増加に対応できないため非推奨です。"
+    },
+    {
+      "id": "C",
+      "text": "パブリックVIF（Public VIF）を作成し、50個のすべてのVPCにインターネットゲートウェイを設置してIPsec VPNを50本張る。",
+      "explanation": "Direct Connect回線上に多数のIPsec VPNを手動で構築することはスループットの制約（VPNトンネルあたり1.25Gbps）を受け、暗号化処理オーバーヘッドや管理コストが大幅に増加します。"
+    },
+    {
+      "id": "D",
+      "text": "50個のVPC間にフルメッシュのVPCピアリング（1,225本）を作成し、単一のプライベートVIFから1つのVPCにのみ接続してトラフィックを推移的（Transitive）にルーティングする。",
+      "explanation": "VPCピアリングは推移的ルーティング（Transitive Routing）をサポートしていないため、この構成では他の49個のVPCへオンプレミスから到達できません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Direct ConnectとAWS Transit Gatewayの統合アーキテクチャに関する設問です。多数のVPC（数十〜数百）とオンプレミスを接続する場合、個別のプライベートVIFを量産するのではなく、Transit GatewayとTransit VIF（Direct Connect Gateway経由）を活用してハブ＆スポーク構成に集約するのがAWSの推奨ベストプラクティスです。"
+}

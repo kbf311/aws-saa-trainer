@@ -1,0 +1,39 @@
+{
+  "id": "146a07cc-afb1-434d-b25e-1d654eac70c0",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "ストレージコスト最適化",
+  "title": "AWS ConfigとSystems Managerを活用した未アタッチEBSボリュームの検出と自動クリーンアップ",
+  "services": [
+    "Amazon EBS",
+    "AWS Config",
+    "AWS Systems Manager"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業では多数の開発者が日々テスト環境で Amazon EC2 インスタンスを起動・終了しています。EC2 インスタンスを終了する際、ルートボリューム以外の追加 EBS ボリュームにおいて「終了時に削除（DeleteOnTermination）」が無効化されているため、インスタンス終了後も未アタッチ（利用可能: available 状態）のまま放置されているボリュームが多数存在し、無駄なストレージ料金が発生していることが分かりました。人手を介さずに未アタッチ状態の不要な EBS ボリュームを自動的に検出し、コスト削減のための修復アクションを実行する最も効率的なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Trusted Advisor の「利用頻度の低い Amazon EBS ボリューム」チェックを週1回手動で確認し、該当するボリュームをマネジメントコンソールから手動で削除する。",
+      "explanation": "Trusted Advisor を手動で定期確認して手動削除する方法は、人手を介した運用オーバーヘッドが大きく、チェック頻度によっては数日間にわたり不要な課金が発生し続けるため要件を満たせません。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Config マネージドルール「ec2-volume-inuse-check」を設定し、非準拠となったボリュームに対して AWS Systems Manager Automation ドキュメントによる自動修復（自動削除またはスナップショット取得後の削除）を設定する。",
+      "explanation": "AWS Config のマネージドルール（ec2-volume-inuse-check）を使用すると、どの EC2 インスタンスにもアタッチされていない EBS ボリュームを自動的かつ継続的に検出できます。さらに、AWS Systems Manager (SSM) Automation と連携して自動修復アクション（Remediation）を設定することで、人手を介さずにスナップショット取得やボリュームの削除を自動実行し、コストを最小化できます。"
+    },
+    {
+      "id": "C",
+      "text": "すべての EC2 インスタンスに CloudWatch エージェントを導入し、ディスク使用率が 0% になったボリュームを自動的にフォーマットする。",
+      "explanation": "未アタッチ状態のボリュームは EC2 インスタンスに接続されていないため、インスタンス上の CloudWatch エージェントからメトリクスを収集することはできません。またディスクをフォーマットしてもボリューム自体の課金は停止しません。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Cost Anomaly Detection でアラートを作成し、月次請求額が閾値を超えた場合にすべての EBS ボリュームの暗号化を無効化する。",
+      "explanation": "Cost Anomaly Detection は異常な支出の検知と通知を行うサービスであり、不要ボリュームの特定や自動削除は行えません。またボリュームの暗号化の有無はストレージ単価に影響しません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "EC2 インスタンスが終了しても、追加アタッチされた EBS ボリュームは自動削除設定（DeleteOnTermination=true）になっていない場合、'available' 状態で残存し課金が継続します。AWS Config の組み込みマネージドルール（ec2-volume-inuse-check）で未接続ボリュームを監視し、AWS Systems Manager Automation による自動修復アクションを関連付けることで、組織全体で継続的かつ完全に自動化されたストレージコスト最適化が実現できます。"
+}

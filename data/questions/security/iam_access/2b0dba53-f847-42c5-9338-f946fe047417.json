@@ -1,0 +1,39 @@
+{
+  "id": "2b0dba53-f847-42c5-9338-f946fe047417",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "aws:SourceArnおよびaws:SourceAccount条件キーによる混乱した代理人 (Confused Deputy) 問題の防御",
+  "services": [
+    "AWS IAM",
+    "Amazon S3",
+    "AWS CloudTrail"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、AWS CloudTrailの証跡ログを中央のAmazon S3バケットに集約して保存しています。S3バケットポリシーでは、CloudTrailサービスプリンシパル（cloudtrail.amazonaws.com）に対する「s3:PutObject」アクションを許可しています。セキュリティ監査チームから、悪意のある第三者のAWSアカウントがこの企業のバケット名を指定して自社用のCloudTrail証跡を設定し、企業のS3バケットにログを書き込ませたり上書きしたりする「混乱した代理人（Confused Deputy）問題」への脆弱性が指摘されました。このリスクを確実に防ぎ、自社組織内の特定のCloudTrail証跡からのみログ書き込みを許可するための最も適切な条件キーの設定はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "S3バケットポリシーのCondition句に「aws:SourceArn」キー（または「aws:SourceAccount」キー）を追加し、自社の正当なCloudTrail証跡のARN（または自社のAWSアカウントID）と一致することを要求する。",
+      "explanation": "AWSサービスが別のアカウントのリソースに対してアクションを実行する際の「混乱した代理人（Confused Deputy）問題」を防ぐための標準的なベストプラクティスは、リソースベースポリシーのCondition句に「aws:SourceArn」や「aws:SourceAccount」グローバル条件キーを指定することです。これにより、CloudTrailサービスがアクションを代行する際に、呼び出し元となったリソース（証跡ARN）やアカウントが自社のものに限定されるため、第三者アカウントによる不正なリソース悪用を確実に防止できます。"
+    },
+    {
+      "id": "B",
+      "text": "S3バケットポリシーのPrincipal要素から「cloudtrail.amazonaws.com」を削除し、企業のセキュリティ管理者のIAMユーザーARNのみをPrincipalとして指定する。",
+      "explanation": "CloudTrailサービスプリンシパルをPrincipalから削除してしまうと、CloudTrailサービスがバケットにログを配信できなくなり、ログ収集自体が停止してしまいます。"
+    },
+    {
+      "id": "C",
+      "text": "S3バケットのオブジェクトロック（Object Lock）をコンプライアンスモードで有効化し、7日間の保持期間を設定する。",
+      "explanation": "オブジェクトロックは既存オブジェクトの改ざんや削除を防止する機能ですが、不正な第三者のCloudTrail証跡がバケットに新規オブジェクトを書き込むこと（Confused Deputyによるリソース汚染・コスト発生）を防ぐことはできません。"
+    },
+    {
+      "id": "D",
+      "text": "バケットのセキュリティグループのインバウンドルールで、AWS CloudTrailサービスのエンドポイントIPレンジのみを許可する。",
+      "explanation": "Amazon S3バケットはVPCセキュリティグループによって保護されるリソースではなく、バケットポリシーなどのIAM制御でアクセス制御を行う必要があります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "「混乱した代理人（Confused Deputy）問題」は、あるアクションを実行する権限を持たないエンティティが、より特権的なエンティティ（AWSサービスなど）を誘導・強制してアクションを実行させてしまうセキュリティ問題です。サービス間リクエストにおいてこの問題を防止するため、AWSではリソースベースポリシーに「aws:SourceArn」または「aws:SourceAccount」グローバル条件キーを使用することを強く推奨しています。バケットポリシーに自社の特定の証跡ARN（または自社アカウントID）を指定することで、CloudTrailサービスが代行実行する際、自社リソースからの正当なログ配信のみを許可し、他者アカウントからの悪用を完全に遮断できます。"
+}

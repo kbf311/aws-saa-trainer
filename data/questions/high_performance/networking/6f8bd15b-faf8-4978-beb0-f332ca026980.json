@@ -1,0 +1,39 @@
+{
+  "id": "6f8bd15b-faf8-4978-beb0-f332ca026980",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "AWS Transit GatewayとECMP（等コストマルチパス）による相互接続帯域のスケーリング",
+  "services": [
+    "AWS Transit Gateway",
+    "Amazon VPC",
+    "AWS Site-to-Site VPN"
+  ],
+  "question_type": "single",
+  "question_text": "あるエンタープライズ企業が、数十個のAWS VPCとオンプレミス拠点を相互接続しています。各拠点のAWS Site-to-Site VPN接続は単一IPsecトンネルあたり最大1.25Gbpsの帯域制限があるため、ピーク時にVPN接続がボトルネックとなっています。また、VPC同士のメッシュ接続が複雑化しています。ネットワーク構成をハブ＆スポーク型で一元管理しつつ、複数のVPNトンネル間で等コストマルチパス（ECMP）ルーティングを利用して集約VPNスループットを数Gbps以上にスケールアップできるAWSサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "VPCピアリング接続をすべてのVPC間にフルメッシュで作成する。",
+      "explanation": "VPCピアリングはECMPルーティングをサポートしておらず、オンプレミスとVPC間の集約VPN帯域のスケーリングには利用できません。またフルメッシュ構成は管理コストが膨大になります。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Transit Gateway をデプロイし、ECMPサポートを有効化した上で複数のVPN接続をアタッチする。",
+      "explanation": "AWS Transit Gatewayは、複数のVPCやオンプレミス接続を集約するクラウドルーター（ハブ＆スポーク型）です。ECMP（Equal-Cost Multi-Path）ルーティングをサポートしており、複数のVPNトンネル間でトラフィックを等コストで負荷分散して集約帯域幅を1.25Gbps以上にスケールさせることができます。また各VPCアタッチメントあたり最大50Gbpsのバーストスループットを提供します。"
+    },
+    {
+      "id": "C",
+      "text": "仮想プライベートゲートウェイ（VGW）を各VPCに個別にアタッチし、それぞれに個別のインターネットゲートウェイ（IGW）を関連付ける。",
+      "explanation": "仮想プライベートゲートウェイ（VGW）はVPC間の中継（トランジットルーティング）をサポートしておらず、複数VPNのECMPによるアグリゲーションも行えません。"
+    },
+    {
+      "id": "D",
+      "text": "各VPC内にプロキシ用の単一t3.micro EC2インスタンスを立て、iptablesでパケットをフォワーディングする。",
+      "explanation": "単一のt3.microインスタンスによるソフトウェアフォワーディングはネットワーク性能が極めて低く、単一障害点となり、Gbps単位のスループットには全く耐えられません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "AWS Transit Gatewayは、数千のVPCやオンプレミスネットワークを一元接続するマネージドクラウドハブです。\n- スループット: 各VPCアタッチメントあたり最大50Gbpsのスループットを提供。\n- ECMP（Equal-Cost Multi-Path）: 複数のSite-to-Site VPNトンネルを束ねることで、単一トンネルの上限である1.25Gbpsを超えてVPN集約帯域をリニアにスケールアップ可能。\n大規模ネットワークの運用簡素化と高パフォーマンス通信を同時に実現する標準的なアーキテクチャパターンです。"
+}

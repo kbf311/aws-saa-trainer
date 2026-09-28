@@ -1,0 +1,39 @@
+{
+  "id": "26da0e98-ede2-4228-8e64-590e5fb0525e",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "AWS Global Acceleratorによる非HTTPトラフィックの低遅延ルーティングと固定Anycast IPの提供",
+  "services": [
+    "AWS Global Accelerator",
+    "Amazon CloudFront",
+    "Application Load Balancer"
+  ],
+  "question_type": "single",
+  "question_text": "あるオンラインマルチプレイヤーゲーム会社が、独自のUDPベースのカスタムプロトコルを使用するリアルタイム対戦ゲームサーバーをAmazon EC2上で運用しています。世界中のプレイヤーがプレイしており、パケットロスとネットワークレイテンシを極限まで低減する必要があります。また、クライアントアプリケーションのファイアウォール制約により、頻繁に変更されない固定の静的パブリックIPアドレスが2つ必要です。コンテンツのキャッシングは不要です。最も適切なAWSサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon CloudFront ディストリビューションを作成し、EC2インスタンスをオリジンとして設定する。",
+      "explanation": "Amazon CloudFrontはHTTP/HTTPSプロトコルおよびコンテンツのキャッシュに最適化されたCDNサービスであり、UDPトラフィックをネイティブにサポートしておらず、専用の静的Anycast IPアドレスも提供されません。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Global Accelerator をプロビジョニングし、2つのAnycast静的IPアドレスをエンドポイント（EC2またはNLB）に関連付ける。",
+      "explanation": "AWS Global Acceleratorは、2つの静的Anycast IPアドレスを提供し、TCPおよびUDPトラフィックの両方をサポートします。クライアントのトラフィックを最も近いエッジロケーションからAWSの広帯域・混雑のないプライベートグローバルバックボーンネットワークへ即座に取り込むことで、ジッターやパケットロスを最小化し、超低レイテンシを実現します。"
+    },
+    {
+      "id": "C",
+      "text": "Application Load Balancer（ALB）をデプロイし、固定IPアドレスを割り当ててUDPリスナーを作成する。",
+      "explanation": "Application Load Balancerはレイヤー7（HTTP/HTTPS/gRPC）専用のロードバランサーであり、UDPプロトコルをサポートせず、静的IPアドレスも直接提供しません（DNS名のみ）。"
+    },
+    {
+      "id": "D",
+      "text": "Route 53 のレイテンシールーティングを設定し、各リージョンのEC2インスタンスのElastic IPを登録する。",
+      "explanation": "Route 53のDNSルーティングはパブリックインターネット経由での通信となるため、インターネットの混雑やルーティング変動の影響を受けやすく、またUDPゲームセッション中の動的な低遅延パス維持やAnycast IPの提供は行えません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "AWS Global Accelerator と Amazon CloudFront の使い分けはSAA試験の超重要テーマです。\n- AWS Global Accelerator: TCP/UDP両対応、非HTTPトラフィック（ゲーム、IoT、VoIPなど）に最適、2つの固定Anycast IPアドレスを提供、AWSのプライベートグローバルネットワークを活用してレイテンシとパケットロスを低減（キャッシング機能はなし）。\n- Amazon CloudFront: HTTP/HTTPS専用、エッジでの静的/動的コンテンツキャッシング、Webトラフィックの最適化向け。"
+}

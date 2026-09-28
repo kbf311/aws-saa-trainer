@@ -1,0 +1,38 @@
+{
+  "id": "949bba4c-d0d9-4f33-af5a-a237631e520a",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "スケーラビリティと疎結合",
+  "title": "Amazon EventBridge API送信先（API Destinations）によるサードパーティSaaSへのセキュアなWebhook連携",
+  "services": [
+    "Amazon EventBridge",
+    "AWS Secrets Manager"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、自社のAWS環境で発生する重要な運用アラートや顧客ステータス変更イベントを、サードパーティの外部SaaS（CRMシステムや通知プラットフォーム）のREST APIエンドポイントへWebhookとして転送したいと考えています。外部APIにはAPIキー認証と毎秒50リクエストのレートリミットが課されています。Lambda関数などのカスタムコードを維持・管理することなく、レートリミットを遵守しながらセキュアに外部APIを呼び出す最適なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon EventBridgeのAPI送信先（API Destinations）を設定し、接続設定でSecrets ManagerまたはAPIキーによる認証とレートリミット（50 req/sec）を定義して、イベントルールのターゲットに指定する。",
+      "explanation": "Amazon EventBridge API Destinations（API送信先）を使用すると、任意の外部HTTP APIをイベントルールのターゲットとしてノーコードで設定できます。APIキーやOAuth認証情報の安全な管理に加え、呼び出しレートリミット（最大スループット）をネイティブに制御できます。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Lambda関数を作成し、コード内にAPIキーをハードコードして外部APIを呼び出し、同時実行数を50に制限する。",
+      "explanation": "Lambdaコードへの認証情報のハードコードはセキュリティ違反であり、同時実行数50の制限は「秒間50リクエスト」のレートリミット制御とは異なるため、外部APIのレート超過を招く可能性があります。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon SNSトピックを作成し、外部SaaSのHTTPSエンドポイントをサブスクライバーとして直接登録する。",
+      "explanation": "Amazon SNSのHTTPSサブスクリプションでは、APIキー認証や複雑なOAuthヘッダー付与、詳細なリクエストレートリミット制御を柔軟に行うことができません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon API GatewayでプライベートREST APIを構築し、外部SaaSへのリバースプロキシとして構成する。",
+      "explanation": "外部SaaSへのアウトバウンド送信のためにAPI Gatewayをリバースプロキシとして立てる設計は不要なアーキテクチャの複雑性とコストを招きます。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon EventBridge API Destinationsは、外部HTTPエンドポイントへのイベント転送、認証情報の自動付加、レートリミット制御をコードレスで実現する標準機能です。"
+}

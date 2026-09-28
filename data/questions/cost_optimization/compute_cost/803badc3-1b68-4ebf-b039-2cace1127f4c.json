@@ -1,0 +1,39 @@
+{
+  "id": "803badc3-1b68-4ebf-b039-2cace1127f4c",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "コンピュートコスト最適化",
+  "title": "Amazon EventBridgeとAWS Systems Manager Automationによる開発環境インスタンスの自動起動・停止スケジュール基盤",
+  "services": [
+    "Amazon EC2",
+    "Amazon EventBridge",
+    "AWS Systems Manager"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業の開発部門では、約100台のAmazon EC2インスタンスが開発・テスト環境として稼働しています。これらのインスタンスは平日の業務時間（8:00〜19:00）のみ利用されますが、開発者が業務終了後や週末に停止し忘れることが多く、無駄なオンデマンド費用が発生しています。運用管理チームは、追加の運用管理サーバー（監視EC2等）を立てることなく、平日夜間と休日に特定タグ（Environment=Dev）が付与されたEC2インスタンスを自動的に一括停止・起動する仕組みを導入したいと考えています。\n\nインフラ保守の手間を最小限に抑え、最も費用対効果が高い自動化ソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon EventBridgeのスケジュールルールを作成し、ターゲットとしてAWS Systems Manager Automationの事前定義ランブック（AWS-StopEC2Instances / AWS-StartEC2Instances）を呼び出してタグ付けされたインスタンスを操作する。",
+      "explanation": "Amazon EventBridgeスケジュールとAWS Systems Manager（SSM）Automationを組み合わせることで、追加のサーバーやカスタムコード（Lambda）のメンテナンスを必要とせず、完全マネージドかつ無料でスケジュール起動・停止を実装できます。これにより、開発環境の稼働時間を平日日中のみ（週約55時間/168時間）に限定し、コンピュートコストを約65%以上削減できます。"
+    },
+    {
+      "id": "B",
+      "text": "24時間稼働の運用管理用EC2インスタンスを1台構築し、cronジョブとAWS CLIスクリプトを配置して停止・起動APIを呼び出す。",
+      "explanation": "運用管理用の常時稼働EC2インスタンス自体のコンピュート料金、OSパッチ適用、耐障害性監視などの運用管理負担（オーバーヘッド）が発生するため、マネージドサービスの利用と比較して非効率です。"
+    },
+    {
+      "id": "C",
+      "text": "すべての開発用EC2インスタンスに対して3年契約のAll Upfront（全額前払い）Standard Reserved Instancesを購入する。",
+      "explanation": "夜間や休日に不要なインスタンスに対してリザーブドインスタンスを購入することは、停止による根本的な稼働時間削減の機会を放棄することになり、コスト最適化の観点から不適切です。"
+    },
+    {
+      "id": "D",
+      "text": "各開発用EC2インスタンス内部のcrontabに shutdown コマンドを設定して夜間に停止させ、朝の起動は各開発者にAWSマネジメントコンソールから手動で行わせる。",
+      "explanation": "OS内部のシャットダウンではインスタンスが停止しても朝の起動は自動化できず、手動作業による生産性低下や人為的ミスが発生するため運用オーバーヘッドが大きくなります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "非本番環境の稼働時間スケジューリングによるコスト削減に関する設問です。Amazon EventBridgeとAWS Systems Manager Automation（またはAWS Instance Scheduler）を利用することで、サーバーレスかつコードレスでEC2インスタンスの停止・起動を自動化でき、アイドル時の無駄なインスタンス料金を安全かつ確実に削減できます。"
+}

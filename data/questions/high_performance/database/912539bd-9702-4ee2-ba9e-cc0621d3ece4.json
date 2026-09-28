@@ -1,0 +1,37 @@
+{
+  "id": "912539bd-9702-4ee2-ba9e-cc0621d3ece4",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "データベースとキャッシング",
+  "title": "Amazon DynamoDB トランザクション (TransactWriteItems) による複数アイテムの原子的更新と整合性確保",
+  "services": [
+    "Amazon DynamoDB"
+  ],
+  "question_type": "single",
+  "question_text": "あるオンラインゲーム企業が、プレイヤー間のゲーム内通貨の送金およびアイテム売買システムを構築しています。この処理では、購入者残高の減額と販売者残高の増額、およびアイテム所有権の変更という複数の異なるテーブルやアイテムに対する更新処理を、All-or-Nothing（すべて成功またはすべてロールバック）の原子性（Atomicity）を維持して実行する必要があります。また、ピーク時には秒間数千件の取引が発生するため、分散デッドロックや複雑な分散トランザクション調整ロジックをアプリケーション側で実装することなく、高いパフォーマンスと低レイテンシで処理したいと考えています。\n\nこれらの要件を満たす最も適切なDynamoDBの機能はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon DynamoDB Transactions（TransactWriteItems API）を使用する。",
+      "explanation": "Amazon DynamoDB Transactions（TransactWriteItems / TransactGetItems）は、単一または複数のテーブルにまたがる最大100個のアイテムまたは合計4MBまでのデータに対して、完全なACID（原子性、一貫性、分離性、耐久性）トランザクションを提供します。複雑な2フェーズコミットやロールバックロジックを自作することなく、高パフォーマンスかつフルマネージドに一括アトミック更新を実行できます。"
+    },
+    {
+      "id": "B",
+      "text": "DynamoDB BatchWriteItem APIを使用して複数アイテムの更新を一括送信する。",
+      "explanation": "BatchWriteItemは複数のPUT/DELETEリクエストをバッチ実行してネットワーク呼び出しを削減しますが、アトミック性（トランザクション）は保証されず、一部のアイテムのみが成功し他が失敗する可能性があります。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon SQS FIFOキューを使用してリクエストを順序保証し、単一のLambda関数で順次PutItemを実行する。",
+      "explanation": "キューによる順次直列処理はスループットが大幅に制限され、また処理途中でクラッシュした場合のロールバック処理を独自実装しなければならず運用が極めて複雑になります。"
+    },
+    {
+      "id": "D",
+      "text": "DynamoDBストリームとAWS Step Functionsのサーガパターンを使用して、補償トランザクションを手動実行する。",
+      "explanation": "補償トランザクションによる最終整合性アプローチは実装とエラーハンドリングが極めて複雑であり、即時かつ厳密なACID整合性が求められる金融・残高移動処理ではDynamoDBネイティブのTransactions機能が推奨されます。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon DynamoDB Transactions機能（TransactWriteItemsおよびTransactGetItems）により、開発者は複数アイテム・複数テーブルに対するアトミックなCRUD処理を容易に実装できます。マネージドで競合検出とロールバックが実行されるため、分散ロックや独自トランザクション管理のオーバーヘッドを排除し、高いスループットを維持できます。"
+}

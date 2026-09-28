@@ -1,0 +1,39 @@
+{
+  "id": "729d9e52-e698-4b2a-9a37-5c8a817b3322",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "DynamoDBへの大量クエリにおけるGateway型VPCエンドポイントによるNAT Gateway通信費用の削減",
+  "services": [
+    "Amazon DynamoDB",
+    "Amazon VPC",
+    "NAT Gateway"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、プライベートサブネット内の複数のAmazon EC2インスタンスで大規模なデータ分析ワークロードを運用しています。このワークロードは、Amazon DynamoDBテーブルに対して毎日数億件の読み書きリクエストを発行しています。現在、EC2インスタンスはNAT Gatewayを経由してパブリックなDynamoDBエンドポイントにアクセスしています。月次請求書を確認したところ、NAT Gatewayのデータ処理料金（Data Processing Charges）がネットワークコストの大半を占めており、コスト削減が急務となっています。\n\n既存のアプリケーションコードやアーキテクチャの大幅な変更を避けつつ、ネットワークデータ転送コストを最小限に抑える最も費用対効果の高いソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各EC2インスタンスにパブリックIPv4アドレスを割り当て、Internet Gatewayを経由してDynamoDBに直接アクセスするようにルーティングを変更する。",
+      "explanation": "パブリックIPv4アドレスの割り当てはプライベートサブネットのセキュリティ原則に反し、パブリックIPv4アドレス自体の利用料金（時間単価）が追加で発生するため、費用対効果およびセキュリティの観点から不適切です。"
+    },
+    {
+      "id": "B",
+      "text": "DynamoDB用のGateway型VPCエンドポイントを作成し、プライベートサブネットのルートテーブルにDynamoDBプレフィックスリスト宛てのルーティングターゲットとして追加する。",
+      "explanation": "DynamoDB用のGateway型VPCエンドポイントは完全無料（追加料金・データ処理料金なし）で提供されています。VPCのルートテーブルにDynamoDB宛てのルートを追加するだけで、EC2インスタンスからのトラフィックがNAT GatewayをバイパスしてAWS内部ネットワーク経由で直接DynamoDBに到達するため、NAT Gatewayのデータ処理料金を完全にゼロに削減できます。"
+    },
+    {
+      "id": "C",
+      "text": "DynamoDB Accelerator (DAX) クラスターをマルチAZ構成でプロビジョニングし、すべての読み書きリクエストをキャッシュする。",
+      "explanation": "DAXは読み取りパフォーマンスの向上（マイクロ秒単位の応答）には有効ですが、常時起動のEC2ノードクラスター費用が追加で発生するため、ネットワークデータ転送コストの削減ソリューションとしては高価であり費用対効果の要件を満たしません。"
+    },
+    {
+      "id": "D",
+      "text": "DynamoDB用のInterface型VPCエンドポイント (AWS PrivateLink) を作成し、プライベートDNSを有効化してプライベートサブネットから接続する。",
+      "explanation": "DynamoDB用にはInterface型エンドポイントも提供されていますが、Interface型エンドポイントはENIの時間あたりの稼働料金およびGBあたりのデータ処理料金（$0.01/GB）が発生します。無料であるGateway型VPCエンドポイントが存在するため、コスト最適化の観点ではGateway型が最善です。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "VPC内のリソースからDynamoDBやS3にアクセスする場合、Gateway型VPCエンドポイント (Gateway VPC Endpoint) を導入することが最も費用対効果の高いベストプラクティスです。Gateway型エンドポイントは時間料金・データ処理料金ともに完全無料であり、ルートテーブルを設定するだけでNAT Gatewayを経由するトラフィックを完全に排除できます。Interface型エンドポイント (PrivateLink) は時間単価およびデータ処理単価が発生するため、オンプレミスからの直接アクセス等の特殊な要件がない限り、同一VPC内からのアクセスにはGateway型を選択します。"
+}

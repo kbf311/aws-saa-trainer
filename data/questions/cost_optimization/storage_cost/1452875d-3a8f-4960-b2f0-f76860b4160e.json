@@ -1,0 +1,38 @@
+{
+  "id": "1452875d-3a8f-4960-b2f0-f76860b4160e",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "ストレージコスト最適化",
+  "title": "AWS DataSyncによるオンプレミスファイルストレージからS3各ストレージクラスへの直接移行とコスト最適化",
+  "services": [
+    "AWS DataSync",
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、オンプレミスに蓄積された500TBの過去ログファイルをクラウドへ移行しようとしています。これらのデータは即座にS3 Glacier Flexible ArchiveまたはGlacier Deep Archiveに格納して保管コストを最小化したいと考えています。移行中にS3 Standardを経由した追加のデータ保管料やS3ライフサイクル移行料金を発生させず、直接目的のアーカイブストレージクラスに一括転送するための最も効果的な方法はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS DataSyncを使用し、宛先S3のロケーション設定でストレージクラスとして直接「S3 Glacier Flexible Archive」または「S3 Glacier Deep Archive」を指定して転送タスクを実行する。",
+      "explanation": "AWS DataSyncでは、宛先S3バケットを設定する際に、格納先ストレージクラス（Standard、Intelligent-Tiering、Glacier、Glacier Deep Archiveなど）を直接指定できます。S3 Standardを経由せずに最初からアーカイブストレージクラスに書き込めるため、ライフサイクル移行費用やStandardの余計な保管料金を完全削減できます。"
+    },
+    {
+      "id": "B",
+      "text": "すべてのデータを一度S3 Standardにアップロードし、S3ライフサイクルルールで1日後にGlacier Deep Archiveに移行させる。",
+      "explanation": "S3 Standardへの保管料金が発生するだけでなく、500TB分の大量オブジェクトに対するライフサイクル移行リクエスト料金（PUT/Lifecycle料金）が追加で発生して不経済です。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Snowball Edgeを注文し、アプライアンス内の暗号化機能のみを用いて手動でファイルを移動する。",
+      "explanation": "Snowballでも移行可能ですが、ネットワーク帯域が十分にある場合、DataSyncによる直接Glacier書き込みの方が迅速かつ運用オーバーヘッドが低くなります。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon EFSにデータを全量転送した上で、EFSからGlacierへのカスタムエクスポートスクリプトを実行する。",
+      "explanation": "EFSの一時保管費用が極めて高額になり、不要なステップが追加されます。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS DataSyncは宛先S3ストレージクラスとしてS3 GlacierやGlacier Deep Archiveを直接指定可能であり、S3 Standardの保管料や移行手数料をかけずに直接低コストアーカイブへ転送できます。"
+}

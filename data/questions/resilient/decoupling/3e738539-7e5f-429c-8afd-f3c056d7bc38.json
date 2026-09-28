@@ -1,0 +1,40 @@
+{
+  "id": "3e738539-7e5f-429c-8afd-f3c056d7bc38",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "スケーラビリティと疎結合",
+  "title": "Amazon EventBridge によるイベント駆動アーキテクチャと複数ターゲットへのコンテンツベースルーティング",
+  "services": [
+    "Amazon EventBridge",
+    "AWS Lambda",
+    "Amazon SQS",
+    "Amazon SNS"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、自社のマイクロサービス、AWSサービス（Amazon S3やEC2等）、および外部のSaaSアプリケーション（Zendesk等）の間で発生する様々なビジネスイベントを統合・連携する新しいイベント駆動型プラットフォームを構築したいと考えています。システム要件として、JSONイベントペイロードの特定フィールド（注文金額やステータス等）の値に基づく高度なルールマッチングを行い、条件に応じてAWS Lambda、Amazon SQSキュー、またはStep Functionsワークフローなどの異なるターゲットへ直接ルーティングすることが求められています。カスタムコードの記述やサーバー管理を最小限に抑えつつ、これを実現する最適なサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon Simple Queue Service (SQS) 標準キューを作成し、カスタムEC2ワーカーでイベント本文を解析して各ターゲットへ条件分岐転送を行う。",
+      "explanation": "自前のEC2ワーカーでメッセージ本文を解析して分岐させる方法は、サーバー管理、スケーリング、パッチ適用などの運用負担が大きく、サーバーレスのベストプラクティスに反します。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon EventBridge のイベントバスを使用し、JSONベースの「イベントパターン（Event Pattern）」を持つルールを定義して、合致したイベントをLambda、SQS、Step Functionsなどのターゲットへ直接ルーティングする。",
+      "explanation": "Amazon EventBridgeはサーバーレスのイベントバスサービスであり、自作アプリ、AWSネイティブサービス、外部SaaSからのイベントをシームレスに集約できます。JSONペイロードの内容に基づく宣言的な「イベントパターン（Event Pattern）」ルールを定義することで、カスタムコードを書かずに複数のAWSターゲットへ直接ルーティングでき、運用オーバーヘッドが最小となります。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon API Gateway のREST APIを作成し、各イベント発生時に同期的にPOSTリクエストを受信してバックエンドへ振り分けるプロキシを設定する。",
+      "explanation": "API Gatewayは同期的なAPIエンドポイントを提供するものであり、外部SaaSやAWSサービス間での非同期イベント駆動オーケストレーションや高度なパターンマッチングによる自動ルーティング機能は備えていません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon Kinesis Data Streams を使用し、すべてのイベントを単一ストリームに流してEMRクラスターでSparkストリーミング処理を行う。",
+      "explanation": "KinesisとEMR（Spark）の組み合わせは大規模なビッグデータ分析向けであり、一般的なビジネスイベントのルーティングとしては大幅に過剰（オーバーキル）であり、コストも高額になります。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Amazon EventBridgeは、自社アプリケーション、SaaSパートナーアプリケーション（Zendesk、Datadogなど）、およびAWSサービスからのリアルタイムデータストリームを接続するサーバーレスイベントバスです。JSON形式の「イベントパターン」を用いてイベントの内容（本文データ）に応じた強力なフィルタリングとルーティングが可能であり、Lambda、SQS、SNS、Step Functionsなど多岐にわたるAWSターゲットへ直接・宣言的にイベントを配信できます。"
+}

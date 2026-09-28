@@ -1,0 +1,39 @@
+{
+  "id": "000",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "Amazon CloudFrontとAWS Global Acceleratorを活用したグローバル配信の低レイテンシ化",
+  "services": [
+    "Amazon CloudFront",
+    "AWS Global Accelerator",
+    "Application Load Balancer"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバルSaaS企業が、東京リージョンの単一VPCでWebアプリケーションおよび非HTTPプロトコル（カスタムTCPプロトコル）を使用するリアルタイム同期サービスを運用しています。世界各地（北米、欧州、東南アジアなど）のユーザーからアクセスされており、遠隔地のユーザーにおいてパケット損失や公衆インターネット経由の遅延によるパフォーマンス低下が報告されています。また、静的コンテンツ（画像やスクリプト）の配信速度向上と、カスタムTCP通信のレイテンシ低減を同時に実現したいと考えています。\n\nこれらの要件を満たす最適なネットワーキング構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各リージョン（北米・欧州・東南アジア）にフルスタックのインフラを複製デプロイし、Route 53のレイテンシーベースルーティングで最寄りのリージョンに振り分ける。",
+      "explanation": "**各リージョンへのフルスタック複製**: 世界中にインフラをフル複製することは運用コストやデータ整合性同期の複雑性が極めて高くなり、単一リージョン運用の最適化アプローチとして過剰です。"
+    },
+    {
+      "id": "B",
+      "text": "静的および動的HTTPコンテンツの配信にはAmazon CloudFrontを配置してエッジキャッシュとAWSバックボーンネットワークを活用し、カスタムTCPプロトコルの通信にはAWS Global Acceleratorを使用してエッジロケーションから東京リージョンへのトラフィックを最適化する。",
+      "explanation": "**Amazon CloudFront**: 世界中に広がるエッジロケーションを利用して、静的コンテンツ（画像・JS・CSSなど）をユーザーの至近でキャッシュして高速配信します。また動的HTTP/HTTPSリクエストについても、最寄りのエッジからAWSの高速・高信頼なプライベートグローバルバックボーンネットワークを経由してオリジンへルーティングするため、パケットロスや遅延を大幅に削減します。\n\n**AWS Global Accelerator**: 2つの静的エニーキャストIPアドレスを提供し、非HTTPプロトコル（カスタムTCP/UDPなど）を含むトラフィックを最寄りのエッジロケーションで受け入れ、混雑した公衆インターネットではなくAWSの専用グローバルネットワークを経由して東京リージョンのエンドポイントへ高速転送します。"
+    },
+    {
+      "id": "C",
+      "text": "東京リージョンにDirect Connectを敷設し、海外ユーザーに対して東京のDirect Connectロケーションへの専用VPN接続を義務付ける。",
+      "explanation": "**海外ユーザーへのDirect Connect/VPN接続要求**: 一般の海外エンドユーザーに対してDirect ConnectやVPN接続を求める構成は現実的ではありません。"
+    },
+    {
+      "id": "D",
+      "text": "東京リージョンのInternet GatewayをNetwork Load Balancerに置き換え、全通信をNLBでターミネーションする。",
+      "explanation": "**Internet GatewayのNLB置換**: NLBへの変更だけでは公衆インターネット上の国際間ルーティング遅延やパケットロスを解決できません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Amazon CloudFrontとAWS Global Acceleratorを活用したグローバル配信の低レイテンシ化に関する設問です。Amazon CloudFrontを活用することで、要件を満たしつつ最適なアーキテクチャを実現できます。"
+}

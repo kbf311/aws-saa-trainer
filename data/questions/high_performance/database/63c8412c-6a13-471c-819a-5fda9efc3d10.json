@@ -1,0 +1,37 @@
+{
+  "id": "63c8412c-6a13-471c-819a-5fda9efc3d10",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "データベースとキャッシング",
+  "title": "DynamoDBのグローバルセカンダリインデックス（GSI）と射影属性（PROJECTION）によるクエリ性能とスループット最適化",
+  "services": [
+    "Amazon DynamoDB"
+  ],
+  "question_type": "single",
+  "question_text": "あるEコマース企業が、注文管理システムにAmazon DynamoDBを採用しています。テーブルのパーティションキーは注文ID（OrderId）です。カスタマーサポート業務において、特定の顧客ID（CustomerId）に紐づく過去の注文履歴を注文日時（OrderDate）の降順で即座に取得し、画面に注文ステータス（Status）と合計金額（TotalAmount）を表示する新しい機能要件が追加されました。\n\n現在のテーブルに対して全件スキャン（Scan）を実行すると、データ量の増加に伴い応答遅延が発生し、読み取りキャパシティ（RCU）を過剰に消費しています。ストレージコストとプロビジョンドスループットの消費を最小限に抑えつつ、顧客ごとの注文履歴をミリ秒単位で高速にクエリする最も適切なソリューションはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "ベーステーブルに対してFilterExpressionを使用してCustomerIdとOrderDateを指定したScan操作を実行し、アプリケーション側でソート処理を行う。",
+      "explanation": "**FilterExpressionによるScan操作**: FilterExpressionはテーブル全体をスキャンした後に項目をフィルタリングするため、消費される読み取りキャパシティユニット（RCU）はテーブル全体のデータ量に比例して増大し、レイテンシーも悪化します。"
+    },
+    {
+      "id": "B",
+      "text": "CustomerIdをパーティションキー、OrderDateをソートキーとし、StatusとTotalAmountのみを射影（INCLUDE）したグローバルセカンダリインデックス（GSI）を作成してQuery操作を実行する。",
+      "explanation": "**GSIの作成とINCLUDE射影**: CustomerIdをパーティションキー、OrderDateをソートキーとするGSIを作成することで、Query操作を用いて対象の注文履歴をインデックスから直接高速に取得できます。また、画面表示に必要な属性のみを`INCLUDE`で射影することで、インデックスのストレージ容量とベーステーブル更新時の書き込みキャパシティユニット（WCU）の消費を最小限に抑制できます。"
+    },
+    {
+      "id": "C",
+      "text": "CustomerIdをパーティションキー、OrderDateをソートキーとし、すべての属性を射影（ALL）したローカルセカンダリインデックス（LSI）を作成してQuery操作を実行する。",
+      "explanation": "**ローカルセカンダリインデックス（LSI）の制約**: LSIはベーステーブルと同じパーティションキー（OrderId）を共有する必要があるため、CustomerIdをパーティションキーとして設定することはできません。また、LSIは既存のテーブルに後から追加作成することは不可能です。"
+    },
+    {
+      "id": "D",
+      "text": "テーブルの前にDynamoDB Accelerator (DAX) クラスターを導入し、CustomerIdとOrderDateによるScan結果をキャッシュさせる。",
+      "explanation": "**DAXによるScanキャッシュ**: DAXはキー指定のGetItemやQueryには非常に効果的ですが、Scan操作の根本的な非効率性（テーブル全体走査によるRCU消費）を解決するアーキテクチャではありません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Amazon DynamoDBにおけるグローバルセカンダリインデックス（GSI）の設計と射影属性（PROJECTION）の最適化に関する設問です。ベーステーブルと異なるパーティションキーで検索する場合はGSIを作成し、クエリに必要な最小限の属性のみをINCLUDEで指定して射影することで、ストレージコストと追加のWCU消費を抑えながら高速な検索性能を実現できます。"
+}

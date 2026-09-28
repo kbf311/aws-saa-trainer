@@ -1,0 +1,38 @@
+{
+  "id": "1445ff36-8874-4722-8e7d-ec33fdd33399",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "スケーラビリティと疎結合",
+  "title": "Amazon MQ によるレガシーメッセージブローカー（ActiveMQ/RabbitMQ）の最小改修クラウド移行",
+  "services": [
+    "Amazon MQ",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融機関は、オンプレミスのデータセンターで稼働しているミッションクリティカルなJavaベースの基幹業務システムをAWSに移行（リフト＆シフト）するプロジェクトを進めています。このシステムは、Apache ActiveMQを使用してJMS（Java Message Service）APIおよびNMS等の標準メッセージングプロトコルに依存した疎結合通信を行っています。同社は、アプリケーションのソースコードの改修を最小限に抑えつつ、インフラのプロビジョニングやOSパッチ適用の運用オーバーヘッドを削減し、高可用性を備えたマネージド型メッセージブローカーを採用したいと考えています。最も適切なAWSサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon SQS",
+      "explanation": "Amazon SQSはAWS独自仕様のクラウドネイティブなメッセージキューイングサービスであり、JMSやAMQPなどの業界標準プロトコルと直接の互換性がありません。SQSを採用するには既存のJavaアプリケーションコードの大幅な書き換えが必要となります。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon MQ",
+      "explanation": "Amazon MQは、Apache ActiveMQやRabbitMQなどの一般的なオープンソースメッセージブローカー向けのマネージドメッセージブローカーサービスです。JMS、NMS、AMQP、STOMP、MQTT、WebSocketなどの業界標準プロトコルをネイティブにサポートしているため、既存のアプリケーションコードを書き換えることなく、エンドポイントの変更のみで容易にAWSへリフト＆シフト移行できます。マルチAZ（アクティブ/スタンバイ）構成により高可用性も容易に実現できます。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon SNS",
+      "explanation": "Amazon SNSはPub/Subプッシュ通知サービスであり、JMS標準APIとの互換性やメッセージの永続キューイング機能は直接提供していません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon EventBridge",
+      "explanation": "Amazon EventBridgeはサーバーレスイベントバスであり、JMSプロトコルやActiveMQメッセージキューの代替としてそのまま使用することはできません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "既存のオンプレミス環境でActiveMQやRabbitMQなどのメッセージブローカーを使用しており、JMSやAMQPなどの標準APIに依存している場合、AWSネイティブのSQS/SNSに移行するには大幅なコード改修が必要です。Amazon MQはこれらのオープンソースメッセージブローカーをマネージド型で提供するサービスであり、プロトコル互換性を維持したまま最小限の工数でクラウド移行（リフト＆シフト）が可能です。また、自動フェイルオーバーを備えたアクティブ/スタンバイブローカー構成により高可用性も確保されます。"
+}

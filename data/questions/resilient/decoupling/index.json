@@ -1,0 +1,319 @@
+{
+  "major": "レジリエント・アーキテクチャの設計",
+  "minor": "スケーラビリティと疎結合",
+  "updated_at": "2026-09-27T23:49:04Z",
+  "questions": [
+    {
+      "id": "12a19dd1-046a-4678-a406-ba5e6e1916aa",
+      "title": "Amazon EventBridgeアーカイブとリプレイ機能による障害復旧とメッセージ再処理",
+      "services": [
+        "Amazon EventBridge",
+        "AWS Lambda",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "12a19dd1-046a-4678-a406-ba5e6e1916aa.json"
+    },
+    {
+      "id": "1445ff36-8874-4722-8e7d-ec33fdd33399",
+      "title": "Amazon MQ によるレガシーメッセージブローカー（ActiveMQ/RabbitMQ）の最小改修クラウド移行",
+      "services": [
+        "Amazon MQ",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "1445ff36-8874-4722-8e7d-ec33fdd33399.json"
+    },
+    {
+      "id": "238c338a-81b1-45d2-9ab2-f4b18ec9105c",
+      "title": "AWS Step Functionsタスクトークンを活用した人間の承認プロセスの非同期オーケストレーション",
+      "services": [
+        "AWS Step Functions",
+        "Amazon SES",
+        "Amazon API Gateway"
+      ],
+      "question_type": "single",
+      "file_name": "238c338a-81b1-45d2-9ab2-f4b18ec9105c.json"
+    },
+    {
+      "id": "35449f2f-b344-42ea-8cfa-9cee4baa4543",
+      "title": "Amazon SQS Redrive Allow Policyを活用した集中型デッドレターキュー（DLQ）のアクセス制御と誤送信防止",
+      "services": [
+        "Amazon SQS"
+      ],
+      "question_type": "single",
+      "file_name": "35449f2f-b344-42ea-8cfa-9cee4baa4543.json"
+    },
+    {
+      "id": "3aaaade2-1ed2-4d66-bba0-407cfa5e9a84",
+      "title": "AWS Step Functions による分散トランザクション（サーガパターン）と障害時の補償処理のオーケストレーション",
+      "services": [
+        "AWS Step Functions",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "3aaaade2-1ed2-4d66-bba0-407cfa5e9a84.json"
+    },
+    {
+      "id": "3bf7ed09-8ab5-4c2c-ab91-aa5b819bcdd8",
+      "title": "Amazon SNS と Amazon SQS によるファンアウト（Pub/Sub）アーキテクチャの構築",
+      "services": [
+        "Amazon SNS",
+        "Amazon SQS",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "3bf7ed09-8ab5-4c2c-ab91-aa5b819bcdd8.json"
+    },
+    {
+      "id": "3c95a639-fe9c-454e-bcfb-f911ecd78254",
+      "title": "Amazon Kinesis Data Streams におけるホットシャードの解消とキャパシティ最適化（シャード分割とオンデマンドモード）",
+      "services": [
+        "Amazon Kinesis Data Streams",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "3c95a639-fe9c-454e-bcfb-f911ecd78254.json"
+    },
+    {
+      "id": "3e738539-7e5f-429c-8afd-f3c056d7bc38",
+      "title": "Amazon EventBridge によるイベント駆動アーキテクチャと複数ターゲットへのコンテンツベースルーティング",
+      "services": [
+        "Amazon EventBridge",
+        "AWS Lambda",
+        "Amazon SQS",
+        "Amazon SNS"
+      ],
+      "question_type": "single",
+      "file_name": "3e738539-7e5f-429c-8afd-f3c056d7bc38.json"
+    },
+    {
+      "id": "5585593f-51fc-4956-bbdc-f3d13c74c5d4",
+      "title": "Amazon Kinesis Data Firehose によるストリーミングデータのインライン変換・列指向フォーマット変換およびバックアップ設計",
+      "services": [
+        "Amazon Kinesis Data Firehose",
+        "AWS Lambda",
+        "Amazon S3"
+      ],
+      "question_type": "multiple",
+      "file_name": "5585593f-51fc-4956-bbdc-f3d13c74c5d4.json"
+    },
+    {
+      "id": "68f38adf-0a1a-44db-882e-6b2a215eaf76",
+      "title": "Amazon SQS メッセージ属性（Correlation ID）を活用したリクエスト/リプライパターンの疎結合化",
+      "services": [
+        "Amazon SQS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "68f38adf-0a1a-44db-882e-6b2a215eaf76.json"
+    },
+    {
+      "id": "6c2d1376-83ff-4104-9b71-fae5504d4ffc",
+      "title": "Amazon SQS遅延キューによる決済確定後の確認メール送信タイミング制御",
+      "services": [
+        "Amazon SQS",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "6c2d1376-83ff-4104-9b71-fae5504d4ffc.json"
+    },
+    {
+      "id": "7ec63ec2-782a-450a-b4f5-eaf27d0e7f04",
+      "title": "Amazon Kinesis Data Streamsの拡張ファンアウト（Enhanced Fan-Out）による複数コンシューマーの低レイテンシー専用スループット確保",
+      "services": [
+        "Amazon Kinesis Data Streams",
+        "AWS Lambda",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "7ec63ec2-782a-450a-b4f5-eaf27d0e7f04.json"
+    },
+    {
+      "id": "81200453-34fb-4367-8035-939c9b492c40",
+      "title": "Amazon Kinesis Data Streams によるリアルタイムデータ収集と複数コンシューマーの独立並列処理",
+      "services": [
+        "Amazon Kinesis Data Streams",
+        "AWS Lambda",
+        "Amazon S3"
+      ],
+      "question_type": "multiple",
+      "file_name": "81200453-34fb-4367-8035-939c9b492c40.json"
+    },
+    {
+      "id": "854f1a98-42b6-48b0-a11e-57eba9ebed9e",
+      "title": "Amazon SQS FIFOキューによる厳格な順序保証とメッセージ重複排除の実現",
+      "services": [
+        "Amazon SQS"
+      ],
+      "question_type": "single",
+      "file_name": "854f1a98-42b6-48b0-a11e-57eba9ebed9e.json"
+    },
+    {
+      "id": "8d1458f1-d582-4312-84c4-6b9feed7ecd6",
+      "title": "Amazon SQS とキューメトリクスに基づくAuto Scalingによる非同期処理層の疎結合化",
+      "services": [
+        "Amazon SQS",
+        "Amazon EC2 Auto Scaling",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "8d1458f1-d582-4312-84c4-6b9feed7ecd6.json"
+    },
+    {
+      "id": "949bba4c-d0d9-4f33-af5a-a237631e520a",
+      "title": "Amazon EventBridge API送信先（API Destinations）によるサードパーティSaaSへのセキュアなWebhook連携",
+      "services": [
+        "Amazon EventBridge",
+        "AWS Secrets Manager"
+      ],
+      "question_type": "single",
+      "file_name": "949bba4c-d0d9-4f33-af5a-a237631e520a.json"
+    },
+    {
+      "id": "a6c6f80a-9a71-40f2-91a2-9542834614a3",
+      "title": "Amazon MQ（Apache ActiveMQ）のアクティブ/スタンバイ高可用性ブローカー構成とマルチAZフェイルオーバー",
+      "services": [
+        "Amazon MQ",
+        "Amazon EFS"
+      ],
+      "question_type": "single",
+      "file_name": "a6c6f80a-9a71-40f2-91a2-9542834614a3.json"
+    },
+    {
+      "id": "aaad77c4-e6e4-4d36-a5c7-bb4a30cd32dd",
+      "title": "Amazon SQS Extended ClientとS3を活用した256KB超過ペイロードの安全な非同期処理",
+      "services": [
+        "Amazon SQS",
+        "Amazon S3",
+        "AWS SDK"
+      ],
+      "question_type": "single",
+      "file_name": "aaad77c4-e6e4-4d36-a5c7-bb4a30cd32dd.json"
+    },
+    {
+      "id": "b40570b6-fa99-4b6b-b3d7-602a3875790d",
+      "title": "Amazon EventBridge クロスアカウントイベントルーティングによるマルチアカウント環境のイベント集約",
+      "services": [
+        "Amazon EventBridge",
+        "AWS Organizations"
+      ],
+      "question_type": "single",
+      "file_name": "b40570b6-fa99-4b6b-b3d7-602a3875790d.json"
+    },
+    {
+      "id": "bba0301f-a534-4dae-bf66-b00a60b28609",
+      "title": "Amazon SQS 可視性タイムアウトとデッドレターキュー（DLQ）による処理失敗メッセージの適切な隔離",
+      "services": [
+        "Amazon SQS"
+      ],
+      "question_type": "single",
+      "file_name": "bba0301f-a534-4dae-bf66-b00a60b28609.json"
+    },
+    {
+      "id": "c00d89f0-d0b8-4355-a53f-147fa3be9475",
+      "title": "Amazon SQS FIFOキューのメッセージグループIDによるテナントごとの並列処理と順序保証の両立",
+      "services": [
+        "Amazon SQS",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "c00d89f0-d0b8-4355-a53f-147fa3be9475.json"
+    },
+    {
+      "id": "c1627c12-0f42-4025-b5d8-27b09277bee8",
+      "title": "Amazon SNS サブスクリプションフィルターポリシーによるコンシューマーの負荷軽減と選択的受信",
+      "services": [
+        "Amazon SNS",
+        "Amazon SQS"
+      ],
+      "question_type": "single",
+      "file_name": "c1627c12-0f42-4025-b5d8-27b09277bee8.json"
+    },
+    {
+      "id": "cc763e46-ec11-4c11-a0fc-21e19f3b27b8",
+      "title": "Amazon AppFlowを活用したSalesforceデータのAWSデータレイクへのセキュアかつサーバーレスな自動連携",
+      "services": [
+        "Amazon AppFlow",
+        "Amazon S3",
+        "AWS KMS"
+      ],
+      "question_type": "single",
+      "file_name": "cc763e46-ec11-4c11-a0fc-21e19f3b27b8.json"
+    },
+    {
+      "id": "ddb5f8bf-7a3a-40c6-ae9f-5221e2a16203",
+      "title": "Amazon SNS FIFOトピックとSQS FIFOキューによる厳格な順序保証を維持したファンアウト構成",
+      "services": [
+        "Amazon SNS",
+        "Amazon SQS"
+      ],
+      "question_type": "single",
+      "file_name": "ddb5f8bf-7a3a-40c6-ae9f-5221e2a16203.json"
+    },
+    {
+      "id": "e08a733b-033e-4e37-8984-b4305406d8a2",
+      "title": "Amazon EventBridge Pipes によるDynamoDB Streamsと後続処理のポイントツーポイント連携・フィルタリングのコードレス化",
+      "services": [
+        "Amazon EventBridge",
+        "Amazon DynamoDB",
+        "AWS Step Functions"
+      ],
+      "question_type": "single",
+      "file_name": "e08a733b-033e-4e37-8984-b4305406d8a2.json"
+    },
+    {
+      "id": "e2a73912-1e62-4d1b-bbd3-7a7903298a4e",
+      "title": "Amazon Kinesis Video Streamsによるライブ監視カメラ映像の安全な取り込みと機械学習リアルタイム解析",
+      "services": [
+        "Amazon Kinesis Video Streams",
+        "Amazon Rekognition",
+        "Amazon S3"
+      ],
+      "question_type": "single",
+      "file_name": "e2a73912-1e62-4d1b-bbd3-7a7903298a4e.json"
+    },
+    {
+      "id": "f31fce5f-635e-4f78-8c59-4a434e5b318d",
+      "title": "AWS Step Functionsにおけるスタンダードとエクスプレスワークフローの特性比較と選定",
+      "services": [
+        "AWS Step Functions",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "f31fce5f-635e-4f78-8c59-4a434e5b318d.json"
+    },
+    {
+      "id": "f3b10ed3-6426-4157-b32a-fc6398f302a9",
+      "title": "Amazon Kinesis Data Firehose動的パーティショニングによるS3への効率的なストリーミングデータ蓄積",
+      "services": [
+        "Amazon Kinesis Data Firehose",
+        "Amazon S3",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "f3b10ed3-6426-4157-b32a-fc6398f302a9.json"
+    },
+    {
+      "id": "fb5a9f4a-9f4f-4a9a-bb1e-8ffb3117f283",
+      "title": "Amazon SQS ロングポーリングの有効化による空受信の削減とコスト最適化",
+      "services": [
+        "Amazon SQS",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "fb5a9f4a-9f4f-4a9a-bb1e-8ffb3117f283.json"
+    },
+    {
+      "id": "ffe685d9-1592-4a60-a971-4971cec43734",
+      "title": "AWS Step Functions 分散マップ（Distributed Map）によるS3上数百万レコードの大規模並列バッチ処理",
+      "services": [
+        "AWS Step Functions",
+        "Amazon S3",
+        "AWS Lambda"
+      ],
+      "question_type": "single",
+      "file_name": "ffe685d9-1592-4a60-a971-4971cec43734.json"
+    }
+  ]
+}

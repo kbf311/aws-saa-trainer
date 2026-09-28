@@ -1,0 +1,38 @@
+{
+  "id": "b66af061-c277-43f7-913c-b51a2999c013",
+  "category_major": "高パフォーマンスアーキテクチャの設計",
+  "category_minor": "ネットワークとコンテンツ配信",
+  "title": "Amazon CloudFrontの自動圧縮（BrotliおよびGzip）による転送ペイロード削減と初回レンダリング高速化",
+  "services": [
+    "Amazon CloudFront",
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "あるWebサービス企業が、Amazon S3バケットをオリジンとするAmazon CloudFrontディストリビューションを通じて、JavaScript、CSS、HTMLなどの静的アセットを配信しています。モバイル回線のユーザーから「ページの初回読み込みやレンダリング開始までの時間が遅い」という指摘を受けています。調査したところ、オリジンのS3バケットには非圧縮のテキストアセットが格納されており、クライアント端末がBrotli（br）やGzipの圧縮エンコーディングに対応しているにもかかわらず、CloudFrontから未圧縮のまま大容量データが配信されていることが判明しました。\n\nオリジンのS3内にある元ファイルを事前に圧縮変換したりファイル構造を変更することなく、CloudFrontエッジで自動的にアセットを圧縮して配信サイズを最大80%削減し、ダウンロード時間を最短化する最も適切な設定はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "CloudFrontキャッシュ動作（Cache Behavior）において「オブジェクトを自動的に圧縮 (Compress objects automatically)」を有効にする。",
+      "explanation": "Amazon CloudFrontのキャッシュ動作で「オブジェクトを自動的に圧縮」を有効にすると、クライアントのHTTPリクエストに「Accept-Encoding: br」または「Accept-Encoding: gzip」が含まれている場合、サポート対象のファイル形式（js、css、htmlなど）をCloudFrontエッジロケーションで自動的にBrotliまたはGzip圧縮して返却します。オリジンのS3ファイルを変更することなく、ネットワーク転送量とレイテンシを大幅に削減できます。"
+    },
+    {
+      "id": "B",
+      "text": "AWS Lambda@EdgeのViewer RequestトリガーでカスタムPythonスクリプトを実行し、リクエストヘッダーを書き換える。",
+      "explanation": "CloudFront標準機能として「自動圧縮」が提供されているため、Lambda@Edgeによる独自コードの実装は追加の実行コストとレイテンシオーバーヘッドを招き不適切です。"
+    },
+    {
+      "id": "C",
+      "text": "S3バケットでS3 Transfer Accelerationを有効化し、オリジンからのデータ取得速度を引き上げる。",
+      "explanation": "S3 Transfer Accelerationは長距離アップロード等の高速化機能であり、クライアントへの配信ファイルサイズ自体を圧縮するものではありません。"
+    },
+    {
+      "id": "D",
+      "text": "CloudFrontディストリビューションの前段にNetwork Load Balancer (NLB) を配置し、TLS圧縮を有効化する。",
+      "explanation": "NLBはCloudFrontの前段に配置することはできず、またTLS圧縮はセキュリティ脆弱性（CRIME攻撃など）の懸念から非推奨です。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon CloudFrontの「オブジェクトを自動的に圧縮 (Compress objects automatically)」機能を有効にすると、CloudFrontはリクエスト元のブラウザがサポートするエンコーディング（BrotliまたはGzip）に応じて、テキスト系アセット（CSS、JavaScript、HTMLなど）をエッジで自動圧縮してキャッシュ・配信します。オリジン側での事前圧縮作業が一切不要になり、モバイルユーザー等のダウンロード速度を大幅に向上できます。"
+}

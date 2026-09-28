@@ -1,0 +1,40 @@
+{
+  "id": "c65f71bb-069e-4256-8ba4-f964b7569220",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "Amazon ECRからのコンテナイメージプルにおけるInterface型VPCエンドポイント導入によるNAT Gateway通信費削減",
+  "services": [
+    "Amazon ECR",
+    "Amazon VPC",
+    "NAT Gateway",
+    "Amazon ECS"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業では、プライベートサブネット内のAmazon ECS（AWS Fargate）クラスターで数百個のコンテナタスクを毎日自動スケール稼働させています。タスク起動時にAmazon ECRから大量のコンテナイメージ（数GB規模）を頻繁にプルしているため、NAT Gatewayのデータ処理料金（Data Processing Charges）が月額数十万円に達しています。セキュリティを損なわず、NAT Gatewayのデータ転送料金を削減するための最も効果的な対策はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "VPC内にAmazon ECR用のInterface型VPCエンドポイント（`com.amazonaws.region.ecr.api` および `com.amazonaws.region.ecr.dkr`）と、イメージレイヤー保存先であるAmazon S3用のGateway型VPCエンドポイントを作成する。",
+      "explanation": "ECRのコンテナイメージ実体（レイヤー）はAmazon S3に保管されています。そのため、ECRのAPI/DKR用Interface型エンドポイントに加えて、無料のS3 Gateway型エンドポイントを導入することで、巨大なコンテナイメージのプル通信がNAT Gatewayを一切経由せずVPC内・AWS内部ネットワークで完結し、NAT Gatewayの通信費用を劇的に削減できます。"
+    },
+    {
+      "id": "B",
+      "text": "すべてのECSタスクにパブリックIPアドレスを割り当て、パブリックサブネットに直接配置してインターネット経由でプルする。",
+      "explanation": "本番コンテナタスクをパブリックサブネットに公開することは重大なセキュリティリスクを招き、推奨されません。"
+    },
+    {
+      "id": "C",
+      "text": "コンテナイメージをDocker Hubに移行し、インターネット経由でパブリックプロキシサーバーからダウンロードする。",
+      "explanation": "依然としてNAT Gatewayを経由してインターネットと通信するため、データ処理料金は削減されず、外部依存度とコストが増加します。"
+    },
+    {
+      "id": "D",
+      "text": "タスク定義内のコンテナイメージ参照をすべてIPアドレス直指定に変更し、NAT GatewayのDNS名前解決を無効化する。",
+      "explanation": "ECRのエンドポイントIPは動的であり、IPアドレス直指定は動作せずシステムが破綻します。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "ECRプライベートアクセスのコスト最適化では、ECRエンドポイントに加えて「S3 Gateway型エンドポイント」を併せて構成することが不可欠です（イメージレイヤーのS3通信が無料化されるため）。"
+}

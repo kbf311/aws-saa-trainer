@@ -1,0 +1,39 @@
+{
+  "id": "aaad77c4-e6e4-4d36-a5c7-bb4a30cd32dd",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "スケーラビリティと疎結合",
+  "title": "Amazon SQS Extended ClientとS3を活用した256KB超過ペイロードの安全な非同期処理",
+  "services": [
+    "Amazon SQS",
+    "Amazon S3",
+    "AWS SDK"
+  ],
+  "question_type": "single",
+  "question_text": "ある画像解析プラットフォームでは、フロントエンドからバックエンドの解析ワーカーに非同期でリクエストをキューイングしています。通常のリクエストメタデータは数KBですが、一部の高解像度画像や添付データを含むリクエストではペイロードが10MBに達することがあります。Amazon SQSの最大メッセージサイズ制限（256KB）を超過するリクエストを、最小限の実装変更で確実に処理するための推奨アーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon SQS Extended Client Library for Java/Python等を使用し、256KBを超えるペイロード本体をAmazon S3バケットに自動格納し、SQSメッセージにはS3オブジェクトへの参照ポインタを含めて送受信する。",
+      "explanation": "Amazon SQS Extended Client Libraryを利用すると、256KBを超えるメッセージペイロードを透過的にAmazon S3バケットに保存し、SQSメッセージにはそのS3参照情報を含めて送受信する標準的なデザインパターンを容易に実装できます。"
+    },
+    {
+      "id": "B",
+      "text": "Amazon Kinesis Data Streamsに移行し、単一レコードサイズ上限を10MBに拡張してデータを直接ストリーミングする。",
+      "explanation": "Amazon Kinesis Data Streamsの1レコードあたりの最大サイズは1MBであり、10MBのペイロードを直接流すことはできません。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon SQSキューのメッセージサイズ上限設定をAWSマネジメントコンソールから256KBから10MBに変更する。",
+      "explanation": "Amazon SQSのメッセージペイロードの上限はハードリミットとして256KBに固定されており、コンソールやAPIから直接引き上げることはできません。"
+    },
+    {
+      "id": "D",
+      "text": "メッセージを256KBごとのチャンクにクライアント側で分割し、それぞれ異なるSQSメッセージとして送信したのちワーカー側でメモリ上に復元する自作プロトコルを実装する。",
+      "explanation": "手動のメッセージ分割・再構成ロジックは開発・運用の複雑性が高く、順序崩れや一部欠損時のリカバリ処理が極めて難しくなります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "SQSの256KB上限を超えるメッセージを取り扱う場合は、実データをS3に退避させて参照ポインタをSQSでリレーする「Claim Checkパターン」がベストプラクティスであり、Amazon SQS Extended Client Libraryがこれを標準サポートしています。"
+}

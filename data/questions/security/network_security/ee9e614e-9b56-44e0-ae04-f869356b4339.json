@@ -1,0 +1,40 @@
+{
+  "id": "ee9e614e-9b56-44e0-ae04-f869356b4339",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "ネットワークセキュリティ",
+  "title": "AWS Security Hubによるマルチアカウント環境のセキュリティ基準統合監視とコンプライアンス自動評価",
+  "services": [
+    "Amazon VPC",
+    "AWS Organizations",
+    "Amazon GuardDuty",
+    "Amazon Inspector"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、AWS Organizations を使用して多数のAWSアカウントを運用しています。CISO（最高情報セキュリティ責任者）は、全アカウントにおけるセキュリティのベストプラクティス違反（例: パブリックアクセス可能なS3バケット、制限のないセキュリティグループ、暗号化されていないEBSボリュームなど）を一元的に集約し、業界標準フレームワーク（CIS AWS Foundations Benchmark や AWS Foundational Security Best Practices）に準拠しているかをスコア化してダッシュボードで継続的に評価したいと考えています。各アカウントから脅威検出結果を自動集約し、一元管理するための最も適切なサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Security Hub を管理アカウントで有効化し、組織内の全メンバーアカウントを委任・集約先に指定した上で、「AWS Foundational Security Best Practices」標準を有効化して自動セキュリティチェックを実施する。",
+      "explanation": "AWS Security Hubは、GuardDuty、Inspector、Macieなどのセキュリティ検出結果を一元集約し、CISやAWSベストプラクティス等のセキュリティ標準に基づいて環境全体のセキュリティポスチャを自動評価・スコアリングできる専用マネージドサービスです。"
+    },
+    {
+      "id": "B",
+      "text": "各アカウントにAWS CloudTrailを個別に設定し、全イベントログをAmazon OpenSearch Serviceに流し込んで独自のアラートルールを構築する。",
+      "explanation": "OpenSearchクラスタの構築や独自ルールエンジンの実装は膨大な運用コスト・設計工数がかかり、継続的なメンテナンスも必要となるため最適ではありません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS CloudFormation StackSetsを用いて各アカウントにPythonスクリプトを実行するEC2インスタンスを1台ずつ常時起動する。",
+      "explanation": "自前のスクリプト実行用EC2インスタンスを各アカウントで常時稼働させるのは、コンピュートコストが無駄にかかり、セキュリティチェックの網羅性や更新追従性にも劣ります。"
+    },
+    {
+      "id": "D",
+      "text": "各アカウントのIAMコンソールでIAM Access AnalyzerのレポートをPDFで出力し、管理アカウントのS3バケットに毎週手動アップロードする。",
+      "explanation": "手動による週次アップロードはリアルタイム性に欠け、運用のヒューマンエラーが発生しやすく、自動評価やセキュリティスコアの算出ができません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS Security Hub は、AWS環境全体のセキュリティ状態を一元的に把握・管理するためのCSPM（クラウドセキュリティポスチャ管理）サービスです。Organizationsと統合することで、マルチアカウント環境全体の検出結果（GuardDuty、Inspector、Macie、IAM Access Analyzerなど）を中央アカウントに自動集約します。さらに「AWS Foundational Security Best Practices」や「CIS AWS Foundations Benchmark」などの標準ルールに基づいて各リソースの設定状況を自動評価し、セキュリティスコアを提示します。"
+}

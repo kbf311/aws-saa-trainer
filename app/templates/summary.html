@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+
+{% block title %}AWS SAA-C03 Trainer - 演習結果サマリー{% endblock %}
+
+{% block content %}
+<main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-8">
+
+  <!-- Loading State -->
+  <div id="summaryLoading" class="bg-aws-card border border-aws-border rounded-2xl p-12 text-center shadow-lg">
+    <i class="fa-solid fa-spinner fa-spin text-3xl text-aws-orange mb-3"></i>
+    <p class="text-slate-300 font-medium text-sm">セッション結果を集計しています...</p>
+  </div>
+
+  <div id="summaryContent" class="hidden space-y-8">
+
+    <!-- Session Completion Banner -->
+    <div
+      class="bg-gradient-to-r from-aws-card via-slate-800 to-aws-card border border-aws-border rounded-2xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+      <div id="bannerGlow"
+        class="absolute -right-10 -bottom-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none">
+      </div>
+
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+        <div>
+          <div class="flex items-center space-x-3 mb-2">
+            <span id="passStatusBadge"
+              class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <i class="fa-solid fa-award mr-1"></i>合格水準達成 (TARGET PASSED)
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white">
+            演習セッション 終了！お疲れ様でした
+          </h1>
+          <p class="text-sm text-slate-400 mt-1">
+            出題モード: <span id="summaryModeLabel" class="text-slate-200 font-semibold">-</span>
+          </p>
+        </div>
+
+        <!-- Primary Action Buttons -->
+        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+          <a href="/setup"
+            class="flex-1 md:flex-initial inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-aws-orange hover:bg-aws-orangeHover text-slate-950 font-bold text-sm shadow-md transition">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>もう一度挑戦する</span>
+          </a>
+          <a href="/"
+            class="flex-1 md:flex-initial inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition">
+            <i class="fa-solid fa-chart-line text-aws-orange"></i>
+            <span>ダッシュボードへ</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Score & Metrics Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <!-- 総合スコア -->
+      <div class="bg-aws-card border border-aws-border rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between text-slate-400 text-xs">
+          <span>総合正解率</span>
+          <i class="fa-solid fa-percent text-aws-orange"></i>
+        </div>
+        <div class="mt-3 flex items-baseline space-x-2">
+          <span id="scoreAccuracy" class="text-4xl font-black text-emerald-400">0.0</span>
+          <span class="text-lg font-bold text-slate-400">%</span>
+        </div>
+        <div class="mt-3 text-xs flex items-center justify-between text-slate-400">
+          <span>合格基準: 72%</span>
+          <span id="scoreDifference" class="font-semibold text-slate-400">-</span>
+        </div>
+      </div>
+
+      <!-- 正解数 / 出題数 -->
+      <div class="bg-aws-card border border-aws-border rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between text-slate-400 text-xs">
+          <span>正解数 / 出題数</span>
+          <i class="fa-solid fa-circle-check text-blue-400"></i>
+        </div>
+        <div class="mt-3 flex items-baseline space-x-2">
+          <span id="scoreCorrectCount" class="text-4xl font-black text-white">0</span>
+          <span class="text-lg font-bold text-slate-400">/ <span id="scoreTotalCount">0</span> 問</span>
+        </div>
+        <div class="mt-3 text-xs flex items-center justify-between text-slate-400">
+          <span>不正解数</span>
+          <span id="scoreIncorrectCount" class="text-rose-400 font-semibold">0 問</span>
+        </div>
+      </div>
+
+      <!-- 総所要時間 -->
+      <div class="bg-aws-card border border-aws-border rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between text-slate-400 text-xs">
+          <span>総所要時間</span>
+          <i class="fa-solid fa-stopwatch text-amber-400"></i>
+        </div>
+        <div class="mt-3 flex items-baseline space-x-2">
+          <span id="scoreTotalTime" class="text-3xl font-black text-white">-</span>
+        </div>
+        <div class="mt-3 text-xs text-slate-400">
+          集中して演習を完了しました
+        </div>
+      </div>
+
+      <!-- 1問あたり平均時間 -->
+      <div class="bg-aws-card border border-aws-border rounded-xl p-5 shadow-sm">
+        <div class="flex items-center justify-between text-slate-400 text-xs">
+          <span>1問あたり平均時間</span>
+          <i class="fa-solid fa-bolt text-purple-400"></i>
+        </div>
+        <div class="mt-3 flex items-baseline space-x-2">
+          <span id="scoreAvgTime" class="text-4xl font-black text-white">0</span>
+          <span class="text-xs text-slate-400">秒 / 問</span>
+        </div>
+        <div class="mt-3 text-xs text-slate-400">
+          目安: 120秒以内
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Category Performance -->
+    <div class="bg-aws-card border border-aws-border rounded-xl p-6 shadow-md">
+      <h2 class="text-base font-bold text-white flex items-center space-x-2 mb-4">
+        <i class="fa-solid fa-chart-simple text-aws-orange"></i>
+        <span>今回解いたカテゴリ別 成績</span>
+      </h2>
+
+      <div id="categoryPerformanceList" class="space-y-4">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- Review Incorrect Questions -->
+    <div class="bg-aws-card border border-aws-border rounded-xl p-6 shadow-md">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-bold text-white flex items-center space-x-2">
+          <i class="fa-solid fa-clipboard-question text-rose-400"></i>
+          <span>間違えた問題の復習</span>
+          <span id="incorrectBadgeCount"
+            class="text-xs px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/30">0問</span>
+        </h2>
+        <span class="text-xs text-slate-400">クリックして問題・解説を展開</span>
+      </div>
+
+      <div id="noIncorrectBox" class="hidden p-8 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-center">
+        <div
+          class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-3">
+          <i class="fa-solid fa-star text-2xl"></i>
+        </div>
+        <h3 class="text-base font-bold text-emerald-400 mb-1">パーフェクト！全問正解です</h3>
+        <p class="text-xs text-slate-300">今回解いたすべての問題に正解しました。この調子で学習を継続しましょう！</p>
+      </div>
+
+      <div id="incorrectAccordionList" class="space-y-3">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+      <a href="/setup"
+        class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-aws-orange hover:bg-aws-orangeHover text-slate-950 font-bold text-sm shadow-md transition text-center">
+        <i class="fa-solid fa-rotate-right mr-2"></i>もう一度挑戦する
+      </a>
+      <a href="/"
+        class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 transition text-center">
+        <i class="fa-solid fa-chart-line text-aws-orange mr-2"></i>ダッシュボードへ戻る
+      </a>
+    </div>
+
+  </div>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get('session_id');
+
+    if (!sessionId) {
+      alert('セッションIDが見つかりません。試験設定画面へ移動します。');
+      window.location.href = '/setup';
+      return;
+    }
+
+    const loadingEl = document.getElementById('summaryLoading');
+    const contentEl = document.getElementById('summaryContent');
+
+    try {
+      const res = await fetch(`/api/quiz/session/${sessionId}/complete`, { method: 'POST' });
+      if (!res.ok) {
+        throw new Error('サマリーデータの取得に失敗しました');
+      }
+      const data = await res.json();
+      renderSummary(data);
+    } catch (err) {
+      console.error(err);
+      alert('サマリーの読み込みに失敗しました');
+    }
+
+    function renderSummary(data) {
+      loadingEl.classList.add('hidden');
+      contentEl.classList.remove('hidden');
+
+      // モード名
+      const modeMap = {
+        random: 'カテゴリ均等ランダム',
+        all_random: '完全ランダム',
+        category_weak: '苦手カテゴリ集中',
+        question_weak: '苦手問題集中',
+      };
+      document.getElementById('summaryModeLabel').textContent = `${modeMap[data.mode] || data.mode} (${data.total_questions}問演習)`;
+
+      // 合否バッジ
+      const badge = document.getElementById('passStatusBadge');
+      const glow = document.getElementById('bannerGlow');
+      if (data.is_passed) {
+        badge.className = 'px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+        badge.innerHTML = '<i class="fa-solid fa-award mr-1"></i>合格水準達成 (TARGET PASSED)';
+        glow.className = 'absolute -right-10 -bottom-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none';
+      } else {
+        badge.className = 'px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider bg-rose-500/20 text-rose-400 border border-rose-500/30';
+        badge.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i>合格ライン未達 (MORE PRACTICE)';
+        glow.className = 'absolute -right-10 -bottom-10 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl pointer-events-none';
+      }
+
+      // 総合正解率
+      const scoreAccEl = document.getElementById('scoreAccuracy');
+      scoreAccEl.textContent = data.accuracy_rate.toFixed(1);
+      scoreAccEl.className = data.is_passed ? 'text-4xl font-black text-emerald-400' : 'text-4xl font-black text-rose-400';
+
+      const diff = (data.accuracy_rate - 72.0).toFixed(1);
+      const diffEl = document.getElementById('scoreDifference');
+      if (data.accuracy_rate >= 72.0) {
+        diffEl.className = 'text-emerald-400 font-semibold';
+        diffEl.innerHTML = `<i class="fa-solid fa-check"></i> +${diff}%`;
+      } else {
+        diffEl.className = 'text-rose-400 font-semibold';
+        diffEl.innerHTML = `<i class="fa-solid fa-arrow-down"></i> ${diff}%`;
+      }
+
+      // 正解数
+      document.getElementById('scoreCorrectCount').textContent = data.correct_count;
+      document.getElementById('scoreTotalCount').textContent = data.total_questions;
+      document.getElementById('scoreIncorrectCount').textContent = `${data.total_questions - data.correct_count} 問`;
+
+      // 時間
+      document.getElementById('scoreTotalTime').textContent = data.total_time_str;
+      document.getElementById('scoreAvgTime').textContent = data.avg_seconds;
+
+      // カテゴリ別成績
+      const catListEl = document.getElementById('categoryPerformanceList');
+      catListEl.innerHTML = '';
+      if (data.category_results.length === 0) {
+        catListEl.innerHTML = '<p class="text-xs text-slate-400">データがありません</p>';
+      } else {
+        data.category_results.forEach(cat => {
+          const item = document.createElement('div');
+          item.className = 'p-3 rounded-xl bg-slate-900/60 border border-slate-700/60';
+          item.innerHTML = `
+            <div class="flex items-center justify-between text-xs mb-1.5">
+              <span class="font-semibold text-slate-200">${cat.minor}</span>
+              <span class="font-mono text-slate-300">${cat.correct}/${cat.total} 問 (${cat.rate}%)</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+              <div class="h-2 rounded-full ${cat.rate >= 72 ? 'bg-emerald-500' : 'bg-amber-500'}" style="width: ${cat.rate}%"></div>
+            </div>
+          `;
+          catListEl.appendChild(item);
+        });
+      }
+
+      // 間違えた問題
+      const incorrectBadge = document.getElementById('incorrectBadgeCount');
+      const noIncorrectBox = document.getElementById('noIncorrectBox');
+      const accordionList = document.getElementById('incorrectAccordionList');
+
+      incorrectBadge.textContent = `${data.incorrect_questions.length}問`;
+      accordionList.innerHTML = '';
+
+      if (data.incorrect_questions.length === 0) {
+        noIncorrectBox.classList.remove('hidden');
+      } else {
+        noIncorrectBox.classList.add('hidden');
+        data.incorrect_questions.forEach((q, idx) => {
+          const card = document.createElement('div');
+          card.className = 'border border-slate-700/70 rounded-xl bg-slate-900/60 overflow-hidden';
+          card.innerHTML = `
+            <button class="w-full p-4 flex items-center justify-between text-left hover:bg-slate-800/50 transition accordion-btn">
+              <div class="flex items-center space-x-3">
+                <span class="w-6 h-6 rounded-md bg-rose-500/20 text-rose-400 text-xs font-bold flex items-center justify-center border border-rose-500/30">${idx + 1}</span>
+                <div>
+                  <div class="text-xs text-slate-400 mb-0.5">${q.category_major} / ${q.category_minor}</div>
+                  <div class="text-sm font-semibold text-slate-200 line-clamp-1">${escapeHtml(q.question_text)}</div>
+                </div>
+              </div>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform duration-200 accordion-icon"></i>
+            </button>
+            <div class="hidden p-4 border-t border-slate-700/60 bg-slate-950/60 text-xs space-y-4 accordion-content">
+              <div>
+                <div class="font-bold text-slate-300 mb-1">【問題文】</div>
+                <p class="text-slate-200 whitespace-pre-line leading-relaxed bg-slate-900 p-3 rounded-lg border border-slate-800">${escapeHtml(q.question_text)}</p>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="p-3 rounded-lg bg-rose-500/10 border border-rose-500/20">
+                  <div class="text-rose-400 font-bold mb-1"><i class="fa-solid fa-xmark mr-1"></i>あなたの回答:</div>
+                  <div class="text-slate-200">${q.user_selected_texts.join('<br>') || '未選択'}</div>
+                </div>
+                <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                  <div class="text-emerald-400 font-bold mb-1"><i class="fa-solid fa-check mr-1"></i>正解:</div>
+                  <div class="text-slate-200">${q.correct_texts.join('<br>')}</div>
+                </div>
+              </div>
+              <div>
+                <div class="font-bold text-aws-orange mb-2"><i class="fa-solid fa-lightbulb mr-1"></i>解説:</div>
+                <div class="space-y-2">
+                  ${
+                    window.formatStructuredExplanationHtml && q.options && q.options.some(o => o.explanation)
+                      ? window.formatStructuredExplanationHtml(
+                          q.explanation,
+                          q.options.map(o => ({
+                            ...o,
+                            is_correct: q.correct_answers.includes(o.id)
+                          }))
+                        )
+                      : (window.formatExplanationHtml
+                          ? window.formatExplanationHtml(q.explanation)
+                          : `<div class="text-slate-200 leading-relaxed bg-slate-900 p-3 rounded-lg border border-slate-800 whitespace-pre-line">${escapeHtml(q.explanation)}</div>`
+                        )
+                  }
+                </div>
+              </div>
+            </div>
+          `;
+
+          const btn = card.querySelector('.accordion-btn');
+          const content = card.querySelector('.accordion-content');
+          const icon = card.querySelector('.accordion-icon');
+          btn.addEventListener('click', () => {
+            const isHidden = content.classList.contains('hidden');
+            if (isHidden) {
+              content.classList.remove('hidden');
+              icon.classList.add('rotate-180');
+            } else {
+              content.classList.add('hidden');
+              icon.classList.remove('rotate-180');
+            }
+          });
+
+          accordionList.appendChild(card);
+        });
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  });
+</script>
+{% endblock %}

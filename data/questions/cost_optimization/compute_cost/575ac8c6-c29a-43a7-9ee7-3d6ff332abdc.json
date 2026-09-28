@@ -1,0 +1,39 @@
+{
+  "id": "575ac8c6-c29a-43a7-9ee7-3d6ff332abdc",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "コンピュートコスト最適化",
+  "title": "CloudWatch統合エージェントによるメモリメトリクス収集とAWS Compute Optimizerの高精度な適正サイジング",
+  "services": [
+    "AWS Compute Optimizer",
+    "Amazon CloudWatch",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "あるIT企業が、AWS Compute Optimizer を利用して稼働中のEC2インスタンス群のコスト適正化（Rightsizing）を図ろうとしています。しかし、Compute Optimizerのダッシュボードを確認したところ、CPU使用率やネットワークI/Oのみに基づいて推奨が行われており、メモリ使用率が考慮されていないため、メモリを大量消費するアプリケーションのインスタンスを不用意に縮小して障害を起こすリスクを懸念しています。Compute Optimizerがメモリ使用率データを正しく取り込んで、安全かつ精度の高いダウングレード推奨を行えるようにするために実施すべき設定はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "各EC2インスタンス内に Amazon CloudWatch エージェント（統合エージェント）をインストールして設定し、メモリ使用率（`mem_used_percent`）メトリクスをCloudWatchに送信するように構成する。",
+      "explanation": "EC2のデフォルトCloudWatchメトリクスにはハイパーバイザー外部から取得できないOS内部のメモリ使用率は含まれません。CloudWatchエージェントを導入してメモリメトリクスを発行することで、Compute Optimizerがメモリ使用率を評価対象に含め、安全かつ高精度な適正サイズを推奨できるようになります。"
+    },
+    {
+      "id": "B",
+      "text": "EC2の詳細モニタリング（Detailed Monitoring）を有効化し、メトリクス収集頻度を1分間隔にする。",
+      "explanation": "詳細モニタリングは標準メトリクスの収集頻度を5分から1分に短縮するものですが、取得項目自体はハイパーバイザーレベルのままであり、OS内部のメモリ使用率は含まれません。"
+    },
+    {
+      "id": "C",
+      "text": "EC2インスタンスのAMIをすべて最新のAmazon Linux 2023に再構築する。",
+      "explanation": "AMIの更新だけではOS内部のメモリメトリクスがCloudWatchへ自動送信されるようにはならず、エージェントの設定が必要です。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Compute Optimizerのコンソールで「メモリ推測機能」のチェックボックスをオンにする。",
+      "explanation": "Compute Optimizerにメモリ推測機能という設定は存在せず、実際のメモリメトリクスをCloudWatch経由で取り込む必要があります。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon EC2のデフォルトモニタリングでは、CPU使用率、ディスクI/O、ネットワークトラフィックなどのハイパーバイザー外部から把握できる指標のみが収集され、OS内部のメモリ使用率は収集されません。AWS Compute Optimizerがメモリ要件を考慮した適正サイジング推奨（Rightsizing）を行うには、インスタンス内に「CloudWatch エージェント」を導入し、メモリ使用率メトリクス（`mem_used_percent`）をCloudWatchに送信させる必要があります。"
+}

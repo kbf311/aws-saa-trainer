@@ -1,0 +1,38 @@
+{
+  "id": "43e998fa-9901-44de-9774-a14995b673d7",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "IAMとアクセス制御",
+  "title": "AWS IAM Identity CenterとSCIMプロトコルを活用した外部IdPからのユーザー・グループ自動プロビジョニング",
+  "services": [
+    "AWS IAM Identity Center",
+    "AWS Organizations"
+  ],
+  "question_type": "single",
+  "question_text": "あるグローバル企業は、全社で利用している外部のSaaS型IDプロバイダー（Microsoft Entra ID / 旧Azure AD）を使用して、AWS Organizations内の100以上のアカウントへのシングルサインオン（SSO）を構成したいと考えています。人事部門による従業員の採用、異動、退職に伴い、外部IdP側でユーザーの追加やグループ所属の変更、アカウント無効化が頻繁に行われます。管理者の手動介入を一切行うことなく、外部IdP側のユーザーおよびグループ情報の変更をAWS環境へほぼリアルタイムに自動同期し、適切なAWSアカウントおよび権限セット（Permission Sets）へのアクセスを自動で維持・剥奪する最も効率的な方法はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS IAM Identity CenterのIDソースとして外部IDプロバイダー（SAML 2.0）を設定し、SCIM（System for Cross-domain Identity Management）エンドポイントとアクセストークンを構成して自動プロビジョニングを有効化する。",
+      "explanation": "AWS IAM Identity Centerでは、外部IdP（Microsoft Entra ID、Oktaなど）との連携においてSAML 2.0による認証と同時に、SCIM（System for Cross-domain Identity Management）プロトコルをサポートしています。SCIMによる自動プロビジョニングを有効にすることで、外部IdPで作成・更新・削除されたユーザーやグループの情報が自動的にIAM Identity Centerへ同期され、管理者の手動作業なしにアクセスの即時反映や退職時のアクセス遮断が実現できます。"
+    },
+    {
+      "id": "B",
+      "text": "各AWSアカウント内に個別のIAM SAMLプロバイダーを作成し、夜間に外部IdPからCSV形式でエクスポートしたユーザー一覧をAWS CLIスクリプトで各アカウントのIAMグループに同期する。",
+      "explanation": "各アカウントに個別のSAMLプロバイダーや同期スクリプトを構築・運用することは、100以上のアカウントが存在する環境では管理オーバーヘッドが膨大であり、夜間バッチでは即時同期の要件を満たせません。"
+    },
+    {
+      "id": "C",
+      "text": "AWS Directory ServiceのAWS Managed Microsoft ADをデプロイし、外部IdPとの間に一方向フォレスト信頼関係を構築して、すべてのアカウントのEC2インスタンスにドメイン参加させる。",
+      "explanation": "Managed Microsoft ADの信頼関係の構築はWindowsインフラ向けの重厚な構成であり、SaaS IdPからのユーザー・グループ自動同期やマルチアカウントSSOの管理としてはSCIMを活用したIAM Identity Center連携よりもコスト・運用負荷が極めて高くなります。"
+    },
+    {
+      "id": "D",
+      "text": "AWS Organizationsのサービスコントロールポリシー（SCP）を使用して、外部IdPのテナントIDと一致しない通信をすべて拒否するルールを定義する。",
+      "explanation": "SCPはアカウント内の最大権限をガードレールとして制限する機能であり、ユーザーやグループの作成・属性同期・プロビジョニングを行う機能は備えていません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "AWS IAM Identity Center（旧AWS SSO）は、外部のIDプロバイダー（IdP）とのシームレスな統合を提供します。SAML 2.0による認証連携に加え、業界標準のSCIM（System for Cross-domain Identity Management）プロトコルを利用した「自動プロビジョニング」をサポートしています。外部IdP側でSCIMエンドポイントと認証トークンを設定することで、ユーザーの作成、プロファイルの更新、グループメンバーシップの変更、アカウントの停止・削除などのライフサイクルイベントが自動的にAWS IAM Identity Centerへ同期されます。これにより、大規模なマルチアカウント環境でも最小限の運用負担で厳格なアイデンティティガバナンスを維持できます。"
+}

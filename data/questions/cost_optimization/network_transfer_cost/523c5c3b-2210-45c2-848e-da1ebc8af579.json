@@ -1,0 +1,38 @@
+{
+  "id": "523c5c3b-2210-45c2-848e-da1ebc8af579",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "Amazon CloudFrontの自動圧縮（Gzip/Brotli）有効化によるエッジデータ転送アウトコストの直接削減",
+  "services": [
+    "Amazon CloudFront",
+    "Amazon S3"
+  ],
+  "question_type": "single",
+  "question_text": "あるニュースメディア企業は、Amazon CloudFrontとAmazon S3を利用して大量のHTML、CSS、JavaScript、JSONコンテンツを世界中の読者に配信しています。CloudFrontからのデータ転送アウト（DTO）費用が予算を超過しているため、配信品質やユーザー体験を犠牲にすることなく、即座にデータ転送量を30%〜50%程度削減したいと考えています。最も効果的で実装が容易な設定変更はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "CloudFrontのキャッシュ動作（Cache Behavior）において「オブジェクトを自動的に圧縮（Compress Objects Automatically）」を有効化し、GzipおよびBrotli圧縮をサポートするクライアントに圧縮データを配信する。",
+      "explanation": "CloudFrontの自動圧縮機能を有効にすると、テキストベースの静的アセット（HTML, CSS, JS, JSON等）が自動的にGzipまたはBrotli形式に圧縮されてエッジからクライアントへ配信されます。転送データサイズが通常30%〜80%削減されるため、CloudFrontデータ転送アウト課金を直接劇的に削減できます。"
+    },
+    {
+      "id": "B",
+      "text": "S3バケット内のすべてのファイルをクライアント側でダウンロード後に伸張するカスタム暗号化フォーマットに手動変換する。",
+      "explanation": "クライアント側でのカスタム伸張実装が必要となり、Web標準から外れユーザー体験を著しく損ないます。"
+    },
+    {
+      "id": "C",
+      "text": "CloudFrontのTTL（有効期限）を0秒に設定し、常にオリジンS3へ最新の非圧縮データをリクエストさせる。",
+      "explanation": "TTLを0秒にするとキャッシュヒット率がゼロになり、S3からの転送量とS3リクエスト料金が激増して逆効果になります。"
+    },
+    {
+      "id": "D",
+      "text": "CloudFrontの前段にAWS Global Acceleratorを配置し、すべてのHTTPトラフィックをUDPに変換する。",
+      "explanation": "Global AcceleratorはHTTPの圧縮を行わず、固定IPによる低遅延ルーティング用であり、追加のデータ転送料金が発生するためコスト削減になりません。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "CloudFrontの「Compress Objects Automatically」によるGzip/Brotli圧縮は、配信ペイロードを大幅に削減し、エッジデータ転送アウト費用を最小化する極めて効果的なベストプラクティスです。"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "99a0e0f4-f1a8-401f-9658-870f9be5d644",
+  "category_major": "コスト最適化アーキテクチャの設計",
+  "category_minor": "データ転送・ネットワークコスト最適化",
+  "title": "複数リージョンVPCとオンプレミス間のDirect Connect Gatewayを活用した回線集約とコスト最適化",
+  "services": [
+    "AWS Direct Connect",
+    "Direct Connect Gateway",
+    "Amazon VPC"
+  ],
+  "question_type": "single",
+  "question_text": "ある多国籍企業は、東京リージョン（ap-northeast-1）とシンガポールリージョン（ap-southeast-1）のそれぞれに複数のVPCを展開しています。現在、オンプレミスのデータセンターから東京リージョンのVPCへは単一のAWS Direct Connect接続（プライベート仮想インターフェイス VIF）を介して通信しています。この度、シンガポールリージョンのVPC群ともオンプレミスからプライベート接続を行う要件が発生しました。\n\nネットワークアーキテクトは、新規のDirect Connect専用物理回線の契約を避け、専用線ポート利用料および管理オーバーヘッドを最小限に抑えつつ、両リージョンの全VPCへのプライベート接続を確立したいと考えています。\n\nこの要件を満たす最も費用対効果の高いネットワーク設計はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "シンガポールリージョンのAWS Direct Connectロケーションで新規のDirect Connect専用線を契約し、シンガポールの各VPCに個別のプライベートVIFを作成する。",
+      "explanation": "新たな物理Direct Connect接続を契約すると、高額な専用線回線費用およびポート時間利用料金が重複して発生するため、コスト最適化の要件を満たしません。"
+    },
+    {
+      "id": "B",
+      "text": "既存のDirect Connect接続上にDirect Connect Gateway (DXGW) を作成・関連付け、東京およびシンガポールの各VPCの仮想プライベートゲートウェイ (VGW) をDXGWに関連付ける。",
+      "explanation": "Direct Connect Gateway (DXGW) はグローバルリソースであり、単一のDirect Connect接続（プライベートVIF）から世界中の任意のパブリックAWSリージョン（中国を除く）にある複数VPCへアクセスを可能にします。新たな物理専用線を敷設することなく、既存のDirect Connect回線を有効活用して複数リージョンと安全に通信できるため、回線ポート費用を最小化できます。"
+    },
+    {
+      "id": "C",
+      "text": "既存の東京リージョンのVPCとシンガポールリージョンのVPC間にリージョン間VPCピアリングを作成し、東京VPC経由でオンプレミストラフィックをシンガポールへ中継（トランジット）する。",
+      "explanation": "VPCピアリングはエッジ間ルーティング（推移的ルーティング / Transitive Routing）をサポートしていません。そのため、オンプレミスからDirect Connect経由で東京VPCに入り、そこからピアリング経由でシンガポールVPCへ通信することは技術的に不可能です。"
+    },
+    {
+      "id": "D",
+      "text": "東京リージョンのVPCからシンガポールリージョンの各VPC宛てに複数のAWS Site-to-Site VPNトンネルを張り、Direct Connect上をIPsecでルーティングする。",
+      "explanation": "複数のSite-to-Site VPNコネクションを構築すると、VPN接続時間料金や暗号化オーバーヘッド、運用管理の複雑さが増大します。Direct Connect Gatewayを使用すれば追加のVPN構成なしでネイティブに解決できます。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Direct Connect Gateway (DXGW) を利用することで、単一または少数のAWS Direct Connect接続を世界中（中国リージョンを除く）の任意のリージョンにある複数のVPC（Virtual Private Gateway）やTransit Gatewayと相互接続できます。\n\nリージョンごとに新規の物理Direct Connect接続を契約・敷設すると、ポート費用やプロバイダー回線費用が膨大になりますが、Direct Connect Gatewayを活用することで既存回線を集約し、コストと管理負荷を大幅に削減できます。なお、VPCピアリングは推移的ルーティングをサポートしないため、別リージョンのVPCを経由してオンプレミスと通信する構成は組めません。"
+}

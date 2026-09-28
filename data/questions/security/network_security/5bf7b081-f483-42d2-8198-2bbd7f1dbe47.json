@@ -1,0 +1,39 @@
+{
+  "id": "5bf7b081-f483-42d2-8198-2bbd7f1dbe47",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "ネットワークセキュリティ",
+  "title": "Amazon Route 53 Resolver DNS FirewallによるマルウェアのC&C通信および悪意あるドメインへのDNS名前解決遮断",
+  "services": [
+    "Amazon Route 53",
+    "Amazon VPC",
+    "AWS Firewall Manager"
+  ],
+  "question_type": "single",
+  "question_text": "あるセキュリティ運用チームが、VPC内のEC2インスタンスがマルウェアに感染した場合に、攻撃者の指令サーバー（C&Cサーバー: Command and Control）との通信やDNSトンネリングによる機密データの外部流出を早期に防止したいと考えています。インスタンスからインターネットへのアウトバウンド通信において、既知の悪意あるドメイン名や不審なフィッシングドメインへのDNS名前解決リクエストそのものを検知し、IPアドレスの解決を拒否（NODATAまたはNXDOMAINを返却）する仕組みをVPCレベルで導入したいと考えています。最も適切なマネージドサービスはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "Amazon Route 53 Resolver DNS Firewall を設定し、AWSマネージドドメインリスト（マルウェア/ボットネットドメイン）またはカスタムドメインリストを含むルールグループを作成して対象VPCに関連付ける。",
+      "explanation": "Route 53 Resolver DNS Firewallは、VPC内のリソースから送信されるアウトバウンドDNSクエリをドメイン名レベルで検査・制御できる機能です。AWSが提供するマネージドドメインリスト（既知の悪意あるドメイン、ボットネット、マルウェア等）や組織独自の拒否リストに基づいてDNS解決をブロック（BLOCKアクションでNODATA、NXDOMAIN、またはオーバーライドIPを返す）でき、IP通信が成立する前のDNS名前解決フェーズで脅威を効果的に無力化できます。"
+    },
+    {
+      "id": "B",
+      "text": "VPCのセキュリティグループのアウトバウンドルールでUDPポート53（DNS）を削除し、すべてのインスタンスでTCPポート80のみを許可する。",
+      "explanation": "DNSポート（UDP/TCP 53）を完全に遮断すると、正常なAWSサービスや業務で必要な正当なドメインの名前解決まで一切できなくなり、システムが正常に動作しなくなります。"
+    },
+    {
+      "id": "C",
+      "text": "AWS WAFをインターネットゲートウェイ (IGW) に直接アタッチし、DNSインスペクションルールを有効にする。",
+      "explanation": "AWS WAFはALB、CloudFront、API Gateway、AppSync、Cognitoユーザープールに関連付けるレイヤー7（HTTP/HTTPS）Webアプリケーションファイアウォールであり、IGWに直接アタッチすることはできず、DNSクエリのフィルタリング機能もありません。"
+    },
+    {
+      "id": "D",
+      "text": "Amazon GuardDutyのみを有効化し、インスタンスのOS内部にホスト型ファイアウォールスクリプトを手動で配布してDNSポートを監視する。",
+      "explanation": "GuardDutyはDNSログから不審なアクティビティを検出・通知するサービスですが、それ自体でDNS名前解決をインラインでブロックする機能はありません。またホスト型ファイアウォールスクリプトの運用は負担が大きいです。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Route 53 Resolver DNS Firewallに関する設問です。DNS Firewallは、VPCからのアウトバウンドDNS名前解決をドメイン名単位でインターセプト・遮断することで、マルウェア感染拡大やデータ流出（DNSトンネリング）を未然に防止する不可欠なレイヤーを提供します。"
+}

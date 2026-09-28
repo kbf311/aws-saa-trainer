@@ -1,0 +1,39 @@
+{
+  "id": "799ba9cc-f3c9-4346-866e-f1daee176b08",
+  "category_major": "セキュアアーキテクチャの設計",
+  "category_minor": "データ保護と暗号化",
+  "title": "Amazon S3バケットポリシーによるSSE-KMS暗号化および特定KMSキー使用の強制",
+  "services": [
+    "Amazon S3",
+    "AWS Key Management Service",
+    "AWS Identity and Access Management"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業では、機密データを保管するAmazon S3バケットを運用しています。全社的なセキュリティポリシーにより、このバケットにアップロード（`PutObject`）されるすべてのオブジェクトは、自社が管理する特定のAWS KMSカスタマーマネージドキー（ARN: `arn:aws:kms:ap-northeast-1:111122223333:key/abcd-1234`）を使用したSSE-KMSによって暗号化されることが義務付けられています。暗号化されていないオブジェクトのアップロードや、標準のSSE-S3（`AES256`）または指定以外のKMSキーによるアップロードはすべて即座に拒否されなければなりません。この要件を最も確実に実装するバケットポリシーの構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "S3バケットポリシーに明示的な「Deny」ステートメントを作成し、`s3:PutObject` アクションに対して、リクエストヘッダー `s3:x-amz-server-side-encryption` が `aws:kms` ではない条件（StringNotEquals）、またはリクエストヘッダー `s3:x-amz-server-side-encryption-aws-kms-key-id` が指定のKMSキーARNと一致しない条件（StringNotEquals）を設定する。",
+      "explanation": "アップロード時に暗号化アルゴリズムヘッダー（`s3:x-amz-server-side-encryption`）が `aws:kms` 以外である場合、およびKMSキーヘッダー（`s3:x-amz-server-side-encryption-aws-kms-key-id`）が指定のKMSキーARNと一致しない場合に明示的拒否（Deny）を行うことで、非暗号化アップロード、SSE-S3によるアップロード、異なるKMSキーによるアップロードのすべてを確実にブロックできます。"
+    },
+    {
+      "id": "B",
+      "text": "S3バケットポリシーに「Allow」ステートメントを作成し、`s3:PutObject` アクションに対して、Condition句で `s3:x-amz-server-side-encryption` が `AES256` であるリクエストのみを許可する。",
+      "explanation": "`AES256` はSSE-S3（S3マネージド暗号化）を表す値であり、要件であるSSE-KMSおよび指定のKMSカスタマーマネージドキーによる暗号化を満たすことができません。"
+    },
+    {
+      "id": "C",
+      "text": "S3バケットのデフォルト暗号化設定で指定のKMSキーを選択するだけで、バケットポリシーでの拒否ルールは作成しない。",
+      "explanation": "デフォルト暗号化を設定すると、暗号化ヘッダーを指定せずにアップロードされたオブジェクトは指定のKMSキーで自動暗号化されますが、クライアントが明示的にヘッダーで別のキーやSSE-S3（AES256）を指定してアップロードした場合、それを拒否することはできません。ポリシー要件を厳密に強制するにはバケットポリシーでの拒否ステートメントが必要です。"
+    },
+    {
+      "id": "D",
+      "text": "KMSキーポリシーにおいて、すべてのIAMユーザーからの `kms:GenerateDataKey` アクションを拒否するステートメントを追加する。",
+      "explanation": "KMSキーポリシーですべての `kms:GenerateDataKey` を拒否してしまうと、正規のアップロードプロセスでもデータキーを生成できなくなり、一切のオブジェクトアップロードが失敗してしまいます。"
+    }
+  ],
+  "correct_answers": [
+    "A"
+  ],
+  "explanation": "Amazon S3において特定の暗号化方式や特定のKMSキーの使用を厳格に強制する場合、S3バケットポリシーの条件キー（Condition Keys）を使用した明示的な拒否（Deny）を設定します。\n\n主要な条件キー：\n1. `s3:x-amz-server-side-encryption`:\n   - サーバーサイド暗号化のタイプ（`aws:kms`、`AES256` 等）を検証。\n   - `StringNotEquals` で `aws:kms` を拒否することで、暗号化なし（ヘッダー未指定でデフォルト暗号化が無効な場合）やSSE-S3（AES256）によるアップロードを遮断。\n2. `s3:x-amz-server-side-encryption-aws-kms-key-id`:\n   - リクエストで指定されたKMSキーのARNまたはIDを検証。\n   - `StringNotEquals` で指定された正規のKMSキーARN以外が指定されたアップロードを拒否。\n\nバケットのデフォルト暗号化（Default Encryption）を併用することで、ヘッダーを明示しないクライアントに対しても指定キーでの暗号化を適用しつつ、ヘッダー指定によるポリシー違反のリクエストを確実に遮断できます。"
+}

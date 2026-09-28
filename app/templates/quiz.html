@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}AWS SAA-C03 Trainer - 演習問題{% endblock %}
+
+{% block extra_head %}
+<style>
+  .option-card.selected {
+    border-color: #FF9900 !important;
+    background-color: rgba(255, 153, 0, 0.1) !important;
+    box-shadow: 0 0 0 1px #FF9900;
+  }
+  .option-card.selected .opt-badge {
+    background-color: #FF9900 !important;
+    color: #020617 !important;
+  }
+  .option-card.correct {
+    border-color: #10b981 !important;
+    background-color: rgba(16, 185, 129, 0.1) !important;
+  }
+  .option-card.correct .opt-badge {
+    background-color: #10b981 !important;
+    color: #020617 !important;
+  }
+  .option-card.incorrect {
+    border-color: #f43f5e !important;
+    background-color: rgba(244, 63, 94, 0.1) !important;
+  }
+  .option-card.incorrect .opt-badge {
+    background-color: #f43f5e !important;
+    color: #ffffff !important;
+  }
+  .option-card:hover:not(.selected):not(.correct):not(.incorrect) .opt-badge {
+    background-color: #475569 !important;
+  }
+  .markdown-bullet-list {
+    margin: 0.75rem 0 !important;
+    padding-left: 1.5rem !important;
+    list-style-type: disc !important;
+  }
+  .markdown-bullet-list li {
+    margin-bottom: 0.375rem !important;
+    line-height: 1.625 !important;
+  }
+  .markdown-bullet-list li::marker {
+    color: #ffffff !important;
+  }
+  .markdown-ordered-list {
+    margin: 0.75rem 0 !important;
+    padding-left: 1.5rem !important;
+    list-style-type: decimal !important;
+  }
+  .markdown-ordered-list li {
+    margin-bottom: 0.375rem !important;
+    line-height: 1.625 !important;
+  }
+  .markdown-ordered-list li::marker {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+  <!-- Progress & Header Info Bar -->
+  <div class="bg-aws-card border border-aws-border rounded-xl p-4 mb-6 shadow-sm">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <!-- Progress Counter -->
+      <div class="flex items-center space-x-3">
+        <div id="progressBadge" class="w-12 h-10 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-white text-sm">
+          <span id="progressCurrent">1</span><span id="progressTotal" class="text-xs text-slate-400">/10</span>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">PROGRESS</span>
+          </div>
+          <div id="progressLabel" class="text-sm font-semibold text-white">第 1 問目</div>
+        </div>
+      </div>
+
+      <!-- Meta Tags -->
+      <div class="flex flex-wrap items-center gap-1.5 sm:justify-end">
+        <span id="badgeMajor" class="text-[11px] font-medium px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">
+          <i class="fa-solid fa-folder-tree mr-1"></i><span id="textMajor">カテゴリ</span>
+        </span>
+        <span id="badgeMinor" class="text-[11px] font-medium px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700">
+          <i class="fa-solid fa-tag mr-1 text-slate-400"></i><span id="textMinor">中分類</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Linear Progress Bar -->
+    <div class="w-full bg-slate-800 rounded-full h-1.5 mt-3 overflow-hidden">
+      <div id="progressBarFill" class="bg-gradient-to-r from-aws-orange to-amber-500 h-1.5 rounded-full transition-all duration-300" style="width: 10%"></div>
+    </div>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div id="loadingIndicator" class="bg-aws-card border border-aws-border rounded-2xl p-12 text-center shadow-lg">
+    <i class="fa-solid fa-spinner fa-spin text-3xl text-aws-orange mb-3"></i>
+    <p class="text-slate-300 font-medium text-sm">問題を読み込んでいます...</p>
+  </div>
+
+  <!-- Question Card Container (hidden during load) -->
+  <div id="questionContainer" class="hidden bg-aws-card border border-aws-border rounded-2xl shadow-xl overflow-hidden transition-all duration-300">
+
+    <!-- Scenario / Problem Statement Header -->
+    <div class="p-6 sm:p-8 border-b border-aws-border bg-slate-900/40">
+      <div class="flex items-center justify-between mb-3">
+        <span id="questionTypeBadge" class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-slate-800 text-aws-orange border border-aws-orange/30">
+          単一選択問題
+        </span>
+        <span class="text-xs text-slate-500 font-mono" id="questionIdLabel">UUID</span>
+      </div>
+
+      <h2 id="questionText" class="text-base sm:text-lg text-slate-100 font-semibold leading-relaxed">
+        問題文がここに表示されます。
+      </h2>
+
+      <div id="questionHint" class="mt-4 flex items-center space-x-2 text-xs text-aws-orange bg-aws-orange/10 px-3 py-1.5 rounded-lg w-fit border border-aws-orange/20">
+        <i class="fa-solid fa-circle-question"></i>
+        <span id="questionHintText">最も適切な選択肢を <strong>1つ</strong> 選択してください。</span>
+      </div>
+    </div>
+
+    <!-- Options List -->
+    <div class="p-6 sm:p-8 space-y-3.5" id="optionsContainer">
+      <!-- Options injected by JavaScript -->
+    </div>
+
+    <!-- Feedback & Detailed Explanation Section -->
+    <div id="explanationContainer" class="hidden border-t-2 border-slate-700 bg-slate-900/95 p-6 sm:p-8">
+      
+      <!-- Result Alert Box -->
+      <div id="resultAlertBox" class="p-4 rounded-xl border flex items-center space-x-3 mb-6 bg-emerald-500/10 border-emerald-500/30 text-emerald-400">
+        <i id="resultIcon" class="fa-solid fa-circle-check text-2xl"></i>
+        <div>
+          <div id="resultTitle" class="font-bold text-base text-emerald-400">正解です！</div>
+          <div id="resultSub" class="text-xs text-slate-300">正解: <strong id="resultCorrectKeys">B</strong></div>
+        </div>
+      </div>
+
+      <!-- Detailed Explanation Content -->
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-xs font-bold text-aws-orange uppercase tracking-wider flex items-center space-x-2 mb-2">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>解説・アーキテクチャの要点</span>
+          </h3>
+          <div id="explanationText" class="space-y-3">
+            <!-- Explanation cards injected by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Bar / Footer of Card -->
+    <div class="p-4 sm:p-6 bg-slate-900/80 border-t border-aws-border flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- End Early / Summary Button -->
+      <button id="btnEndEarly" type="button" class="text-xs text-slate-400 hover:text-slate-200 px-3 py-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 border border-slate-700/60 transition flex items-center" title="この問題を解き終えたらサマリーへ進みます">
+        <span id="labelEndEarly">この問題で終了する</span>
+      </button>
+
+      <!-- Main Action: Submit or Next -->
+      <div class="flex items-center space-x-3 ml-auto">
+        <button id="btnSubmitAnswer" disabled class="px-6 py-3 rounded-xl bg-aws-orange text-slate-950 font-bold text-sm shadow-md transition hover:bg-aws-orangeHover disabled:opacity-40 disabled:cursor-not-allowed flex items-center space-x-2">
+          <span>回答を確定する</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+
+        <button id="btnNextQuestion" class="hidden px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-sm shadow-md transition hover:from-emerald-400 hover:to-teal-500 flex items-center space-x-2">
+          <span id="btnNextLabel">次の問題へ進む</span>
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/quiz.js?v={{ range(1000, 99999) | random }}"></script>
+{% endblock %}
