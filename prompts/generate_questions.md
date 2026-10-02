@@ -113,3 +113,33 @@
 
 - `data/questions/{major}/{minor}/index.json` は **手動で編集しないでください**（スクリプトで自動再生成されます）。
 - 各フォルダの `sample.json` は **編集・削除しないでください**。
+
+---
+
+## 7. 作成記録CSVの生成・追記（別AIによる問題チェック用）
+
+今回作成した問題ファイル群を、後続の別AIによる品質チェック・正誤検証・校正タスクへスムーズに引き渡せるよう、作成した問題のファイル一覧とメタ情報を **`data/created_questions.csv`** に記録・保存してください。
+
+### CSVの保存・追記ルール
+- **保存先パス**: `data/created_questions.csv`
+- **追記（Append）動作**:
+  - すでに `data/created_questions.csv` が存在する場合は、既存の行を削除せず、**末尾に新規行を追記**してください。
+  - ファイルがまだ存在しない場合は、ヘッダー行を含めて新規作成してください。
+  - ※ファイルシステムへの直接保存が可能な環境（Cursor / Windsurf / Antigravity 等）では直接ファイルへ保存・追記し、ファイル直接書き込みができないチャット環境（ChatGPT / Claude Web等）では、出力の末尾にCSV形式のコードブロックを出力してください。
+
+### CSVのカラム仕様
+1. **`created_at`**: 作成日時（形式: `YYYY-MM-DD HH:mm:ss`）
+2. **`directory`**: 保存先ディレクトリ（例: `data/questions/resilient/disaster_recovery/`）
+3. **`file_path`**: 作成した問題のファイルパス（例: `data/questions/resilient/disaster_recovery/003.json`）
+4. **`category_major`**: 大分類名（例: `レジリエント・アーキテクチャの設計`）
+5. **`category_minor`**: 中分類名（例: `ディザスタリカバリ`）
+6. **`title`**: 問題の要約タイトル
+7. **`status`**: チェックステータス（初期値: `pending`。別AIでのチェック時に `ok` / `ng` 等に更新用）
+
+### CSVフォーマット例
+```csv
+created_at,directory,file_path,category_major,category_minor,title,status
+2026-10-02 18:00:00,data/questions/resilient/disaster_recovery/,data/questions/resilient/disaster_recovery/003.json,レジリエント・アーキテクチャの設計,ディザスタリカバリ,マルチリージョンにおけるRTO短縮のディザスタリカバリ設計,pending
+2026-10-02 18:00:00,data/questions/resilient/disaster_recovery/,data/questions/resilient/disaster_recovery/004.json,レジリエント・アーキテクチャの設計,ディザスタリカバリ,Route 53ルーティングとフェイルオーバー設計,pending
+```
+

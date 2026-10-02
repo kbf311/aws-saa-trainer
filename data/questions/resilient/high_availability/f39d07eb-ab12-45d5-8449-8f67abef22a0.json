@@ -1,0 +1,39 @@
+{
+  "id": "f39d07eb-ab12-45d5-8449-8f67abef22a0",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "高可用性と耐障害性",
+  "title": "Amazon API Gateway プライベートREST API とインターフェイス型VPCエンドポイントによる社内閉域高可用性設計",
+  "services": [
+    "Amazon API Gateway",
+    "Amazon VPC",
+    "AWS PrivateLink"
+  ],
+  "question_type": "single",
+  "question_text": "ある金融機関は、社内のオンプレミスシステムおよび複数のVPCから呼び出される勘定系マイクロサービスを Amazon API Gateway を用いて構築しています。セキュリティ要件により、APIトラフィックはパブリックインターネットを一切通過してはならず、かつ単一のアベイラビリティーゾーンの障害時にもAPI呼び出しが途切れない高い耐障害性が求められます。また、許可された特定のVPCエンドポイントからのリクエストのみを厳格に制限する必要があります。この要件を満たす最も適切なアーキテクチャはどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "API Gateway でエッジ最適化REST APIを作成し、AWS WAFのIPセット条件でオンプレミスとVPCのIPアドレスのみを許可する。",
+      "explanation": "エッジ最適化APIはCloudFrontのグローバルエッジを利用するためパブリックインターネットを経由します。インターネットを経由しないという閉域セキュリティ要件を満たせません。"
+    },
+    {
+      "id": "B",
+      "text": "API Gateway で「プライベートREST API」を作成し、複数のアベイラビリティーゾーンのサブネットにインターフェイス型VPCエンドポイント（com.amazonaws.{region}.execute-api）をデプロイした上で、API Gatewayのリソースポリシーで当該VPCエンドポイントID（aws:sourceVpce）からのアクセスのみを許可する。",
+      "explanation": "プライベートREST APIを複数のAZに展開されたインターフェイス型VPCエンドポイント（AWS PrivateLink）経由で公開することで、パブリックインターネットを経由せずトラフィックがAWS内部ネットワークに留まり、AZ障害時にも耐障害性が確保されます。さらにAPI Gatewayのリソースポリシーで特定のVPCエンドポイントID（aws:sourceVpce）を検証することで厳格なアクセス制御が実現できます。"
+    },
+    {
+      "id": "C",
+      "text": "API Gateway でリージョンREST APIを作成し、VPCにゲートウェイ型VPCエンドポイントを作成してルートテーブルに関連付ける。",
+      "explanation": "ゲートウェイ型VPCエンドポイントはAmazon S3およびDynamoDBのみに対応しており、API Gatewayには対応していません（API Gatewayにはインターフェイス型VPCエンドポイントが必要です）。また、リージョンAPIはパブリックエンドポイントを持ちます。"
+    },
+    {
+      "id": "D",
+      "text": "単一のサブネットにNAT Gatewayを配置し、プライベートサブネット内のEC2インスタンスからNAT Gatewayを経由してパブリックAPI Gatewayにアクセスする。",
+      "explanation": "NAT Gateway経由の通信はパブリックインターネットを経由し、さらに単一AZに配置されたNAT Gatewayは単一障害点となるため、耐障害性と閉域要件の両方を満たせません。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Amazon API Gateway の「プライベートREST API」は、インターフェイス型VPCエンドポイント（AWS PrivateLink）を介してのみアクセス可能なエンドポイントです。複数AZのサブネットにVPCエンドポイントENIを配置することで、アベイラビリティーゾーンの障害時にも高可用性が維持されます。また、インターネットを経由せずAWSのプライベートネットワーク内で通信が完結し、API Gatewayのリソースポリシーに「aws:sourceVpce」条件を設定することで、特定のVPCエンドポイント経由のトラフィックのみを許可する安全なアクセス制御が確立できます。"
+}

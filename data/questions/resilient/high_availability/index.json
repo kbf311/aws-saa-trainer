@@ -1,7 +1,7 @@
 {
   "major": "レジリエント・アーキテクチャの設計",
   "minor": "高可用性と耐障害性",
-  "updated_at": "2026-09-27T23:49:04Z",
+  "updated_at": "2026-10-02T08:40:17Z",
   "questions": [
     {
       "id": "0c514b21-6de0-4071-b95e-58baf14716e9",
@@ -24,6 +24,16 @@
       "file_name": "14add5a7-771e-4016-b46a-303a9af8de95.json"
     },
     {
+      "id": "15b91235-8e62-4cb7-8f0a-5ffca1c703e0",
+      "title": "Amazon Route 53 計算ヘルスチェックによる複数メトリクスに基づくフェイルオーバー制御",
+      "services": [
+        "Amazon Route 53",
+        "Amazon CloudWatch"
+      ],
+      "question_type": "single",
+      "file_name": "15b91235-8e62-4cb7-8f0a-5ffca1c703e0.json"
+    },
+    {
       "id": "1abf833a-052e-4555-807f-ea8e18603e95",
       "title": "Amazon Aurora Serverless v2 マルチAZ展開による予測不能な負荷への耐障害性確保",
       "services": [
@@ -43,6 +53,15 @@
       ],
       "question_type": "single",
       "file_name": "1e9e5517-5204-4fc3-942a-bea8965d5b98.json"
+    },
+    {
+      "id": "385ed0d4-c016-4848-b3ea-a169ef85d64c",
+      "title": "Amazon Aurora マルチマスタークラスターによるゼロダウンタイム書き込み可用性の実現",
+      "services": [
+        "Amazon Aurora"
+      ],
+      "question_type": "single",
+      "file_name": "385ed0d4-c016-4848-b3ea-a169ef85d64c.json"
     },
     {
       "id": "3c30af7a-48ea-4ea0-bd05-6a9fdaf7d578",
@@ -88,6 +107,15 @@
       "file_name": "4043324d-351d-456b-8ca8-4d850e4130d7.json"
     },
     {
+      "id": "51e9ae19-4af6-473f-ad87-5391fa515e92",
+      "title": "Amazon RDS Multi-AZ DB クラスターによるフェイルオーバー時間の短縮と読み取りキャパシティ向上",
+      "services": [
+        "Amazon RDS"
+      ],
+      "question_type": "single",
+      "file_name": "51e9ae19-4af6-473f-ad87-5391fa515e92.json"
+    },
+    {
       "id": "5230acf3-676d-4b82-8060-a49a4346062e",
       "title": "マルチAZプライベートサブネットにおけるNAT Gatewayの耐障害性アーキテクチャ",
       "services": [
@@ -127,6 +155,15 @@
       ],
       "question_type": "single",
       "file_name": "59378195-afe3-4df9-9079-b14f5b431fe0.json"
+    },
+    {
+      "id": "5aaad14b-b6e7-47eb-a8e0-d3cc71766ae0",
+      "title": "Amazon ElastiCache for Redis クラスターモード有効による耐障害性と水平スケーラビリティの確保",
+      "services": [
+        "Amazon ElastiCache"
+      ],
+      "question_type": "single",
+      "file_name": "5aaad14b-b6e7-47eb-a8e0-d3cc71766ae0.json"
     },
     {
       "id": "5c1bf398-5d00-4d33-9979-8c4cea118971",
@@ -173,6 +210,15 @@
       "file_name": "5f7b47e1-f21e-486a-b664-23e830a894b3.json"
     },
     {
+      "id": "60218e0e-7577-4462-a2e9-073f5f534492",
+      "title": "スプレッド配置グループ（Spread Placement Group）による重要クラスターノードのハードウェア障害隔離",
+      "services": [
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "60218e0e-7577-4462-a2e9-073f5f534492.json"
+    },
+    {
       "id": "698e14e6-325f-494f-be71-2711feb1b05e",
       "title": "Application Load Balancer 加重ターゲットグループを活用した無停止カナリアリリースとロールバック設計",
       "services": [
@@ -205,6 +251,16 @@
       "file_name": "805c9369-5078-44e2-8f24-ce005a1c1efa.json"
     },
     {
+      "id": "851b585a-a9d7-4621-bdfa-cffb06954cb4",
+      "title": "AWS Site-to-Site VPN の冗長トンネル構成とBGP動的ルーティングによる耐障害性確保",
+      "services": [
+        "Amazon VPC",
+        "AWS Site-to-Site VPN"
+      ],
+      "question_type": "single",
+      "file_name": "851b585a-a9d7-4621-bdfa-cffb06954cb4.json"
+    },
+    {
       "id": "8e68e823-29c7-48ec-9fca-d4f17c6dbb61",
       "title": "Network Load Balancerにおけるクロスゾーン負荷分散の有効化による負荷不均衡と耐障害性の改善",
       "services": [
@@ -233,6 +289,27 @@
       ],
       "question_type": "single",
       "file_name": "966575a4-1381-43a9-93a0-54b02ef55e20.json"
+    },
+    {
+      "id": "9a718fa5-63de-4204-97ee-09c0c018b320",
+      "title": "AWS Direct Connect と Site-to-Site VPN による自動フェイルオーバーを備えた耐障害性ハイブリッド接続",
+      "services": [
+        "AWS Direct Connect",
+        "AWS Site-to-Site VPN",
+        "AWS Transit Gateway"
+      ],
+      "question_type": "multiple",
+      "file_name": "9a718fa5-63de-4204-97ee-09c0c018b320.json"
+    },
+    {
+      "id": "aa6508da-72f9-4f2c-b128-391d2b0da09c",
+      "title": "Amazon FSx for Windows File Server マルチAZ配置による共有ファイルストレージの透過的フェイルオーバー",
+      "services": [
+        "Amazon FSx",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "aa6508da-72f9-4f2c-b128-391d2b0da09c.json"
     },
     {
       "id": "aed3016a-9162-40bb-a7ab-e81df1b77a43",
@@ -286,6 +363,27 @@
       ],
       "question_type": "single",
       "file_name": "cc3e850f-22b9-4701-b172-b837b44627a0.json"
+    },
+    {
+      "id": "ccec8338-56e5-4060-a3ae-23316331e488",
+      "title": "ALBターゲットグループのヘルスチェックしきい値と登録解除遅延の最適化による可用性向上",
+      "services": [
+        "Application Load Balancer",
+        "Amazon EC2"
+      ],
+      "question_type": "single",
+      "file_name": "ccec8338-56e5-4060-a3ae-23316331e488.json"
+    },
+    {
+      "id": "f39d07eb-ab12-45d5-8449-8f67abef22a0",
+      "title": "Amazon API Gateway プライベートREST API とインターフェイス型VPCエンドポイントによる社内閉域高可用性設計",
+      "services": [
+        "Amazon API Gateway",
+        "Amazon VPC",
+        "AWS PrivateLink"
+      ],
+      "question_type": "single",
+      "file_name": "f39d07eb-ab12-45d5-8449-8f67abef22a0.json"
     },
     {
       "id": "f75475f9-404b-41cb-b243-05d6e3646ca8",

@@ -1,0 +1,45 @@
+{
+  "id": "9a718fa5-63de-4204-97ee-09c0c018b320",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "高可用性と耐障害性",
+  "title": "AWS Direct Connect と Site-to-Site VPN による自動フェイルオーバーを備えた耐障害性ハイブリッド接続",
+  "services": [
+    "AWS Direct Connect",
+    "AWS Site-to-Site VPN",
+    "AWS Transit Gateway"
+  ],
+  "question_type": "multiple",
+  "question_text": "ある企業は、オンプレミスのデータセンターとAWS上の複数のVPCを単一のAWS Direct Connect専用回線で接続しています。Direct Connectの計画メンテナンスや物理ファイバー障害時に備えて、耐障害性を高めるバックアップ接続としてAWS Site-to-Site VPNを導入することを決定しました。平常時はすべてのトラフィックが広帯域なDirect Connectを経由し、Direct Connectが停止した際にのみ、手動介入なしで自動的にSite-to-Site VPNへトラフィックが切り替わるように構成する必要があります。この要件を満たすために実施すべき適切なアクションはどれですか？（2つ選択してください）",
+  "options": [
+    {
+      "id": "A",
+      "text": "AWS Transit Gateway を導入し、Direct Connect ゲートウェイと Site-to-Site VPN 接続の両方を Transit Gateway にアタッチする。",
+      "explanation": "Transit Gateway に Direct Connect ゲートウェイ（トランジット仮想インターフェイス経由）と Site-to-Site VPN をアタッチすることで、複数のVPCに対するハイブリッド接続を一元管理し、BGPによる動的ルーティング制御と自動フェイルオーバーを可能にします。"
+    },
+    {
+      "id": "B",
+      "text": "オンプレミスのルーターからDirect Connect経由とVPN経由の両方でBGPを使用して同一のIPプレフィックスをアドバタイズし、VPN側のBGPセッションでAS-PATHプリペンドを設定してパス長を長くする。",
+      "explanation": "BGPルーティングにおいて、Direct ConnectとVPNの両方から同じプレフィックスがアドバタイズされる場合、AWSからオンプレミスへのトラフィックはDirect Connectが優先されます。一方、オンプレミス側のBGPでVPN接続にAS-PATHプリペンドを適用して経路を長く見せることで、平常時はDirect Connectが選定され、Direct Connect停止時のみVPNへ自動フェイルオーバーします。"
+    },
+    {
+      "id": "C",
+      "text": "VPCルートテーブルにDirect ConnectとSite-to-Site VPNのエンドポイントを静的ルートとして登録し、VPN側のメトリック値を小さく設定する。",
+      "explanation": "VPN側のメトリック値を小さく設定すると平常時に低帯域なVPNが優先されてしまいます。また、静的ルートでは動的なリンク断の検知と自動切り替えが確実に行われません。"
+    },
+    {
+      "id": "D",
+      "text": "Direct Connect 接続の仮想インターフェイス（VIF）をパブリックVIFに変更し、VPNトラフィックをパブリックDirect Connect経由でトンネリングする。",
+      "explanation": "Direct Connectの物理障害時にVPNもDirect Connect上を通っていると共倒れになり、バックアップとしての耐障害性を提供できません。"
+    },
+    {
+      "id": "E",
+      "text": "オンプレミスルーターでDirect Connect経由とVPN経由で異なるCIDRブロックをアドバタイズする。",
+      "explanation": "異なるCIDRをアドバタイズすると、最長一致ルーティング（Longest Prefix Match）が適用され、Direct Connect障害時にトラフィックをVPNへ自動的に迂回させることができなくなります。"
+    }
+  ],
+  "correct_answers": [
+    "A",
+    "B"
+  ],
+  "explanation": "AWS Direct Connect と AWS Site-to-Site VPN を組み合わせた耐障害性アーキテクチャでは、AWS Transit Gateway をハブとして集約し、両方の接続でBGP動的ルーティングを使用するのがベストプラクティスです。AWS側からオンプレミス宛ての通信では、Direct Connect経由のルートが自動的にVPN経由より優先されます。オンプレミス側からAWS宛ての通信においては、VPN側のBGPでAS-PATHプリペンドを設定して意図的にASパス長を長くすることで、平常時はDirect Connectを優先させ、障害発生時のみ自動的にVPNへフェイルオーバーさせることができます。"
+}

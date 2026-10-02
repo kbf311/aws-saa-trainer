@@ -1,0 +1,38 @@
+{
+  "id": "aa6508da-72f9-4f2c-b128-391d2b0da09c",
+  "category_major": "レジリエント・アーキテクチャの設計",
+  "category_minor": "高可用性と耐障害性",
+  "title": "Amazon FSx for Windows File Server マルチAZ配置による共有ファイルストレージの透過的フェイルオーバー",
+  "services": [
+    "Amazon FSx",
+    "Amazon EC2"
+  ],
+  "question_type": "single",
+  "question_text": "ある企業は、Windowsベースの社内業務アプリケーションを複数のアベイラビリティーゾーンに配置されたEC2インスタンス上で稼働させています。これらのインスタンスは、SMB（Server Message Block）プロトコルを介して共有ファイルシステムにアクセスし、Active Directoryドメイン認証を利用しています。基盤となるストレージハードウェアや特定AZの障害が発生した場合でも、データ損失なしでファイル共有サービスを自動的かつ透過的にフェイルオーバーさせ、業務影響を最小限に抑える必要があります。最も適切なストレージ構成はどれですか？",
+  "options": [
+    {
+      "id": "A",
+      "text": "シングルAZデプロイの Amazon FSx for Windows File Server を作成し、AWS Backup を使用して毎時EBSスナップショットを取得する。",
+      "explanation": "シングルAZデプロイでは、アベイラビリティーゾーンの障害時にファイルシステムが完全に停止し、バックアップからの復元には手動作業と長いダウンタイムおよびデータ損失（RPOの遅れ）が発生します。"
+    },
+    {
+      "id": "B",
+      "text": "マルチAZデプロイモデルを選択した Amazon FSx for Windows File Server を作成し、Microsoft Active Directory と統合する。",
+      "explanation": "マルチAZデプロイの FSx for Windows File Server は、異なるAZにアクティブとスタンバイのファイルサーバーを自動プロビジョニングし、AZ間でデータを同期レプリケーションします。ハードウェアやAZの障害時には数分以内に自動的かつ透過的なフェイルオーバー（SMBクライアントの再接続）が行われるため、データ損失なしで高可用性を実現できます。"
+    },
+    {
+      "id": "C",
+      "text": "Amazon EFS ファイルシステムを作成し、Windows EC2インスタンスからSambaクライアント経由でマウントする。",
+      "explanation": "Amazon EFS は主にLinux向け（NFSv4プロトコル）であり、Windows環境からのネイティブなSMBサポートやActive Directoryの高度なNTFSアクセス権（ACL）の統合要件には適していません。"
+    },
+    {
+      "id": "D",
+      "text": "マルチAZにまたがるEC2インスタンスにそれぞれプロビジョンドIOPS SSD（io2）EBSボリュームをアタッチし、EBS Multi-Attach を有効化する。",
+      "explanation": "EBS Multi-Attach は同一AZ内の複数インスタンスへのアタッチに限定されており、AZをまたいだアタッチはできません。また、標準的なWindows NTFSファイルシステムはクラスター対応ファイルシステムではないため、破損のリスクがあります。"
+    }
+  ],
+  "correct_answers": [
+    "B"
+  ],
+  "explanation": "Amazon FSx for Windows File Server のマルチAZデプロイモデルは、高可用性と耐障害性を備えたフルマネージド共有ファイルストレージを提供します。異なるAZにアクティブとスタンバイのファイルサーバーが配置され、同期レプリケーションによってデータの一貫性が維持されます。障害発生時にはSMBの継続的可用性（Continuous Availability: CA）共有などを活用して自動的にスタンバイへ透過的フェイルオーバーが行われるため、Active Directory環境下のWindowsワークロードに最適です。"
+}

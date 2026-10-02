@@ -1,0 +1,11 @@
+created_at,directory,file_path,category_major,category_minor,title,status
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/001.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,Amazon Aurora マルチマスタークラスターによるゼロダウンタイム書き込み可用性の実現,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/002.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,ALBターゲットグループのヘルスチェックしきい値と登録解除遅延の最適化による可用性向上,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/003.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,AWS Site-to-Site VPN の冗長トンネル構成とBGP動的ルーティングによる耐障害性確保,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/004.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,スプレッド配置グループ（Spread Placement Group）による重要クラスターノードのハードウェア障害隔離,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/005.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,Amazon RDS Multi-AZ DB クラスターによるフェイルオーバー時間の短縮と読み取りキャパシティ向上,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/006.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,Amazon Route 53 計算ヘルスチェックによる複数メトリクスに基づくフェイルオーバー制御,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/007.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,Amazon FSx for Windows File Server マルチAZ配置による共有ファイルストレージの透過的フェイルオーバー,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/008.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,AWS Direct Connect と Site-to-Site VPN による自動フェイルオーバーを備えた耐障害性ハイブリッド接続,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/009.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,Amazon ElastiCache for Redis クラスターモード有効による耐障害性と水平スケーラビリティの確保,pending
+2026-10-02 17:39:00,data/questions/resilient/high_availability/,data/questions/resilient/high_availability/010.json,レジリエント・アーキテクチャの設計,高可用性と耐障害性,Amazon API Gateway プライベートREST API とインターフェイス型VPCエンドポイントによる社内閉域高可用性設計,pending
