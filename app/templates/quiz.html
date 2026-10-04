@@ -2,6 +2,13 @@
 
 {% block title %}AWS SAA-C03 Trainer - 演習問題{% endblock %}
 
+{% block header_timer %}
+<div id="quizTimerHeader" class="flex items-center space-x-2 px-3 py-1 rounded-lg bg-slate-900/80 border border-slate-700/60 text-slate-200 shrink-0 shadow-inner">
+  <i class="fa-regular fa-clock text-aws-orange text-xs"></i>
+  <span id="quizTimerDigits" class="font-mono text-sm font-semibold tracking-wider text-slate-100">00:00</span>
+</div>
+{% endblock %}
+
 {% block extra_head %}
 <style>
   .option-card.selected {
@@ -185,4 +192,5 @@
 
 {% block scripts %}
 <script src="/static/js/quiz.js?v={{ range(1000, 99999) | random }}"></script>
+<script src="/static/js/quiz-timer.js?v={{ range(1000, 99999) | random }}"></script>
 {% endblock %}
